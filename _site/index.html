@@ -238,13 +238,13 @@
 
   <li>
     <div class="post-card">
-      <a href="./test0.html" title="这是我的第一篇测试文章"class="post-card-image" style="background: url('./assets/img/posts/20210312/nnet_optimization.jpg')  center no-repeat; background-size: cover;">
+      <a href="./test0.html" title="这是我的第一篇测试文章<br>沁园春·长沙"class="post-card-image" style="background: url('./assets/img//posts/20210719-毛泽东书法/unnamed.jpg')  center no-repeat; background-size: cover;">
       </a>
       <div class="post-card-body">
         <p class="post-card-title-and-meta">
 
           <a href="./test0.html" class="post-card-link">
-          这是我的第一篇测试文章
+          这是我的第一篇测试文章<br>沁园春·长沙
           </a>
           
 
@@ -255,7 +255,9 @@
   
 </ol>
 
-    <div class="search-box">
+    <!-- 寻找帖子 -->
+
+<div class="search-box">
   <div class="wrapper">
     <div class="search-grid">
       <form class="search-form">
@@ -356,7 +358,7 @@
     var sw = document.getElementById('theme-switch');
     var html = document.getElementsByTagName('html')[0];
     var logo = document.getElementById('logo');
-    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var nightModeOption = ('manual' || 'auto').toLowerCase();
     var storage = nightModeOption === 'manual'
         ? localStorage
         : sessionStorage;

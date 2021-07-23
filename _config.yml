@@ -26,8 +26,8 @@ highlight_theme: syntax-base16.monokai.dark # select a dark theme for the code h
 
 # Author settings
 author: Wenbo Li # add your name
-#author-pic: Myself_Neon_grey.jpg
-about-author: Master bei KIT
+author-pic: Myself_Neon_grey.jpg
+about-author:  Master bei KIT <br/> Mechatronik und Informations­technik
 # Contact links
 email: lwenbo010@gmail.com # Add your Email address
 phone: # Add your Phone number

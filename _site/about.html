@@ -237,10 +237,10 @@
   <div class="about-container">
     <section class="about-header">
       <div class="author-image-container">
-        <a href='https://wenboli-cn-de.github.io'><img src=".//assets/img/" alt="Wenbo Li"></a>
+        <a href='https://wenboli-cn-de.github.io'><img src=".//assets/img/Myself_Neon_grey.jpg" alt="Wenbo Li"></a>
       </div>
       <h3>Wenbo Li</h3>
-      <p class="subtitle">Master bei KIT</p>
+      <p class="subtitle">Master bei KIT <br/> Mechatronik und Informations­technik</p>
     </section>
     <section class="about-body">
       <ul class="contact-list">
@@ -256,7 +256,9 @@
   </div> <!-- End About Container -->
 </div> <!-- End Small Wrapper -->
 
-  <div class="search-box">
+  <!-- 寻找帖子 -->
+
+<div class="search-box">
   <div class="wrapper">
     <div class="search-grid">
       <form class="search-form">
@@ -339,7 +341,7 @@
     var sw = document.getElementById('theme-switch');
     var html = document.getElementsByTagName('html')[0];
     var logo = document.getElementById('logo');
-    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var nightModeOption = ('manual' || 'auto').toLowerCase();
     var storage = nightModeOption === 'manual'
         ? localStorage
         : sessionStorage;
