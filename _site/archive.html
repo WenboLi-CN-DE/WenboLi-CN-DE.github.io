@@ -23,7 +23,7 @@
   "headline": "Archive",
   "abstract": "",
     "keywords": "",
-    "wordcount": "43",
+    "wordcount": "31",
     "image": ["https://wenboli-cn-de.github.io/assets/img"],
   "datePublished": "",
   "dateModified": "",
@@ -63,7 +63,7 @@
 <meta name="twitter:description" content="">
 <meta name="twitter:creator" content="">
 <meta data-rh="true" name="twitter:label1" content="Word count"/>
-<meta data-rh="true" name="twitter:data1" content="43"/>
+<meta data-rh="true" name="twitter:data1" content="31"/>
 <meta name="twitter:image:src" content="https://wenboli-cn-de.github.io/assets/img/">
 	<!-- Windows Phone -->
 	<meta name="msapplication-navbutton-color" content="#311e3e">
@@ -244,12 +244,14 @@
 		<div class="post">
 			
 
-			<a class="post-list-title" href="./test0.html">这是我的第一篇测试文章</a>
+			<!-- 文章标题 -->
+			<a class="post-list-title" href="./test0.html">这是我的第一篇测试文章<br>沁园春·长沙</a>
 			
 
-			<div class="post-excerpt">
-				<p>沁园春·长沙</p><p>独立寒秋，湘江北去，橘子洲头。看万山红遍，层林尽染；漫江碧透，百舸争流。鹰击长空，鱼翔浅底，万类霜天竞自由。怅寥廓，问苍茫大地，谁主沉浮？</p><p>携来百侣曾游，忆往昔峥嵘岁月稠。恰同学少年，风华正茂；书生意气，挥斥方遒。指点江山，激扬文字，粪土当年万户侯。曾记否，到中流击水，浪遏飞舟！</p><p><img src="http://www.sc1618.com/Upload/Articles/1/0/88/88587_20200407122645191_0.jpg" alt="xxx" /></p><a class="read-more" href="./test0.html"> read more</a>
-			</div>
+			<!-- #截取文章中的一部分作为索引 -->
+			<!-- <div class="post-excerpt"> -->
+				<!-- <p>独立寒秋，湘江北去，橘子洲头。看万山红遍，层   <a class="read-more" href="./test0.html"> 阅读更多<p>read more</a> -->
+			<!-- </div> -->
 		</div>
 	
 	</div>
@@ -315,7 +317,10 @@
   <div class="rect4"></div>
   <div class="rect5"></div>
 </div>
-  <div class="search-box">
+
+  <!-- 寻找帖子 -->
+
+<div class="search-box">
   <div class="wrapper">
     <div class="search-grid">
       <form class="search-form">
@@ -398,7 +403,7 @@
     var sw = document.getElementById('theme-switch');
     var html = document.getElementsByTagName('html')[0];
     var logo = document.getElementById('logo');
-    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var nightModeOption = ('manual' || 'auto').toLowerCase();
     var storage = nightModeOption === 'manual'
         ? localStorage
         : sessionStorage;

@@ -253,9 +253,9 @@
           
           
 
-          <a href="/test0.html" class="recent-item-img" style="background: url('/assets/img/posts/20210312/nnet_optimization.jpg') center no-repeat; background-size: cover;">
+          <a href="/test0.html" class="recent-item-img" style="background: url('/assets/img//posts/20210719-毛泽东书法/unnamed.jpg') center no-repeat; background-size: cover;">
             <div class="recent-item-title">
-              <span>这是我的第一篇测试文章</span>
+              <span>这是我的第一篇测试文章<br>沁园春·长沙</span>
               
 
             </div>
@@ -273,7 +273,9 @@
 </form>
 <ul id="results-container" class="results-search"></ul>
 
-    <div class="search-box">
+    <!-- 寻找帖子 -->
+
+<div class="search-box">
   <div class="wrapper">
     <div class="search-grid">
       <form class="search-form">
@@ -374,7 +376,7 @@
     var sw = document.getElementById('theme-switch');
     var html = document.getElementsByTagName('html')[0];
     var logo = document.getElementById('logo');
-    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var nightModeOption = ('manual' || 'auto').toLowerCase();
     var storage = nightModeOption === 'manual'
         ? localStorage
         : sessionStorage;
