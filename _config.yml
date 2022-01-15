@@ -3,7 +3,7 @@ title: 高傲的电工李
 subtitle: 个人博客
 description: 欢迎来到我的个人博客
 # 头像里面的标题
-avatarTitle: Wenbo Li
+avatarTitle: 李文博
 # 头像里面的描述
 avatarDesc: 机电 / 机器学习
 url: "https://wenboli-cn-de.github.io"
@@ -12,9 +12,9 @@ url: "https://wenboli-cn-de.github.io"
 enableToc: true
 
 # Comment
-comment:
+#comment:
     # livere: MTAyMC81MDk5NC8yNzQ3Ng  # https://www.livere.com
-    disqus: leopard
+    # disqus: leopard
     # uyan: 2143225  # 有言id,登录有言官网申请
 
 # Social
@@ -25,19 +25,19 @@ social:
     # juejin: xxx
     # jianshu: 2ada30d8d0f7
     # twitter: 
-    mail: leopardpan@icloud.com
+    #mail: leopardpan@icloud.com
 
 
 # 百度统计 
 # 使用博客模板请去掉或者更换 id 
-baidu:
-    id: 8ba1c6be0953b6f9c2ba38e57f615421  
+#baidu:
+    #id: 8ba1c6be0953b6f9c2ba38e57f615421  
 
 # Google Analytics
 # 使用博客模板请去掉或者更换 id
-ga:
-    id: UA-84134159-3  
-    host: auto  
+#ga:
+    #id: UA-84134159-3  
+    #host: auto  
 
 
 # 《----------------- 上面的信息修改成你自己的 ---------------------------》
