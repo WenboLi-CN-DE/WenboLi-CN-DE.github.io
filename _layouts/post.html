@@ -1,47 +1,33 @@
 ---
 layout: default
 ---
-{% include calculate_relative_base.html %}
-{% capture post_url %}{{ relativebase }}{{ page.url }}{% endcapture %}
-{% assign post_url = post_url | replace: "//", "/" %}
-<section class="hidden">
-  <div class="post">
-      <a  class="post-list-title" href="{{ post_url }}">{{ page.title }}</a>
-      {% include post_meta.html type="post-card-meta" %}
-        <div class="post-excerpt">
-            {{ page.content | markdownify | strip_newlines | truncatewords: 10 }}<a class="read-more" href="{{ post_url }}"> 阅读更多 read more</a>
-        </div>
-  </div>
-</section>
-<div class="flex-container transparent">
-  {% include header.html %}
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    {% include schema-meta.html %}
-    <div class="page-image">
-      <div class="cover-image" style="background: url('{{ relativebase }}assets/img/{{ page.img }}') center no-repeat; background-size: cover;"></div>
+
+<head>
+  <link rel="stylesheet" href="{{ "/css/post.css" | prepend: site.baseurl }}">
+</head>
+
+<article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="{{page.date | date: date_to_xmlschema}}" itemprop="datePublished" class="post-meta__date date">{{page.date | date: "%F"}}</time>  
+
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
     </div>
-    <div class="wrapper">
-      <div class="page-content">
-        <div class="header-page">
-          <h1 class="page-title">{{ page.title }}</h1>
-          {% include post_meta.html type="post-page-meta" %}
-        </div>
-        {% include sidebar.html context="post" class="side" id="sidebar" %}
-        {% if page.toc %}{% include sidebar-toc.html %}{% endif %}
-        {% include github-button.html %}
-        {{page.content | markdownify}}
-        {% include sidebar.html context="post" class="inline" id="post-end" %}
-        <div class="separator"></div>
-        <!-- {% include author-box.html %} -->
-        <!-- 在文章中加入最近帖子 -->
-        {% include recent-post.html %}
-        <!-- 在文章中加入信箱 -->
-        {% include newsletter.html %}
-        <!-- 在文章在加入评论 -->
-        {% include disqus.html %}
-      </div>
-    </div> <!-- End Wrapper -->
-  </article>
-  {% include search.html %}
-  {% include footer.html %}
-</div>
+  </header>
+
+  {% if site.enableToc %}
+    <h2 class="post-title">目录</h2>
+    {% include toc.html html=content %}
+  {% endif %}
+
+  <section class="post">
+    {{ content }}
+  </section>
+
+</article>
+
+{% include new-old.html %}
+{% include comments.html %}
