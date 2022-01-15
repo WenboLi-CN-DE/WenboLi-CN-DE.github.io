@@ -1,12 +1,12 @@
 # Basic
-title: 潘柏信
-subtitle: 个人站
-description: 欢迎来到我的个人站~
+title: 高傲的电工李
+subtitle: 个人博客
+description: 欢迎来到我的个人博客
 # 头像里面的标题
-avatarTitle: leopardpan
+avatarTitle: Wenbo Li
 # 头像里面的描述
-avatarDesc: iOS / 机器学习
-url: "https://leopardpan.cn"
+avatarDesc: 机电 / 机器学习
+url: "https://wenboli-cn-de.github.io"
 
 # 博客是否自动生成目录，false为不生成
 enableToc: true
@@ -19,11 +19,11 @@ comment:
 
 # Social
 social:
-    weibo: 5366874726 
-    github: leopardpan
+    # weibo: 5366874726 
+    # github: leopardpan
     # zhihu: panpanleopard
     # juejin: xxx
-    jianshu: 2ada30d8d0f7
+    # jianshu: 2ada30d8d0f7
     # twitter: 
     mail: leopardpan@icloud.com
 
