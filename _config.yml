@@ -20,12 +20,12 @@ enableToc: true
 # Social
 social:
     # weibo: 5366874726 
-    # github: leopardpan
+     github: WenboLi-CN-DE
     # zhihu: panpanleopard
     # juejin: xxx
     # jianshu: 2ada30d8d0f7
     # twitter: 
-    #mail: leopardpan@icloud.com
+     mail: lwb_010@163.com
 
 
 # 百度统计 
@@ -67,7 +67,7 @@ blog_button:
 nav:
     - {title: 所有文章, description: archive, url: '/archive'}   
     - {title: 标签, description: tags, url: '/tags'}      
-    - {title: 技术支持, description: support, url: '/support'}      
+   # - {title: 技术支持, description: support, url: '/support'}      
     - {title: 关于我, description: about, url: '/about'}   
     
 
