@@ -5,9 +5,33 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 16 Jan 2022 00:37:36 +0800</pubDate>
-    <lastBuildDate>Sun, 16 Jan 2022 00:37:36 +0800</lastBuildDate>
+    <pubDate>Sun, 16 Jan 2022 05:33:32 +0800</pubDate>
+    <lastBuildDate>Sun, 16 Jan 2022 05:33:32 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Win系统与Linux进行文件互传</title>
+        <description>&lt;h2 id=&quot;1-使用工具winscp&quot;&gt;1. 使用工具Winscp&lt;/h2&gt;
+&lt;p&gt;Win系统与Linux在局域网内进行文件互传可以通过Winscp软件进行。
+值得注意的是Linux必须开启了ssh服务 对于树莓派来说，开启ssh是很容易的。
+但是我的另一个Linux系统是XUbuntu（可以理解为小体积的Ubuntu，由于搭载系统的硬件是一台08年的破iMac, 
+尝试Ubuntu无果后选择了替代系统，所以有些服务并未安装，比如此处的ssh服务。），其中并没有ssh服务，必须自己安装。&lt;/p&gt;
+&lt;h2 id=&quot;2可能出现的问题&quot;&gt;2.可能出现的问题&lt;/h2&gt;
+&lt;p&gt;连接过程可能会提示：
+网络错误，连接被（Linux主机IP）拒绝 
+Xubuntu安装ssh服务： 
+sudo apt-get install openssh-server&lt;br /&gt;
+验证SSH服务器状态： 
+sudo systemctl status ssh&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Jan 2022 00:00:00 +0800</pubDate>
+        <link>https://wenboli-cn-de.github.io/2022/01/Test0/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/Test0/</guid>
+        
+        <category>技术</category>
+        
+        
+      </item>
     
   </channel>
 </rss>
