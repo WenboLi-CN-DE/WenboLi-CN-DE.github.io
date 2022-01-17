@@ -1,0 +1,38 @@
+I"�<p>机电与信息硕士在读(Mechatronik und Informationstechnik)</p>
+
+<p>中共党员</p>
+
+<p>机械与电子爱好者</p>
+
+<p>科技是第一生产力</p>
+
+<h2> 我的博客 </h2>
+
+<p>平时更新一些学习心得, 学习笔记, 生活趣事等等</p>
+
+<p>博客会不定时更新，谢谢~</p>
+
+<section class="post-comments">
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NTIzMy8zMTcwMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+</section>
+
+:ET
