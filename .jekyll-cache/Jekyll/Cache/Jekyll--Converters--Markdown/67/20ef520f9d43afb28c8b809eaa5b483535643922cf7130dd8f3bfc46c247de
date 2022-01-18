@@ -1,0 +1,14 @@
+I"m<h2 id="1-使用工具winscp">1. 使用工具Winscp</h2>
+<p>Win系统与Linux在局域网内进行文件互传可以通过Winscp软件进行。
+值得注意的是Linux必须开启了ssh服务 对于树莓派来说，开启ssh是很容易的。
+但是我的另一个Linux系统是XUbuntu（可以理解为小体积的Ubuntu，由于搭载系统的硬件是一台08年的破iMac, 
+尝试Ubuntu无果后选择了替代系统，所以有些服务并未安装，比如此处的ssh服务。），其中并没有ssh服务，必须自己安装。</p>
+<h2 id="2可能出现的问题">2.可能出现的问题</h2>
+<p>连接过程可能会提示：
+网络错误，连接被（Linux主机IP）拒绝</p>
+
+<p>Xubuntu安装ssh服务：
+<code class="language-plaintext highlighter-rouge">sudo apt-get install openssh-server  
+验证SSH服务器状态：
+</code> sudo systemctl status ssh</p>
+:ET
