@@ -5,14 +5,23 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 20 Jan 2022 02:25:05 +0800</pubDate>
-    <lastBuildDate>Thu, 20 Jan 2022 02:25:05 +0800</lastBuildDate>
+    <pubDate>Thu, 20 Jan 2022 03:15:19 +0800</pubDate>
+    <lastBuildDate>Thu, 20 Jan 2022 03:15:19 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>机器视觉-边缘检测 Edge Detection</title>
-        <description>&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
-
+        <description>&lt;head&gt;
+    &lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    &lt;/script&gt;
+&lt;/head&gt;
 &lt;h1 id=&quot;边缘检测的意义&quot;&gt;边缘检测的意义&lt;/h1&gt;
 
 &lt;p&gt;边缘检测是为了提取图像中主体的轮廓特征.&lt;/p&gt;
