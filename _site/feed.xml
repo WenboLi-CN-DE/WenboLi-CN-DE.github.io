@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 20 Jan 2022 03:32:51 +0800</pubDate>
-    <lastBuildDate>Thu, 20 Jan 2022 03:32:51 +0800</lastBuildDate>
+    <pubDate>Thu, 20 Jan 2022 05:27:44 +0800</pubDate>
+    <lastBuildDate>Thu, 20 Jan 2022 05:27:44 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -45,8 +45,11 @@
 &lt;h1 id=&quot;寻找边缘&quot;&gt;寻找边缘&lt;/h1&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;边缘是灰度变化最大的地方（其变化率最大，可以通过导数判断）
-$|g(u+\epsilon)-g(u-\epsilon)|$&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;边缘是灰度变化最大的地方（其变化率最大，可以通过导数判断）&lt;/p&gt;
+
+    &lt;p&gt;$g(u+\epsilon)-g(u-\epsilon)$&lt;/p&gt;
+  &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;寻找区域内的g的导数的最大值&lt;/p&gt;
 
@@ -153,7 +156,7 @@ $|g(u+\epsilon)-g(u-\epsilon)|$&lt;/li&gt;
 
 &lt;p&gt;$D o G(u, v)=G_{\sigma_{1}}(u, v)-G_{\sigma_{2}}(u, v)$&lt;/p&gt;
 
-&lt;p&gt;关于DoG的介绍：&lt;a href=&quot;https://stonema.github.io/2018/04/16/LoG%E7%AE%97%E5%AD%90%E4%B8%8EDoG%E7%AE%97%E5%AD%90/%E2%80%B8&quot;&gt;https://stonema.github.io/2018/04/16/LoG%E7%AE%97%E5%AD%90%E4%B8%8EDoG%E7%AE%97%E5%AD%90/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;关于DoG的介绍：&lt;a href=&quot;https://stonema.github.io/2018/04/16/LoG%E7%AE%97%E5%AD%90%E4%B8%8EDoG%E7%AE%97%E5%AD%90/&quot;&gt;https://stonema.github.io/2018/04/16/LoG%E7%AE%97%E5%AD%90%E4%B8%8EDoG%E7%AE%97%E5%AD%90/&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 19 Jan 2022 00:00:00 +0800</pubDate>
         <link>https://wenboli-cn-de.github.io/2022/01/MV3.1/</link>
