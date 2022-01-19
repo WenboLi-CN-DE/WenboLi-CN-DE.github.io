@@ -5,13 +5,15 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 20 Jan 2022 01:35:59 +0800</pubDate>
-    <lastBuildDate>Thu, 20 Jan 2022 01:35:59 +0800</lastBuildDate>
+    <pubDate>Thu, 20 Jan 2022 02:09:37 +0800</pubDate>
+    <lastBuildDate>Thu, 20 Jan 2022 02:09:37 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>机器视觉</title>
-        <description>&lt;h1 id=&quot;边缘检测的意义&quot;&gt;边缘检测的意义&lt;/h1&gt;
+        <description>&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+
+&lt;h1 id=&quot;边缘检测的意义&quot;&gt;边缘检测的意义&lt;/h1&gt;
 
 &lt;p&gt;边缘检测是为了提取图像中主体的轮廓特征.&lt;/p&gt;
 
@@ -101,7 +103,8 @@ $|g(u+\epsilon)-g(u-\epsilon)|$&lt;/li&gt;
 
 &lt;p&gt;拉普拉斯算子属于最简单的各项同性二阶微分算子，对于二阶图像：&lt;/p&gt;
 
-&lt;p&gt;$\begin{aligned} \nabla^{2} g=&amp;amp; \frac{\partial^{2} g}{(\partial u)^{2}}+\frac{\partial^{2} g}{(\partial v)^{2}} \=&amp;amp; \operatorname{trace}(H) \ &amp;amp;(H \text { Hessian }) \end{aligned}$&lt;/p&gt;
+&lt;p&gt;$\begin{aligned} \nabla^{2} g=&amp;amp; \frac{\partial^{2} g}{(\partial u)^{2}}+\frac{\partial^{2} g}
+{(\partial v)^{2}}\end{aligned}$&lt;/p&gt;
 
 &lt;p&gt;变化率最大处（一阶导数）=二阶导数为0&lt;/p&gt;
 
