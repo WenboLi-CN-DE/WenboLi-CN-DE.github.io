@@ -5,9 +5,154 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 18 Jan 2022 23:29:17 +0800</pubDate>
-    <lastBuildDate>Tue, 18 Jan 2022 23:29:17 +0800</lastBuildDate>
+    <pubDate>Thu, 20 Jan 2022 01:35:59 +0800</pubDate>
+    <lastBuildDate>Thu, 20 Jan 2022 01:35:59 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>机器视觉</title>
+        <description>&lt;h1 id=&quot;边缘检测的意义&quot;&gt;边缘检测的意义&lt;/h1&gt;
+
+&lt;p&gt;边缘检测是为了提取图像中主体的轮廓特征.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/Snipaste_2022-01-19_16-48-09.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;灰度边缘的特性&quot;&gt;灰度边缘的特性&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在明亮和黑暗交接出有明显的改变(hard changes)&lt;/li&gt;
+  &lt;li&gt;通常发生在物体的边缘处&lt;/li&gt;
+  &lt;li&gt;发生在阴影和纹理处&lt;/li&gt;
+  &lt;li&gt;边缘和亮度没有关系&lt;/li&gt;
+  &lt;li&gt;人类的视觉皮层的许多部分都在处理灰度边缘&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;灰度&quot;&gt;灰度：&lt;/h2&gt;
+
+&lt;p&gt;把白色与黑色之间按对数关系分成若干级，成为灰度等级。范围一般从0-255，黑色为0.&lt;/p&gt;
+
+&lt;h1 id=&quot;寻找边缘&quot;&gt;寻找边缘&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;边缘是灰度变化最大的地方（其变化率最大，可以通过导数判断）
+$|g(u+\epsilon)-g(u-\epsilon)|$&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;寻找区域内的g的导数的最大值&lt;/p&gt;
+
+    &lt;p&gt;$\frac{\partial g}{\partial u}=\lim _{\epsilon \rightarrow 0} \frac{g(u+\epsilon)-g(u)}{\epsilon}=\lim _{\epsilon \rightarrow 0} \frac{g(u+\epsilon)-g(u-\epsilon)}{2 \epsilon}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通过差分逼近函数进行近似（因为图片中为各个像素点，无法取极限，通过像素点之间的距离来代替）&lt;/p&gt;
+
+    &lt;p&gt;$\frac{\partial g}{\partial u} \approx \frac{g(u+1)-g(u-1)}{2}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;近似导数可以实现为带滤波器掩码的卷积&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119173327.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;prewitt算子sobel算子&quot;&gt;Prewitt算子，Sobel算子&lt;/h2&gt;
+
+&lt;p&gt;Prewitt算子： 利用像素点上下，左右邻点的灰度差，在边缘处达到极值边缘检测&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119173746.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Sobel算子：与Prewitt算子相比，Sobel对像素的位置的影响做了加权，可以降低位置的影响&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119173847.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;边缘方向&quot;&gt;边缘方向&lt;/h2&gt;
+
+&lt;p&gt;边缘方向edge direction：灰度梯度指向最大灰度上升的方向（正交方向没有灰度变化）&lt;/p&gt;
+
+&lt;p&gt;$\operatorname{grad} g=\left(\frac{\partial g}{\partial u}, \frac{\partial g}{\partial v}\right)$， $\operatorname{grad} g \perp\left(-\frac{\partial g}{\partial v}, \frac{\partial g}{\partial u}\right)$&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119175209.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;canny边缘检测&quot;&gt;Canny边缘检测&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-高斯滤波&quot;&gt;1. 高斯滤波&lt;/h3&gt;
+
+&lt;p&gt;高斯滤波用于降噪，使图像变得平滑。&lt;/p&gt;
+
+&lt;p&gt;使用方法：用高斯矩阵乘以每个像素点及其邻域取其带权重的平均值作为最后的灰度值。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-使用边缘计算算子&quot;&gt;2. 使用边缘计算算子&lt;/h3&gt;
+
+&lt;p&gt;上文中的Prewitt/Sobol算子&lt;/p&gt;
+
+&lt;h3 id=&quot;3-使用非极大值抑制&quot;&gt;3. 使用非极大值抑制&lt;/h3&gt;
+
+&lt;p&gt;非极大值抑制：搜索局部最大值，来抑制非极大值。例如在目标检测过程中，同一目标可能会出现大量候选框，我们通过非极大值抑制的方法来进行唯一化。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-使用双阈值法上下阈值法&quot;&gt;4. 使用双阈值法（上下阈值法）&lt;/h3&gt;
+
+&lt;p&gt;使用一个阈值来检测边缘的效果不好，&lt;/p&gt;
+
+&lt;p&gt;小阈值：太多噪点，&lt;/p&gt;
+
+&lt;p&gt;大阈值：轮廓线连接不上。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119180210.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;二阶微分算子laplace算子&quot;&gt;二阶微分算子：Laplace算子&lt;/h2&gt;
+
+&lt;p&gt;拉普拉斯算子属于最简单的各项同性二阶微分算子，对于二阶图像：&lt;/p&gt;
+
+&lt;p&gt;$\begin{aligned} \nabla^{2} g=&amp;amp; \frac{\partial^{2} g}{(\partial u)^{2}}+\frac{\partial^{2} g}{(\partial v)^{2}} \=&amp;amp; \operatorname{trace}(H) \ &amp;amp;(H \text { Hessian }) \end{aligned}$&lt;/p&gt;
+
+&lt;p&gt;变化率最大处（一阶导数）=二阶导数为0&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119180804.png&quot; height=&quot;330&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;近似为拉普拉斯算子：&lt;/p&gt;
+
+&lt;p&gt;一阶导数:&lt;/p&gt;
+
+&lt;p&gt;$\frac{\partial g}{\partial u}(u, v) \approx g(u+1, v)-g(u, v)$&lt;/p&gt;
+
+&lt;p&gt;二阶导数：&lt;/p&gt;
+
+&lt;p&gt;$\begin{aligned} \frac{\partial^{2} g}{(\partial u)^{2}}(u, v) &amp;amp; \approx \frac{\partial g}{\partial u}(u, v)-\frac{\partial g}{\partial u}(u-1, v) \ &amp;amp; \approx g(u+1, v)-2 g(u, v)+g(u-1, v) \end{aligned}$&lt;/p&gt;
+
+&lt;p&gt;$		\frac{\partial^{2} g}{(\partial v)^{2}}(u, v) \approx g(u, v+1)-2 g(u, v)+g(u, v-1)$&lt;/p&gt;
+
+&lt;p&gt;可以得到：&lt;/p&gt;
+
+&lt;p&gt;$\nabla^{2} g \approx g(u+1, v)+g(u-1, v)+g(u, v+1)+g(u, v-1)-4 g(u, v)$&lt;/p&gt;
+
+&lt;p&gt;通过掩码器实现：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119181824.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但是二阶导数带有很多的噪声，所以我们结合高斯平滑，从而形成高斯拉普拉斯算子&lt;/p&gt;
+
+&lt;h3 id=&quot;laplacian-of-gaussian-log&quot;&gt;Laplacian of Gaussian， LoG&lt;/h3&gt;
+
+&lt;p&gt;$\nabla^{2}(G * g)=\left(\nabla^{2} G\right) * g$ $(G$ Gaussian $)$ $G(u, v)=\frac{1}{2 \pi \sigma^{2}} e^{-\frac{1}{2 \sigma^{2}}\left(u^{2}+v^{2}\right)}$ $\begin{aligned} \frac{\partial G}{\partial u} &amp;amp;=\frac{1}{2 \pi \sigma^{2}}\left(-\frac{1}{2 \sigma^{2}}\right) 2 u e^{-\frac{1}{2 \sigma^{2}}\left(u^{2}+v^{2}\right)} \ &amp;amp;=-\frac{u}{\sigma^{2}} G(u, v) \ \frac{\partial^{2} G}{(\partial u)^{2}} &amp;amp;=-\frac{1}{\sigma^{2}} G(u, v)-\frac{u}{\sigma^{2}}\left(-\frac{u}{\sigma^{2}} G(u, v)\right) \ &amp;amp;=\frac{u^{2}-\sigma^{2}}{\sigma^{4}} G(u, v) \ \nabla^{2} G &amp;amp;=\frac{u^{2}+v^{2}-2 \sigma^{2}}{\sigma^{4}} G(u, v) \end{aligned}$&lt;/p&gt;
+
+&lt;p&gt;通过掩码器实现：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119182303.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;LoG算法可以近似为DoG算法：&lt;/p&gt;
+
+&lt;p&gt;$D o G(u, v)=G_{\sigma_{1}}(u, v)-G_{\sigma_{2}}(u, v)$&lt;/p&gt;
+
+&lt;p&gt;关于DoG的介绍：&lt;a href=&quot;https://stonema.github.io/2018/04/16/LoG%E7%AE%97%E5%AD%90%E4%B8%8EDoG%E7%AE%97%E5%AD%90/%E2%80%B8&quot;&gt;https://stonema.github.io/2018/04/16/LoG%E7%AE%97%E5%AD%90%E4%B8%8EDoG%E7%AE%97%E5%AD%90/&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 19 Jan 2022 00:00:00 +0800</pubDate>
+        <link>https://wenboli-cn-de.github.io/2022/01/MV3.1/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/MV3.1/</guid>
+        
+        <category>专业</category>
+        
+        <category>机器视觉</category>
+        
+        
+      </item>
     
       <item>
         <title>央视五集电视专题片《零容忍》</title>
