@@ -5,12 +5,12 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 20 Jan 2022 02:19:47 +0800</pubDate>
-    <lastBuildDate>Thu, 20 Jan 2022 02:19:47 +0800</lastBuildDate>
+    <pubDate>Thu, 20 Jan 2022 02:21:55 +0800</pubDate>
+    <lastBuildDate>Thu, 20 Jan 2022 02:21:55 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
-        <title>机器视觉-边缘检测</title>
+        <title>机器视觉-边缘检测 Edge Detection</title>
         <description>&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
 
 &lt;h1 id=&quot;边缘检测的意义&quot;&gt;边缘检测的意义&lt;/h1&gt;
