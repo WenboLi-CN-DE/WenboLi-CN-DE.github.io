@@ -28,6 +28,26 @@
   <link rel="alternate" type="application/rss+xml" title="高傲的电工李" href="https://wenboli-cn-de.github.io/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            inlineMath: [ ['$','$'] ],
+            <!--不需要displayMath(行外公式 我也不知道为什么)-->
+            processEscapes: true
+        },
+        TeX: {
+            equationNumbers: {
+                autoNumber: "AMS"
+            },
+            <!--自定义的宏-->
+            Macros: {
+                lbrace: "\\{",
+                rbrace: "\\}"
+            }
+        }
+    });
+</script>
 
 <!-- 站点统计 -->
   <script 
@@ -203,7 +223,9 @@
   
 
   <section class="post">
-    <h1 id="边缘检测的意义">边缘检测的意义</h1>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h1 id="边缘检测的意义">边缘检测的意义</h1>
 
 <p>边缘检测是为了提取图像中主体的轮廓特征.</p>
 
@@ -293,7 +315,8 @@ $|g(u+\epsilon)-g(u-\epsilon)|$</li>
 
 <p>拉普拉斯算子属于最简单的各项同性二阶微分算子，对于二阶图像：</p>
 
-<p>$\begin{aligned} \nabla^{2} g=&amp; \frac{\partial^{2} g}{(\partial u)^{2}}+\frac{\partial^{2} g}{(\partial v)^{2}} \=&amp; \operatorname{trace}(H) \ &amp;(H \text { Hessian }) \end{aligned}$</p>
+<p>$\begin{aligned} \nabla^{2} g=&amp; \frac{\partial^{2} g}{(\partial u)^{2}}+\frac{\partial^{2} g}
+{(\partial v)^{2}}\end{aligned}$</p>
 
 <p>变化率最大处（一阶导数）=二阶导数为0</p>
 
