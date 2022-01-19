@@ -76,4 +76,8 @@ gems: [jekyll-paginate,jekyll-sitemap]
 paginate: 20
 paginate_path: "page/:num/"
 
+# MathJax rendering for layout:page (e.g. post preview)
+page-mathjax: true
+# 说明：是否对数学公式进行渲染（渲染的话显示的公式在网页加载的时候会出现变化）
+
 
