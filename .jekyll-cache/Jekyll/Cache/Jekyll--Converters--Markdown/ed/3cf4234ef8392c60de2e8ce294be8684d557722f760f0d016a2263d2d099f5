@@ -1,4 +1,4 @@
-I"u=<head>
+I"I=<head>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -84,9 +84,9 @@
 
 <p>每个向量都可以用极坐标来表示：</p>
 
-<p>$\vec{v}=r \cdot\left(\begin{array}{c}\cos \phi \ \sin \phi\end{array}\right) \quad$ with $r \geq 0, \phi \in[0,2 \pi)$</p>
+\[\vec{v}=r \cdot\left(\begin{array}{c}\cos \phi \\ \sin \phi\end{array}\right) \quad，r \geq 0, \phi \in[0,2 \pi)\]
 
-<p>$\phi=\operatorname{atan}<em>{2}\left(v</em>{1}, v_{2}\right)$</p>
+\[\phi=\operatorname{atan}_{2}\left(v_{1}, v_{2}\right)\]
 
 <p><strong>通过点积可以来判断一个多边形是否面向摄像机（游戏开发中重要的一点）；根据点积来计算光照效果（聚光）；在计算机图学中进行方向性的判断</strong></p>
 
@@ -179,14 +179,12 @@
   <li>结果取决于累积器数组的大小和精度</li>
   <li>在实践中，确定累积器阵列中的重要峰值可能是困难的</li>
   <li>梯度方向被忽略</li>
-  <li>
-    <p>累加器数组在”自然场景“中溢出（我猜是计算量过大）</p>
-
-    <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220126002533.png" alt="img" /></p>
-
-    <p>上图是一张经过霍夫变换后的图，在图中我们可以知道，圆弧部分并没有找到。</p>
-  </li>
+  <li>累加器数组在”自然场景“中溢出（我猜是计算量过大）</li>
 </ol>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220126002533.png" alt="img" /></p>
+
+<p>上图是一张经过霍夫变换后的图，在图中我们可以知道，圆弧部分并没有找到。</p>
 
 <h1 id="边缘追踪-edge-following">边缘追踪 Edge following</h1>
 
