@@ -1,4 +1,4 @@
-I"�=<head>
+I"L=<head>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -84,9 +84,9 @@
 
 <p>每个向量都可以用极坐标来表示：</p>
 
-<p>$\vec{v}=r \cdot\left(\begin{array}{c}\cos \phi \ \sin \phi\end{array}\right) \quad$ with $r \geq 0, \phi \in[0,2 \pi)$</p>
+\[\vec{v}=r \cdot\left(\begin{array}{c}\cos \phi \\ \sin \phi\end{array}\right) \quad，r \geq 0, \phi \in[0,2 \pi)\]
 
-<p>$\phi=\operatorname{atan}<em>{2}\left(v</em>{1}, v_{2}\right)$</p>
+\[\phi=\operatorname{atan}_{2}\left(v_{1}, v_{2}\right)\]
 
 <p><strong>通过点积可以来判断一个多边形是否面向摄像机（游戏开发中重要的一点）；根据点积来计算光照效果（聚光）；在计算机图学中进行方向性的判断</strong></p>
 
@@ -166,14 +166,12 @@
 <ol>
   <li>用0初始化具有足够精度的累加器阵列</li>
   <li>使得所有满足线方程的累加器单元增加计数（有点拗口，就是计数）</li>
-  <li>
-    <p>在累加器中找到局部最大值（图像中最主要的参数）</p>
-
-    <p>在找到线参数后，可以将离线距离小的边缘像素分配到边缘线上。</p>
-
-    <p>但需要做两个工作：1. 确定线的起点和终点。2. 确定允许最大尺寸的间隙。</p>
-  </li>
+  <li>在累加器中找到局部最大值（图像中最主要的参数）</li>
 </ol>
+
+<p>在找到线参数后，可以将离线距离小的边缘像素分配到边缘线上。</p>
+
+<p>但需要做两个工作：1. 确定线的起点和终点。2. 确定允许最大尺寸的间隙。</p>
 
 <h2 id="霍夫变换的性质">霍夫变换的性质</h2>
 
@@ -181,14 +179,12 @@
   <li>结果取决于累积器数组的大小和精度</li>
   <li>在实践中，确定累积器阵列中的重要峰值可能是困难的</li>
   <li>梯度方向被忽略</li>
-  <li>
-    <p>累加器数组在”自然场景“中溢出（我猜是计算量过大）</p>
-
-    <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220126002533.png" alt="img" /></p>
-
-    <p>上图是一张经过霍夫变换后的图，在图中我们可以知道，圆弧部分并没有找到。</p>
-  </li>
+  <li>累加器数组在”自然场景“中溢出（我猜是计算量过大）</li>
 </ol>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220126002533.png" alt="img" /></p>
+
+<p>上图是一张经过霍夫变换后的图，在图中我们可以知道，圆弧部分并没有找到。</p>
 
 <h1 id="边缘追踪-edge-following">边缘追踪 Edge following</h1>
 
@@ -297,13 +293,10 @@
 <h2 id="最小二乘法的步骤">最小二乘法的步骤</h2>
 
 <ol>
-  <li>从所有的边缘像素中计算：</li>
-</ol>
-
-\[\sum_{i} x_{i, 1}, \sum_{i} x_{i, 2}, \sum_{i} x_{i, 1}^{2}, \sum_{i} x_{i, 2}^{2}, \sum_{i} x_{i, 1} x_{i, 2}\]
-
-<ol>
-  <li>计算矩阵$\left(\begin{array}{ll}\alpha &amp; \beta \ \beta &amp; \gamma\end{array}\right)$的特征向量和特征值，取较小的特征值</li>
+  <li>
+    <p>从所有的边缘像素中计算：  $\sum_{i} x_{i, 1}, \sum_{i} x_{i, 2}, \sum_{i} x_{i, 1}^{2}, \sum_{i} x_{i, 2}^{2}, \sum_{i} x_{i, 1} x_{i, 2}$</p>
+  </li>
+  <li>计算矩阵 $\left(\begin{array}{ll}\alpha &amp; \beta \ \beta &amp; \gamma\end{array}\right)$ 的特征向量和特征值，取较小的特征值</li>
   <li>根据$\vec{n}$计算$c$</li>
   <li>如果您对线段感兴趣，请根据投影在线上的边缘像素确定起点和终点。</li>
 </ol>

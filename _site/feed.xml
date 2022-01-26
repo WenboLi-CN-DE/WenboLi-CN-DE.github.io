@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Jan 2022 08:54:34 +0800</pubDate>
-    <lastBuildDate>Wed, 26 Jan 2022 08:54:34 +0800</lastBuildDate>
+    <pubDate>Wed, 26 Jan 2022 18:40:09 +0800</pubDate>
+    <lastBuildDate>Wed, 26 Jan 2022 18:40:09 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -97,7 +97,7 @@
 
 &lt;p&gt;每个向量都可以用极坐标来表示：&lt;/p&gt;
 
-\[\vec{v}=r \cdot\left(\begin{array}{c}\cos \phi \\ \sin \phi\end{array}\right) \quad$ with $r \geq 0, \phi \in[0,2 \pi)\]
+\[\vec{v}=r \cdot\left(\begin{array}{c}\cos \phi \\ \sin \phi\end{array}\right) \quad，r \geq 0, \phi \in[0,2 \pi)\]
 
 \[\phi=\operatorname{atan}_{2}\left(v_{1}, v_{2}\right)\]
 
@@ -306,13 +306,10 @@
 &lt;h2 id=&quot;最小二乘法的步骤&quot;&gt;最小二乘法的步骤&lt;/h2&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;从所有的边缘像素中计算：&lt;/li&gt;
-&lt;/ol&gt;
-
-\[\sum_{i} x_{i, 1}, \sum_{i} x_{i, 2}, \sum_{i} x_{i, 1}^{2}, \sum_{i} x_{i, 2}^{2}, \sum_{i} x_{i, 1} x_{i, 2}\]
-
-&lt;ol&gt;
-  &lt;li&gt;计算矩阵$\left(\begin{array}{ll}\alpha &amp;amp; \beta \ \beta &amp;amp; \gamma\end{array}\right)$的特征向量和特征值，取较小的特征值&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;从所有的边缘像素中计算：   $\sum_{i} x_{i, 1}, \sum_{i} x_{i, 2}, \sum_{i} x_{i, 1}^{2}, \sum_{i} x_{i, 2}^{2}, \sum_{i} x_{i, 1} x_{i, 2}$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;计算矩阵 $\left(\begin{array}{ll}\alpha &amp;amp; \beta \ \beta &amp;amp; \gamma\end{array}\right)$ 的特征向量和特征值，取较小的特征值&lt;/li&gt;
   &lt;li&gt;根据$\vec{n}$计算$c$&lt;/li&gt;
   &lt;li&gt;如果您对线段感兴趣，请根据投影在线上的边缘像素确定起点和终点。&lt;/li&gt;
 &lt;/ol&gt;

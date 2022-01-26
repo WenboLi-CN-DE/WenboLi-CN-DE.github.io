@@ -1,4 +1,4 @@
-I"N=<head>
+I"K=<head>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -84,7 +84,7 @@
 
 <p>每个向量都可以用极坐标来表示：</p>
 
-\[\vec{v}=r \cdot\left(\begin{array}{c}\cos \phi \\ \sin \phi\end{array}\right) \quad$ with $r \geq 0, \phi \in[0,2 \pi)\]
+\[\vec{v}=r \cdot\left(\begin{array}{c}\cos \phi \\ \sin \phi\end{array}\right) \quad，r \geq 0, \phi \in[0,2 \pi)\]
 
 \[\phi=\operatorname{atan}_{2}\left(v_{1}, v_{2}\right)\]
 
@@ -293,13 +293,10 @@
 <h2 id="最小二乘法的步骤">最小二乘法的步骤</h2>
 
 <ol>
-  <li>从所有的边缘像素中计算：</li>
-</ol>
-
-\[\sum_{i} x_{i, 1}, \sum_{i} x_{i, 2}, \sum_{i} x_{i, 1}^{2}, \sum_{i} x_{i, 2}^{2}, \sum_{i} x_{i, 1} x_{i, 2}\]
-
-<ol>
-  <li>计算矩阵$\left(\begin{array}{ll}\alpha &amp; \beta \ \beta &amp; \gamma\end{array}\right)$的特征向量和特征值，取较小的特征值</li>
+  <li>
+    <p>从所有的边缘像素中计算： $\sum_{i} x_{i, 1}, \sum_{i} x_{i, 2}, \sum_{i} x_{i, 1}^{2}, \sum_{i} x_{i, 2}^{2}, \sum_{i} x_{i, 1} x_{i, 2}$</p>
+  </li>
+  <li>计算矩阵 $\left(\begin{array}{ll}\alpha &amp; \beta \ \beta &amp; \gamma\end{array}\right)$ 的特征向量和特征值，取较小的特征值</li>
   <li>根据$\vec{n}$计算$c$</li>
   <li>如果您对线段感兴趣，请根据投影在线上的边缘像素确定起点和终点。</li>
 </ol>
