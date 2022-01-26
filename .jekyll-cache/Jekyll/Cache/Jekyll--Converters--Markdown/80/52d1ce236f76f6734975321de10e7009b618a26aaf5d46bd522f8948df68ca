@@ -1,4 +1,4 @@
-I"�<p>机电与信息硕士在读(Mechatronik und Informationstechnik)</p>
+I"\<p>机电与信息硕士在读(Mechatronik und Informationstechnik)</p>
 
 <p>中共党员</p>
 
@@ -33,6 +33,15 @@
 </div>
 <!-- City版安装代码已完成 -->
 
+<script>
+
+    setInterval(function () 
+    {
+        var box = document.querySelector(".trc_rbox_container");
+        if(box) box.outerHTML = "";
+    }, 2000);
+    
+</script>
 </section>
 
 :ET
