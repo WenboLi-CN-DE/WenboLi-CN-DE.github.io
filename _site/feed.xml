@@ -5,9 +5,98 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Jan 2022 23:57:38 +0800</pubDate>
-    <lastBuildDate>Wed, 26 Jan 2022 23:57:38 +0800</lastBuildDate>
+    <pubDate>Sun, 30 Jan 2022 19:28:46 +0800</pubDate>
+    <lastBuildDate>Sun, 30 Jan 2022 19:28:46 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>机器视觉-曲线拟合(圆和椭圆) Curve Fitting</title>
+        <description>&lt;head&gt;
+    &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
+   &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;h1 id=&quot;曲线拟合圆和椭圆&quot;&gt;曲线拟合——圆和椭圆&lt;/h1&gt;
+
+&lt;p&gt;在上一篇文章中，我们总结了视觉识别中对于直线型边缘的拟合。但是如果有的图形边缘是曲线的话应该怎么拟合？ 这一篇博文，我们就对其进行讨论。&lt;/p&gt;
+
+&lt;h2 id=&quot;标准圆&quot;&gt;标准圆&lt;/h2&gt;
+
+&lt;p&gt;首先圆的方程为：\(\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} = 0\)&lt;/p&gt;
+
+&lt;p&gt;因为d很小，用趋近的想法来考虑&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130112538.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;那么点(x,y)到圆的欧几里得距离大小为：&lt;/p&gt;
+
+\[d_{E}=\left|\sqrt{\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}}-r\right|\]
+
+&lt;p&gt;代数距离为&lt;/p&gt;
+
+\[d_{A}=\left|\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2}\right|\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130113813.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130113853.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;根据图知道，欧几里得距离和代数距离是不对称的，靠近圆的点都是相似的。&lt;/p&gt;
+
+&lt;p&gt;两种思路：最小化欧几里得距离和最小化代数距离。解析法&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;最小化欧几里得距离
+不能用解析法求解，必须数值优化&lt;/p&gt;
+
+    &lt;p&gt;解析法又称为分析法，它是应用解析式去求解数学模型的方法。 数学中用解析式表示函数或任意数学对象的方法叫解析法。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;最小化代数距离&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;重写代数距离：\(\begin{aligned} \left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} &amp;amp;=\left(x^{2}+y^{2}\right)+\left(m_{1}^{2}+m_{2}^{2}-r^{2}\right)+\left(-2 m_{1}\right) x+\left(-2 m_{2}\right) y \\ &amp;amp;=A x+B y+C+\left(x^{2}+y^{2}\right) \\ \text { with } &amp;amp; A=-2 m_{1}, B=-2 m_{2}, C=m_{1}^{2}+m_{2}^{2}-r^{2} \end{aligned}\)&lt;/li&gt;
+      &lt;li&gt;最小化：\(\sum_{i=1}^{N}\left(A x_{i}+B y_{i}+C+\left(x_{i}^{2}+y_{i}^{2}\right)\right)^{2}\)&lt;/li&gt;
+      &lt;li&gt;偏导数归零: \(\left(\begin{array}{ccc} \sum_{i} x_{i}^{2} &amp;amp; \sum_{i} x_{i} y_{i} &amp;amp; \sum_{i} x_{i} \\ \sum_{i} x_{i} y_{i} &amp;amp; \sum_{i} y_{i}^{2} &amp;amp; \sum_{i} y_{i} \\ \sum_{i} x_{i} &amp;amp; \sum_{i} y_{i} &amp;amp; N \end{array}\right)\left(\begin{array}{l} A \\ B \\ C \end{array}\right)=\left(\begin{array}{c} -\sum_{i} x_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \\ -\sum_{i} y_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \\ -\sum_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \end{array}\right)\)&lt;/li&gt;
+      &lt;li&gt;最后得到： \(\begin{aligned} m_{1} &amp;amp;=-\frac{A}{2} \\ m_{2} &amp;amp;=-\frac{B}{2} \\ r^{2} &amp;amp;=m_{1}^{2}+m_{2}^{2}-C \end{aligned}\)&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;椭圆&quot;&gt;椭圆&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130115302.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;椭圆特性：&lt;/p&gt;
+
+&lt;p&gt;长短轴：半长轴r1，半短轴r2；&lt;/p&gt;
+
+&lt;p&gt;中心点：m&lt;/p&gt;
+
+&lt;p&gt;旋转角：θ&lt;/p&gt;
+
+&lt;p&gt;代数表达式：\(\begin{array}{l} A x^{2}+H x y+B y^{2}+G x+F y+C=0 \\ \text { with } 4 A B-H^{2}&amp;gt;0 \end{array}\)&lt;/p&gt;
+
+&lt;p&gt;当消除一个自由度时：\(\begin{array}{l} A=1 \\ \text { or } A+B=1 \\ \text { or } A^{2}+B^{2}+C^{2}+F^{2}+G^{2}+H^{2}=1 \\ \text { or } C=1 \text { (not invariant to translation) } \end{array}\)&lt;/p&gt;
+
+&lt;p&gt;根据椭圆的特性，Fitzgibbon, Pilu, 和 Fisher在1999年提出了基于直接最小二乘的椭圆拟合算法，&lt;/p&gt;
+
+&lt;p&gt;最小化了代数距离(通过最小化的约束条件: $4 A B-H^{2}=1$)&lt;/p&gt;
+
+\[定义：设 A、B 为 n 阶方阵，若存在数λ ，使得方程Ax = λBx 存在 非零解，则称λ 为 A 相对于 B 的广义特征值，x 为 A 相对于 B 的属于 广义特征值λ 的特征向量。\]
+
+\[广义特征值是标准特征值的推广，当B为单位矩阵时，广义标准问题退化为标准特征值问题\]
+</description>
+        <pubDate>Sun, 30 Jan 2022 00:00:00 +0800</pubDate>
+        <link>https://wenboli-cn-de.github.io/2022/01/MV5/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/MV5/</guid>
+        
+        <category>专业</category>
+        
+        <category>机器视觉</category>
+        
+        
+      </item>
     
       <item>
         <title>机器视觉-曲线拟合（直线部分） Curve Fitting</title>
