@@ -1,0 +1,517 @@
+I"�><head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+<h1 id="模式识别">模式识别</h1>
+
+<h2 id="组合方法-ensemble-methods">组合方法 Ensemble Methods</h2>
+
+<p>如果想解决分类问题，应该怎么做？</p>
+
+<p>– 创建专家：训练分类器</p>
+
+<p>– 训练几个分类器 → 并构建一个组合</p>
+
+<p><strong>集成学习归属于机器学习，他是一种「训练思路」，并不是某种具体的方法或者算法。</strong></p>
+
+<p>现实生活中，大家都知道「人多力量大」，「3 个臭皮匠顶个诸葛亮」。而集成学习的核心思路就是「人多力量大」，它并没有创造出新的算法，而是把已有的算法进行结合，从而得到更好的效果。</p>
+
+<p>那组合怎么工作？</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309112402.png" style="zoom:67%;" /></p>
+
+<ul>
+  <li>
+    <p>k分类器 $c_{1}, c_{2}, \ldots, c_{k}$</p>
+  </li>
+  <li>
+    <p>将相同的模式应用于所有分类器 → k 个预测</p>
+  </li>
+</ul>
+
+<p>$\begin{array}{c}
+c_{1}(\vec{x}) \in{-1,+1} <br />
+c_{2}(\vec{x}) \in{-1,+1} <br />
+c_{k}(\vec{x}) \in{-1,+1}
+\end{array}$</p>
+
+<ul>
+  <li>总结所有预测并与零进行比较：</li>
+</ul>
+
+<p>$\operatorname{ensemble}(\vec{x})=\operatorname{sign}\left(\sum_{j=1}^{k} c_{j}(\vec{x})\right)$</p>
+
+<p>最好的四种数字识别方法:</p>
+
+<ul>
+  <li>– (2) “线拟合”特征：99.7%</li>
+  <li>– (3) 像素值：99.4%</li>
+  <li>– (4) HOG 特征：99.7%</li>
+  <li>– (5) Haar 特征：99.4%</li>
+  <li>– (6) LBP 特征：99.3%</li>
+</ul>
+
+<p>这些方法的组合会共享错误（在 1000 个测试示例中）：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309112824.png" alt="" /></p>
+
+<p>在实验数字识别中, 组合这些方法：</p>
+
+<ol>
+  <li>
+    <p>组合：线拟合、像素、Haar</p>
+
+    <p>错误率：5/1000 • 成员错误：3、6、6/1000</p>
+  </li>
+  <li>
+    <p>组合：线拟合、HOG、Haar</p>
+
+    <p>错误率：1/1000</p>
+
+    <p>成员错误：3、3、6/1000</p>
+
+    <p>具有联合特征的 SVM 错误：2/1000</p>
+  </li>
+  <li>
+    <p>组合：线拟合、HOG、LBP</p>
+
+    <p>错误率 1/1000</p>
+
+    <p>成员错误：3、3、7/1000</p>
+
+    <p>具有联合特征的 SVM 错误：5/1000</p>
+  </li>
+  <li>
+    <p>组合所有
+错误率 1/1000</p>
+  </li>
+</ol>
+
+<p><strong>什么时候组合更有利？</strong></p>
+
+<p>最佳情况：分类器不共享错误</p>
+
+<ul>
+  <li>组合错误：0</li>
+  <li>每个分类器的错误：100</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309113528.png" alt="" /></p>
+
+<p>最差情况：分类器共享所有错误</p>
+
+<ul>
+  <li>组合错误：150</li>
+  <li>每个分类器的错误：100</li>
+</ul>
+
+<p>所以关键问题就是：<strong>避免分类器共享错误</strong></p>
+
+<p>接下来引入：Boosting</p>
+
+<ul>
+  <li>
+    <p>训练相互依赖的分类器</p>
+  </li>
+  <li>
+    <p><u>*第 n+1 号分类器*</u> 应该专注于被<em><u>第 1...n号分类器</u></em>   <strong>错误分类</strong> 的例子</p>
+  </li>
+</ul>
+
+<h3 id="boosting">Boosting</h3>
+
+<p><strong>实现思路：</strong></p>
+
+<p>一、加权训练模式：为每个训练模式引入权重$\gamma_{i} \geq 0$以模拟其重要性</p>
+
+<p>→ 有必要修改训练算法，例如soft margin SVM。</p>
+
+<p>$\underset{\vec{w}, b}{\operatorname{minimise}} \frac{1}{2}|\vec{w}|^{2}+C \sum_{i}\left(\gamma_{i} \cdot \xi_{i}\right)$
+subject to $d^{(i)} \cdot\left(\left\langle\vec{x}^{(i)}, \vec{w}\right\rangle+b\right) \geq 1-\xi_{i} \quad$ for all $i$ $\xi_{i} \geq 0 \quad$ for all $i$</p>
+
+<p>如何确定模式权重？
+→ 训练分类器后重新计算权重。</p>
+
+<ul>
+  <li>增加被错误分类的模式的权重</li>
+  <li>降低分类良好的模式的权重</li>
+</ul>
+
+<p><strong>实现思路：</strong></p>
+
+<p>二、 加权表决</p>
+
+<p>为每个分类器引入权重$\beta_{k} \geq 0$以模拟其可靠性</p>
+
+<p>→ 修改投票方案：</p>
+
+<p>$\operatorname{ensemble}(\vec{x})=\operatorname{sign}\left(\sum_{k} \beta_{k} \cdot \text { vote }_{k}\right)$</p>
+
+<p>如何确定投票权重？</p>
+
+<p>→根据分类器的性能选择权重：</p>
+
+<ul>
+  <li>分类器权重大，准确率高</li>
+  <li>权重小，分类器准确率低</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309115611.png" alt="" /></p>
+
+<h5 id="adaboost算法">AdaBoost算法</h5>
+
+<p>Boosting是一种集合技术，试图从许多弱分类器中创建一个强分类器。这是通过从训练数据构建模型，然后创建第二个模型来尝试从第一个模型中纠正错误来完成的。添加模型直到完美预测训练集或添加最大数量的模型。</p>
+
+<p>AdaBoost是第一个为二进制分类开发的真正成功的增强算法。这是理解助力的最佳起点。现代助推方法建立在AdaBoost上，最着名的是随机梯度增强机。</p>
+
+<p>Adaboost是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器（强分类器）。</p>
+
+<p>算法：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309115745.png" alt="" /></p>
+
+<p>AdaBoost 的特性：</p>
+
+<p>集成的训练误差由以下限制：</p>
+
+<p>$\prod_{t=1}^{T}\left(2 \sqrt{\epsilon_{t}\left(1-\epsilon_{t}\right)}\right) \leq \exp \left{-2 \sum_{t=1}^{T}\left(\frac{1}{2}-\epsilon_{t}\right)^{2}\right}$</p>
+
+<p>如果 所有的$\epsilon_{t} \leq \lambda&lt;\frac{1}{2}$ 和$T \rightarrow \infty$ AdaBoost 会产生一个完美的分类器</p>
+
+<h5 id="haar分类器">Haar分类器</h5>
+
+<p>概括来说:</p>
+
+<p><strong>Haar分类器=Haar-like特征+AdaBoost算法+级联+积分图快速计算</strong></p>
+
+<p>(1) Haar 特性</p>
+
+<p>$s=\frac{1}{N_{\text {red }}} \sum_{(u, v) \in \text { red area }} g(u, v)-\frac{1}{N_{\text {blue }}} \sum_{(u, v) \in \text { blue area }} g(u, v)$</p>
+
+<p>(2) 制作分类器</p>
+
+<p>$c(s)=\operatorname{sign}(z \cdot(s-\theta))$</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309121157.png" alt="" /></p>
+
+<p>参数：</p>
+
+<p>$\theta \in \mathbb{R}$ 阈值</p>
+
+<p>$z \in{+1,-1}$ 方向</p>
+
+<p>(3)从加权示例训练分类器：</p>
+
+<ul>
+  <li>
+    <p>尝试 θ 和 z 的所有可能值</p>
+  </li>
+  <li>
+    <p>选择最小化加权误差的值</p>
+  </li>
+</ul>
+
+<p>$\sum_{s_{i}&lt;\theta, d^{(i)}=z} \gamma_{i}+\sum_{s_{i}&gt;\theta, d^{(i)}=-z} \gamma_{i}$</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309121411.png" alt="" /></p>
+
+<p>(4)具有多种功能的 Haar 分类器：</p>
+
+<p>​	分类器在一组选项中选择一个 Haar 特征</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309121537.png" alt="" /></p>
+
+<h5 id="boosting-结合haar分类器">Boosting 结合Haar分类器</h5>
+
+<p>Idea：</p>
+
+<p><strong>(1) 将 AdaBoost 与 Haar 分类器一起使用</strong></p>
+
+<p>数字识别任务的测试错误：</p>
+
+<ul>
+  <li>第一个分类器：56/1000</li>
+  <li>集合大小 5：54/1000</li>
+  <li>集合大小 50：16/1000</li>
+  <li>集合大小 200：10/1000</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309121744.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309121756.png" alt="" /></p>
+
+<p><strong>(2)每个特征产生一个分类器</strong></p>
+
+<p>例如 像素灰度</p>
+
+<p>数字识别任务的测试错误：</p>
+
+<ul>
+  <li>第一个分类器：193/1000</li>
+  <li>集合大小 5：90/1000</li>
+  <li>集合大小 50：24/1000</li>
+  <li>集合大小 200：18/1000</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309122153.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309122208.png" alt="" /></p>
+
+<h6 id="平衡错误">平衡错误</h6>
+
+<p>组合分类器：$\sum_{k}\left(\beta_{k} \cdot c_{k}(\vec{x})\right) \gtrless 0$</p>
+
+<p>延伸：$\sum_{k}\left(\beta_{k} \cdot c_{k}(\vec{x})\right) \gtrless \delta$</p>
+
+<p>δ &gt; 0 ：仅当非常确定时才分类为positive</p>
+
+<p>δ &lt; 0 ：即使不确定，也可以将其归为positive</p>
+
+<p>例子：</p>
+
+<p>具有 Haar 功能的 AdaBoost，组合大小为5</p>
+
+<p>$\sum_{k}\left(\beta_{k} \cdot c_{k}(\vec{x})\right) \gtrless \delta$</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309123029.png" alt="" /></p>
+
+<p>假设现在有这样一个测试集，测试集中的图片只由大雁和飞机两种图片组成. 假设你的分类系统最终的目的是：能取出测试集中所有飞机的图片，而不是大雁的图片，那么在这个任务中，飞机就是正例，大雁就是反例。</p>
+
+<p>现在做如下的定义：
+True positives : 飞机的图片被正确的识别成了飞机。
+True negatives: 大雁的图片没有被识别出来，系统正确地认为它们是大雁。
+False positives: 大雁的图片被错误地识别成了飞机。
+False negatives: 飞机的图片没有被识别出来，系统错误地认为它们是大雁。</p>
+
+<p>Precision其实就是在识别出来的图片中，True positives所占的比率：</p>
+
+<p>$precision = \frac{tp}{tp+fp} = \frac{tp}{n}$</p>
+
+<p>其中的n代表的是(True positives + False positives)，也就是系统一共识别出来多少照片 。</p>
+
+<p>$recall = \frac{tp}{tp+fn}$</p>
+
+<p>Recall 是被正确识别出来的飞机个数与测试集中所有飞机的个数的比值。</p>
+
+<p>Recall的分母是(True positives + False negatives)，这两个值的和，可以理解为一共有多少张飞机的照片。</p>
+
+<h5 id="搜索对象-searching-for-objects">搜索对象 Searching for Objects</h5>
+
+<p>我们如何使用分类器在图像中找到对象？</p>
+
+<p>– 例如 在字母上找到数字“1”；使用“1”的分类器</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309123827.png" style="zoom:50%;" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309123945.png" alt="" /></p>
+
+<p>想法：</p>
+
+<p>将分类器应用于所有图像中所有可能的区域</p>
+
+<ul>
+  <li>改变区域的位置</li>
+  <li>改变区域的大小</li>
+  <li>改变区域的方向（可选择）。
+→ 需要数百万次的试验
+效率如何？</li>
+</ul>
+
+<p>改进的想法：</p>
+
+<p>使用两个分类器</p>
+
+<p>分类器1</p>
+
+<ul>
+  <li>高效</li>
+  <li>不准确</li>
+  <li>高召回率</li>
+  <li>低精度</li>
+  <li>适用于所有领域</li>
+</ul>
+
+<p>分类器2</p>
+
+<ul>
+  <li>低效率</li>
+  <li>精度</li>
+  <li>高召回率</li>
+  <li>高精度</li>
+  <li>适用于由分类器1发现的区域</li>
+</ul>
+
+<p>想法可以扩展到一系列许多分类器 → <strong>Viola/Jones 算法</strong></p>
+
+<h6 id="violajones-approach">Viola/Jones Approach</h6>
+
+<p>结合：</p>
+
+<p>– Haar 分类器</p>
+
+<p>– AdaBoost</p>
+
+<p>– 增加集合大小的分类器系列（“级联”）</p>
+
+<p>– 调整集合以最大化召回率</p>
+
+<p>– 搜索具有不同区域位置和大小的整个图像</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309124646.png" alt="" /></p>
+
+<h6 id="violajones算法举例">Viola/Jones算法举例</h6>
+
+<p>人脸识别</p>
+
+<p>轮廓线检测</p>
+
+<h3 id="决策树decision-trees">决策树：Decision Trees</h3>
+
+<p>决策树。</p>
+<ul>
+  <li>树状结构，分支因子2</li>
+  <li>内部节点：二进制分类器</li>
+  <li>叶子结点：类标签</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309125041.png" alt="" /></p>
+
+<p>从训练示例创建决策树:</p>
+
+<p>创建具有未知类标签的叶节点作为根节点。</p>
+
+<p>将所有训练示例分配给它.</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309125151.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309125211.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309125440.png" alt="" /></p>
+
+<p>哪些分类器是合适的？</p>
+
+<p>– 一般来说：全部</p>
+
+<p>– 类似的想法，例如 boosting：</p>
+
+<p>通过组合简单分类器创建一个复杂分类器，即阈值分类器: 如使用 Haar 分类器进行数字识别</p>
+
+<p>数字识别决策树：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309130254.png" alt="" /></p>
+
+<h6 id="改进决策树的技术">改进决策树的技术</h6>
+
+<p><strong>正则化技术Regularization techniques:</strong></p>
+
+<p>机器学习中的一个核心问题是设计不仅在训练集上误差小，而且在新样本上泛化能力好的算法。许多机器学习算法都需要采取相应的策略来减少测试误差，这些策略被统称为正则化。</p>
+
+<p><strong>1. 早期止损</strong>
+在构建树时使用验证集。当你在验证集上观察到非递减的错误时，停止分割节点。
+你观察到验证集上的错误没有减少。</p>
+
+<ul>
+  <li>例如：数字识别的验证误差是。
+深度为1的树为54
+深度为2的树为37
+深度3的树为29
+深度4的树为29
+深度5的树为29
+深度为7的树为36
+深度为7的树为37
+→ 取深度为3的树</li>
+</ul>
+
+<p><strong>2.修剪</strong></p>
+
+<p>首先创建完整的决策树。 之后去除不平衡或病态的分支。</p>
+
+<p>• 几个修剪标准</p>
+
+<p>• 已经应用过，例如 在决策树算法 C4.5</p>
+
+<p><strong>3.随机决策树和森林</strong></p>
+
+<p><u>通过以下方式随机创建决策树</u>：</p>
+
+<ul>
+  <li>随机选择训练数据的子集</li>
+  <li>随机选择作为下一次拆分选项的特征子集</li>
+  <li>随机选择区分阈值</li>
+</ul>
+
+<p><u>构建许多随机树的集合：</u></p>
+
+<p>→ 随机决策森林</p>
+
+<p><strong>创建决策森林</strong></p>
+
+<p>– 使用 Haar 特征</p>
+
+<p>– 随机选择特征和阈值（在 k 个试验中最好）</p>
+
+<p>– 训练集没有变化</p>
+
+<p>– 允许深度树</p>
+
+<p>– 改变集合大小 n</p>
+
+<p>测试集错误：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309131242.png" alt="" /></p>
+
+<p>比较：</p>
+
+<ul>
+  <li>
+    <p>使用早期停止训练的决策树：29</p>
+  </li>
+  <li>
+    <p>AdaBoost 集成</p>
+
+    <ul>
+      <li>
+        <p>大小 5：54</p>
+      </li>
+      <li>
+        <p>大小 50：16</p>
+      </li>
+      <li>
+        <p>大小 200：10</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>SVM：6</p>
+  </li>
+</ul>
+
+<h5 id="结合多类别分类器的决策树">结合多类别分类器的决策树</h5>
+
+<p>扩展到两个以上的类：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309131610.png" alt="" /></p>
+
+<p>训练分类器以最小化叶节点中的香农熵</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309131637.png" style="zoom: 50%;" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309131849.png" alt="" /></p>
+
+<p>熵衡量模式集的同质性</p>
+
+<ul>
+  <li>所有模式属于同一类：熵最小 (0)</li>
+  <li>相同数量的模式属于每个类：熵最大</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309134356.png" style="zoom: 67%;" /></p>
+:ET
