@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>机器视觉-深度学习(第二部分) Deep Learning</title>
+  <meta name="description" content="        深度学习语义分割和目标检测 (Semantic Segmentation and Object Detection)场景标注 Scene Labeling分割图像  分类每个像素  自动编码器/解码器结构摘自：J. Long、E. Shelhamer、T. Darrell，“用于语义分割的全卷积网...">
+  <meta name="author" content="leopardpan">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="机器视觉-深度学习(第二部分) Deep Learning">
+  <meta name="twitter:description" content="        深度学习语义分割和目标检测 (Semantic Segmentation and Object Detection)场景标注 Scene Labeling分割图像  分类每个像素  自动编码器/解码器结构摘自：J. Long、E. Shelhamer、T. Darrell，“用于语义分割的全卷积网...">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="机器视觉-深度学习(第二部分) Deep Learning">
+  <meta property="og:description" content="        深度学习语义分割和目标检测 (Semantic Segmentation and Object Detection)场景标注 Scene Labeling分割图像  分类每个像素  自动编码器/解码器结构摘自：J. Long、E. Shelhamer、T. Darrell，“用于语义分割的全卷积网...">
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="https://wenboli-cn-de.github.io/2022/03/MV12.1/">
+  <link rel="alternate" type="application/rss+xml" title="高傲的电工李" href="https://wenboli-cn-de.github.io/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+
+<!-- 站点统计 -->
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
+
+<!-- 百度统计 -->
+  
+
+<!-- google 统计 -->
+  
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9005224472374751",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <!-- 头像效果-start -->
+        <div class="ih-item circle effect right_to_left">            
+            <a href="/#blog" title="前往 高傲的电工李 的主页" class="blog-button">
+                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+                <div class="info">
+                    <div class="info-back">
+                        <h2> 
+                            
+                                李文博
+                            
+                        </h2>
+                        <p>
+                           
+                                机电 / 机器学习
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 头像效果-end -->
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for 高傲的电工李" class="blog-button">高傲的电工李</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">个人博客</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到我的个人博客</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        
+
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+                
+                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+                
+                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+                
+                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+                
+              </ul>
+            </nav>
+          </div>          
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-clear"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <head>
+  <link rel="stylesheet" href="/css/post.css">
+</head>
+
+<article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">机器视觉-深度学习(第二部分) Deep Learning</h1>
+    <div class="post-meta">
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2022-03-10 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2022-03-10</time>  
+
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+  
+    <h2 class="post-title">目录</h2>
+    <ul>
+  <li><a href="#深度学习">深度学习</a>
+    <ul>
+      <li><a href="#语义分割和目标检测-semantic-segmentation-and-object-detection">语义分割和目标检测 (Semantic Segmentation and Object Detection)</a>
+        <ul>
+          <li><a href="#场景标注-scene-labeling">场景标注 Scene Labeling</a></li>
+          <li><a href="#实例标签-instance-labeling">实例标签 Instance Labeling</a></li>
+          <li><a href="#区域生成网络region-proposal-networks">区域生成网络Region Proposal Networks</a></li>
+          <li><a href="#深度学习技术">深度学习技术</a></li>
+          <li><a href="#训练期间的典型错误进展">训练期间的典型错误进展</a>
+            <ul>
+              <li><a href="#小权重正则化">小权重正则化</a></li>
+            </ul>
+          </li>
+          <li><a href="#权重衰减l2-正则化-weight-decay--l2-regularisation">权重衰减/L2-正则化 Weight Decay / L2-Regularisation</a></li>
+          <li><a href="#梯度下降的修正">梯度下降的修正</a>
+            <ul>
+              <li><a href="#随机梯度下降"><strong>随机梯度下降</strong></a></li>
+              <li><a href="#动量梯度下降"><strong>动量梯度下降</strong></a></li>
+            </ul>
+          </li>
+          <li><a href="#多任务学习-multi-task-learning">多任务学习 Multi Task Learning</a></li>
+          <li><a href="#预训练特征网络的使用"><strong>预训练特征网络的使用</strong></a></li>
+          <li><a href="#输出层和损失函数-output-layers-and-loss-functions">输出层和损失函数 Output Layers and Loss Functions</a></li>
+          <li><a href="#不平衡训练集的变体">不平衡训练集的变体</a></li>
+        </ul>
+      </li>
+      <li><a href="#来自深度学习工具箱的其他技术">来自深度学习工具箱的其他技术</a>
+        <ul>
+          <li><a href="#生成对抗网络-gan-generative-adversarial-networks-gan">生成对抗网络 (GAN) Generative Adversarial Networks (GAN)</a></li>
+          <li><a href="#序列处理sequence-processing">序列处理Sequence Processing</a></li>
+          <li><a href="#循环单元-grulstm-recurrent-units-grulstm">循环单元 (GRU+LSTM) Recurrent Units (GRU+LSTM)</a></li>
+          <li><a href="#门控循环单元-gru">门控循环单元 (GRU)</a></li>
+          <li><a href="#长短期记忆单元-lstm">长短期记忆单元 (LSTM)</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+  
+
+  <section class="post">
+    <head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+<h1 id="深度学习">深度学习</h1>
+
+<h2 id="语义分割和目标检测-semantic-segmentation-and-object-detection">语义分割和目标检测 (Semantic Segmentation and Object Detection)</h2>
+
+<h3 id="场景标注-scene-labeling">场景标注 Scene Labeling</h3>
+
+<p>分割图像</p>
+
+<ul>
+  <li>分类每个像素</li>
+  <li>自动编码器/解码器结构</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310111358.png" alt="img" style="zoom:80%;" /></p>
+
+<center>摘自：J. Long、E. Shelhamer、T. Darrell，“用于语义分割的全卷积网络”，CVPR，2015</center>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310111347.png" alt="" /></p>
+
+<center>摘自：J. Long、E. Shelhamer、T. Darrell，“用于语义分割的全卷积网络”，CVPR，2015</center>
+
+<h3 id="实例标签-instance-labeling">实例标签 Instance Labeling</h3>
+
+<p>语义标签不提供对象边界！</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310111731.png" alt="" /></p>
+
+<center>摘自: J. Uhrig, M. Cordts, U. Franke, T. Brox, Pixel-level
+encoding and depth layering for instance-level semantic
+segmentation, Germ. Conf. on Pattern Recognition, 2016/
+provided by Nick Schneider, Daimler AG</center>
+
+<p><strong>想法：将方向标记为对象中心</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112000.png" alt="" /></p>
+
+<center>摘自: J. Uhrig, M. Cordts, U. Franke, T. Brox, Pixel-level
+encoding and depth layering for instance-level semantic
+segmentation, Germ. Conf. on Pattern Recognition, 2016/
+provided by Nick Schneider, Daimler AG</center>
+
+<p><img src="C:\Users\Wenbo Li\AppData\Roaming\Typora\typora-user-images\image-20220310112145711.png" alt="image-20220310112145711" /></p>
+
+<center>video provided by Nick Schneider, Daimler AG  </center>
+
+<h3 id="区域生成网络region-proposal-networks">区域生成网络Region Proposal Networks</h3>
+
+<p>Region Proposal Network，直接翻译是“<strong>区域生成网络</strong>”，通俗讲是“筛选出可能会有目标的框”。其本质是基于滑窗的无类别object检测器，输入是任意尺度的图像，输出是一系列矩形候选区域。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112344.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112421.png" style="zoom: 68%;" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112445.png" alt="" /></p>
+
+<p>我们在哪里可以找到哪些对象？</p>
+
+<ul>
+  <li>将图像划分为单元</li>
+  <li>在每个单元中应用区域生成网络</li>
+  <li>改变划分的单元大小以处理更大/更小的对象</li>
+</ul>
+
+<h3 id="深度学习技术">深度学习技术</h3>
+
+<p>没有比更多数据更重要的数据了！</p>
+
+<ul>
+  <li>
+    <p>训练过程的严格验证</p>
+  </li>
+  <li>
+    <p>训练过程的正则化</p>
+
+    <ul>
+      <li>
+        <p>– 提前停止</p>
+      </li>
+      <li>
+        <p>– 权重衰减/L2 正则化</p>
+      </li>
+      <li>
+        <p>– dropout</p>
+      </li>
+      <li>
+        <p>– 随机梯度下降</p>
+      </li>
+      <li>
+        <p>– 多任务学习</p>
+      </li>
+      <li>
+        <p>– 使用预训练网络</p>
+      </li>
+      <li>
+        <p>– 损失函数</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>重用 （他人的）实践知识</p>
+  </li>
+  <li>
+    <p>– 成功的网络结构</p>
+  </li>
+  <li>
+    <p>– 成功的培训过程</p>
+  </li>
+</ul>
+
+<h3 id="训练期间的典型错误进展">训练期间的典型错误进展</h3>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113429.png" alt="" /></p>
+
+<p>为什么早期停止作为正则化技术起作用？</p>
+
+<ul>
+  <li>提前停止更倾向小权重</li>
+  <li>小权重意味着几乎没有非线性</li>
+</ul>
+
+<h4 id="小权重正则化">小权重正则化</h4>
+
+<p>假设感知器的绝对权重较小</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113609.png" style="zoom: 33%;" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113743.png" style="zoom:67%;" /></p>
+
+<p>小权重促进感知器的线性行为</p>
+
+<p>假设具有线性激活的全连接网络</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113904.png" style="zoom: 67%;" /></p>
+
+<p>→感知器的线性行为降低了非线性表达性</p>
+
+<p>→正则化</p>
+
+<h3 id="权重衰减l2-正则化-weight-decay--l2-regularisation">权重衰减/L2-正则化 Weight Decay / L2-Regularisation</h3>
+
+<p>通过正则化规则扩大训练目标</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310114446.png" alt="" /></p>
+
+<p>通过在训练期间随机关闭感知器进行正则化</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310114520.png" alt="" /></p>
+
+<p>dropout 迫使神经网络以分布式方式存储相关信息</p>
+
+<p>dropout 减少过拟合</p>
+
+<h3 id="梯度下降的修正">梯度下降的修正</h3>
+
+<h4 id="随机梯度下降"><strong>随机梯度下降</strong></h4>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310114745.png" alt="" /></p>
+
+<p>优点：</p>
+
+<ol>
+  <li>加速</li>
+  <li>减少一点过拟合</li>
+</ol>
+
+<h4 id="动量梯度下降"><strong>动量梯度下降</strong></h4>
+
+\[\begin{aligned}
+\Delta \vec{w} &amp; \leftarrow \alpha \cdot \Delta \vec{w}-\varepsilon \cdot \frac{\partial}{\partial \vec{w}} \sum_{j \in S} \operatorname{err}\left(f_{M L P}^{\vec{w}}\left(\vec{x}^{(j)}\right), \vec{t}^{(j)}\right) \\
+\vec{w} \leftarrow \vec{w}+\Delta \vec{w}
+\end{aligned}\]
+
+<p>用一个α&gt;0参数来控制后续步骤的一致性</p>
+
+<p>优点：</p>
+
+<ol>
+  <li>在平坦区域加速</li>
+  <li>减少曲折</li>
+</ol>
+
+<h3 id="多任务学习-multi-task-learning">多任务学习 Multi Task Learning</h3>
+
+<p>想法：在单个网络示例中学习多个相关任务：</p>
+
+<p>场景标记+实例标记+深度估计</p>
+
+<p>scene labeling + instance labeling + depth estimation</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115128.png" alt="" /></p>
+
+<p>优点：</p>
+
+<ol>
+  <li>强制网络在隐藏层中开发共同特征</li>
+  <li>减少对单个任务的过度拟合</li>
+</ol>
+
+<h3 id="预训练特征网络的使用"><strong>预训练特征网络的使用</strong></h3>
+
+<p>想法：重用预训练的网络</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115236.png" alt="" /></p>
+
+<ol>
+  <li>用大型训练集训练其他任务</li>
+  <li>丢弃其他任务的分类层</li>
+  <li>为新任务创建新的分类层</li>
+  <li>训练新分类层的权重，同时保留特征层</li>
+</ol>
+
+<h3 id="输出层和损失函数-output-layers-and-loss-functions">输出层和损失函数 Output Layers and Loss Functions</h3>
+
+<p>损失函数将网络输出与期望的输出进行比较</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115431.png" style="zoom:67%;" /></p>
+
+<ol>
+  <li>
+    <p>情况（回归任务）：期望的输出应该是实数</p>
+
+    <ul>
+      <li>
+        <p>在输出层使用线性激活函数</p>
+      </li>
+      <li>
+        <p>使用平方误差，即</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+\[\operatorname{err}(\vec{y}, \vec{t})=\|\vec{y}-\vec{t}\|^{2}\]
+
+<ol>
+  <li>
+    <p>情况（分类任务）：期望的输出应该是类别标签</p>
+
+    <ul>
+      <li>
+        <p>在输出层使用softmax激活函数</p>
+      </li>
+      <li>
+        <p>使用交叉熵误差 cross entropy error</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115748.png" alt="" /></p>
+
+<h3 id="不平衡训练集的变体">不平衡训练集的变体</h3>
+
+<p>对于严重不平衡的训练集（即每个类的示例数量不相等），训练可能会失败</p>
+
+<p>引入加权因子来补偿不平衡</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120231.png" alt="" /></p>
+
+<h2 id="来自深度学习工具箱的其他技术">来自深度学习工具箱的其他技术</h2>
+
+<h3 id="生成对抗网络-gan-generative-adversarial-networks-gan">生成对抗网络 (GAN) Generative Adversarial Networks (GAN)</h3>
+
+<p>我们可以使用深度网络生成逼真的图像吗？</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120527.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120601.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p>生成网络应该学会生成逼真的图像</p>
+  </li>
+  <li>鉴别性网络应该学习如何区分图像是真实的还是生成的。</li>
+  <li>训练：两个网络都是零和游戏中的竞争对手</li>
+</ul>
+
+<p>应用领域： • 图像渲染 • 域适应 • 为分类器生成（附加）训练数据</p>
+
+<h3 id="序列处理sequence-processing">序列处理Sequence Processing</h3>
+
+<p>我们如何处理序列，例如 视频序列？</p>
+
+<p>(1) 多通道输入层</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120707.png" alt="" /></p>
+
+<p>只有在以下情况下才有可能</p>
+
+<ul>
+  <li>短序列</li>
+  <li>固定长度的序列</li>
+</ul>
+
+<p>(2)图像单独处理+拼接层</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120832.png" alt="" /></p>
+
+<p>只有当</p>
+<ul>
+  <li>短序列</li>
+  <li>固定长度的序列</li>
+</ul>
+
+<p>(3) 图像的单独处理+附加层（深度集）</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120924.png" alt="" /></p>
+
+<p>只有当</p>
+<ul>
+  <li>图像的顺序并不重要</li>
+</ul>
+
+<p>(4)递归网络</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121006.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121023.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p>学习算法：通过时间进行反向传播</p>
+  </li>
+  <li>问题：梯度消失</li>
+  <li>解决方案：用适当的处理单元（GRU、LSTM）取代网络C中的感知器。
+适当的处理单元(GRU, LSTM)</li>
+</ul>
+
+<h3 id="循环单元-grulstm-recurrent-units-grulstm">循环单元 (GRU+LSTM) Recurrent Units (GRU+LSTM)</h3>
+
+<ul>
+  <li>
+    <p>实现简单状态机的专用单元</p>
+  </li>
+  <li>状态从不通过双曲切线的逻辑函数→来传递
+没有消失的梯度</li>
+  <li>内部结构有几个控制信息流的闸门</li>
+  <li>使用感知器机制打开/关闭闸门</li>
+  <li>LSTM：更早（1997年），更复杂（需要5个感知器）。</li>
+  <li>GRU：较新（2014年），门数较少，参数较少（需要3个感知器）。</li>
+</ul>
+
+<h3 id="门控循环单元-gru">门控循环单元 (GRU)</h3>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121136.png" alt="" /></p>
+
+<h3 id="长短期记忆单元-lstm">长短期记忆单元 (LSTM)</h3>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121153.png" alt="" /></p>
+
+
+  </section>
+
+</article>
+
+<section>
+
+
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2022/03/MV12.0/" data-toggle="tooltip" data-placement="top" title="机器视觉-深度学习(第一部分) Deep Learning">上一篇：  <span>机器视觉-深度学习(第一部分) Deep Learning</span>
+            </a>
+        </li>
+        
+        
+    </ul>
+</section>
+
+
+<section class="post-comments">
+
+    <script>
+
+        setInterval(function () 
+        {
+            var box = document.querySelector(".trc_rbox_container");
+            if(box) box.outerHTML = "";
+        }, 2000);
+        
+    </script>
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NTIzMy8zMTcwMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">  
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/WenboLi-CN-DE" title="@WenboLi-CN-DE 的 Github" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
+            </a>
+          </li>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:lwb_010@163.com" title="Contact me">
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
+            </a>
+          </li>
+          
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">  
+           <p class="copyright text-muted">
+            Copyright &copy; 高傲的电工李 2022 Theme by <a href="https://leopardpan.cn/">leopardpan</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+
+</html>

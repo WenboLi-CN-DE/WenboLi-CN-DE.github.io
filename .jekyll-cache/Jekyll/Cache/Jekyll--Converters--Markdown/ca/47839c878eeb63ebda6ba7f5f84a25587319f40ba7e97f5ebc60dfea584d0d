@@ -1,0 +1,25 @@
+I"�
+<ul>
+  <li><a href="#深度学习-deep-learning">深度学习 Deep Learning</a>
+    <ul>
+      <li><a href="#多层感知器multi-layer-perceptrons--mlp">多层感知器Multi-Layer Perceptrons  （MLP）</a></li>
+      <li><a href="#梯度下降反向传播gradient-descent-backpropagation">梯度下降（反向传播）Gradient Descent (Backpropagation)</a></li>
+      <li><a href="#训练-mlp传统方法training-mlps-traditional-methods">训练 MLP（传统方法）Training MLPs (traditional methods)</a></li>
+      <li><a href="#深度学习">深度学习</a>
+        <ul>
+          <li><a href="#特征学习">特征学习</a></li>
+          <li><a href="#自动编码器-autoencoder">自动编码器 Autoencoder</a></li>
+          <li><a href="#堆叠自动编码器-stacked-autoencoders">堆叠自动编码器 Stacked Autoencoders</a></li>
+          <li><a href="#用于分类的堆叠自动编码器">用于分类的堆叠自动编码器</a></li>
+          <li><a href="#局部感受野local-receptive-fields">局部感受野Local Receptive Fields</a></li>
+          <li><a href="#权值共享--weight-sharing"><a href="https://baike.baidu.com/item/权值共享/22689640">权值共享</a>  Weight Sharing</a></li>
+          <li><a href="#多通道特征层multi-channel-feature-layers">多通道特征层Multi-Channel Feature Layers</a></li>
+          <li><a href="#最大池化max-pooling">最大池化Max-Pooling</a></li>
+          <li><a href="#卷积网络convolutional-networks">卷积网络Convolutional Networks</a></li>
+          <li><a href="#resnet层-resnet-layers">ResNet层 ResNet Layers</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET
