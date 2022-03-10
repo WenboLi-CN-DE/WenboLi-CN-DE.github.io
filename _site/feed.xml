@@ -5,9 +5,675 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Mar 2022 22:14:31 +0800</pubDate>
-    <lastBuildDate>Wed, 09 Mar 2022 22:14:31 +0800</lastBuildDate>
+    <pubDate>Fri, 11 Mar 2022 00:21:14 +0800</pubDate>
+    <lastBuildDate>Fri, 11 Mar 2022 00:21:14 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>机器视觉-深度学习(第二部分) Deep Learning</title>
+        <description>&lt;head&gt;
+    &lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;h1 id=&quot;深度学习&quot;&gt;深度学习&lt;/h1&gt;
+
+&lt;h2 id=&quot;语义分割和目标检测-semantic-segmentation-and-object-detection&quot;&gt;语义分割和目标检测 (Semantic Segmentation and Object Detection)&lt;/h2&gt;
+
+&lt;h3 id=&quot;场景标注-scene-labeling&quot;&gt;场景标注 Scene Labeling&lt;/h3&gt;
+
+&lt;p&gt;分割图像&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;分类每个像素&lt;/li&gt;
+  &lt;li&gt;自动编码器/解码器结构&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310111358.png&quot; alt=&quot;img&quot; style=&quot;zoom:80%;&quot; /&gt;&lt;/p&gt;
+
+&lt;center&gt;摘自：J. Long、E. Shelhamer、T. Darrell，“用于语义分割的全卷积网络”，CVPR，2015&lt;/center&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310111347.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;center&gt;摘自：J. Long、E. Shelhamer、T. Darrell，“用于语义分割的全卷积网络”，CVPR，2015&lt;/center&gt;
+
+&lt;h3 id=&quot;实例标签-instance-labeling&quot;&gt;实例标签 Instance Labeling&lt;/h3&gt;
+
+&lt;p&gt;语义标签不提供对象边界！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310111731.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;center&gt;摘自: J. Uhrig, M. Cordts, U. Franke, T. Brox, Pixel-level
+encoding and depth layering for instance-level semantic
+segmentation, Germ. Conf. on Pattern Recognition, 2016/
+provided by Nick Schneider, Daimler AG&lt;/center&gt;
+
+&lt;p&gt;&lt;strong&gt;想法：将方向标记为对象中心&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112000.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;center&gt;摘自: J. Uhrig, M. Cordts, U. Franke, T. Brox, Pixel-level
+encoding and depth layering for instance-level semantic
+segmentation, Germ. Conf. on Pattern Recognition, 2016/
+provided by Nick Schneider, Daimler AG&lt;/center&gt;
+
+&lt;p&gt;&lt;img src=&quot;C:\Users\Wenbo Li\AppData\Roaming\Typora\typora-user-images\image-20220310112145711.png&quot; alt=&quot;image-20220310112145711&quot; /&gt;&lt;/p&gt;
+
+&lt;center&gt;video provided by Nick Schneider, Daimler AG  &lt;/center&gt;
+
+&lt;h3 id=&quot;区域生成网络region-proposal-networks&quot;&gt;区域生成网络Region Proposal Networks&lt;/h3&gt;
+
+&lt;p&gt;Region Proposal Network，直接翻译是“&lt;strong&gt;区域生成网络&lt;/strong&gt;”，通俗讲是“筛选出可能会有目标的框”。其本质是基于滑窗的无类别object检测器，输入是任意尺度的图像，输出是一系列矩形候选区域。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112344.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112421.png&quot; style=&quot;zoom: 68%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112445.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们在哪里可以找到哪些对象？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;将图像划分为单元&lt;/li&gt;
+  &lt;li&gt;在每个单元中应用区域生成网络&lt;/li&gt;
+  &lt;li&gt;改变划分的单元大小以处理更大/更小的对象&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;深度学习技术&quot;&gt;深度学习技术&lt;/h3&gt;
+
+&lt;p&gt;没有比更多数据更重要的数据了！&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;训练过程的严格验证&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;训练过程的正则化&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;– 提前停止&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;– 权重衰减/L2 正则化&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;– dropout&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;– 随机梯度下降&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;– 多任务学习&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;– 使用预训练网络&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;– 损失函数&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重用 （他人的）实践知识&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;– 成功的网络结构&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;– 成功的培训过程&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;训练期间的典型错误进展&quot;&gt;训练期间的典型错误进展&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113429.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为什么早期停止作为正则化技术起作用？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;提前停止更倾向小权重&lt;/li&gt;
+  &lt;li&gt;小权重意味着几乎没有非线性&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;小权重正则化&quot;&gt;小权重正则化&lt;/h4&gt;
+
+&lt;p&gt;假设感知器的绝对权重较小&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113609.png&quot; style=&quot;zoom: 33%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113743.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;小权重促进感知器的线性行为&lt;/p&gt;
+
+&lt;p&gt;假设具有线性激活的全连接网络&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113904.png&quot; style=&quot;zoom: 67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;→感知器的线性行为降低了非线性表达性&lt;/p&gt;
+
+&lt;p&gt;→正则化&lt;/p&gt;
+
+&lt;h3 id=&quot;权重衰减l2-正则化-weight-decay--l2-regularisation&quot;&gt;权重衰减/L2-正则化 Weight Decay / L2-Regularisation&lt;/h3&gt;
+
+&lt;p&gt;通过正则化规则扩大训练目标&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310114446.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;通过在训练期间随机关闭感知器进行正则化&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310114520.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;dropout 迫使神经网络以分布式方式存储相关信息&lt;/p&gt;
+
+&lt;p&gt;dropout 减少过拟合&lt;/p&gt;
+
+&lt;h3 id=&quot;梯度下降的修正&quot;&gt;梯度下降的修正&lt;/h3&gt;
+
+&lt;h4 id=&quot;随机梯度下降&quot;&gt;&lt;strong&gt;随机梯度下降&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310114745.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;优点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;加速&lt;/li&gt;
+  &lt;li&gt;减少一点过拟合&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;动量梯度下降&quot;&gt;&lt;strong&gt;动量梯度下降&lt;/strong&gt;&lt;/h4&gt;
+
+\[\begin{aligned}
+\Delta \vec{w} &amp;amp; \leftarrow \alpha \cdot \Delta \vec{w}-\varepsilon \cdot \frac{\partial}{\partial \vec{w}} \sum_{j \in S} \operatorname{err}\left(f_{M L P}^{\vec{w}}\left(\vec{x}^{(j)}\right), \vec{t}^{(j)}\right) \\
+\vec{w} \leftarrow \vec{w}+\Delta \vec{w}
+\end{aligned}\]
+
+&lt;p&gt;用一个α&amp;gt;0参数来控制后续步骤的一致性&lt;/p&gt;
+
+&lt;p&gt;优点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在平坦区域加速&lt;/li&gt;
+  &lt;li&gt;减少曲折&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;多任务学习-multi-task-learning&quot;&gt;多任务学习 Multi Task Learning&lt;/h3&gt;
+
+&lt;p&gt;想法：在单个网络示例中学习多个相关任务：&lt;/p&gt;
+
+&lt;p&gt;场景标记+实例标记+深度估计&lt;/p&gt;
+
+&lt;p&gt;scene labeling + instance labeling + depth estimation&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115128.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;优点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;强制网络在隐藏层中开发共同特征&lt;/li&gt;
+  &lt;li&gt;减少对单个任务的过度拟合&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;预训练特征网络的使用&quot;&gt;&lt;strong&gt;预训练特征网络的使用&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;想法：重用预训练的网络&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115236.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;用大型训练集训练其他任务&lt;/li&gt;
+  &lt;li&gt;丢弃其他任务的分类层&lt;/li&gt;
+  &lt;li&gt;为新任务创建新的分类层&lt;/li&gt;
+  &lt;li&gt;训练新分类层的权重，同时保留特征层&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;输出层和损失函数-output-layers-and-loss-functions&quot;&gt;输出层和损失函数 Output Layers and Loss Functions&lt;/h3&gt;
+
+&lt;p&gt;损失函数将网络输出与期望的输出进行比较&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115431.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;情况（回归任务）：期望的输出应该是实数&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;在输出层使用线性激活函数&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用平方误差，即&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+\[\operatorname{err}(\vec{y}, \vec{t})=\|\vec{y}-\vec{t}\|^{2}\]
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;情况（分类任务）：期望的输出应该是类别标签&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;在输出层使用softmax激活函数&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用交叉熵误差 cross entropy error&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115748.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;不平衡训练集的变体&quot;&gt;不平衡训练集的变体&lt;/h3&gt;
+
+&lt;p&gt;对于严重不平衡的训练集（即每个类的示例数量不相等），训练可能会失败&lt;/p&gt;
+
+&lt;p&gt;引入加权因子来补偿不平衡&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120231.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;来自深度学习工具箱的其他技术&quot;&gt;来自深度学习工具箱的其他技术&lt;/h2&gt;
+
+&lt;h3 id=&quot;生成对抗网络-gan-generative-adversarial-networks-gan&quot;&gt;生成对抗网络 (GAN) Generative Adversarial Networks (GAN)&lt;/h3&gt;
+
+&lt;p&gt;我们可以使用深度网络生成逼真的图像吗？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120527.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120601.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;生成网络应该学会生成逼真的图像&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;鉴别性网络应该学习如何区分图像是真实的还是生成的。&lt;/li&gt;
+  &lt;li&gt;训练：两个网络都是零和游戏中的竞争对手&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;应用领域： • 图像渲染 • 域适应 • 为分类器生成（附加）训练数据&lt;/p&gt;
+
+&lt;h3 id=&quot;序列处理sequence-processing&quot;&gt;序列处理Sequence Processing&lt;/h3&gt;
+
+&lt;p&gt;我们如何处理序列，例如 视频序列？&lt;/p&gt;
+
+&lt;p&gt;(1) 多通道输入层&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120707.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;只有在以下情况下才有可能&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;短序列&lt;/li&gt;
+  &lt;li&gt;固定长度的序列&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(2)图像单独处理+拼接层&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120832.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;只有当&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;短序列&lt;/li&gt;
+  &lt;li&gt;固定长度的序列&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(3) 图像的单独处理+附加层（深度集）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120924.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;只有当&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;图像的顺序并不重要&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(4)递归网络&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121006.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121023.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;学习算法：通过时间进行反向传播&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;问题：梯度消失&lt;/li&gt;
+  &lt;li&gt;解决方案：用适当的处理单元（GRU、LSTM）取代网络C中的感知器。
+适当的处理单元(GRU, LSTM)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;循环单元-grulstm-recurrent-units-grulstm&quot;&gt;循环单元 (GRU+LSTM) Recurrent Units (GRU+LSTM)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;实现简单状态机的专用单元&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;状态从不通过双曲切线的逻辑函数→来传递
+没有消失的梯度&lt;/li&gt;
+  &lt;li&gt;内部结构有几个控制信息流的闸门&lt;/li&gt;
+  &lt;li&gt;使用感知器机制打开/关闭闸门&lt;/li&gt;
+  &lt;li&gt;LSTM：更早（1997年），更复杂（需要5个感知器）。&lt;/li&gt;
+  &lt;li&gt;GRU：较新（2014年），门数较少，参数较少（需要3个感知器）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;门控循环单元-gru&quot;&gt;门控循环单元 (GRU)&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121136.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;长短期记忆单元-lstm&quot;&gt;长短期记忆单元 (LSTM)&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121153.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 10 Mar 2022 00:00:00 +0800</pubDate>
+        <link>https://wenboli-cn-de.github.io/2022/03/MV12.1/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV12.1/</guid>
+        
+        <category>专业</category>
+        
+        <category>机器视觉</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>机器视觉-深度学习(第一部分) Deep Learning</title>
+        <description>&lt;head&gt;
+    &lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;h1 id=&quot;深度学习-deep-learning&quot;&gt;深度学习 Deep Learning&lt;/h1&gt;
+
+&lt;h2 id=&quot;多层感知器multi-layer-perceptrons--mlp&quot;&gt;多层感知器Multi-Layer Perceptrons  （MLP）&lt;/h2&gt;
+
+&lt;p&gt;MLP 是高度参数化的非线性函数&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094040.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;示例：图像分类&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094246.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;$\vec{x}$   特征向量，例如 图像中所有灰度值的向量&lt;/p&gt;
+
+&lt;p&gt;$\vec{y}$  1-of-q-vector 为 q 个可能类别中的每一个建模概率，例如 笑脸是快乐/悲伤/沮丧&lt;/p&gt;
+
+&lt;p&gt;感知器, 感知机&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094519.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094543.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094646.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;许多感知器的分层排列：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094857.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;网络结构创建了一组高度非线性的函数&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;许多权重&lt;/li&gt;
+  &lt;li&gt;深层架构：通常 &amp;gt;5 个隐藏层&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我们如何确定 MLP 的权重？&lt;/p&gt;
+
+&lt;p&gt;– 基本思想：最小化训练样例的误差&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310095152.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;解决&lt;/p&gt;
+
+\[\operatorname{minimize}_{\vec{w}} \sum_{j=1}^{p} \operatorname{err}\left(f_{M L P} ^ {\vec{w} }\left(\vec{x}^ {(j)}\right), \vec{t}^ {(j)}\right)\]
+
+&lt;p&gt;用于适当的误差测量（损失函数）&lt;/p&gt;
+
+&lt;p&gt;for appropriate error measure (loss function)&lt;/p&gt;
+
+&lt;p&gt;算法：梯度下降（反向传播）&lt;/p&gt;
+
+&lt;h2 id=&quot;梯度下降反向传播gradient-descent-backpropagation&quot;&gt;梯度下降（反向传播）Gradient Descent (Backpropagation)&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;目标&lt;/strong&gt;：&lt;/p&gt;
+
+\[\underset{\vec{w}} {\operatorname{minimize}} g(\vec{w}) \text { with } g(\vec{w}):=\sum_{j=1}^{p} \operatorname{err}\left(f_{M L P}^{\vec{w} }\left(\vec{x}^{(j)}\right), \bar{t}^{(j)}\right)\]
+
+&lt;p&gt;&lt;strong&gt;算法&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;用小数字随机初始化权重 $\vec{w}$&lt;/li&gt;
+  &lt;li&gt;计算梯度 $\frac{\partial g(\vec{w})}{\partial \vec{w}}$&lt;/li&gt;
+  &lt;li&gt;以小的学习率$\varepsilon&amp;gt;0$更新权重 $\varepsilon&amp;gt;0\vec{w} \leftarrow \vec{w}-\varepsilon \frac{\partial g(\vec{w})}{\partial \vec{w}}$&lt;/li&gt;
+  &lt;li&gt;转到 第2步 直到达到停止标准&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310095811.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;改进： – 稍后讨论&lt;/p&gt;
+
+&lt;h2 id=&quot;训练-mlp传统方法training-mlps-traditional-methods&quot;&gt;训练 MLP（传统方法）Training MLPs (traditional methods)&lt;/h2&gt;
+
+&lt;p&gt;传统训练方法的问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;权重太多，训练样例太少&lt;/li&gt;
+  &lt;li&gt;太慢&lt;/li&gt;
+  &lt;li&gt;数值问题，局部最小值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;👉过拟合、欠拟合、泛化不足&lt;/p&gt;
+
+&lt;p&gt;克服问题的传统技术：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;正则化（例如提前停止、权重衰减、贝叶斯学习）&lt;/li&gt;
+  &lt;li&gt;模式预处理、特征提取、降维&lt;/li&gt;
+  &lt;li&gt;选择更小的 MLP、更少的层、更少的隐藏神经元、网络修剪&lt;/li&gt;
+  &lt;li&gt;用其他方法替换神经网络 （例如 SVM、boosting 等）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;深度学习&quot;&gt;深度学习&lt;/h2&gt;
+
+&lt;p&gt;深度学习有什么不同的？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;更大的训练集（数百万而不是数百）&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;更强大的计算机，多核 CPU 和 GPU 上的并行实现&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;特殊网络结构&lt;/p&gt;
+
+    &lt;p&gt;自编码器&lt;/p&gt;
+
+    &lt;p&gt;卷积网络&lt;/p&gt;
+
+    &lt;p&gt;循环网络/LSTM&lt;/p&gt;
+
+    &lt;p&gt;(深度信念网络/受限玻尔兹曼机)&lt;/p&gt;
+
+    &lt;p&gt;…&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;权重共享 weight sharing&lt;/li&gt;
+  &lt;li&gt;逐层学习 layer-wise learning&lt;/li&gt;
+  &lt;li&gt;Dropout&lt;/li&gt;
+  &lt;li&gt;有用特征的学习 learning of useful features&lt;/li&gt;
+  &lt;li&gt;从无标签的例子中学习 learning from unlabeled examples&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;特征学习&quot;&gt;特征学习&lt;/h3&gt;
+
+&lt;p&gt;观察：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;许多像素并没有提供太多的信息&lt;/li&gt;
+  &lt;li&gt;相邻的像素是高度相关的&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;示例：笑脸&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310102320.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们如何将相关信息与无关信息分开？&lt;/p&gt;
+
+&lt;h3 id=&quot;自动编码器-autoencoder&quot;&gt;自动编码器 Autoencoder&lt;/h3&gt;
+
+&lt;p&gt;👉具有这种结构的 MLP&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310102549.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;学习识别功能：&lt;/p&gt;
+
+\[\operatorname{minimize}_{\vec{w}} \sum_{j=1}^{p}\left(f_{M L P}^{\vec{w}}\left(\vec{x}^{(j)}\right)-\vec{x}^{(j)}\right)^{2}\]
+
+&lt;p&gt;隐蔽层必须分析压缩图像内容的神经主成分的种类&lt;/p&gt;
+
+&lt;h3 id=&quot;堆叠自动编码器-stacked-autoencoders&quot;&gt;堆叠自动编码器 Stacked Autoencoders&lt;/h3&gt;
+
+&lt;p&gt;多层自动编码器的增量训练&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;训练具有单个隐藏层的自动编码器&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103140.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103247.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通过附加隐藏层扩展自动编码器&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103315.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103412.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;类似地重复过程以添加更多隐藏层&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;👉信息压缩逐层增加非线性、多层主成分分析&lt;/p&gt;
+
+&lt;h3 id=&quot;用于分类的堆叠自动编码器&quot;&gt;用于分类的堆叠自动编码器&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;训练堆叠自动编码器&lt;/li&gt;
+  &lt;li&gt;用全连接分类器网络替换解码器网络&lt;/li&gt;
+  &lt;li&gt;训练分类器网络&lt;/li&gt;
+  &lt;li&gt;训练编码器和分类器网络的所有权重进行几次迭代&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103608.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;优点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;堆叠式自动编码器可以使用未标记的示例进行训练&lt;/li&gt;
+  &lt;li&gt;增量训练获得更好的结果&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;局部感受野local-receptive-fields&quot;&gt;局部感受野Local Receptive Fields&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://baike.baidu.com/item/%E6%84%9F%E5%8F%97%E9%87%8E/8989338&quot;&gt;感受野是什么&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/28492837&quot;&gt;深度神经网络中的感受野(Receptive Field)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;评论里有句话：convNets(cnn)每一层输出的特征图(feature map)上的像素点在原始图像上映射的区域大小。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103920.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;局部感受野迫使网络在本地处理信息。&lt;/p&gt;
+
+&lt;p&gt;示例：图像的局部特征&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310104631.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;权值共享--weight-sharing&quot;&gt;权值共享  Weight Sharing&lt;/h3&gt;
+
+&lt;p&gt;权值共享就是说，给一张输入图片，用一个&lt;a href=&quot;https://baike.baidu.com/item/卷积核/3377590&quot;&gt;卷积核&lt;/a&gt;去扫这张图，卷积核里面的数就叫权重，这张图每个位置是被同样的卷积核扫的，所以&lt;a href=&quot;https://baike.baidu.com/item/权重/10245966&quot;&gt;权重&lt;/a&gt;是一样的，也就是共享。&lt;/p&gt;
+
+&lt;p&gt;我们可以为所有像素生成相同的局部特征吗？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;权重共享：绑定不同感知器的权重&lt;/li&gt;
+  &lt;li&gt;卷积层：绑定一层所有感知器的权重&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310104849.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;多通道特征层multi-channel-feature-layers&quot;&gt;多通道特征层Multi-Channel Feature Layers&lt;/h3&gt;
+
+&lt;p&gt;在每个隐藏层中，想为每个像素计算几个不同的特征 → &lt;u&gt;多通道层&lt;/u&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310105353.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;卷积核是大小$h×w×k$的&lt;a href=&quot;https://baike.baidu.com/item/%E5%BC%A0%E9%87%8F/380114&quot;&gt;张量&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;最大池化max-pooling&quot;&gt;最大池化Max-Pooling&lt;/h3&gt;
+
+&lt;p&gt;池化层旨在在空间上聚合信息&lt;/p&gt;
+
+&lt;p&gt;池化（Pooling）是卷积神经网络中的一个重要的概念，它实际上是一种形式的降采样。有多种不同形式的非线性池化函数，而其中“最大池化（Max pooling）”是最为常见的。它是将输入的图像划分为若干个矩形区域，对每个子区域输出最大值。直觉上，这种机制能够有效的原因在于，在发现一个特征之后，它的精确位置远不及它和其他特征的相对位置的关系重要。池化层会不断地减小数据的空间大小，因此参数的数量和计算量也会下降，这在一定程度上也控制了过拟合。通常来说，CNN的卷积层之间都会周期性地插入池化层。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Max-Pooling：从局部感受野计算最大值&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110253.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;池化通常与降低层的分辨率相结合&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110357.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;卷积网络convolutional-networks&quot;&gt;卷积网络Convolutional Networks&lt;/h3&gt;
+
+&lt;p&gt;卷积神经网络（CNN）结合了&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;卷积层&lt;/li&gt;
+  &lt;li&gt;池化层&lt;/li&gt;
+  &lt;li&gt;全连接分类器网络&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110454.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;例如：Alexnet是2012年Imagenet竞赛的冠军模型，准确率达到了57.1%, top-5识别率达到80.2%。&lt;/p&gt;
+
+&lt;p&gt;AlexNet包含5个卷积层和3个&lt;a href=&quot;https://so.csdn.net/so/search?q=全连接层&amp;amp;spm=1001.2101.3001.7020&quot;&gt;全连接层&lt;/a&gt;，模型示意图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110646.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从层到层… – 特征在几何上变得越来越复杂 – 特征变得越来越独立于位置 – 特征变得越来越独立于图案大小 – 特征变得越来越具体&lt;/p&gt;
+
+&lt;h3 id=&quot;resnet层-resnet-layers&quot;&gt;ResNet层 ResNet Layers&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110832.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Mar 2022 00:00:00 +0800</pubDate>
+        <link>https://wenboli-cn-de.github.io/2022/03/MV12.0/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV12.0/</guid>
+        
+        <category>专业</category>
+        
+        <category>机器视觉</category>
+        
+        
+      </item>
     
       <item>
         <title>机器视觉-模式识别(第二部分) Pattern Recognition</title>
@@ -2732,34 +3398,6 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
         <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/Politik/</guid>
         
         <category>党政</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Win系统与Linux进行文件互传</title>
-        <description>&lt;h2 id=&quot;1-使用工具winscp&quot;&gt;1. 使用工具Winscp&lt;/h2&gt;
-&lt;p&gt;Win系统与Linux在局域网内进行文件互传可以通过Winscp软件进行。
-值得注意的是Linux必须开启了ssh服务 对于树莓派来说，开启ssh是很容易的。
-但是我的另一个Linux系统是XUbuntu（可以理解为小体积的Ubuntu，由于搭载系统的硬件是一台08年的破iMac, 
-尝试Ubuntu无果后选择了替代系统，所以有些服务并未安装，比如此处的ssh服务。），其中并没有ssh服务，必须自己安装。&lt;/p&gt;
-&lt;h2 id=&quot;2可能出现的问题&quot;&gt;2.可能出现的问题&lt;/h2&gt;
-&lt;p&gt;连接过程可能会提示：
-网络错误，连接被（Linux主机IP）拒绝&lt;/p&gt;
-
-&lt;p&gt;Xubuntu安装ssh服务：&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt-get install openssh-server&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;验证SSH服务器状态：&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo systemctl status ssh&lt;/code&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sat, 15 Jan 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/01/Test0/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/Test0/</guid>
-        
-        <category>技术</category>
         
         
       </item>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>机器视觉-深度学习(第一部分) Deep Learning</title>
+  <meta name="description" content="        深度学习 Deep Learning多层感知器Multi-Layer Perceptrons  （MLP）MLP 是高度参数化的非线性函数示例：图像分类$\vec{x}$   特征向量，例如 图像中所有灰度值的向量$\vec{y}$  1-of-q-vector 为 q 个可能类别中的每一个建模概...">
+  <meta name="author" content="leopardpan">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="机器视觉-深度学习(第一部分) Deep Learning">
+  <meta name="twitter:description" content="        深度学习 Deep Learning多层感知器Multi-Layer Perceptrons  （MLP）MLP 是高度参数化的非线性函数示例：图像分类$\vec{x}$   特征向量，例如 图像中所有灰度值的向量$\vec{y}$  1-of-q-vector 为 q 个可能类别中的每一个建模概...">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="机器视觉-深度学习(第一部分) Deep Learning">
+  <meta property="og:description" content="        深度学习 Deep Learning多层感知器Multi-Layer Perceptrons  （MLP）MLP 是高度参数化的非线性函数示例：图像分类$\vec{x}$   特征向量，例如 图像中所有灰度值的向量$\vec{y}$  1-of-q-vector 为 q 个可能类别中的每一个建模概...">
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="https://wenboli-cn-de.github.io/2022/03/MV12.0/">
+  <link rel="alternate" type="application/rss+xml" title="高傲的电工李" href="https://wenboli-cn-de.github.io/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+
+<!-- 站点统计 -->
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
+
+<!-- 百度统计 -->
+  
+
+<!-- google 统计 -->
+  
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9005224472374751",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <!-- 头像效果-start -->
+        <div class="ih-item circle effect right_to_left">            
+            <a href="/#blog" title="前往 高傲的电工李 的主页" class="blog-button">
+                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+                <div class="info">
+                    <div class="info-back">
+                        <h2> 
+                            
+                                李文博
+                            
+                        </h2>
+                        <p>
+                           
+                                机电 / 机器学习
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 头像效果-end -->
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for 高傲的电工李" class="blog-button">高傲的电工李</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">个人博客</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到我的个人博客</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        
+
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+                
+                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+                
+                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+                
+                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+                
+              </ul>
+            </nav>
+          </div>          
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-clear"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <head>
+  <link rel="stylesheet" href="/css/post.css">
+</head>
+
+<article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">机器视觉-深度学习(第一部分) Deep Learning</h1>
+    <div class="post-meta">
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2022-03-10 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2022-03-10</time>  
+
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+  
+    <h2 class="post-title">目录</h2>
+    <ul>
+  <li><a href="#深度学习-deep-learning">深度学习 Deep Learning</a>
+    <ul>
+      <li><a href="#多层感知器multi-layer-perceptrons--mlp">多层感知器Multi-Layer Perceptrons  （MLP）</a></li>
+      <li><a href="#梯度下降反向传播gradient-descent-backpropagation">梯度下降（反向传播）Gradient Descent (Backpropagation)</a></li>
+      <li><a href="#训练-mlp传统方法training-mlps-traditional-methods">训练 MLP（传统方法）Training MLPs (traditional methods)</a></li>
+      <li><a href="#深度学习">深度学习</a>
+        <ul>
+          <li><a href="#特征学习">特征学习</a></li>
+          <li><a href="#自动编码器-autoencoder">自动编码器 Autoencoder</a></li>
+          <li><a href="#堆叠自动编码器-stacked-autoencoders">堆叠自动编码器 Stacked Autoencoders</a></li>
+          <li><a href="#用于分类的堆叠自动编码器">用于分类的堆叠自动编码器</a></li>
+          <li><a href="#局部感受野local-receptive-fields">局部感受野Local Receptive Fields</a></li>
+          <li><a href="#权值共享--weight-sharing">权值共享  Weight Sharing</a></li>
+          <li><a href="#多通道特征层multi-channel-feature-layers">多通道特征层Multi-Channel Feature Layers</a></li>
+          <li><a href="#最大池化max-pooling">最大池化Max-Pooling</a></li>
+          <li><a href="#卷积网络convolutional-networks">卷积网络Convolutional Networks</a></li>
+          <li><a href="#resnet层-resnet-layers">ResNet层 ResNet Layers</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+  
+
+  <section class="post">
+    <head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+<h1 id="深度学习-deep-learning">深度学习 Deep Learning</h1>
+
+<h2 id="多层感知器multi-layer-perceptrons--mlp">多层感知器Multi-Layer Perceptrons  （MLP）</h2>
+
+<p>MLP 是高度参数化的非线性函数</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094040.png" style="zoom:67%;" /></p>
+
+<p>示例：图像分类</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094246.png" alt="" /></p>
+
+<p>$\vec{x}$   特征向量，例如 图像中所有灰度值的向量</p>
+
+<p>$\vec{y}$  1-of-q-vector 为 q 个可能类别中的每一个建模概率，例如 笑脸是快乐/悲伤/沮丧</p>
+
+<p>感知器, 感知机</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094519.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094543.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094646.png" alt="" /></p>
+
+<p>许多感知器的分层排列：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310094857.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p>网络结构创建了一组高度非线性的函数</p>
+  </li>
+  <li>许多权重</li>
+  <li>深层架构：通常 &gt;5 个隐藏层</li>
+</ul>
+
+<p>我们如何确定 MLP 的权重？</p>
+
+<p>– 基本思想：最小化训练样例的误差</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310095152.png" alt="" /></p>
+
+<p>解决</p>
+
+\[\operatorname{minimize}_{\vec{w}} \sum_{j=1}^{p} \operatorname{err}\left(f_{M L P} ^ {\vec{w} }\left(\vec{x}^ {(j)}\right), \vec{t}^ {(j)}\right)\]
+
+<p>用于适当的误差测量（损失函数）</p>
+
+<p>for appropriate error measure (loss function)</p>
+
+<p>算法：梯度下降（反向传播）</p>
+
+<h2 id="梯度下降反向传播gradient-descent-backpropagation">梯度下降（反向传播）Gradient Descent (Backpropagation)</h2>
+
+<p><strong>目标</strong>：</p>
+
+\[\underset{\vec{w}} {\operatorname{minimize}} g(\vec{w}) \text { with } g(\vec{w}):=\sum_{j=1}^{p} \operatorname{err}\left(f_{M L P}^{\vec{w} }\left(\vec{x}^{(j)}\right), \bar{t}^{(j)}\right)\]
+
+<p><strong>算法</strong>：</p>
+
+<ol>
+  <li>用小数字随机初始化权重 $\vec{w}$</li>
+  <li>计算梯度 $\frac{\partial g(\vec{w})}{\partial \vec{w}}$</li>
+  <li>以小的学习率$\varepsilon&gt;0$更新权重 $\varepsilon&gt;0\vec{w} \leftarrow \vec{w}-\varepsilon \frac{\partial g(\vec{w})}{\partial \vec{w}}$</li>
+  <li>转到 第2步 直到达到停止标准</li>
+</ol>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310095811.png" alt="" /></p>
+
+<p>改进： – 稍后讨论</p>
+
+<h2 id="训练-mlp传统方法training-mlps-traditional-methods">训练 MLP（传统方法）Training MLPs (traditional methods)</h2>
+
+<p>传统训练方法的问题：</p>
+
+<ul>
+  <li>权重太多，训练样例太少</li>
+  <li>太慢</li>
+  <li>数值问题，局部最小值</li>
+</ul>
+
+<p>👉过拟合、欠拟合、泛化不足</p>
+
+<p>克服问题的传统技术：</p>
+
+<ul>
+  <li>正则化（例如提前停止、权重衰减、贝叶斯学习）</li>
+  <li>模式预处理、特征提取、降维</li>
+  <li>选择更小的 MLP、更少的层、更少的隐藏神经元、网络修剪</li>
+  <li>用其他方法替换神经网络 （例如 SVM、boosting 等）</li>
+</ul>
+
+<h2 id="深度学习">深度学习</h2>
+
+<p>深度学习有什么不同的？</p>
+
+<ul>
+  <li>更大的训练集（数百万而不是数百）</li>
+  <li>
+    <p>更强大的计算机，多核 CPU 和 GPU 上的并行实现</p>
+  </li>
+  <li>
+    <p>特殊网络结构</p>
+
+    <p>自编码器</p>
+
+    <p>卷积网络</p>
+
+    <p>循环网络/LSTM</p>
+
+    <p>(深度信念网络/受限玻尔兹曼机)</p>
+
+    <p>…</p>
+  </li>
+  <li>权重共享 weight sharing</li>
+  <li>逐层学习 layer-wise learning</li>
+  <li>Dropout</li>
+  <li>有用特征的学习 learning of useful features</li>
+  <li>从无标签的例子中学习 learning from unlabeled examples</li>
+</ul>
+
+<h3 id="特征学习">特征学习</h3>
+
+<p>观察：</p>
+<ul>
+  <li>许多像素并没有提供太多的信息</li>
+  <li>相邻的像素是高度相关的</li>
+</ul>
+
+<p>示例：笑脸</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310102320.png" alt="" /></p>
+
+<p>我们如何将相关信息与无关信息分开？</p>
+
+<h3 id="自动编码器-autoencoder">自动编码器 Autoencoder</h3>
+
+<p>👉具有这种结构的 MLP</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310102549.png" alt="" /></p>
+
+<p>学习识别功能：</p>
+
+\[\operatorname{minimize}_{\vec{w}} \sum_{j=1}^{p}\left(f_{M L P}^{\vec{w}}\left(\vec{x}^{(j)}\right)-\vec{x}^{(j)}\right)^{2}\]
+
+<p>隐蔽层必须分析压缩图像内容的神经主成分的种类</p>
+
+<h3 id="堆叠自动编码器-stacked-autoencoders">堆叠自动编码器 Stacked Autoencoders</h3>
+
+<p>多层自动编码器的增量训练</p>
+
+<ol>
+  <li>
+    <p>训练具有单个隐藏层的自动编码器</p>
+
+    <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103140.png" alt="" /></p>
+
+    <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103247.png" alt="" /></p>
+  </li>
+  <li>
+    <p>通过附加隐藏层扩展自动编码器</p>
+
+    <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103315.png" alt="" /></p>
+
+    <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103412.png" alt="" /></p>
+  </li>
+  <li>
+    <p>类似地重复过程以添加更多隐藏层</p>
+  </li>
+</ol>
+
+<p>👉信息压缩逐层增加非线性、多层主成分分析</p>
+
+<h3 id="用于分类的堆叠自动编码器">用于分类的堆叠自动编码器</h3>
+
+<ol>
+  <li>训练堆叠自动编码器</li>
+  <li>用全连接分类器网络替换解码器网络</li>
+  <li>训练分类器网络</li>
+  <li>训练编码器和分类器网络的所有权重进行几次迭代</li>
+</ol>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103608.png" style="zoom:67%;" /></p>
+
+<p>优点：</p>
+
+<ul>
+  <li>堆叠式自动编码器可以使用未标记的示例进行训练</li>
+  <li>增量训练获得更好的结果</li>
+</ul>
+
+<h3 id="局部感受野local-receptive-fields">局部感受野Local Receptive Fields</h3>
+
+<p><a href="https://baike.baidu.com/item/%E6%84%9F%E5%8F%97%E9%87%8E/8989338">感受野是什么</a></p>
+
+<p><a href="https://zhuanlan.zhihu.com/p/28492837">深度神经网络中的感受野(Receptive Field)</a></p>
+
+<p>评论里有句话：convNets(cnn)每一层输出的特征图(feature map)上的像素点在原始图像上映射的区域大小。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310103920.png" alt="" /></p>
+
+<p>局部感受野迫使网络在本地处理信息。</p>
+
+<p>示例：图像的局部特征</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310104631.png" /></p>
+
+<h3 id="权值共享--weight-sharing">权值共享  Weight Sharing</h3>
+
+<p>权值共享就是说，给一张输入图片，用一个<a href="https://baike.baidu.com/item/卷积核/3377590">卷积核</a>去扫这张图，卷积核里面的数就叫权重，这张图每个位置是被同样的卷积核扫的，所以<a href="https://baike.baidu.com/item/权重/10245966">权重</a>是一样的，也就是共享。</p>
+
+<p>我们可以为所有像素生成相同的局部特征吗？</p>
+
+<ul>
+  <li>权重共享：绑定不同感知器的权重</li>
+  <li>卷积层：绑定一层所有感知器的权重</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310104849.png" alt="" /></p>
+
+<h3 id="多通道特征层multi-channel-feature-layers">多通道特征层Multi-Channel Feature Layers</h3>
+
+<p>在每个隐藏层中，想为每个像素计算几个不同的特征 → <u>多通道层</u></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310105353.png" alt="" /></p>
+
+<p>卷积核是大小$h×w×k$的<a href="https://baike.baidu.com/item/%E5%BC%A0%E9%87%8F/380114">张量</a></p>
+
+<h3 id="最大池化max-pooling">最大池化Max-Pooling</h3>
+
+<p>池化层旨在在空间上聚合信息</p>
+
+<p>池化（Pooling）是卷积神经网络中的一个重要的概念，它实际上是一种形式的降采样。有多种不同形式的非线性池化函数，而其中“最大池化（Max pooling）”是最为常见的。它是将输入的图像划分为若干个矩形区域，对每个子区域输出最大值。直觉上，这种机制能够有效的原因在于，在发现一个特征之后，它的精确位置远不及它和其他特征的相对位置的关系重要。池化层会不断地减小数据的空间大小，因此参数的数量和计算量也会下降，这在一定程度上也控制了过拟合。通常来说，CNN的卷积层之间都会周期性地插入池化层。</p>
+
+<p><strong>Max-Pooling：从局部感受野计算最大值</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110253.png" alt="" /></p>
+
+<p>池化通常与降低层的分辨率相结合</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110357.png" alt="" /></p>
+
+<h3 id="卷积网络convolutional-networks">卷积网络Convolutional Networks</h3>
+
+<p>卷积神经网络（CNN）结合了</p>
+<ul>
+  <li>卷积层</li>
+  <li>池化层</li>
+  <li>全连接分类器网络</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110454.png" alt="" /></p>
+
+<p>例如：Alexnet是2012年Imagenet竞赛的冠军模型，准确率达到了57.1%, top-5识别率达到80.2%。</p>
+
+<p>AlexNet包含5个卷积层和3个<a href="https://so.csdn.net/so/search?q=全连接层&amp;spm=1001.2101.3001.7020">全连接层</a>，模型示意图：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110646.png" alt="" /></p>
+
+<p>从层到层… – 特征在几何上变得越来越复杂 – 特征变得越来越独立于位置 – 特征变得越来越独立于图案大小 – 特征变得越来越具体</p>
+
+<h3 id="resnet层-resnet-layers">ResNet层 ResNet Layers</h3>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110832.png" alt="" /></p>
+
+  </section>
+
+</article>
+
+<section>
+
+
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2022/03/MV8.2/" data-toggle="tooltip" data-placement="top" title="机器视觉-模式识别(第二部分) Pattern Recognition">上一篇：  <span>机器视觉-模式识别(第二部分) Pattern Recognition</span>
+            </a>
+        </li>
+        
+        
+        <li class="next">
+            <a href="/2022/03/MV12.1/" data-toggle="tooltip" data-placement="top" title="机器视觉-深度学习(第二部分) Deep Learning">下一篇：  <span>机器视觉-深度学习(第二部分) Deep Learning</span>
+            </a>
+        </li>
+        
+    </ul>
+</section>
+
+
+<section class="post-comments">
+
+    <script>
+
+        setInterval(function () 
+        {
+            var box = document.querySelector(".trc_rbox_container");
+            if(box) box.outerHTML = "";
+        }, 2000);
+        
+    </script>
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NTIzMy8zMTcwMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">  
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/WenboLi-CN-DE" title="@WenboLi-CN-DE 的 Github" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
+            </a>
+          </li>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:lwb_010@163.com" title="Contact me">
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
+            </a>
+          </li>
+          
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">  
+           <p class="copyright text-muted">
+            Copyright &copy; 高傲的电工李 2022 Theme by <a href="https://leopardpan.cn/">leopardpan</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+
+</html>

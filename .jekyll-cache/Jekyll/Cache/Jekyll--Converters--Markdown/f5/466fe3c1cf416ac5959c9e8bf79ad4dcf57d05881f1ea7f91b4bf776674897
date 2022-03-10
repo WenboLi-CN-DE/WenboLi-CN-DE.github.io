@@ -1,0 +1,41 @@
+I"�	
+<ul>
+  <li><a href="#深度学习">深度学习</a>
+    <ul>
+      <li><a href="#语义分割和目标检测-semantic-segmentation-and-object-detection">语义分割和目标检测 (Semantic Segmentation and Object Detection)</a>
+        <ul>
+          <li><a href="#场景标注-scene-labeling">场景标注 Scene Labeling</a></li>
+          <li><a href="#实例标签-instance-labeling">实例标签 Instance Labeling</a></li>
+          <li><a href="#区域生成网络region-proposal-networks">区域生成网络Region Proposal Networks</a></li>
+          <li><a href="#深度学习技术">深度学习技术</a></li>
+          <li><a href="#训练期间的典型错误进展">训练期间的典型错误进展</a>
+            <ul>
+              <li><a href="#小权重正则化">小权重正则化</a></li>
+            </ul>
+          </li>
+          <li><a href="#权重衰减l2-正则化-weight-decay--l2-regularisation">权重衰减/L2-正则化 Weight Decay / L2-Regularisation</a></li>
+          <li><a href="#梯度下降的修正">梯度下降的修正</a>
+            <ul>
+              <li><a href="#随机梯度下降"><strong>随机梯度下降</strong></a></li>
+              <li><a href="#动量梯度下降"><strong>动量梯度下降</strong></a></li>
+            </ul>
+          </li>
+          <li><a href="#多任务学习-multi-task-learning">多任务学习 Multi Task Learning</a></li>
+          <li><a href="#预训练特征网络的使用"><strong>预训练特征网络的使用</strong></a></li>
+          <li><a href="#输出层和损失函数-output-layers-and-loss-functions">输出层和损失函数 Output Layers and Loss Functions</a></li>
+          <li><a href="#不平衡训练集的变体">不平衡训练集的变体</a></li>
+        </ul>
+      </li>
+      <li><a href="#来自深度学习工具箱的其他技术">来自深度学习工具箱的其他技术</a>
+        <ul>
+          <li><a href="#生成对抗网络-gan-generative-adversarial-networks-gan">生成对抗网络 (GAN) Generative Adversarial Networks (GAN)</a></li>
+          <li><a href="#序列处理sequence-processing">序列处理Sequence Processing</a></li>
+          <li><a href="#循环单元-grulstm-recurrent-units-grulstm">循环单元 (GRU+LSTM) Recurrent Units (GRU+LSTM)</a></li>
+          <li><a href="#门控循环单元-gru">门控循环单元 (GRU)</a></li>
+          <li><a href="#长短期记忆单元-lstm">长短期记忆单元 (LSTM)</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET
