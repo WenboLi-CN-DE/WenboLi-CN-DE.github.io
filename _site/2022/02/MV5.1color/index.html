@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>机器视觉-曲线拟合(圆和椭圆) Curve Fitting</title>
-  <meta name="description" content="    曲线拟合——圆和椭圆在上一篇文章中，我们总结了视觉识别中对于直线型边缘的拟合。但是如果有的图形边缘是曲线的话应该怎么拟合？ 这一篇博文，我们就对其进行讨论。标准圆首先圆的方程为：\(\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} = 0\)因...">
+  <title>机器视觉-颜色 Color</title>
+  <meta name="description" content="    颜色">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="机器视觉-曲线拟合(圆和椭圆) Curve Fitting">
-  <meta name="twitter:description" content="    曲线拟合——圆和椭圆在上一篇文章中，我们总结了视觉识别中对于直线型边缘的拟合。但是如果有的图形边缘是曲线的话应该怎么拟合？ 这一篇博文，我们就对其进行讨论。标准圆首先圆的方程为：\(\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} = 0\)因...">
+  <meta name="twitter:title" content="机器视觉-颜色 Color">
+  <meta name="twitter:description" content="    颜色">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="机器视觉-曲线拟合(圆和椭圆) Curve Fitting">
-  <meta property="og:description" content="    曲线拟合——圆和椭圆在上一篇文章中，我们总结了视觉识别中对于直线型边缘的拟合。但是如果有的图形边缘是曲线的话应该怎么拟合？ 这一篇博文，我们就对其进行讨论。标准圆首先圆的方程为：\(\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} = 0\)因...">
+  <meta property="og:title" content="机器视觉-颜色 Color">
+  <meta property="og:description" content="    颜色">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="https://wenboli-cn-de.github.io/2022/01/MV5/">
+  <link rel="canonical" href="https://wenboli-cn-de.github.io/2022/02/MV5.1color/">
   <link rel="alternate" type="application/rss+xml" title="高傲的电工李" href="https://wenboli-cn-de.github.io/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -161,10 +161,10 @@
 
 <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <h1 class="post-title">机器视觉-曲线拟合(圆和椭圆) Curve Fitting</h1>
+    <h1 class="post-title">机器视觉-颜色 Color</h1>
     <div class="post-meta">
       <img src="/images/calendar.png" width="20px"/> 
-      <time datetime="2022-01-30 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2022-01-30</time>  
+      <time datetime="2022-02-03 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2022-02-03</time>  
 
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
@@ -174,10 +174,20 @@
   
     <h2 class="post-title">目录</h2>
     <ul>
-  <li><a href="#曲线拟合圆和椭圆">曲线拟合——圆和椭圆</a>
+  <li><a href="#颜色">颜色</a>
     <ul>
-      <li><a href="#标准圆">标准圆</a></li>
-      <li><a href="#椭圆">椭圆</a></li>
+      <li><a href="#颜色物理学">颜色物理学</a></li>
+      <li><a href="#人类感知中的颜色">人类感知中的颜色</a></li>
+      <li><a href="#色彩心理学-color-psychology">色彩心理学 Color Psychology</a></li>
+      <li><a href="#颜色处理的作用">颜色处理的作用</a></li>
+      <li><a href="#rgb彩色空间">rgb彩色空间</a></li>
+      <li><a href="#hsv彩色空间">HSV彩色空间</a></li>
+      <li><a href="#luv-颜色空间和-lab-颜色空间">Luv 颜色空间和 Lab 颜色空间</a></li>
+      <li><a href="#色彩恒常性色感一致性">色彩恒常性；色感一致性</a>
+        <ul>
+          <li><a href="#白平衡-white-balance">白平衡 white balance</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -189,77 +199,237 @@
     <script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
    </script>
 </head>
+<h1 id="颜色">颜色</h1>
 
-<h1 id="曲线拟合圆和椭圆">曲线拟合——圆和椭圆</h1>
+<h2 id="颜色物理学">颜色物理学</h2>
 
-<p>在上一篇文章中，我们总结了视觉识别中对于直线型边缘的拟合。但是如果有的图形边缘是曲线的话应该怎么拟合？ 这一篇博文，我们就对其进行讨论。</p>
+<p>可见光是波长在 380nm 到 740nm 之间的电磁波</p>
 
-<h2 id="标准圆">标准圆</h2>
+<p>光的波长指定了它的颜色图像</p>
 
-<p>首先圆的方程为：\(\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} = 0\)</p>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311101659.png" alt="" /></p>
 
-<p>因为d很小，用趋近的想法来考虑</p>
+<p>– 光可以包含许多波长’ → 光谱</p>
 
-<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130112538.png" alt="" /></p>
+<p>– 光谱取决于光源和滤光片</p>
 
-<p>那么点(x,y)到圆的欧几里得距离大小为：</p>
+<p>– 要完整描述光源的物理特性，我们必须知道它的全光谱</p>
 
-\[d_{E}=\left|\sqrt{\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}}-r\right|\]
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311101831.png" alt="" /></p>
 
-<p>代数距离为</p>
+<h2 id="人类感知中的颜色">人类感知中的颜色</h2>
 
-\[d_{A}=\left|\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2}\right|\]
+<p>人眼有四种感光细胞：</p>
 
-<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130113813.png" alt="" /></p>
+<ul>
+  <li>视杆细胞（对颜色不敏感） rods</li>
+  <li>L-、M-、S-视锥细胞（对颜色敏感）</li>
+</ul>
 
-<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130113853.png" alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311101921.png" alt="" /></p>
 
-<p>根据图知道，欧几里得距离和代数距离是不对称的，靠近圆的点都是相似的。</p>
+<p>Young-Helmholtz 理论：</p>
 
-<p>两种思路：最小化欧几里得距离和最小化代数距离。解析法</p>
+<ul>
+  <li>人类对颜色的印象可以完全通过 S、M 和 L 锥的反应来解释</li>
+  <li>这不适用于色盲人士</li>
+  <li>这不适用于其他物种</li>
+</ul>
 
-<ol>
+<p>假设单色光的波长可以从视锥细胞的反应中重建</p>
+
+<p>– 不同的光谱导致视锥细胞的相同响应</p>
+
+<p>​	→ 彩色相机模仿视锥细胞的响应</p>
+
+<p>​	→ 彩色监视器混合来自三个波长的颜色”</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311102345.png" alt="" /></p>
+
+<h2 id="色彩心理学-color-psychology">色彩心理学 Color Psychology</h2>
+
+<p>颜色的心理印象不能用视锥细胞的反应来解释</p>
+
+<p>Hering 的拮抗色学说：</p>
+
+<p>人类对色彩的印象可以用三个尺度来描述： • 亮与暗 • 红色与绿色 • 蓝色与黄色</p>
+
+<p>（Hering，1834—1918)提出了色觉<strong>拮抗色学说</strong>（<strong>opponent Color Theory</strong>），它撇开了先入为主的成见，认为人类的色觉是由三组正反相对的基本色感——拮抗色在大脑中融合而成，它们分别是亮暗、红绿、蓝黄…</p>
+
+<p>观察结果：存在一些“混合颜色”，其他不存在：</p>
+
+<ul>
   <li>
-    <p>最小化欧几里得距离
-不能用解析法求解，必须数值优化</p>
+    <p>存在：蓝红色（紫色）、黄红色（橙色）、蓝绿色（青色）、黄绿色（柠檬色）</p>
 
-    <p>解析法又称为分析法，它是应用解析式去求解数学模型的方法。 数学中用解析式表示函数或任意数学对象的方法叫解析法。</p>
+    <p>bluish red (violet), yellowish red (orange), bluish green
+(cyan), yellowish green (citron color)</p>
   </li>
   <li>
-    <p>最小化代数距离</p>
+    <p>不存在：蓝黄色、红绿色</p>
 
-    <ol>
-      <li>重写代数距离：\(\begin{aligned} \left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} &amp;=\left(x^{2}+y^{2}\right)+\left(m_{1}^{2}+m_{2}^{2}-r^{2}\right)+\left(-2 m_{1}\right) x+\left(-2 m_{2}\right) y \\ &amp;=A x+B y+C+\left(x^{2}+y^{2}\right) \\ \text { with } &amp; A=-2 m_{1}, B=-2 m_{2}, C=m_{1}^{2}+m_{2}^{2}-r^{2} \end{aligned}\)</li>
-      <li>最小化：\(\sum_{i=1}^{N}\left(A x_{i}+B y_{i}+C+\left(x_{i}^{2}+y_{i}^{2}\right)\right)^{2}\)</li>
-      <li>偏导数归零: \(\left(\begin{array}{ccc} \sum_{i} x_{i}^{2} &amp; \sum_{i} x_{i} y_{i} &amp; \sum_{i} x_{i} \\ \sum_{i} x_{i} y_{i} &amp; \sum_{i} y_{i}^{2} &amp; \sum_{i} y_{i} \\ \sum_{i} x_{i} &amp; \sum_{i} y_{i} &amp; N \end{array}\right)\left(\begin{array}{l} A \\ B \\ C \end{array}\right)=\left(\begin{array}{c} -\sum_{i} x_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \\ -\sum_{i} y_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \\ -\sum_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \end{array}\right)\)</li>
-      <li>最后得到： \(\begin{aligned} m_{1} &amp;=-\frac{A}{2} \\ m_{2} &amp;=-\frac{B}{2} \\ r^{2} &amp;=m_{1}^{2}+m_{2}^{2}-C \end{aligned}\)</li>
-    </ol>
+    <p>bluish yellow, reddish green</p>
   </li>
-</ol>
+</ul>
 
-<h2 id="椭圆">椭圆</h2>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311102853.png" alt="" /></p>
 
-<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130115302.png" alt="" /></p>
+<p>颜色名称</p>
 
-<p>椭圆特性：</p>
+<p>颜色的分类取决于文化背景</p>
 
-<p>长短轴：半长轴r1，半短轴r2；</p>
+<p>例如， 哪些颜色被命名为“绿色”、“蓝色”等。</p>
 
-<p>中心点：m</p>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103032.png" alt="" /></p>
 
-<p>旋转角：θ</p>
+<p>讲师对颜色术语的个人印象（德国文化背景，使用液晶显示器进行的分类）</p>
 
-<p>代数表达式：\(\begin{array}{l} A x^{2}+H x y+B y^{2}+G x+F y+C=0 \\ \text { with } 4 A B-H^{2}&gt;0 \end{array}\)</p>
+<p>亮度，强度luminance, intensity  ：与光谱无关的入射光总量</p>
 
-<p>当消除一个自由度时：\(\begin{array}{l} A=1 \\ \text { or } A+B=1 \\ \text { or } A^{2}+B^{2}+C^{2}+F^{2}+G^{2}+H^{2}=1 \\ \text { or } C=1 \text { (not invariant to translation) } \end{array}\)</p>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103148.png" alt="" /></p>
 
-<p>根据椭圆的特性，Fitzgibbon, Pilu, 和 Fisher在1999年提出了基于直接最小二乘的椭圆拟合算法，</p>
+<p>色度chrominance:  ：与亮度无关的光谱</p>
 
-<p>最小化了代数距离(通过最小化的约束条件: \(4 A B-H^{2}=1\))</p>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103545.png" alt="" /></p>
 
-\[定义：设 A、B 为 n 阶方阵，若存在数λ ，使得方程Ax = λBx 存在 非零解，则称λ 为 A 相对于 B 的广义特征值，x 为 A 相对于 B 的属于 广义特征值λ 的特征向量。\]
+<p>色调hue  ：光谱中最主要的波长</p>
 
-\[广义特征值是标准特征值的推广，当B为单位矩阵时，广义标准问题退化为标准特征值问题\]
+<p>饱和saturation:  主波长的能量百分比</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103348.png" alt="" /></p>
+
+<h2 id="颜色处理的作用">颜色处理的作用</h2>
+
+<p>视觉皮层中色度和亮度的处理遵循不同的途径</p>
+
+<ul>
+  <li>亮度用于识别图像中的形状和纹理</li>
+  <li>色度是控制视觉注意力的重要线索</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103831.png" alt="" /></p>
+
+<p>许多不同的颜色模型，但都使用 3 个通道</p>
+
+<p>– 模仿三个锥体的模型：RGB、CMY/CMYK</p>
+
+<p>– 基于色彩心理学的模型：XYZ、L<em>a</em>b<em>、L</em>u<em>v</em>、HSV、HSL、 …</p>
+
+<p>– 其他模型：YUV，…</p>
+
+<h2 id="rgb彩色空间">rgb彩色空间</h2>
+
+<p>RGB 模仿 S 、M 和 L 视锥细胞的响应</p>
+
+<p>– R：红色值 (0–1)</p>
+
+<p>– G：绿色值 (0–1)</p>
+
+<p>– B：蓝色值 (0–1)</p>
+
+<p>显示器上显示的颜色取决于设备</p>
+
+<p>应用领域：数码相机、显示器、图像表示</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311105844.png" alt="" /></p>
+
+<h2 id="hsv彩色空间">HSV彩色空间</h2>
+
+<p>颜色分解为亮度、色调和饱和度</p>
+
+<p>– H：hue 色相 (0–360°)</p>
+
+<p>用角度度量，取值范围为0°～360°，从红色开始按逆时针方向计算，红色为0°，绿色为120°,蓝色为240°。它们的补色是：黄色为60°，青色为180°,紫色为300°；</p>
+
+<p>色相（英语：hue）指的是色彩的外相，是在不同波长的光照射下，人眼所感觉不同的颜色，有红色、橙色、黄色、绿色、蓝色、紫色、粉红色、黑色、褐色、灰色、白色、金色和银色。
+在HSL和HSV色彩空间中，H指的就是色相，是以红色为0度（360度）；黄色为60度；绿色为120度；青色为180度；蓝色为240度；品红色为300度。</p>
+
+<p>– S：饱和度 (0–1)</p>
+
+<p><strong>饱和度是指色彩的纯度</strong>，一种颜色的饱和度越高，它就越鲜艳；反之，一种颜色的饱和度越低，它就越接近于灰色。</p>
+
+<p>– V：值、亮度 (0–1)</p>
+
+<p>明度表示颜色明亮的程度，对于光源色，明度值与发光体的光亮度有关；对于物体色，此值和物体的透射比或反射比有关。通常取值范围为0%（黑）到100%（白）。</p>
+
+<p>– 由 RGB 立方体沿其对角线投影创建</p>
+
+<p>– 通道具有语义</p>
+
+<p>应用领域：绘画、机器视觉</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110016.png" alt="" /></p>
+
+<h2 id="luv-颜色空间和-lab-颜色空间">Luv 颜色空间和 Lab 颜色空间</h2>
+
+<p>基于人类色彩解释的色彩空间</p>
+
+<p>– 色彩空间中的距离是指人类色彩解释的差异</p>
+
+<p>– L* 轴：亮度</p>
+
+<p>– u<em>、v</em> 轴：色度</p>
+
+<p>– a<em>、b</em> 轴：色度</p>
+
+<p>应用领域：机器视觉</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110159.png" alt="" /></p>
+
+<h2 id="色彩恒常性色感一致性">色彩恒常性；色感一致性</h2>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311181131.png" alt="" /></p>
+<center>左侧立方体顶部的蓝色瓷砖与右侧立方体顶部的黄色瓷砖颜色相同！</center>
+
+<p>颜色感知取决于照明条件，即用于照亮物体的光谱</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110455.png" alt="" /></p>
+
+<p>人造光导致颜色偏移</p>
+
+<p>用于颜色校正的白平衡</p>
+
+<h3 id="白平衡-white-balance">白平衡 white balance</h3>
+
+<p>白平衡，字面上的理解是白色的平衡。白平衡是描述显示器中红、绿、蓝三基色混合生成后白色精确度的一项指标。</p>
+
+<p>其基本概念是“不管在任何光源下，都能将白色物体还原为白色”，对在特定光源下拍摄时出现的偏色现象，通过加强对应的补色来进行补偿。相机的白平衡设定可以校准色温的偏差，在拍摄时我们可以大胆地调整白平衡来达到想要的画面效果</p>
+
+<p>白平衡：</p>
+
+<p>– 改变 RGB 的 R 和 B 通道</p>
+
+<p>– 需要一个灰色或白色参考区域</p>
+
+<p>– 计算参考区域的平均 RGB 值</p>
+
+<p>– 计算 R 和 B 的校正因子</p>
+
+<p>– 将图像像素的 R 和 B 值乘以校正因子</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110614.png" alt="" /></p>
+
+<p>白平衡：</p>
+
+<p>– 许多数码相机的内置功能</p>
+
+<p>– 确定参考颜色的替代策略：</p>
+
+<ul>
+  <li>最亮像素的颜色</li>
+  <li>图像中的平均颜色</li>
+</ul>
+
+<p>– 例如：机器人足球</p>
+
+<ul>
+  <li>将白纸放入相机视野</li>
+  <li>使用该区域作为参考进行白平衡</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110732.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311111243.png" alt="" /></p>
 
   </section>
 
@@ -302,13 +472,13 @@
        <ul class="pager">
         
         <li class="previous">
-            <a href="/2022/01/MV4/" data-toggle="tooltip" data-placement="top" title="机器视觉-曲线拟合（直线部分） Curve Fitting">上一篇：  <span>机器视觉-曲线拟合（直线部分） Curve Fitting</span>
+            <a href="/2022/01/MV5/" data-toggle="tooltip" data-placement="top" title="机器视觉-曲线拟合(圆和椭圆) Curve Fitting">上一篇：  <span>机器视觉-曲线拟合(圆和椭圆) Curve Fitting</span>
             </a>
         </li>
         
         
         <li class="next">
-            <a href="/2022/02/MV5.1color/" data-toggle="tooltip" data-placement="top" title="机器视觉-颜色 Color">下一篇：  <span>机器视觉-颜色 Color</span>
+            <a href="/2022/03/MV6/" data-toggle="tooltip" data-placement="top" title="机器视觉-图像分割(第一部分) Segmentation">下一篇：  <span>机器视觉-图像分割(第一部分) Segmentation</span>
             </a>
         </li>
         
