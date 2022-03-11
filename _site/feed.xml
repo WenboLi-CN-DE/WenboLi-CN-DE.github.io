@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 11 Mar 2022 00:21:14 +0800</pubDate>
-    <lastBuildDate>Fri, 11 Mar 2022 00:21:14 +0800</lastBuildDate>
+    <pubDate>Sat, 12 Mar 2022 01:12:53 +0800</pubDate>
+    <lastBuildDate>Sat, 12 Mar 2022 01:12:53 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -2754,6 +2754,255 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
       </item>
     
       <item>
+        <title>机器视觉-颜色 Color</title>
+        <description>&lt;head&gt;
+    &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;h1 id=&quot;颜色&quot;&gt;颜色&lt;/h1&gt;
+
+&lt;h2 id=&quot;颜色物理学&quot;&gt;颜色物理学&lt;/h2&gt;
+
+&lt;p&gt;可见光是波长在 380nm 到 740nm 之间的电磁波&lt;/p&gt;
+
+&lt;p&gt;光的波长指定了它的颜色图像&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311101659.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;– 光可以包含许多波长’ → 光谱&lt;/p&gt;
+
+&lt;p&gt;– 光谱取决于光源和滤光片&lt;/p&gt;
+
+&lt;p&gt;– 要完整描述光源的物理特性，我们必须知道它的全光谱&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311101831.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;人类感知中的颜色&quot;&gt;人类感知中的颜色&lt;/h2&gt;
+
+&lt;p&gt;人眼有四种感光细胞：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;视杆细胞（对颜色不敏感） rods&lt;/li&gt;
+  &lt;li&gt;L-、M-、S-视锥细胞（对颜色敏感）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311101921.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Young-Helmholtz 理论：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;人类对颜色的印象可以完全通过 S、M 和 L 锥的反应来解释&lt;/li&gt;
+  &lt;li&gt;这不适用于色盲人士&lt;/li&gt;
+  &lt;li&gt;这不适用于其他物种&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;假设单色光的波长可以从视锥细胞的反应中重建&lt;/p&gt;
+
+&lt;p&gt;– 不同的光谱导致视锥细胞的相同响应&lt;/p&gt;
+
+&lt;p&gt;​	→ 彩色相机模仿视锥细胞的响应&lt;/p&gt;
+
+&lt;p&gt;​	→ 彩色监视器混合来自三个波长的颜色”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311102345.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;色彩心理学-color-psychology&quot;&gt;色彩心理学 Color Psychology&lt;/h2&gt;
+
+&lt;p&gt;颜色的心理印象不能用视锥细胞的反应来解释&lt;/p&gt;
+
+&lt;p&gt;Hering 的拮抗色学说：&lt;/p&gt;
+
+&lt;p&gt;人类对色彩的印象可以用三个尺度来描述： • 亮与暗 • 红色与绿色 • 蓝色与黄色&lt;/p&gt;
+
+&lt;p&gt;（Hering，1834—1918)提出了色觉&lt;strong&gt;拮抗色学说&lt;/strong&gt;（&lt;strong&gt;opponent Color Theory&lt;/strong&gt;），它撇开了先入为主的成见，认为人类的色觉是由三组正反相对的基本色感——拮抗色在大脑中融合而成，它们分别是亮暗、红绿、蓝黄…&lt;/p&gt;
+
+&lt;p&gt;观察结果：存在一些“混合颜色”，其他不存在：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;存在：蓝红色（紫色）、黄红色（橙色）、蓝绿色（青色）、黄绿色（柠檬色）&lt;/p&gt;
+
+    &lt;p&gt;bluish red (violet), yellowish red (orange), bluish green
+(cyan), yellowish green (citron color)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;不存在：蓝黄色、红绿色&lt;/p&gt;
+
+    &lt;p&gt;bluish yellow, reddish green&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311102853.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;颜色名称&lt;/p&gt;
+
+&lt;p&gt;颜色的分类取决于文化背景&lt;/p&gt;
+
+&lt;p&gt;例如， 哪些颜色被命名为“绿色”、“蓝色”等。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103032.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;讲师对颜色术语的个人印象（德国文化背景，使用液晶显示器进行的分类）&lt;/p&gt;
+
+&lt;p&gt;亮度，强度luminance, intensity  ：与光谱无关的入射光总量&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103148.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;色度chrominance:  ：与亮度无关的光谱&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103545.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;色调hue  ：光谱中最主要的波长&lt;/p&gt;
+
+&lt;p&gt;饱和saturation:  主波长的能量百分比&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103348.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;颜色处理的作用&quot;&gt;颜色处理的作用&lt;/h2&gt;
+
+&lt;p&gt;视觉皮层中色度和亮度的处理遵循不同的途径&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;亮度用于识别图像中的形状和纹理&lt;/li&gt;
+  &lt;li&gt;色度是控制视觉注意力的重要线索&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103831.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;许多不同的颜色模型，但都使用 3 个通道&lt;/p&gt;
+
+&lt;p&gt;– 模仿三个锥体的模型：RGB、CMY/CMYK&lt;/p&gt;
+
+&lt;p&gt;– 基于色彩心理学的模型：XYZ、L&lt;em&gt;a&lt;/em&gt;b&lt;em&gt;、L&lt;/em&gt;u&lt;em&gt;v&lt;/em&gt;、HSV、HSL、 …&lt;/p&gt;
+
+&lt;p&gt;– 其他模型：YUV，…&lt;/p&gt;
+
+&lt;h2 id=&quot;rgb彩色空间&quot;&gt;rgb彩色空间&lt;/h2&gt;
+
+&lt;p&gt;RGB 模仿 S 、M 和 L 视锥细胞的响应&lt;/p&gt;
+
+&lt;p&gt;– R：红色值 (0–1)&lt;/p&gt;
+
+&lt;p&gt;– G：绿色值 (0–1)&lt;/p&gt;
+
+&lt;p&gt;– B：蓝色值 (0–1)&lt;/p&gt;
+
+&lt;p&gt;显示器上显示的颜色取决于设备&lt;/p&gt;
+
+&lt;p&gt;应用领域：数码相机、显示器、图像表示&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311105844.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;hsv彩色空间&quot;&gt;HSV彩色空间&lt;/h2&gt;
+
+&lt;p&gt;颜色分解为亮度、色调和饱和度&lt;/p&gt;
+
+&lt;p&gt;– H：hue 色相 (0–360°)&lt;/p&gt;
+
+&lt;p&gt;用角度度量，取值范围为0°～360°，从红色开始按逆时针方向计算，红色为0°，绿色为120°,蓝色为240°。它们的补色是：黄色为60°，青色为180°,紫色为300°；&lt;/p&gt;
+
+&lt;p&gt;色相（英语：hue）指的是色彩的外相，是在不同波长的光照射下，人眼所感觉不同的颜色，有红色、橙色、黄色、绿色、蓝色、紫色、粉红色、黑色、褐色、灰色、白色、金色和银色。
+在HSL和HSV色彩空间中，H指的就是色相，是以红色为0度（360度）；黄色为60度；绿色为120度；青色为180度；蓝色为240度；品红色为300度。&lt;/p&gt;
+
+&lt;p&gt;– S：饱和度 (0–1)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;饱和度是指色彩的纯度&lt;/strong&gt;，一种颜色的饱和度越高，它就越鲜艳；反之，一种颜色的饱和度越低，它就越接近于灰色。&lt;/p&gt;
+
+&lt;p&gt;– V：值、亮度 (0–1)&lt;/p&gt;
+
+&lt;p&gt;明度表示颜色明亮的程度，对于光源色，明度值与发光体的光亮度有关；对于物体色，此值和物体的透射比或反射比有关。通常取值范围为0%（黑）到100%（白）。&lt;/p&gt;
+
+&lt;p&gt;– 由 RGB 立方体沿其对角线投影创建&lt;/p&gt;
+
+&lt;p&gt;– 通道具有语义&lt;/p&gt;
+
+&lt;p&gt;应用领域：绘画、机器视觉&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110016.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;luv-颜色空间和-lab-颜色空间&quot;&gt;Luv 颜色空间和 Lab 颜色空间&lt;/h2&gt;
+
+&lt;p&gt;基于人类色彩解释的色彩空间&lt;/p&gt;
+
+&lt;p&gt;– 色彩空间中的距离是指人类色彩解释的差异&lt;/p&gt;
+
+&lt;p&gt;– L* 轴：亮度&lt;/p&gt;
+
+&lt;p&gt;– u&lt;em&gt;、v&lt;/em&gt; 轴：色度&lt;/p&gt;
+
+&lt;p&gt;– a&lt;em&gt;、b&lt;/em&gt; 轴：色度&lt;/p&gt;
+
+&lt;p&gt;应用领域：机器视觉&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110159.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;色彩恒常性色感一致性&quot;&gt;色彩恒常性；色感一致性&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311181131.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;center&gt;左侧立方体顶部的蓝色瓷砖与右侧立方体顶部的黄色瓷砖颜色相同！&lt;/center&gt;
+
+&lt;p&gt;颜色感知取决于照明条件，即用于照亮物体的光谱&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110455.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;人造光导致颜色偏移&lt;/p&gt;
+
+&lt;p&gt;用于颜色校正的白平衡&lt;/p&gt;
+
+&lt;h3 id=&quot;白平衡-white-balance&quot;&gt;白平衡 white balance&lt;/h3&gt;
+
+&lt;p&gt;白平衡，字面上的理解是白色的平衡。白平衡是描述显示器中红、绿、蓝三基色混合生成后白色精确度的一项指标。&lt;/p&gt;
+
+&lt;p&gt;其基本概念是“不管在任何光源下，都能将白色物体还原为白色”，对在特定光源下拍摄时出现的偏色现象，通过加强对应的补色来进行补偿。相机的白平衡设定可以校准色温的偏差，在拍摄时我们可以大胆地调整白平衡来达到想要的画面效果&lt;/p&gt;
+
+&lt;p&gt;白平衡：&lt;/p&gt;
+
+&lt;p&gt;– 改变 RGB 的 R 和 B 通道&lt;/p&gt;
+
+&lt;p&gt;– 需要一个灰色或白色参考区域&lt;/p&gt;
+
+&lt;p&gt;– 计算参考区域的平均 RGB 值&lt;/p&gt;
+
+&lt;p&gt;– 计算 R 和 B 的校正因子&lt;/p&gt;
+
+&lt;p&gt;– 将图像像素的 R 和 B 值乘以校正因子&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110614.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;白平衡：&lt;/p&gt;
+
+&lt;p&gt;– 许多数码相机的内置功能&lt;/p&gt;
+
+&lt;p&gt;– 确定参考颜色的替代策略：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;最亮像素的颜色&lt;/li&gt;
+  &lt;li&gt;图像中的平均颜色&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;– 例如：机器人足球&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;将白纸放入相机视野&lt;/li&gt;
+  &lt;li&gt;使用该区域作为参考进行白平衡&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110732.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311111243.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 03 Feb 2022 00:00:00 +0800</pubDate>
+        <link>https://wenboli-cn-de.github.io/2022/02/MV5.1color/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/02/MV5.1color/</guid>
+        
+        <category>专业</category>
+        
+        <category>机器视觉</category>
+        
+        
+      </item>
+    
+      <item>
         <title>机器视觉-曲线拟合(圆和椭圆) Curve Fitting</title>
         <description>&lt;head&gt;
     &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
@@ -3365,39 +3614,6 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
         <category>专业</category>
         
         <category>机器视觉</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>央视五集电视专题片《零容忍》</title>
-        <description>&lt;h1 id=&quot;第一集不负14亿&quot;&gt;第一集:《不负14亿》&lt;/h1&gt;
-
-&lt;p&gt;链接：&lt;a href=&quot;https://www.bilibili.com/video/BV1eL4y1476T?p=1&quot;&gt;https://www.bilibili.com/video/BV1eL4y1476T?p=1&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;第二集打虎拍蝇&quot;&gt;第二集:《打虎拍蝇》&lt;/h1&gt;
-
-&lt;p&gt;链接：&lt;a href=&quot;https://www.bilibili.com/video/BV1eL4y1476T?p=2&quot;&gt;https://www.bilibili.com/video/BV1eL4y1476T?p=2&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;第三集惩前毖后&quot;&gt;第三集:《惩前毖后》&lt;/h1&gt;
-
-&lt;p&gt;链接：&lt;a href=&quot;https://www.bilibili.com/video/BV1eL4y1476T?p=3&quot;&gt;https://www.bilibili.com/video/BV1eL4y1476T?p=3&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;第四集系统施治&quot;&gt;第四集:《系统施治》&lt;/h1&gt;
-
-&lt;p&gt;链接：&lt;a href=&quot;https://www.bilibili.com/video/BV1eL4y1476T?p=4&quot;&gt;https://www.bilibili.com/video/BV1eL4y1476T?p=4&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;第五集永远在路上&quot;&gt;第五集:《永远在路上》&lt;/h1&gt;
-
-&lt;p&gt;链接：&lt;a href=&quot;https://www.bilibili.com/video/BV1eL4y1476T?p=5&quot;&gt;https://www.bilibili.com/video/BV1eL4y1476T?p=5&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Flag_of_the_Chinese_Communist_Party.svg/1200px-Flag_of_the_Chinese_Communist_Party.svg.png&quot; alt=&quot;Flag&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 18 Jan 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/01/Politik/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/Politik/</guid>
-        
-        <category>党政</category>
         
         
       </item>
