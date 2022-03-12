@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 13 Mar 2022 05:24:35 +0800</pubDate>
-    <lastBuildDate>Sun, 13 Mar 2022 05:24:35 +0800</lastBuildDate>
+    <pubDate>Sun, 13 Mar 2022 05:28:51 +0800</pubDate>
+    <lastBuildDate>Sun, 13 Mar 2022 05:28:51 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -2763,7 +2763,7 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311204148.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;点$(x,y,z)$投影到$(x’,y’)$截距定理：&lt;/p&gt;
+&lt;p&gt;点\((x,y,z)\)投影到\((x',y')\)截距定理：&lt;/p&gt;
 
 \[\frac{x}{z}=\frac{x^{\prime}}{f}, \quad \frac{y}{z}=\frac{y^{\prime}}{f} \quad \Rightarrow \quad z \cdot\left(\begin{array}{l}x^{\prime} \\ y^{\prime}\end{array}\right)=\left(\begin{array}{ll}f &amp;amp; 0 \\ 0 &amp;amp; f\end{array}\right) \cdot\left(\begin{array}{l}x \\ y\end{array}\right)\]
 
