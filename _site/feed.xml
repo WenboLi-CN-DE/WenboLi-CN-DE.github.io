@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 12 Mar 2022 01:12:53 +0800</pubDate>
-    <lastBuildDate>Sat, 12 Mar 2022 01:12:53 +0800</lastBuildDate>
+    <pubDate>Sun, 13 Mar 2022 05:24:35 +0800</pubDate>
+    <lastBuildDate>Sun, 13 Mar 2022 05:24:35 +0800</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -2754,6 +2754,881 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
       </item>
     
       <item>
+        <title>机器视觉-相机光学 Ｏptics</title>
+        <description>&lt;head&gt;
+    &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
+   &lt;/script&gt;
+&lt;/head&gt;
+&lt;h1 id=&quot;针孔照相机&quot;&gt;针孔照相机&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311204148.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;点$(x,y,z)$投影到$(x’,y’)$截距定理：&lt;/p&gt;
+
+\[\frac{x}{z}=\frac{x^{\prime}}{f}, \quad \frac{y}{z}=\frac{y^{\prime}}{f} \quad \Rightarrow \quad z \cdot\left(\begin{array}{l}x^{\prime} \\ y^{\prime}\end{array}\right)=\left(\begin{array}{ll}f &amp;amp; 0 \\ 0 &amp;amp; f\end{array}\right) \cdot\left(\begin{array}{l}x \\ y\end{array}\right)\]
+
+&lt;h1 id=&quot;世界到图像映射&quot;&gt;世界到图像映射&lt;/h1&gt;
+
+&lt;p&gt;相机坐标系&lt;/p&gt;
+
+&lt;p&gt;图像坐标系&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;u 方向平行于 x’ 方向&lt;/li&gt;
+  &lt;li&gt;v 方向可能倾斜 θ=u 和 v 方向之间的角度&lt;/li&gt;
+  &lt;li&gt;主点 = 图像坐标中相机坐标系的原点 (u0,v0)&lt;/li&gt;
+  &lt;li&gt;单位向量 u 和 v 的长度与单位向量 x’、y’ 的长度不同 比例因子 α、β&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311204556.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;将点 Z 从相机坐标映射到图像坐标：&lt;/p&gt;
+
+&lt;p&gt;三角形 ZBC：&lt;/p&gt;
+
+\[\begin{aligned} \sin \theta &amp;amp;=\frac{\beta y^{\prime}}{v-v_{0}} \\ \Rightarrow v &amp;amp;=\frac{\beta}{\sin \theta} y^{\prime}+v_{0} \\ \cot \theta &amp;amp;=\frac{\alpha x^{\prime}+u_{0}-u}{\beta y^{\prime}} \\ \Rightarrow u &amp;amp;=\alpha x^{\prime}-(\cot \theta) \cdot \beta y^{\prime}+u_{0} \end{aligned}\]
+
+&lt;p&gt;==从相机到图像帧的映射：==&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312211920.png&quot; alt=&quot;&quot; /&gt;
+\(\left(\begin{array}{l}
+u \\
+v
+\end{array}\right)=\left(\begin{array}{cc}
+\alpha &amp;amp; -\beta \cot \theta \\
+0 &amp;amp; \frac{\beta}{\sin \theta}
+\end{array}\right) \cdot\left(\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right)+\left(\begin{array}{l}
+u_{0} \\
+v_{0}
+\end{array}\right)\)
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311204822.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;物体在相机坐标上的位置通常未知&lt;/p&gt;
+
+&lt;p&gt;外部坐标系（“世界框架”）（ξ，η，ζ）&lt;/p&gt;
+
+&lt;p&gt;映射：
+\(\left(\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right)=R \cdot\left(\begin{array}{l}
+\xi \\
+\eta \\
+\zeta
+\end{array}\right)+\vec{t}\)
+R是旋转矩阵，t是转移矩阵&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;坐标变换&lt;/p&gt;
+
+    &lt;p&gt;世界框架→相机框架&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+\[\left(\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right)=R \cdot\left(\begin{array}{l}
+\xi \\
+\eta \\
+\zeta
+\end{array}\right)+\vec{t}\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311205018.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;透视投影；中心投影法&lt;/li&gt;
+&lt;/ol&gt;
+
+\[z \cdot\left(\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right)=\left(\begin{array}{ll}
+f &amp;amp; 0 \\
+0 &amp;amp; f
+\end{array}\right) \cdot\left(\begin{array}{l}
+x \\
+y
+\end{array}\right)\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311205103.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;坐标变换&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;​		相机帧→图像帧
+\(\left(\begin{array}{l}
+u \\
+v
+\end{array}\right)=\left(\begin{array}{cc}
+\alpha &amp;amp; -\beta \cot \theta \\
+0 &amp;amp; \frac{\beta}{\sin \theta}
+\end{array}\right) \cdot\left(\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right)+\left(\begin{array}{l}
+u_{0} \\
+v_{0}
+\end{array}\right)\)
+\(cot\theta=cos\theta/sin\theta\)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311205201.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;重写步骤3：
+\(\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right)=\left(\begin{array}{ccc}
+\alpha &amp;amp; -\beta \cot \theta &amp;amp; u_{0} \\
+0 &amp;amp; \frac{\beta}{\sin \theta} &amp;amp; v_{0} \\
+0 &amp;amp; 0 &amp;amp; 1
+\end{array}\right) \cdot\left(\begin{array}{l}
+x^{\prime} \\
+y^{\prime} \\
+1
+\end{array}\right)\)
+重写步骤2：
+\(z \cdot\left(\begin{array}{l}
+x^{\prime} \\
+y^{\prime} \\
+1
+\end{array}\right)=\left(\begin{array}{lll}
+f &amp;amp; 0 &amp;amp; 0 \\
+0 &amp;amp; f &amp;amp; 0 \\
+0 &amp;amp; 0 &amp;amp; 1
+\end{array}\right) \cdot\left(\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right)\)
+结合第 2 步和第 3 步：
+\(\begin{aligned}
+z \cdot\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right) &amp;amp;=\left(\begin{array}{ccc}
+\alpha &amp;amp; -\beta \cot \theta &amp;amp; u_{0} \\
+0 &amp;amp; \frac{\beta}{\sin \theta} &amp;amp; v_{0} \\
+0 &amp;amp; 0 &amp;amp; 1
+\end{array}\right) \cdot\left(\begin{array}{lll}
+f &amp;amp; 0 &amp;amp; 0 \\
+0 &amp;amp; f &amp;amp; 0 \\
+0 &amp;amp; 0 &amp;amp; 1
+\end{array}\right) \cdot\left(\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right) \\
+&amp;amp;=\left(\begin{array}{ccc}
+f \alpha &amp;amp; -f \beta \cot \theta &amp;amp; u_{0} \\
+0 &amp;amp; \frac{f \beta}{\sin \theta} &amp;amp; v_{0} \\
+0 &amp;amp; 0 &amp;amp; 1
+\end{array}\right) \cdot\left(\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right) \\
+&amp;amp;=\underbrace{\left(\begin{array}{ccc}
+\alpha^{\prime} &amp;amp; -\beta^{\prime} \cot \theta &amp;amp; u_{0} \\
+0 &amp;amp; \frac{\beta^{\prime}}{\sin \theta} &amp;amp; v_{0} \\
+0 &amp;amp; 0 &amp;amp; 1
+\end{array}\right)}_{=: A} \cdot\left(\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right)
+\end{aligned}\)
+with&lt;br /&gt;
+\(\alpha^{\prime}=f \alpha, \quad \beta^{\prime}=f \beta\)
+重写步骤1：
+\(\left(\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right)=(R \mid \vec{t}) \cdot\left(\begin{array}{l}
+\xi \\
+\eta \\
+\zeta \\
+1
+\end{array}\right)\)
+ 将 1 与之前的结果相结合：&lt;/p&gt;
+
+\[z \cdot\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right)=A \cdot(R \mid \vec{t}) \cdot\left(\begin{array}{l}
+\xi \\
+\eta \\
+\zeta \\
+1
+\end{array}\right)z \cdot\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right)=A \cdot(R \mid \vec{t}) \cdot\left(\begin{array}{l}
+\xi \\
+\eta \\
+\zeta \\
+1
+\end{array}\right)\]
+
+&lt;p&gt;给定 (ξ,η,ζ)，我们如何计算 (u,v) ？&lt;/p&gt;
+
+\[\begin{array}{l}
+\left(\begin{array}{c}
+\tilde{x} \\
+\tilde{y} \\
+\tilde{z}
+\end{array}\right)=A \cdot(R \mid \vec{t}) \cdot\left(\begin{array}{l}
+\xi \\
+\eta \\
+\zeta \\
+1
+\end{array}\right) \\
+\left(\begin{array}{l}
+u \\
+v
+\end{array}\right)=\frac{1}{\widetilde{z}}\left(\begin{array}{l}
+\tilde{x} \\
+\tilde{y}
+\end{array}\right)
+\end{array}\]
+
+&lt;p&gt;给定 (u,v)，我们如何计算 (ξ,η,ζ) ？&lt;/p&gt;
+
+\[\left(\begin{array}{l}
+\xi \\
+\eta \\
+\zeta
+\end{array}\right)=z R^{T} A^{-1}\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right)-R^{T} \vec{t} \quad \text { with } z \geq 0\]
+
+&lt;p&gt;(ξ,η,ζ) 不是唯一的，而是射线的元素&lt;/p&gt;
+
+&lt;p&gt;相机原点坐标：&lt;/p&gt;
+
+\[(\xi, \eta, \zeta)^{T}=-R^{T} \vec{t}\]
+
+&lt;p&gt;参数：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;内在参数：描述相机（5个参数）&lt;/p&gt;
+
+\[u_{0}, v_{0}, \alpha^{\prime}, \beta^{\prime}, \theta\]
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;外部参数：相机的位姿（6个参数）&lt;/p&gt;
+
+\[R,\vec{t}\]
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;有时，模型被简化假设&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+\[\theta=90^{\circ}, \alpha^{\prime}=\beta^{\prime}\]
+
+&lt;h1 id=&quot;体积测量&quot;&gt;体积测量&lt;/h1&gt;
+
+&lt;p&gt;测量体积：&lt;/p&gt;
+
+&lt;p&gt;– 是一个矩形金字塔&lt;/p&gt;
+
+&lt;p&gt;– 焦点是金字塔的顶点&lt;/p&gt;
+
+&lt;p&gt;– 水平孔径角（张角）&lt;/p&gt;
+
+\[\arccos \frac{\left\langle A^{-1}\left(0, v_{0}, 1\right)^{T}, A^{-1}\left(u_{\max }, v_{0}, 1\right)^{T}\right\rangle}{\left\|A^{-1}\left(0, v_{0}, 1\right)^{T}\right\| \cdot\left\|A^{-1}\left(u_{\max }, v_{0}, 1\right)^{T}\right\|}\]
+
+&lt;p&gt;– 垂直孔径角&lt;/p&gt;
+
+\[arccos \frac{\left\langle A^{-1}\left(u_{0}, 0,1\right)^{T}, A^{-1}\left(u_{0}, v_{\max }, 1\right)^{T}\right\rangle}{\left\|A^{-1}\left(u_{0}, 0,1\right)^{T}\right\| \cdot\left\|A^{-1}\left(u_{0}, v_{\max }, 1\right)^{T}\right\|}\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312163116.png&quot; style=&quot;zoom: 67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;透视投影中心投影法&quot;&gt;透视投影；中心投影法&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312163742.png&quot; style=&quot;zoom: 67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312163805.png&quot; style=&quot;zoom: 38.5%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312163832.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164207.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164237.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;透视投影不：&lt;/p&gt;
+
+&lt;p&gt;– 保留角度&lt;/p&gt;
+
+&lt;p&gt;– 保留长度&lt;/p&gt;
+
+&lt;p&gt;– 保留面积&lt;/p&gt;
+
+&lt;p&gt;– 保留长度比&lt;/p&gt;
+
+&lt;p&gt;– 将圆/椭圆的中心映射到所映射的椭圆的中心（除非：如果平面与光轴正交）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164333.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;镜头&quot;&gt;镜头&lt;/h1&gt;
+
+&lt;p&gt;针孔相机很难让光线通过&lt;/p&gt;
+
+&lt;p&gt;→ 镜头 • 斯涅尔折射定律&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164413.png&quot; style=&quot;zoom: 33%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;📌&lt;strong&gt;Snell’s law:&lt;/strong&gt;  📌&lt;/p&gt;
+
+\[n_{e} \sin \theta_{e}=n_{t} \sin \theta_{t}\]
+
+\[n_{\text {medium }}=\frac{v_{\text {vacuum }}}{v_{\text {medium }}}\]
+
+&lt;p&gt;镜头焦距：镜头到焦点的距离，平行于光轴的光线被折射后的交汇点&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164804.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;镜片的折射&lt;/p&gt;
+
+&lt;p&gt;– 表面空气/玻璃&lt;/p&gt;
+
+&lt;p&gt;– 表面玻璃/空气&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164839.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;可忽略的厚度&lt;/li&gt;
+  &lt;li&gt;双折射可以通过中心线的单折射来近似&lt;/li&gt;
+  &lt;li&gt;更简单的几何建模&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;C:\Users\Wenbo Li\AppData\Roaming\Typora\typora-user-images\image-20220312164906393.png&quot; alt=&quot;image-20220312164906393&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;薄镜片&quot;&gt;薄镜片&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;清晰的图像必须满足什么条件？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312165020.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;截距定理：&lt;/p&gt;
+
+\[\frac{x^{\prime}}{x}=\frac{f_{\text {camera }}}{z}\]
+
+\[\frac{x^{\prime}}{x}=\frac{f_{\text {camera }}-f_{\text {lens }}}{f_{\text {lens }}}\]
+
+&lt;p&gt;由上可得 👉&lt;/p&gt;
+
+\[\frac{1}{f_{\text {lens }}}=\frac{1}{f_{\text {camera }}}+\frac{1}{z}\]
+
+&lt;p&gt;（透镜方程）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;当违反透镜方程时会发生什么？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312165242.png&quot; style=&quot;zoom: 50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们可以改变z多少程度才影响不大？&lt;/p&gt;
+
+&lt;h2 id=&quot;depth-of-field--景深视野深度&quot;&gt;Depth of Field  景深；视野深度&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312165422.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;截距定理：&lt;/p&gt;
+
+\[\frac{\epsilon}{D}=\frac{f_{0}-f_{f a r}}{f_{f a r}}=\cdots=\frac{f_{\text {lens }} \cdot\left(z_{\text {far }}-z_{0}\right)}{z_{\text {far }} \cdot\left(z_{0}-f_{\text {lens }}\right)}\]
+
+&lt;p&gt;截距定理：&lt;/p&gt;
+
+\[\frac{\epsilon}{D}=\frac{f_{\text {near }}-f_{0}}{f_{\text {near }}}=\cdots=\frac{f_{\text {lens }} \cdot\left(z_{0}-z_{\text {near }}\right)}{z_{\text {near }} \cdot\left(z_{0}-f_{\text {lens }}\right)}\]
+
+&lt;p&gt;由上可得：&lt;/p&gt;
+
+\[z_{f a r}=\frac{z_{0} \cdot d_{h}}{d_{h}-\left(z_{0}-f_{l e n s}\right)}\]
+
+\[z_{\text {near }}=\frac{z_{0} \cdot d_{h}}{d_{h}+\left(z_{0}-f_{\text {lens }}\right)}\]
+
+&lt;p&gt;\(d_{h}=\frac{D \cdot f_{\text {lens }}}{\epsilon}\)(hyperfocal distance)  （超焦距）&lt;/p&gt;
+
+\[\Delta z=z_{\text {far }}-z_{\text {near }}=2 \frac{z_{0} \cdot d_{h} \cdot\left(z_{0}-f_{\text {lens }}\right)}{d_{h}^{2}-\left(z_{0}-f_{\text {lens }}\right)^{2}}\]
+
+&lt;p&gt;观察:&lt;/p&gt;
+
+&lt;p&gt;对于&lt;/p&gt;
+
+\[z_{0} \rightarrow d_{h}+f_{\text {lens }}\]
+
+&lt;p&gt;holds：&lt;/p&gt;
+
+\[z_{\text {far }} \rightarrow \infty\]
+
+\[\Delta z \rightarrow \infty\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170009.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;对焦&quot;&gt;对焦&lt;/h2&gt;
+
+&lt;p&gt;对焦包围/对焦堆叠图像系列具有不同的镜头和图像平面之间的距离，以克服有限的景深&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170237.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;像差-lens-aberrations&quot;&gt;像差 Lens Aberrations&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;几何像差：由于镜头几何形状不完善，没有唯一焦点&lt;/p&gt;
+
+    &lt;p&gt;– 球面像差、散光、彗差&lt;/p&gt;
+
+    &lt;p&gt;geometric aberrations: no unique focal point due to imperfect lens geometry
+– spherical aberration, astigmatism, coma&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;色差：因不同波长的不同折射率引起的色散（“彩虹效应”）&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;chromatic aberrations:
+  dispersion caused by different refraction index for different wavelength (“rainbow effect”)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;渐晕：图像周边的光强度和饱和度降低&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;vignetting:
+  reduced light intensity and saturation in the image periphery&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170349.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170407.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;图象失真&quot;&gt;图象失真&lt;/h2&gt;
+
+&lt;p&gt;图像失真：透视投影应将线映射到线。&lt;/p&gt;
+
+&lt;p&gt;但大多数相机不会 → 畸变&lt;/p&gt;
+
+&lt;p&gt;– 径向畸变 镜头形状欠佳&lt;/p&gt;
+
+&lt;p&gt;– 切向畸变 镜头安装欠佳&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170604.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;径向畸变&quot;&gt;径向畸变&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;点偏离主点&lt;/li&gt;
+  &lt;li&gt;径向畸变是对称的&lt;/li&gt;
+  &lt;li&gt;偏移量与到主点的距离呈非线性关系&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170728.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;矩形对象在图像中呈桶形或枕形&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170704.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;偶数多项式的数学建模：&lt;/p&gt;
+
+\[\left(\begin{array}{l}x^{\prime} \\ y^{\prime}\end{array}\right)=\left(1+k_{1} r^{2}+k_{2} r^{4}\right)\left(\begin{array}{l}x_{d} \\ y_{d}\end{array}\right) \quad \text{ with } r^{2}=x_{d}^{2}+y_{d}^{2}\]
+
+&lt;p&gt;或在图像坐标中：&lt;/p&gt;
+
+\[\left(\begin{array}{l}u^{\prime} \\ v^{\prime}\end{array}\right)=\left(\begin{array}{l}u_{0} \\ v_{0}\end{array}\right)+\left(1+k_{1} r^{2}+k_{2} r^{4}\right)\left(\begin{array}{l}u_{d}-u_{0} \\ v_{d}-v_{0}\end{array}\right) \text{with } r^{2}=\left(u_{d}-u_{0}\right)^{2}+\left(v_{d}-v_{0}\right)^{2}\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171211.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+\[k_1 = 0, k_2=0\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171407.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+\[k_1&amp;gt;0，k_2≥0\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171536.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+\[k_1&amp;lt;0，k_2≤0\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171627.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+\[k_1&amp;lt;0，k_2＞0\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171659.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+\[k_1&amp;gt;0，k_2&amp;lt;0\]
+
+&lt;h1 id=&quot;相机标定-camera-calibration&quot;&gt;相机标定 Camera Calibration&lt;/h1&gt;
+
+&lt;p&gt;常用术语
+内参矩阵: Intrinsic Matrix
+焦距: Focal Length
+主点: Principal Point
+径向畸变: Radial Distortion
+切向畸变: Tangential Distortion
+旋转矩阵: Rotation Matrices
+平移向量: Translation Vectors
+平均重投影误差: Mean Reprojection Error
+重投影误差: Reprojection Errors
+重投影点: Reprojected Points
+————————————————
+版权声明：本文为CSDN博主「AI人工智能科学」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/lql0716/article/details/71973318&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;建立相机成像几何模型并矫正透镜畸变&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;参数：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;内在参数：描述相机（5个参数）&lt;/p&gt;
+
+\[u_{0}, v_{0}, \alpha^{\prime}, \beta^{\prime}, \theta\]
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;外部参数：相机的位姿（2个参数）&lt;/p&gt;
+
+\[R,\vec{t}\]
+
+    &lt;p&gt;失真参数：&lt;/p&gt;
+
+\[k_1,k_2\]
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;校准 = 确定参数的过程&lt;/p&gt;
+
+&lt;p&gt;校准：从成对的图像点和世界点确定相机参数&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171947.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从一张或几张图片我们得到对应的点：&lt;/p&gt;
+
+\[\left(\xi_{i}, \eta_{i}, \zeta_{i}\right) \mapsto\left(u_{i}, v_{i}\right)\]
+
+&lt;p&gt;找到映射
+\(\left(\xi_{i}, \eta_{i}, \zeta_{i}\right)\)
+到尽可能好的相机参数
+\(A,R,\vec{t}\) 在 \(\left(u_{i}, v_{i}\right)\)&lt;/p&gt;
+
+&lt;p&gt;几种方法。 这里： 1. Tasi的方法 2. 张氏方法&lt;/p&gt;
+
+&lt;p&gt;世界到图像映射：&lt;/p&gt;
+
+\[z \cdot\left(\begin{array}{l}u \\ v \\ 1\end{array}\right)=\underbrace{A \cdot(R \mid \vec{t})}_{=: M} \cdot\left(\begin{array}{l}\xi \\ \eta \\ \zeta \\ 1\end{array}\right)\]
+
+&lt;p&gt;M 是 3x4 矩阵&lt;/p&gt;
+
+\[M=\left(\begin{array}{ccc}m_{1,1} &amp;amp; \ldots &amp;amp; m_{1,4} \\ \vdots &amp;amp; \ddots &amp;amp; \vdots \\ m_{3,1} &amp;amp; \ldots &amp;amp; m_{3,4}\end{array}\right)\]
+
+&lt;p&gt;我们得到：&lt;/p&gt;
+
+\[\vec{m}_{1,1: 3}\left(\begin{array}{l}\xi \\ \eta \\ \zeta\end{array}\right)+m_{1,4}-u\left(\vec{m}_{3,1: 3}\left(\begin{array}{l}\xi \\ \eta \\ \zeta\end{array}\right)+m_{3,4}\right)=0\]
+
+\[\vec{m}_{2,1: 3}\left(\begin{array}{l}\xi \\ \eta \\ \zeta\end{array}\right)+m_{2,4}-v\left(\vec{m}_{3,1: 3}\left(\begin{array}{l}\xi \\ \eta \\ \zeta\end{array}\right)+m_{3,4}\right)=0\]
+
+&lt;p&gt;通过最小化确定相机参数&lt;/p&gt;
+
+\[\sum_{i}\left(\left(\vec{m}_{1,1: 3}\left(\begin{array}{c}\xi_{i} \\ \eta_{i} \\ \zeta_{i}\end{array}\right)+m_{1,4}-u_{i}\left(\vec{m}_{3,1: 3}\left(\begin{array}{c}\xi_{i} \\ \eta_{i} \\ \zeta_{i}\end{array}\right)+m_{3,4}\right)\right)^{2}\right.\left.+\left(\vec{m}_{2,1: 3}\left(\begin{array}{c}\xi_{i} \\ \eta_{i} \\ \zeta_{i}\end{array}\right)+m_{2,4}-v_{i}\left(\vec{m}_{3,1: 3}\left(\begin{array}{c}\xi_{i} \\ \eta_{i} \\ \zeta_{i}\end{array}\right)+m_{3,4}\right)\right)^{2}\right)\]
+
+&lt;p&gt;归零偏导数：&lt;/p&gt;
+
+&lt;p&gt;\(\left(\begin{array}{ccc}\sum_{i} S_{i} &amp;amp; 0 &amp;amp; -\sum_{i} u_{i} S_{i} \\0 &amp;amp; \sum_{i} S_{i} &amp;amp; -\sum_{i} v_{i} S_{i} \\-\sum_{i} u_{i} S_{i} &amp;amp; -\sum_{i} v_{i} S_{i} &amp;amp; \sum_{i}\left(u_{i}^{2}+v_{i}^{2}\right) S_{i}\end{array}\right) \cdot\left(\begin{array}{l}\vec{m}_{1,1: 4}^{T} \\\vec{m}_{2,1: 4}^{T} \\\vec{m}_{3,1: 4}^{T}\end{array}\right)=\overrightarrow{0}\)  with  \(S_{i}=\left(\xi_{i}, \eta_{i}, \zeta_{i}, 1\right)^{T}\left(\xi_{i}, \eta_{i}, \zeta_{i}, 1\right)\)&lt;/p&gt;
+
+&lt;p&gt;解：关于最小特征值的特征向量&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1 个自由度：解的长度&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;解的结构：&lt;/p&gt;
+
+&lt;p&gt;\(M=A \cdot(R \mid \vec{t})=\left(\begin{array}{ll}\vec{m}_{1,1: 3} &amp;amp; m_{1,4} \\\vec{m}_{2,1: 3} &amp;amp; m_{2,4} \\\vec{m}_{3,1: 3} &amp;amp; m_{3,4}\end{array}\right)\) with \(\vec{m}_{1,1: 3}=\alpha^{\prime} \vec{r}_{1,1: 3}-\beta^{\prime} \cot \theta \vec{r}_{2,1: 3}+u_{0} \vec{r}_{3,1: 3}\) 
+\(\begin{aligned}m_{1,4} &amp;amp;=\alpha^{\prime} t_{1}-\beta^{\prime} \cot \theta t_{2}+u_{0} t_{3} \\\vec{m}_{2,1: 3} &amp;amp;=\frac{\beta^{\prime}}{\sin \theta} \vec{r}_{2,1: 3}+v_{0} \vec{r}_{3,1: 3} \\m_{2,4} &amp;amp;=\frac{\beta^{\prime}}{\sin \theta} t_{2}+v_{0} t_{3} \\\vec{m}_{3,1: 3} &amp;amp;=\vec{r}_{3,1: 3} \\m_{3,4} &amp;amp;=t_{3}\end{aligned}\)&lt;/p&gt;
+
+&lt;p&gt;R 是一个旋转矩阵：&lt;/p&gt;
+
+\[\left\|\vec{r}_{1,1: 3}\right\|=1 \\  \| \vec{r}_{2,1: 3} \|=1 \\\| \vec{r}_{3,1: 3}\|=1\\\left\langle\vec{r}_{1,1: 3}, \vec{r}_{2,1: 3}\right\rangle=0 \left\langle\vec{r}_{2,1: 3,}, \vec{r}_{3,1: 3}\right\rangle=0 \left\langle\vec{r}_{3,1: 3,}, \vec{r}_{1,1: 3}\right\rangle=0\]
+
+&lt;p&gt;由于 
+\(\vec{m}_{3,1: 3}=\vec{r}_{3,1: 3}\)　
+选择解决方案　
+\(\left|\vec{m}_{3,1: 3}\right|^{2}=1\)
+（两种可能性，检查　
+\(\operatorname{det}(R)=+1）\)&lt;/p&gt;
+
+&lt;p&gt;给定 M，我们如何推导出相机参数 R, t, α’, β’, θ, u0, v0 ？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312173958.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;总结：Tsai 的方法&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;用校准标记（一般位置的标记）创建一个人工场景&lt;/li&gt;
+  &lt;li&gt;测量校准标记的 3d 世界位置&lt;/li&gt;
+  &lt;li&gt;制作图片&lt;/li&gt;
+  &lt;li&gt;测量校准标记的 2d 图像位置&lt;/li&gt;
+  &lt;li&gt;解决优化问题 估计矩阵 M&lt;/li&gt;
+  &lt;li&gt;将 M 分解为 A, R, t&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;相机校准：张 Camera Calibration: Zhang&lt;/p&gt;
+
+&lt;p&gt;假设平面上的 3d-点\(\zeta=0\)&lt;/p&gt;
+
+&lt;p&gt;这些点由相机映射到
+\(\begin{aligned}
+z \cdot\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right) &amp;amp;=A \cdot\left(R \cdot\left(\begin{array}{l}
+\xi \\
+\eta \\
+0
+\end{array}\right)+\vec{t}\right) \\
+&amp;amp;=\underbrace{A \cdot\left(\vec{r}_{1: 3,1}, \vec{r}_{1: 3,2}, \vec{t}\right)}_{=: H} \cdot\left(\begin{array}{l}
+\xi \\
+\eta \\
+1
+\end{array}\right)
+\end{aligned}\)
+H 称为单应性 H is called a homography&lt;br /&gt;
+\(H=A \cdot\left(\vec{r}_{1: 3,1}, \vec{r}_{1: 3,2}, \vec{t}\right)\)
+如果我们知道几个单应性$H_1,H_2…H_n$，我们能推导出来$A$吗？让我们首先考虑
+\(B=A^{-T} A^{-1}\)
+A是满秩的，上三角矩阵&lt;/p&gt;
+
+&lt;p&gt;→ \(A^{-1}\) 存在并且也是上三角矩阵&lt;/p&gt;
+
+&lt;p&gt;→ B是对称的，有 6 个不同的条目&lt;/p&gt;
+
+&lt;p&gt;→ \(A^{-1}\) 可以通过 Cholesky 分解计算&lt;/p&gt;
+
+&lt;p&gt;→ 如果我们知道B，我们可以很容易地推导出
+\(B=\left(\begin{array}{lll}
+b_{1,1} &amp;amp; b_{1,2} &amp;amp; b_{1,3} \\
+b_{1,2} &amp;amp; b_{2,2} &amp;amp; b_{2,3} \\
+b_{1,3} &amp;amp; b_{2,3} &amp;amp; b_{3,3}
+\end{array}\right)\)&lt;/p&gt;
+
+\[H=A \cdot\left(\vec{r}_{1: 3,1}, \vec{r}_{1: 3,2}, \vec{t}\right)\]
+
+&lt;p&gt;R是一个旋转矩阵，因此&lt;/p&gt;
+
+&lt;p&gt;(1)
+\(\begin{aligned}
+0=\left\langle\vec{r}_{1: 3,1}, \vec{r}_{1: 3,2}\right\rangle &amp;amp;=\left\langle A^{-1} \vec{h}_{1: 3,1}, A^{-1} \vec{h}_{1: 3,2}\right\rangle \\
+&amp;amp;=\vec{h}_{1: 3,1}^{T} \cdot\left(A^{-T} A^{-1}\right) \cdot \vec{h}_{1: 3,2} \\
+&amp;amp;=\vec{h}_{1: 3,1}^{T} \cdot B \cdot \vec{h}_{1: 3,2}
+\end{aligned}\)&lt;/p&gt;
+
+&lt;p&gt;(2)
+\(\begin{aligned}
+\left\langle\vec{r}_{1: 3,1}, \vec{r}_{1: 3,1}\right\rangle=1=&amp;amp;\left\langle\vec{r}_{1: 3,2}, \vec{r}_{1: 3,2}\right\rangle \\
+\left\langle A^{-1} \vec{h}_{1: 3,1}, A^{-1} \vec{h}_{1: 3,1}\right\rangle &amp;amp;\left\langle A^{-1} \vec{h}_{1: 3,2}, A^{-1} \vec{h}_{1: 3,2}\right\rangle \\
+\vec{h}_{1: 3,1}^{T} \cdot B \cdot \vec{h}_{1: 3,1} &amp;amp; \vec{h}_{1: 3,2}^{T} \cdot B \cdot \vec{h}_{1: 3,2} \\
+\Rightarrow 0=\vec{h}_{1: 3,1}^{T} \cdot B \cdot \vec{h}_{1: 3,1}-\vec{h}_{1: 3,2}^{T} \cdot B \cdot \vec{h}_{1: 3,2}
+\end{aligned}\)
+因此，从一个单应性我们得到两个约束（1）,（2）&lt;/p&gt;
+
+&lt;p&gt;如果我们知道几个单应性，我们能推导出来A吗？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;从每个单应性我们得到两个约束&lt;/li&gt;
+  &lt;li&gt;3 个单应性产生总共 6 个约束以估计 6 个参数&lt;/li&gt;
+  &lt;li&gt;3 个单应性产生一个超定的约束系统&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;​	→ 最小二乘法找到一个使残差最小化的矩阵&lt;/p&gt;
+
+&lt;p&gt;概述：张的方法&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;…&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;…&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;…&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;估计单应性 H&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;求解优化问题以估计矩阵 B&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;将 B 分解为 A, R, t&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;…&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;我们如何得到单应性？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312192013.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;假设平面上点的一组点对应关系&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;找到单应性使得&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+\[z \cdot\left(u_{i}, v_{i}, 1\right)^{T} \approx H \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T}\]
+
+&lt;ol&gt;
+  &lt;li&gt;一个对应产生两个约束&lt;/li&gt;
+&lt;/ol&gt;
+
+\[\begin{aligned}
+&amp;amp;\vec{h}_{1,1: 3} \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T}-u_{i} \cdot \vec{h}_{3,1: 3} \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T} \approx 0 \\
+&amp;amp;\vec{h}_{2,1: 3} \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T}-v_{i} \cdot \vec{h}_{3,1: 3} \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T} \approx 0
+\end{aligned}\]
+
+&lt;ol&gt;
+  &lt;li&gt;最小二乘以最小化残差并找到最佳单应性H&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;概述：张的方法&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在已知位置创建一个带有校准标记的平面&lt;/li&gt;
+  &lt;li&gt;制作几张平面不同位置和方向的图片&lt;/li&gt;
+  &lt;li&gt;测量标记的二维图像位置&lt;/li&gt;
+  &lt;li&gt;估计每张图片的单应性 H&lt;/li&gt;
+  &lt;li&gt;求解 估计矩阵 B 的优化问题&lt;/li&gt;
+  &lt;li&gt;将 B 分解为 A, R, t&lt;/li&gt;
+  &lt;li&gt;使用非线性最小二乘法优化所有参数&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;最后，我们得到&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;内在参数 A&lt;/li&gt;
+  &lt;li&gt;每个平面的旋转 R 和平移 t&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;center&gt;Z. Zhang,
+A flexible new technique for camera calibration.
+IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
+    pp. 1330-1334, 2000  &lt;/center&gt;
+
+&lt;p&gt;校准失真参数 k1、k2：&lt;/p&gt;
+
+&lt;p&gt;– 非线性优化过程&lt;/p&gt;
+
+&lt;p&gt;– 内在、外在参数和失真参数的迭代估计&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312192616.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;无畸变的效果图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312192705.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;不失真（需要更复杂的失真模型）：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312192752.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;校准指示器：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;性能特点&lt;/li&gt;
+  &lt;li&gt;清晰可识别&lt;/li&gt;
+  &lt;li&gt;易于确定世界位置&lt;/li&gt;
+  &lt;li&gt;易于在图像中高精度定位&lt;/li&gt;
+  &lt;li&gt;世界上不共面的特征（对于 Tsai 的方法）&lt;/li&gt;
+  &lt;li&gt;避免遮挡&lt;/li&gt;
+  &lt;li&gt;避免阴影&lt;/li&gt;
+  &lt;li&gt;尽可能多&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;棋盘标记&lt;/p&gt;
+
+&lt;p&gt;​	确定图像位置，计算水平和垂直边缘的交点&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193003.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193016.png&quot; style=&quot;zoom: 50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;正方形和矩形&lt;/strong&gt; - 确定图像位置，计算水平和垂直边缘的交点&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193103.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193051.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;圆&lt;/strong&gt; 确定结果椭圆的中心 - 圆心映射误差的迭代校正&lt;/p&gt;
+
+&lt;h1 id=&quot;非标相机&quot;&gt;非标相机&lt;/h1&gt;
+
+&lt;p&gt;远心镜头 Telecentric Lenses&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193259.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;优点：– 放大倍率与物距无关 – 改善景深&lt;/p&gt;
+
+&lt;p&gt;缺点：– 小光圈，让光线很差 – 大、重且昂贵&lt;/p&gt;
+
+&lt;p&gt;应用领域：显微镜&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193636.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;折反射相机 = 带镜子的相机&lt;/p&gt;
+
+&lt;p&gt;平面镜&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193708.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;– 曲面镜&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193742.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;折反射相机&quot;&gt;折反射相机&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;单视点&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;如果所有物镜光线都在一个点相交（例如，如果镜子可以用针孔相机代替），则折反射相机具有单一视点&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193851.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;单视点相机设置：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312194016.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312194039.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 11 Feb 2022 00:00:00 +0800</pubDate>
+        <link>https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</guid>
+        
+        <category>专业</category>
+        
+        <category>机器视觉</category>
+        
+        
+      </item>
+    
+      <item>
         <title>机器视觉-颜色 Color</title>
         <description>&lt;head&gt;
     &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
@@ -3450,166 +4325,6 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
         <pubDate>Tue, 25 Jan 2022 00:00:00 +0800</pubDate>
         <link>https://wenboli-cn-de.github.io/2022/01/MV4/</link>
         <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/MV4/</guid>
-        
-        <category>专业</category>
-        
-        <category>机器视觉</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>机器视觉-边缘检测 Edge Detection</title>
-        <description>&lt;head&gt;
-    &lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-        MathJax.Hub.Config({
-            tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
-            }
-        });
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;h1 id=&quot;边缘检测的意义&quot;&gt;边缘检测的意义&lt;/h1&gt;
-
-&lt;p&gt;边缘检测是为了提取图像中主体的轮廓特征.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/Snipaste_2022-01-19_16-48-09.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;灰度边缘的特性&quot;&gt;灰度边缘的特性&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在明亮和黑暗交接出有明显的改变(hard changes)&lt;/li&gt;
-  &lt;li&gt;通常发生在物体的边缘处&lt;/li&gt;
-  &lt;li&gt;发生在阴影和纹理处&lt;/li&gt;
-  &lt;li&gt;边缘和亮度没有关系&lt;/li&gt;
-  &lt;li&gt;人类的视觉皮层的许多部分都在处理灰度边缘&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;灰度&quot;&gt;灰度：&lt;/h2&gt;
-
-&lt;p&gt;把白色与黑色之间按对数关系分成若干级，成为灰度等级。范围一般从0-255，黑色为0.&lt;/p&gt;
-
-&lt;h1 id=&quot;寻找边缘&quot;&gt;寻找边缘&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;边缘是灰度变化最大的地方（其变化率最大，可以通过导数判断）&lt;/p&gt;
-
-    &lt;p&gt;$g(u+\epsilon)-g(u-\epsilon)$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;寻找区域内的g的导数的最大值&lt;/p&gt;
-
-    &lt;p&gt;$\frac{\partial g}{\partial u}=\lim _{\epsilon \rightarrow 0} \frac{g(u+\epsilon)-g(u)}{\epsilon}=\lim _{\epsilon \rightarrow 0} \frac{g(u+\epsilon)-g(u-\epsilon)}{2 \epsilon}$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;通过差分逼近函数进行近似（因为图片中为各个像素点，无法取极限，通过像素点之间的距离来代替）&lt;/p&gt;
-
-    &lt;p&gt;$\frac{\partial g}{\partial u} \approx \frac{g(u+1)-g(u-1)}{2}$&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;近似导数可以实现为带滤波器掩码的卷积&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119173327.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;prewitt算子sobel算子&quot;&gt;Prewitt算子，Sobel算子&lt;/h2&gt;
-
-&lt;p&gt;Prewitt算子： 利用像素点上下，左右邻点的灰度差，在边缘处达到极值边缘检测&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119173746.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Sobel算子：与Prewitt算子相比，Sobel对像素的位置的影响做了加权，可以降低位置的影响&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119173847.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;边缘方向&quot;&gt;边缘方向&lt;/h2&gt;
-
-&lt;p&gt;边缘方向edge direction：灰度梯度指向最大灰度上升的方向（正交方向没有灰度变化）&lt;/p&gt;
-
-&lt;p&gt;$\operatorname{grad} g=\left(\frac{\partial g}{\partial u}, \frac{\partial g}{\partial v}\right)$， $\operatorname{grad} g \perp\left(-\frac{\partial g}{\partial v}, \frac{\partial g}{\partial u}\right)$&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119175209.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;canny边缘检测&quot;&gt;Canny边缘检测&lt;/h2&gt;
-
-&lt;h3 id=&quot;1-高斯滤波&quot;&gt;1. 高斯滤波&lt;/h3&gt;
-
-&lt;p&gt;高斯滤波用于降噪，使图像变得平滑。&lt;/p&gt;
-
-&lt;p&gt;使用方法：用高斯矩阵乘以每个像素点及其邻域取其带权重的平均值作为最后的灰度值。&lt;/p&gt;
-
-&lt;h3 id=&quot;2-使用边缘计算算子&quot;&gt;2. 使用边缘计算算子&lt;/h3&gt;
-
-&lt;p&gt;上文中的Prewitt/Sobol算子&lt;/p&gt;
-
-&lt;h3 id=&quot;3-使用非极大值抑制&quot;&gt;3. 使用非极大值抑制&lt;/h3&gt;
-
-&lt;p&gt;非极大值抑制：搜索局部最大值，来抑制非极大值。例如在目标检测过程中，同一目标可能会出现大量候选框，我们通过非极大值抑制的方法来进行唯一化。&lt;/p&gt;
-
-&lt;h3 id=&quot;4-使用双阈值法上下阈值法&quot;&gt;4. 使用双阈值法（上下阈值法）&lt;/h3&gt;
-
-&lt;p&gt;使用一个阈值来检测边缘的效果不好，&lt;/p&gt;
-
-&lt;p&gt;小阈值：太多噪点，&lt;/p&gt;
-
-&lt;p&gt;大阈值：轮廓线连接不上。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119180210.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;二阶微分算子laplace算子&quot;&gt;二阶微分算子：Laplace算子&lt;/h2&gt;
-
-&lt;p&gt;拉普拉斯算子属于最简单的各项同性二阶微分算子，对于二阶图像：&lt;/p&gt;
-
-&lt;p&gt;$\begin{aligned} \nabla^{2} g=&amp;amp; \frac{\partial^{2} g}{(\partial u)^{2}}+\frac{\partial^{2} g}
-{(\partial v)^{2}}\end{aligned}$&lt;/p&gt;
-
-&lt;p&gt;变化率最大处（一阶导数）=二阶导数为0&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119180804.png&quot; height=&quot;330&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;近似为拉普拉斯算子：&lt;/p&gt;
-
-&lt;p&gt;一阶导数:&lt;/p&gt;
-
-&lt;p&gt;$\frac{\partial g}{\partial u}(u, v) \approx g(u+1, v)-g(u, v)$&lt;/p&gt;
-
-&lt;p&gt;二阶导数：&lt;/p&gt;
-
-&lt;p&gt;$\begin{aligned} \frac{\partial^{2} g}{(\partial u)^{2}}(u, v) &amp;amp; \approx \frac{\partial g}{\partial u}(u, v)-\frac{\partial g}{\partial u}(u-1, v) \ &amp;amp; \approx g(u+1, v)-2 g(u, v)+g(u-1, v) \end{aligned}$&lt;/p&gt;
-
-&lt;p&gt;$		\frac{\partial^{2} g}{(\partial v)^{2}}(u, v) \approx g(u, v+1)-2 g(u, v)+g(u, v-1)$&lt;/p&gt;
-
-&lt;p&gt;可以得到：&lt;/p&gt;
-
-&lt;p&gt;$\nabla^{2} g \approx g(u+1, v)+g(u-1, v)+g(u, v+1)+g(u, v-1)-4 g(u, v)$&lt;/p&gt;
-
-&lt;p&gt;通过掩码器实现：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119181824.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;但是二阶导数带有很多的噪声，所以我们结合高斯平滑，从而形成高斯拉普拉斯算子&lt;/p&gt;
-
-&lt;h3 id=&quot;laplacian-of-gaussian-log&quot;&gt;Laplacian of Gaussian， LoG&lt;/h3&gt;
-
-&lt;p&gt;$\nabla^{2}(G * g)=\left(\nabla^{2} G\right) * g$ $(G$ Gaussian $)$ $G(u, v)=\frac{1}{2 \pi \sigma^{2}} e^{-\frac{1}{2 \sigma^{2}}\left(u^{2}+v^{2}\right)}$ $\begin{aligned} \frac{\partial G}{\partial u} &amp;amp;=\frac{1}{2 \pi \sigma^{2}}\left(-\frac{1}{2 \sigma^{2}}\right) 2 u e^{-\frac{1}{2 \sigma^{2}}\left(u^{2}+v^{2}\right)} \ &amp;amp;=-\frac{u}{\sigma^{2}} G(u, v) \ \frac{\partial^{2} G}{(\partial u)^{2}} &amp;amp;=-\frac{1}{\sigma^{2}} G(u, v)-\frac{u}{\sigma^{2}}\left(-\frac{u}{\sigma^{2}} G(u, v)\right) \ &amp;amp;=\frac{u^{2}-\sigma^{2}}{\sigma^{4}} G(u, v) \ \nabla^{2} G &amp;amp;=\frac{u^{2}+v^{2}-2 \sigma^{2}}{\sigma^{4}} G(u, v) \end{aligned}$&lt;/p&gt;
-
-&lt;p&gt;通过掩码器实现：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220119182303.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;LoG算法可以近似为DoG算法：&lt;/p&gt;
-
-&lt;p&gt;$D o G(u, v)=G_{\sigma_{1}}(u, v)-G_{\sigma_{2}}(u, v)$&lt;/p&gt;
-
-&lt;p&gt;关于DoG的介绍：&lt;a href=&quot;https://stonema.github.io/2018/04/16/LoG%E7%AE%97%E5%AD%90%E4%B8%8EDoG%E7%AE%97%E5%AD%90/&quot;&gt;https://stonema.github.io/2018/04/16/LoG%E7%AE%97%E5%AD%90%E4%B8%8EDoG%E7%AE%97%E5%AD%90/&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 19 Jan 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/01/MV3.1/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/MV3.1/</guid>
         
         <category>专业</category>
         
