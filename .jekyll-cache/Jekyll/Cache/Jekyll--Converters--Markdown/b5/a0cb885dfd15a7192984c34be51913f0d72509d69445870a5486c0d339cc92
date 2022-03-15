@@ -1,4 +1,4 @@
-I"�
+I"]	
 <ul>
   <li><a href="#模式识别-pattern-recognition">模式识别 Pattern Recognition</a>
     <ul>
@@ -13,13 +13,16 @@
               <li><a href="#交叉验证-cross-validation">交叉验证 Cross Validation</a></li>
               <li><a href="#实验-数字识别">实验： 数字识别</a>
                 <ul>
-                  <li><a href="#第一种方法">第一种方法</a></li>
-                  <li><a href="#第二种方法">第二种方法：</a></li>
-                  <li><a href="#第二种方法改进">第二种方法，改进</a></li>
-                  <li><a href="#第三种方法">第三种方法</a></li>
-                  <li><a href="#第三种方法改进">第三种方法改进</a></li>
-                  <li><a href="#第-4-种方法">第 4 种方法</a></li>
-                  <li><a href="#第五种方法">第五种方法</a></li>
+                  <li><a href="#第一种方法-2-dimensional-patterns">第一种方法 2-dimensional patterns</a></li>
+                  <li><a href="#第二种方法-添加第三个特征">第二种方法 添加第三个特征</a></li>
+                  <li><a href="#第二种方法改进-找到连通分量-ccl-并屏蔽除最大段以外的所有部分">第二种方法改进 找到连通分量 (CCL) 并屏蔽除最大段以外的所有部分</a></li>
+                  <li><a href="#第三种方法-统一缩放图片">第三种方法 统一缩放图片</a></li>
+                  <li><a href="#第三种方法改进-只使用一部分像素">第三种方法改进 只使用一部分像素</a></li>
+                </ul>
+              </li>
+              <li><a href="#第四种方法-hog-features">第四种方法 HOG-features</a>
+                <ul>
+                  <li><a href="#第五种方法-哈尔特征-haar-features">第五种方法 哈尔特征 Haar features</a></li>
                   <li><a href="#总结">总结</a></li>
                 </ul>
               </li>

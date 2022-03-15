@@ -1,4 +1,4 @@
-I"�e<head>
+I"Il<head>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -72,7 +72,9 @@
 
 <p>学习任务：</p>
 
-<p>给定一组训练样例：\(\left\{\left(\vec{x}^{(1)}, d^{(1)}\right), \ldots,\left(\vec{x}^{(p)}, d^{(p)}\right)\right\}\)</p>
+<p>给定一组训练样例：</p>
+
+\[\left\{\left(\vec{x}^{(1)}, d^{(1)}\right), \ldots,\left(\vec{x}^{(p)}, d^{(p)}\right)\right\}\]
 
 <p>$d^{(i)}=+1$属于一类的例子（“positive examples”）</p>
 
@@ -225,9 +227,10 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p>在知道拉格朗日乘数的情况下，解决方案完全确定：</p>
 
-<p>​	– 不需要计算</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>– 不需要计算
 
-<p>​	– 模式仅作为点积的参数成对出现$\left\langle\vec{X}^{(i)}, \vec{X}^{(j)}\right\rangle=\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$</p>
+– 模式仅作为点积的参数成对出现$\left\langle\vec{X}^{(i)}, \vec{X}^{(j)}\right\rangle=\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$
+</code></pre></div></div>
 
 <p>考虑到：$\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$</p>
 
@@ -257,7 +260,8 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
   <li>点积：$K(\vec{x}, \vec{y})=\langle\vec{x}, \vec{y}\rangle$</li>
   <li>多项式核函数：$K(\vec{x}, \vec{y})=(\langle\vec{x}, \vec{y}\rangle)^{q}$ or $(\langle\vec{x}, \vec{y}\rangle+1)^{q}$</li>
   <li>径向基函数 (RBF) 内核 $K(\vec{x}, \vec{y})=e^{-\frac{|\vec{x}-\vec{y}|^{2}}{2 \sigma^{2}}}$</li>
-  <li>直方图交叉核（仅适用于直方图特征）\(K(\vec{x}, \vec{y})=\sum_{i} \min \left\{x_{i}, y_{i}\right\}\)</li>
+  <li>直方图交叉核（仅适用于直方图特征）
+\(K(\vec{x}, \vec{y})=\sum_{i} \min \left\{x_{i}, y_{i}\right\}\)</li>
 </ul>
 
 <p>内核参数必须手动设置</p>
@@ -265,15 +269,9 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 <p><strong>现在结合所有想法：</strong></p>
 
 <ul>
-  <li>
-    <p>支持向量机<u>最大化边距</u>以最小化错误分类的风险</p>
-  </li>
-  <li>
-    <p>软边距支持向量机允许<u>个别错误</u>。 由参数 C 控制边距大小和误差之间的平衡</p>
-  </li>
-  <li>
-    <p><u>核函数允许</u>在不改变理论框架的情况下进行<u>非线性分类</u>。 内核类型和内核参数控制非线性程度</p>
-  </li>
+  <li>支持向量机<code class="language-plaintext highlighter-rouge">&lt;u&gt;</code>最大化边距<code class="language-plaintext highlighter-rouge">&lt;/u&gt;</code>以最小化错误分类的风险</li>
+  <li>软边距支持向量机允许<code class="language-plaintext highlighter-rouge">&lt;u&gt;</code>个别错误<code class="language-plaintext highlighter-rouge">&lt;/u&gt;</code>。 由参数 C 控制边距大小和误差之间的平衡</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;u&gt;</code>核函数允许<code class="language-plaintext highlighter-rouge">&lt;/u&gt;</code>在不改变理论框架的情况下进行<code class="language-plaintext highlighter-rouge">&lt;u&gt;</code>非线性分类<code class="language-plaintext highlighter-rouge">&lt;/u&gt;</code>。 内核类型和内核参数控制非线性程度</li>
 </ul>
 
 <h3 id="使用svms">使用SVMs</h3>
@@ -324,30 +322,26 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p>• 验证过程的缺点：</p>
 
-<p>​	– 仅部分数据用于训练</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>– 仅部分数据用于训练
 
-<p>​	– 仅部分数据用于验证</p>
+– 仅部分数据用于验证
+</code></pre></div></div>
 
 <p>• k -fold 交叉验证</p>
 
-<p>​	 – 想法：用不同的训练和验证集重复训练/验证过程几次</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>– 想法：用不同的训练和验证集重复训练/验证过程几次
 
-<p>​	 –  k 是重复次数（介于 2 和模式数之间）</p>
+–  k 是重复次数（介于 2 和模式数之间）
+</code></pre></div></div>
 
 <p>K-fold交叉验证法</p>
 
 <ol>
-  <li>
-    <p>将模式集细分为K个大小相同的不相干子集</p>
-  </li>
-  <li>
-    <p>对每个子集j重复。
-	2.1 从子集1,…,j-1,j+1,…k训练SVM
-	2.2. 评估子集j的错误分类率</p>
-  </li>
-  <li>
-    <p>平均错误分类率</p>
-  </li>
+  <li>将模式集细分为K个大小相同的不相干子集</li>
+  <li>对每个子集j重复。
+2.1 从子集1,…,j-1,j+1,…k训练SVM
+2.2. 评估子集j的错误分类率</li>
+  <li>平均错误分类率</li>
 </ol>
 
 <p>优点：</p>
@@ -369,18 +363,10 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 <p>应该听说过的一些概念：</p>
 
 <ul>
-  <li>
-    <p>过度拟合：分类器在训练数据上表现良好，但在验证或测试数据上表现不佳</p>
-  </li>
-  <li>
-    <p>欠拟合：分类器在训练和验证数据上表现不佳</p>
-  </li>
-  <li>
-    <p>泛化：从训练示例中学习一个概念 也适用于测试数据，而不仅仅是记住训练示例</p>
-  </li>
-  <li>
-    <p>正则化：“帮助”过度拟合的分类器来提高泛化能力</p>
-  </li>
+  <li>过度拟合：分类器在训练数据上表现良好，但在验证或测试数据上表现不佳</li>
+  <li>欠拟合：分类器在训练和验证数据上表现不佳</li>
+  <li>泛化：从训练示例中学习一个概念 也适用于测试数据，而不仅仅是记住训练示例</li>
+  <li>正则化：“帮助”过度拟合的分类器来提高泛化能力</li>
 </ul>
 
 <h4 id="实验-数字识别">实验： 数字识别</h4>
@@ -397,7 +383,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p>– 用于测试：500 个“1”图像，500 个“not-1”数据集图像</p>
 
-<h5 id="第一种方法">第一种方法</h5>
+<h5 id="第一种方法-2-dimensional-patterns">第一种方法 2-dimensional patterns</h5>
 
 <p>– 二维模式</p>
 
@@ -424,7 +410,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309093927.png" alt="" /></p>
 
-<h5 id="第二种方法">第二种方法：</h5>
+<h5 id="第二种方法-添加第三个特征">第二种方法 添加第三个特征</h5>
 
 <p>– 添加第三个特征：拟合线到暗像素的平均距离</p>
 
@@ -442,7 +428,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309094606.png" alt="" /></p>
 
-<h5 id="第二种方法改进">第二种方法，改进</h5>
+<h5 id="第二种方法改进-找到连通分量-ccl-并屏蔽除最大段以外的所有部分">第二种方法改进 找到连通分量 (CCL) 并屏蔽除最大段以外的所有部分</h5>
 
 <p>– 找到连通分量 (CCL) 并屏蔽除最大段以外的所有部分</p>
 
@@ -458,7 +444,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309094804.png" alt="" /></p>
 
-<h5 id="第三种方法">第三种方法</h5>
+<h5 id="第三种方法-统一缩放图片">第三种方法 统一缩放图片</h5>
 
 <p>– 将所有图像的大小调整为 28x28 像素，并使用像素的灰度值作为特征</p>
 
@@ -470,12 +456,10 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309094957.png" alt="" /></p>
 
-<h5 id="第三种方法改进">第三种方法改进</h5>
+<h5 id="第三种方法改进-只使用一部分像素">第三种方法改进 只使用一部分像素</h5>
 
 <ul>
-  <li>
-    <p>观察：很多像素对决策没有贡献，例如 边界像素</p>
-  </li>
+  <li>观察：很多像素不影响分类，例如 边界像素</li>
   <li>
     <p>仅使用所有像素的子集，例如 24x18 子区域 → 432 维图案</p>
 
@@ -491,7 +475,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309095151.png" alt="" /></p>
 
-<h5 id="第-4-种方法">第 4 种方法</h5>
+<p>第四种方法 HOG-features</p>
 
 <p><strong><em>HOG-features</em></strong></p>
 
@@ -525,13 +509,19 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p>支持向量的数量：174（共 1000 个）</p>
 
-<h5 id="第五种方法">第五种方法</h5>
+<h5 id="第五种方法-哈尔特征-haar-features">第五种方法 哈尔特征 Haar features</h5>
 
 <p><a href="https://zh.wikipedia.org/zh-hans/哈尔特征">哈尔特征</a>（Haar features）</p>
 
+<p>哈尔特征使用检测窗口中指定位置的相邻矩形，计算每一个矩形的像素和并取其差值。然后用这些差值来对图像的子区域进行分类。</p>
+
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309101607.png" alt="" /></p>
 
-<p>比较矩形区域的灰度，即红色区域的平均灰度减去蓝色区域的平均灰度</p>
+<p>比较矩形区域的灰度，即红色区域的平均灰度减去蓝色区域的平均灰度。</p>
+
+<p>Haar特征在一定程度上反应了图像灰度的局部变化。</p>
+
+<p>在人脸检测中，脸部的一些特征可由矩形特征简单刻画，例如，眼睛比周围区域的颜色要深，鼻梁比两侧颜色要浅等。</p>
 
 <p>有很多可能的特征</p>
 
@@ -573,11 +563,13 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p>$s=\sum_{u=0}^{u_{0}+w-1} \sum_{v=0}^{v_{0}+h-1} g(u, v)-\sum_{u=0}^{u_{0}-1} \sum_{v=0}^{v_{0}+h-1} g(u, v)+\sum_{u=0}^{u_{0}-1} \sum_{v=0}^{v_{0}-1} g(u, v)-\sum_{u=0}^{u_{0}+w-1} \sum_{v=0}^{v_{0}-1} g(u, v)$</p>
 
-<p>​	积分图像：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>积分图像：
+</code></pre></div></div>
 
 <p>$I(x, y):=\sum_{u=0}^{x} \sum_{v=0}^{y} g(u, v)$</p>
 
-<p>​	计算 s 需要 4 个操作：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>计算 s 需要 4 个操作：
+</code></pre></div></div>
 
 <p>$\begin{array}{c}
 s=I\left(u_{0}+w-1, v_{0}+h-1\right)-I\left(u_{0}-1, v_{0}+h-1\right)+ <br />
@@ -636,12 +628,8 @@ I(x+1, y+1) &amp;=\sum_{u=0}^{x+1} \sum_{v=0}^{y+1} g(u, v) <br />
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309104218.png" alt="" /></p>
 
 <ol>
-  <li>
-    <p>制作直方图</p>
-  </li>
-  <li>
-    <p>将所有块的直方图排列在一个向量中</p>
-  </li>
+  <li>制作直方图</li>
+  <li>将所有块的直方图排列在一个向量中</li>
 </ol>
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309104357.png" alt="" /></p>
@@ -691,9 +679,7 @@ I(x+1, y+1) &amp;=\sum_{u=0}^{x+1} \sum_{v=0}^{y+1} g(u, v) <br />
 
 <ol>
   <li>对于每个像素：样本从高斯分布随机偏移</li>
-  <li>
-    <p>通过与高斯滤波器的卷积平滑移位值</p>
-  </li>
+  <li>通过与高斯滤波器的卷积平滑移位值</li>
   <li>对于每个像素：将像素移动到新位置</li>
 </ol>
 
@@ -729,5 +715,4 @@ x_{i}^{\prime}=\frac{x_{i}-\bar{x}}{s_{x}} <br />
 <p>克服歧义：</p>
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309111726.png" alt="" /></p>
-
 :ET
