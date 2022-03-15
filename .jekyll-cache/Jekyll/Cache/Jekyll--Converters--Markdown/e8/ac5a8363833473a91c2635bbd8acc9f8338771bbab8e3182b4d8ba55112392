@@ -1,0 +1,35 @@
+I"5
+<ul>
+  <li><a href="#模式识别">模式识别</a>
+    <ul>
+      <li><a href="#组合方法-ensemble-methods">组合方法 Ensemble Methods</a>
+        <ul>
+          <li><a href="#boosting">Boosting</a>
+            <ul>
+              <li><a href="#adaboost算法">AdaBoost算法</a></li>
+              <li><a href="#haar分类器">Haar分类器</a></li>
+              <li><a href="#boosting-结合haar分类器">Boosting 结合Haar分类器</a>
+                <ul>
+                  <li><a href="#平衡错误">平衡错误</a></li>
+                </ul>
+              </li>
+              <li><a href="#搜索对象-searching-for-objects">搜索对象 Searching for Objects</a>
+                <ul>
+                  <li><a href="#violajones-approach">Viola/Jones Approach</a></li>
+                  <li><a href="#violajones算法举例">Viola/Jones算法举例</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#决策树decision-trees">决策树：Decision Trees</a>
+            <ul>
+              <li><a href="#改进决策树的技术">改进决策树的技术</a></li>
+              <li><a href="#结合多类别分类器的决策树">结合多类别分类器的决策树</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

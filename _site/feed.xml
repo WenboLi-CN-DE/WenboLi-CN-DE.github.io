@@ -3,10 +3,10 @@
   <channel>
     <title>高傲的电工李</title>
     <description>欢迎来到我的个人博客</description>
-    <link>https://wenboli-cn-de.github.io/</link>
-    <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 13 Mar 2022 05:28:51 +0800</pubDate>
-    <lastBuildDate>Sun, 13 Mar 2022 05:28:51 +0800</lastBuildDate>
+    <link>http://localhost:4001/</link>
+    <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 15 Mar 2022 22:45:50 +0100</pubDate>
+    <lastBuildDate>Tue, 15 Mar 2022 22:45:50 +0100</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -16,8 +16,8 @@
     &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
         MathJax.Hub.Config({
             tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
+            skipTags: [&apos;script&apos;, &apos;noscript&apos;, &apos;style&apos;, &apos;textarea&apos;, &apos;pre&apos;],
+            inlineMath: [[&apos;$&apos;,&apos;$&apos;]]
             }
         });
     &lt;/script&gt;
@@ -374,9 +374,9 @@ provided by Nick Schneider, Daimler AG&lt;/center&gt;
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121153.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 10 Mar 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/03/MV12.1/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV12.1/</guid>
+        <pubDate>Thu, 10 Mar 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/03/MV12.1/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/03/MV12.1/</guid>
         
         <category>专业</category>
         
@@ -392,8 +392,8 @@ provided by Nick Schneider, Daimler AG&lt;/center&gt;
     &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
         MathJax.Hub.Config({
             tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
+            skipTags: [&apos;script&apos;, &apos;noscript&apos;, &apos;style&apos;, &apos;textarea&apos;, &apos;pre&apos;],
+            inlineMath: [[&apos;$&apos;,&apos;$&apos;]]
             }
         });
     &lt;/script&gt;
@@ -664,9 +664,9 @@ provided by Nick Schneider, Daimler AG&lt;/center&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110832.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 10 Mar 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/03/MV12.0/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV12.0/</guid>
+        <pubDate>Thu, 10 Mar 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/03/MV12.0/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/03/MV12.0/</guid>
         
         <category>专业</category>
         
@@ -682,8 +682,8 @@ provided by Nick Schneider, Daimler AG&lt;/center&gt;
     &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
         MathJax.Hub.Config({
             tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
+            skipTags: [&apos;script&apos;, &apos;noscript&apos;, &apos;style&apos;, &apos;textarea&apos;, &apos;pre&apos;],
+            inlineMath: [[&apos;$&apos;,&apos;$&apos;]]
             }
         });
     &lt;/script&gt;
@@ -845,7 +845,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{x}^{(i)}, \vec{w}\right\rangle+b
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309115611.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h5 id=&quot;adaboost算法&quot;&gt;AdaBoost算法&lt;/h5&gt;
+&lt;h4 id=&quot;adaboost算法&quot;&gt;AdaBoost算法&lt;/h4&gt;
 
 &lt;p&gt;Boosting是一种集合技术，试图从许多弱分类器中创建一个强分类器。这是通过从训练数据构建模型，然后创建第二个模型来尝试从第一个模型中纠正错误来完成的。添加模型直到完美预测训练集或添加最大数量的模型。&lt;/p&gt;
 
@@ -865,7 +865,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{x}^{(i)}, \vec{w}\right\rangle+b
 
 &lt;p&gt;如果 所有的$\epsilon_{t} \leq \lambda&amp;lt;\frac{1}{2}$ 和$T \rightarrow \infty$ AdaBoost 会产生一个完美的分类器&lt;/p&gt;
 
-&lt;h5 id=&quot;haar分类器&quot;&gt;Haar分类器&lt;/h5&gt;
+&lt;h4 id=&quot;haar分类器&quot;&gt;Haar分类器&lt;/h4&gt;
 
 &lt;p&gt;概括来说:&lt;/p&gt;
 
@@ -908,7 +908,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{x}^{(i)}, \vec{w}\right\rangle+b
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309121537.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h5 id=&quot;boosting-结合haar分类器&quot;&gt;Boosting 结合Haar分类器&lt;/h5&gt;
+&lt;h4 id=&quot;boosting-结合haar分类器&quot;&gt;Boosting 结合Haar分类器&lt;/h4&gt;
 
 &lt;p&gt;Idea：&lt;/p&gt;
 
@@ -944,7 +944,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{x}^{(i)}, \vec{w}\right\rangle+b
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309122208.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h6 id=&quot;平衡错误&quot;&gt;平衡错误&lt;/h6&gt;
+&lt;h5 id=&quot;平衡错误&quot;&gt;平衡错误&lt;/h5&gt;
 
 &lt;p&gt;组合分类器：$\sum_{k}\left(\beta_{k} \cdot c_{k}(\vec{x})\right) \gtrless 0$&lt;/p&gt;
 
@@ -982,7 +982,7 @@ False negatives: 飞机的图片没有被识别出来，系统错误地认为它
 
 &lt;p&gt;Recall的分母是(True positives + False negatives)，这两个值的和，可以理解为一共有多少张飞机的照片。&lt;/p&gt;
 
-&lt;h5 id=&quot;搜索对象-searching-for-objects&quot;&gt;搜索对象 Searching for Objects&lt;/h5&gt;
+&lt;h4 id=&quot;搜索对象-searching-for-objects&quot;&gt;搜索对象 Searching for Objects&lt;/h4&gt;
 
 &lt;p&gt;我们如何使用分类器在图像中找到对象？&lt;/p&gt;
 
@@ -1030,7 +1030,7 @@ False negatives: 飞机的图片没有被识别出来，系统错误地认为它
 
 &lt;p&gt;想法可以扩展到一系列许多分类器 → &lt;strong&gt;Viola/Jones 算法&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h6 id=&quot;violajones-approach&quot;&gt;Viola/Jones Approach&lt;/h6&gt;
+&lt;h5 id=&quot;violajones-approach&quot;&gt;Viola/Jones Approach&lt;/h5&gt;
 
 &lt;p&gt;结合：&lt;/p&gt;
 
@@ -1046,7 +1046,7 @@ False negatives: 飞机的图片没有被识别出来，系统错误地认为它
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309124646.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h6 id=&quot;violajones算法举例&quot;&gt;Viola/Jones算法举例&lt;/h6&gt;
+&lt;h5 id=&quot;violajones算法举例&quot;&gt;Viola/Jones算法举例&lt;/h5&gt;
 
 &lt;p&gt;人脸识别&lt;/p&gt;
 
@@ -1087,7 +1087,7 @@ False negatives: 飞机的图片没有被识别出来，系统错误地认为它
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309130254.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h6 id=&quot;改进决策树的技术&quot;&gt;改进决策树的技术&lt;/h6&gt;
+&lt;h4 id=&quot;改进决策树的技术&quot;&gt;改进决策树的技术&lt;/h4&gt;
 
 &lt;p&gt;&lt;strong&gt;正则化技术Regularization techniques:&lt;/strong&gt;&lt;/p&gt;
 
@@ -1173,7 +1173,7 @@ False negatives: 飞机的图片没有被识别出来，系统错误地认为它
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h5 id=&quot;结合多类别分类器的决策树&quot;&gt;结合多类别分类器的决策树&lt;/h5&gt;
+&lt;h4 id=&quot;结合多类别分类器的决策树&quot;&gt;结合多类别分类器的决策树&lt;/h4&gt;
 
 &lt;p&gt;扩展到两个以上的类：&lt;/p&gt;
 
@@ -1194,9 +1194,9 @@ False negatives: 飞机的图片没有被识别出来，系统错误地认为它
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309134356.png&quot; style=&quot;zoom: 67%;&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Wed, 09 Mar 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/03/MV8.2/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV8.2/</guid>
+        <pubDate>Wed, 09 Mar 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/03/MV8.2/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/03/MV8.2/</guid>
         
         <category>专业</category>
         
@@ -1212,8 +1212,8 @@ False negatives: 飞机的图片没有被识别出来，系统错误地认为它
     &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
         MathJax.Hub.Config({
             tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
+            skipTags: [&apos;script&apos;, &apos;noscript&apos;, &apos;style&apos;, &apos;textarea&apos;, &apos;pre&apos;],
+            inlineMath: [[&apos;$&apos;,&apos;$&apos;]]
             }
         });
     &lt;/script&gt;
@@ -1940,9 +1940,9 @@ x_{i}^{\prime}=\frac{x_{i}-\bar{x}}{s_{x}} &lt;br /&gt;
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309111726.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 08 Mar 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/03/MV8.1/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV8.1/</guid>
+        <pubDate>Tue, 08 Mar 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/03/MV8.1/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/03/MV8.1/</guid>
         
         <category>专业</category>
         
@@ -2370,9 +2370,9 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220308164951.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 08 Mar 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/03/MV6.1/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV6.1/</guid>
+        <pubDate>Tue, 08 Mar 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/03/MV6.1/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/03/MV6.1/</guid>
         
         <category>专业</category>
         
@@ -2388,8 +2388,8 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
     &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
         MathJax.Hub.Config({
             tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
+            skipTags: [&apos;script&apos;, &apos;noscript&apos;, &apos;style&apos;, &apos;textarea&apos;, &apos;pre&apos;],
+            inlineMath: [[&apos;$&apos;,&apos;$&apos;]]
             }
         });
     &lt;/script&gt;
@@ -2742,9 +2742,9 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302212319.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Wed, 02 Mar 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/03/MV6/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV6/</guid>
+        <pubDate>Wed, 02 Mar 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/03/MV6/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/03/MV6/</guid>
         
         <category>专业</category>
         
@@ -2763,7 +2763,7 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311204148.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;点\((x,y,z)\)投影到\((x',y')\)截距定理：&lt;/p&gt;
+&lt;p&gt;点\((x,y,z)\)投影到\((x&apos;,y&apos;)\)截距定理：&lt;/p&gt;
 
 \[\frac{x}{z}=\frac{x^{\prime}}{f}, \quad \frac{y}{z}=\frac{y^{\prime}}{f} \quad \Rightarrow \quad z \cdot\left(\begin{array}{l}x^{\prime} \\ y^{\prime}\end{array}\right)=\left(\begin{array}{ll}f &amp;amp; 0 \\ 0 &amp;amp; f\end{array}\right) \cdot\left(\begin{array}{l}x \\ y\end{array}\right)\]
 
@@ -3617,9 +3617,9 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312194039.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 11 Feb 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</guid>
+        <pubDate>Fri, 11 Feb 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/02/MV7-Optics/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/02/MV7-Optics/</guid>
         
         <category>专业</category>
         
@@ -3866,9 +3866,9 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311111243.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 03 Feb 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/02/MV5.1color/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/02/MV5.1color/</guid>
+        <pubDate>Thu, 03 Feb 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/02/MV5.1color/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/02/MV5.1color/</guid>
         
         <category>专业</category>
         
@@ -3955,9 +3955,9 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
 
 \[广义特征值是标准特征值的推广，当B为单位矩阵时，广义标准问题退化为标准特征值问题\]
 </description>
-        <pubDate>Sun, 30 Jan 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/01/MV5/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/MV5/</guid>
+        <pubDate>Sun, 30 Jan 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/01/MV5/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/01/MV5/</guid>
         
         <category>专业</category>
         
@@ -3973,8 +3973,8 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
     &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
         MathJax.Hub.Config({
             tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-            inlineMath: [['$','$']]
+            skipTags: [&apos;script&apos;, &apos;noscript&apos;, &apos;style&apos;, &apos;textarea&apos;, &apos;pre&apos;],
+            inlineMath: [[&apos;$&apos;,&apos;$&apos;]]
             }
         });
     &lt;/script&gt;
@@ -4322,9 +4322,9 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
   &lt;li&gt;选择异常值数量最少的线&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Tue, 25 Jan 2022 00:00:00 +0800</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/01/MV4/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/MV4/</guid>
+        <pubDate>Tue, 25 Jan 2022 00:00:00 +0100</pubDate>
+        <link>http://localhost:4001/2022/01/MV4/</link>
+        <guid isPermaLink="true">http://localhost:4001/2022/01/MV4/</guid>
         
         <category>专业</category>
         
