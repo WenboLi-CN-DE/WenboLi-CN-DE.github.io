@@ -1,0 +1,75 @@
+<head>
+    <script type="text/javascript" async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+   </script>
+</head>
+
+<h1 id="曲线拟合圆和椭圆">曲线拟合——圆和椭圆</h1>
+
+<p>在上一篇文章中，我们总结了视觉识别中对于直线型边缘的拟合。但是如果有的图形边缘是曲线的话应该怎么拟合？ 这一篇博文，我们就对其进行讨论。</p>
+
+<h2 id="标准圆">标准圆</h2>
+
+<p>首先圆的方程为：\(\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} = 0\)</p>
+
+<p>因为d很小，用趋近的想法来考虑</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130112538.png" alt="" /></p>
+
+<p>那么点(x,y)到圆的欧几里得距离大小为：</p>
+
+\[d_{E}=\left|\sqrt{\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}}-r\right|\]
+
+<p>代数距离为</p>
+
+\[d_{A}=\left|\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2}\right|\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130113813.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130113853.png" alt="" /></p>
+
+<p>根据图知道，欧几里得距离和代数距离是不对称的，靠近圆的点都是相似的。</p>
+
+<p>两种思路：最小化欧几里得距离和最小化代数距离。解析法</p>
+
+<ol>
+  <li>
+    <p>最小化欧几里得距离
+不能用解析法求解，必须数值优化</p>
+
+    <p>解析法又称为分析法，它是应用解析式去求解数学模型的方法。 数学中用解析式表示函数或任意数学对象的方法叫解析法。</p>
+  </li>
+  <li>
+    <p>最小化代数距离</p>
+
+    <ol>
+      <li>重写代数距离：\(\begin{aligned} \left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} &amp;=\left(x^{2}+y^{2}\right)+\left(m_{1}^{2}+m_{2}^{2}-r^{2}\right)+\left(-2 m_{1}\right) x+\left(-2 m_{2}\right) y \\ &amp;=A x+B y+C+\left(x^{2}+y^{2}\right) \\ \text { with } &amp; A=-2 m_{1}, B=-2 m_{2}, C=m_{1}^{2}+m_{2}^{2}-r^{2} \end{aligned}\)</li>
+      <li>最小化：\(\sum_{i=1}^{N}\left(A x_{i}+B y_{i}+C+\left(x_{i}^{2}+y_{i}^{2}\right)\right)^{2}\)</li>
+      <li>偏导数归零: \(\left(\begin{array}{ccc} \sum_{i} x_{i}^{2} &amp; \sum_{i} x_{i} y_{i} &amp; \sum_{i} x_{i} \\ \sum_{i} x_{i} y_{i} &amp; \sum_{i} y_{i}^{2} &amp; \sum_{i} y_{i} \\ \sum_{i} x_{i} &amp; \sum_{i} y_{i} &amp; N \end{array}\right)\left(\begin{array}{l} A \\ B \\ C \end{array}\right)=\left(\begin{array}{c} -\sum_{i} x_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \\ -\sum_{i} y_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \\ -\sum_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \end{array}\right)\)</li>
+      <li>最后得到： \(\begin{aligned} m_{1} &amp;=-\frac{A}{2} \\ m_{2} &amp;=-\frac{B}{2} \\ r^{2} &amp;=m_{1}^{2}+m_{2}^{2}-C \end{aligned}\)</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="椭圆">椭圆</h2>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130115302.png" alt="" /></p>
+
+<p>椭圆特性：</p>
+
+<p>长短轴：半长轴r1，半短轴r2；</p>
+
+<p>中心点：m</p>
+
+<p>旋转角：θ</p>
+
+<p>代数表达式：\(\begin{array}{l} A x^{2}+H x y+B y^{2}+G x+F y+C=0 \\ \text { with } 4 A B-H^{2}&gt;0 \end{array}\)</p>
+
+<p>当消除一个自由度时：\(\begin{array}{l} A=1 \\ \text { or } A+B=1 \\ \text { or } A^{2}+B^{2}+C^{2}+F^{2}+G^{2}+H^{2}=1 \\ \text { or } C=1 \text { (not invariant to translation) } \end{array}\)</p>
+
+<p>根据椭圆的特性，Fitzgibbon, Pilu, 和 Fisher在1999年提出了基于直接最小二乘的椭圆拟合算法，</p>
+
+<p>最小化了代数距离(通过最小化的约束条件: \(4 A B-H^{2}=1\))</p>
+
+\[定义：设 A、B 为 n 阶方阵，若存在数λ ，使得方程Ax = λBx 存在 非零解，则称λ 为 A 相对于 B 的广义特征值，x 为 A 相对于 B 的属于 广义特征值λ 的特征向量。\]
+
+\[广义特征值是标准特征值的推广，当B为单位矩阵时，广义标准问题退化为标准特征值问题\]

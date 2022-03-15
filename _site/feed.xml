@@ -3,10 +3,10 @@
   <channel>
     <title>高傲的电工李</title>
     <description>欢迎来到我的个人博客</description>
-    <link>http://localhost:4001/</link>
-    <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Mar 2022 22:45:50 +0100</pubDate>
-    <lastBuildDate>Tue, 15 Mar 2022 22:45:50 +0100</lastBuildDate>
+    <link>https://wenboli-cn-de.github.io/</link>
+    <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 15 Mar 2022 23:20:28 +0100</pubDate>
+    <lastBuildDate>Tue, 15 Mar 2022 23:20:28 +0100</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -375,8 +375,8 @@ provided by Nick Schneider, Daimler AG&lt;/center&gt;
 
 </description>
         <pubDate>Thu, 10 Mar 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/03/MV12.1/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/03/MV12.1/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/03/MV12.1/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV12.1/</guid>
         
         <category>专业</category>
         
@@ -665,8 +665,8 @@ provided by Nick Schneider, Daimler AG&lt;/center&gt;
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310110832.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 10 Mar 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/03/MV12.0/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/03/MV12.0/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/03/MV12.0/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV12.0/</guid>
         
         <category>专业</category>
         
@@ -1195,8 +1195,8 @@ False negatives: 飞机的图片没有被识别出来，系统错误地认为它
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309134356.png&quot; style=&quot;zoom: 67%;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 09 Mar 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/03/MV8.2/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/03/MV8.2/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/03/MV8.2/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV8.2/</guid>
         
         <category>专业</category>
         
@@ -1281,7 +1281,9 @@ False negatives: 飞机的图片没有被识别出来，系统错误地认为它
 
 &lt;p&gt;学习任务：&lt;/p&gt;
 
-&lt;p&gt;给定一组训练样例：\(\left\{\left(\vec{x}^{(1)}, d^{(1)}\right), \ldots,\left(\vec{x}^{(p)}, d^{(p)}\right)\right\}\)&lt;/p&gt;
+&lt;p&gt;给定一组训练样例：&lt;/p&gt;
+
+\[\left\{\left(\vec{x}^{(1)}, d^{(1)}\right), \ldots,\left(\vec{x}^{(p)}, d^{(p)}\right)\right\}\]
 
 &lt;p&gt;$d^{(i)}=+1$属于一类的例子（“positive examples”）&lt;/p&gt;
 
@@ -1434,9 +1436,10 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;在知道拉格朗日乘数的情况下，解决方案完全确定：&lt;/p&gt;
 
-&lt;p&gt;​	– 不需要计算&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;– 不需要计算
 
-&lt;p&gt;​	– 模式仅作为点积的参数成对出现$\left\langle\vec{X}^{(i)}, \vec{X}^{(j)}\right\rangle=\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$&lt;/p&gt;
+– 模式仅作为点积的参数成对出现$\left\langle\vec{X}^{(i)}, \vec{X}^{(j)}\right\rangle=\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;考虑到：$\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$&lt;/p&gt;
 
@@ -1466,7 +1469,8 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
   &lt;li&gt;点积：$K(\vec{x}, \vec{y})=\langle\vec{x}, \vec{y}\rangle$&lt;/li&gt;
   &lt;li&gt;多项式核函数：$K(\vec{x}, \vec{y})=(\langle\vec{x}, \vec{y}\rangle)^{q}$ or $(\langle\vec{x}, \vec{y}\rangle+1)^{q}$&lt;/li&gt;
   &lt;li&gt;径向基函数 (RBF) 内核 $K(\vec{x}, \vec{y})=e^{-\frac{|\vec{x}-\vec{y}|^{2}}{2 \sigma^{2}}}$&lt;/li&gt;
-  &lt;li&gt;直方图交叉核（仅适用于直方图特征）\(K(\vec{x}, \vec{y})=\sum_{i} \min \left\{x_{i}, y_{i}\right\}\)&lt;/li&gt;
+  &lt;li&gt;直方图交叉核（仅适用于直方图特征）
+\(K(\vec{x}, \vec{y})=\sum_{i} \min \left\{x_{i}, y_{i}\right\}\)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;内核参数必须手动设置&lt;/p&gt;
@@ -1474,15 +1478,9 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 &lt;p&gt;&lt;strong&gt;现在结合所有想法：&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;支持向量机&lt;u&gt;最大化边距&lt;/u&gt;以最小化错误分类的风险&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;软边距支持向量机允许&lt;u&gt;个别错误&lt;/u&gt;。 由参数 C 控制边距大小和误差之间的平衡&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;核函数允许&lt;/u&gt;在不改变理论框架的情况下进行&lt;u&gt;非线性分类&lt;/u&gt;。 内核类型和内核参数控制非线性程度&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;支持向量机&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt;最大化边距&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/u&amp;gt;&lt;/code&gt;以最小化错误分类的风险&lt;/li&gt;
+  &lt;li&gt;软边距支持向量机允许&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt;个别错误&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/u&amp;gt;&lt;/code&gt;。 由参数 C 控制边距大小和误差之间的平衡&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt;核函数允许&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/u&amp;gt;&lt;/code&gt;在不改变理论框架的情况下进行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt;非线性分类&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/u&amp;gt;&lt;/code&gt;。 内核类型和内核参数控制非线性程度&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;使用svms&quot;&gt;使用SVMs&lt;/h3&gt;
@@ -1533,30 +1531,26 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;• 验证过程的缺点：&lt;/p&gt;
 
-&lt;p&gt;​	– 仅部分数据用于训练&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;– 仅部分数据用于训练
 
-&lt;p&gt;​	– 仅部分数据用于验证&lt;/p&gt;
+– 仅部分数据用于验证
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;• k -fold 交叉验证&lt;/p&gt;
 
-&lt;p&gt;​	 – 想法：用不同的训练和验证集重复训练/验证过程几次&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;– 想法：用不同的训练和验证集重复训练/验证过程几次
 
-&lt;p&gt;​	 –  k 是重复次数（介于 2 和模式数之间）&lt;/p&gt;
+–  k 是重复次数（介于 2 和模式数之间）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;K-fold交叉验证法&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;将模式集细分为K个大小相同的不相干子集&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;对每个子集j重复。
-	2.1 从子集1,…,j-1,j+1,…k训练SVM
-	2.2. 评估子集j的错误分类率&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;平均错误分类率&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;将模式集细分为K个大小相同的不相干子集&lt;/li&gt;
+  &lt;li&gt;对每个子集j重复。
+2.1 从子集1,…,j-1,j+1,…k训练SVM
+2.2. 评估子集j的错误分类率&lt;/li&gt;
+  &lt;li&gt;平均错误分类率&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;优点：&lt;/p&gt;
@@ -1578,18 +1572,10 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 &lt;p&gt;应该听说过的一些概念：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;过度拟合：分类器在训练数据上表现良好，但在验证或测试数据上表现不佳&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;欠拟合：分类器在训练和验证数据上表现不佳&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;泛化：从训练示例中学习一个概念 也适用于测试数据，而不仅仅是记住训练示例&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;正则化：“帮助”过度拟合的分类器来提高泛化能力&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;过度拟合：分类器在训练数据上表现良好，但在验证或测试数据上表现不佳&lt;/li&gt;
+  &lt;li&gt;欠拟合：分类器在训练和验证数据上表现不佳&lt;/li&gt;
+  &lt;li&gt;泛化：从训练示例中学习一个概念 也适用于测试数据，而不仅仅是记住训练示例&lt;/li&gt;
+  &lt;li&gt;正则化：“帮助”过度拟合的分类器来提高泛化能力&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;实验-数字识别&quot;&gt;实验： 数字识别&lt;/h4&gt;
@@ -1606,7 +1592,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;– 用于测试：500 个“1”图像，500 个“not-1”数据集图像&lt;/p&gt;
 
-&lt;h5 id=&quot;第一种方法&quot;&gt;第一种方法&lt;/h5&gt;
+&lt;h5 id=&quot;第一种方法-2-dimensional-patterns&quot;&gt;第一种方法 2-dimensional patterns&lt;/h5&gt;
 
 &lt;p&gt;– 二维模式&lt;/p&gt;
 
@@ -1633,7 +1619,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309093927.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h5 id=&quot;第二种方法&quot;&gt;第二种方法：&lt;/h5&gt;
+&lt;h5 id=&quot;第二种方法-添加第三个特征&quot;&gt;第二种方法 添加第三个特征&lt;/h5&gt;
 
 &lt;p&gt;– 添加第三个特征：拟合线到暗像素的平均距离&lt;/p&gt;
 
@@ -1651,7 +1637,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309094606.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h5 id=&quot;第二种方法改进&quot;&gt;第二种方法，改进&lt;/h5&gt;
+&lt;h5 id=&quot;第二种方法改进-找到连通分量-ccl-并屏蔽除最大段以外的所有部分&quot;&gt;第二种方法改进 找到连通分量 (CCL) 并屏蔽除最大段以外的所有部分&lt;/h5&gt;
 
 &lt;p&gt;– 找到连通分量 (CCL) 并屏蔽除最大段以外的所有部分&lt;/p&gt;
 
@@ -1667,7 +1653,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309094804.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h5 id=&quot;第三种方法&quot;&gt;第三种方法&lt;/h5&gt;
+&lt;h5 id=&quot;第三种方法-统一缩放图片&quot;&gt;第三种方法 统一缩放图片&lt;/h5&gt;
 
 &lt;p&gt;– 将所有图像的大小调整为 28x28 像素，并使用像素的灰度值作为特征&lt;/p&gt;
 
@@ -1679,12 +1665,10 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309094957.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h5 id=&quot;第三种方法改进&quot;&gt;第三种方法改进&lt;/h5&gt;
+&lt;h5 id=&quot;第三种方法改进-只使用一部分像素&quot;&gt;第三种方法改进 只使用一部分像素&lt;/h5&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;观察：很多像素对决策没有贡献，例如 边界像素&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;观察：很多像素不影响分类，例如 边界像素&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;仅使用所有像素的子集，例如 24x18 子区域 → 432 维图案&lt;/p&gt;
 
@@ -1700,7 +1684,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309095151.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h5 id=&quot;第-4-种方法&quot;&gt;第 4 种方法&lt;/h5&gt;
+&lt;h5 id=&quot;第四种方法-hog-features&quot;&gt;第四种方法 HOG-features&lt;/h5&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;HOG-features&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -1734,13 +1718,19 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;支持向量的数量：174（共 1000 个）&lt;/p&gt;
 
-&lt;h5 id=&quot;第五种方法&quot;&gt;第五种方法&lt;/h5&gt;
+&lt;h5 id=&quot;第五种方法-哈尔特征-haar-features&quot;&gt;第五种方法 哈尔特征 Haar features&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/zh-hans/哈尔特征&quot;&gt;哈尔特征&lt;/a&gt;（Haar features）&lt;/p&gt;
 
+&lt;p&gt;哈尔特征使用检测窗口中指定位置的相邻矩形，计算每一个矩形的像素和并取其差值。然后用这些差值来对图像的子区域进行分类。&lt;/p&gt;
+
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309101607.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;比较矩形区域的灰度，即红色区域的平均灰度减去蓝色区域的平均灰度&lt;/p&gt;
+&lt;p&gt;比较矩形区域的灰度，即红色区域的平均灰度减去蓝色区域的平均灰度。&lt;/p&gt;
+
+&lt;p&gt;Haar特征在一定程度上反应了图像灰度的局部变化。&lt;/p&gt;
+
+&lt;p&gt;在人脸检测中，脸部的一些特征可由矩形特征简单刻画，例如，眼睛比周围区域的颜色要深，鼻梁比两侧颜色要浅等。&lt;/p&gt;
 
 &lt;p&gt;有很多可能的特征&lt;/p&gt;
 
@@ -1782,11 +1772,13 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;$s=\sum_{u=0}^{u_{0}+w-1} \sum_{v=0}^{v_{0}+h-1} g(u, v)-\sum_{u=0}^{u_{0}-1} \sum_{v=0}^{v_{0}+h-1} g(u, v)+\sum_{u=0}^{u_{0}-1} \sum_{v=0}^{v_{0}-1} g(u, v)-\sum_{u=0}^{u_{0}+w-1} \sum_{v=0}^{v_{0}-1} g(u, v)$&lt;/p&gt;
 
-&lt;p&gt;​	积分图像：&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;积分图像：
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;$I(x, y):=\sum_{u=0}^{x} \sum_{v=0}^{y} g(u, v)$&lt;/p&gt;
 
-&lt;p&gt;​	计算 s 需要 4 个操作：&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;计算 s 需要 4 个操作：
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;$\begin{array}{c}
 s=I\left(u_{0}+w-1, v_{0}+h-1\right)-I\left(u_{0}-1, v_{0}+h-1\right)+ &lt;br /&gt;
@@ -1845,12 +1837,8 @@ I(x+1, y+1) &amp;amp;=\sum_{u=0}^{x+1} \sum_{v=0}^{y+1} g(u, v) &lt;br /&gt;
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309104218.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;制作直方图&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;将所有块的直方图排列在一个向量中&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;制作直方图&lt;/li&gt;
+  &lt;li&gt;将所有块的直方图排列在一个向量中&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309104357.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -1900,9 +1888,7 @@ I(x+1, y+1) &amp;amp;=\sum_{u=0}^{x+1} \sum_{v=0}^{y+1} g(u, v) &lt;br /&gt;
 
 &lt;ol&gt;
   &lt;li&gt;对于每个像素：样本从高斯分布随机偏移&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;通过与高斯滤波器的卷积平滑移位值&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;通过与高斯滤波器的卷积平滑移位值&lt;/li&gt;
   &lt;li&gt;对于每个像素：将像素移动到新位置&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -1938,11 +1924,10 @@ x_{i}^{\prime}=\frac{x_{i}-\bar{x}}{s_{x}} &lt;br /&gt;
 &lt;p&gt;克服歧义：&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309111726.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
 </description>
         <pubDate>Tue, 08 Mar 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/03/MV8.1/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/03/MV8.1/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/03/MV8.1/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV8.1/</guid>
         
         <category>专业</category>
         
@@ -2371,8 +2356,8 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220308164951.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 08 Mar 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/03/MV6.1/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/03/MV6.1/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/03/MV6.1/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV6.1/</guid>
         
         <category>专业</category>
         
@@ -2743,8 +2728,8 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302212319.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 02 Mar 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/03/MV6/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/03/MV6/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/03/MV6/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV6/</guid>
         
         <category>专业</category>
         
@@ -3618,8 +3603,8 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312194039.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 11 Feb 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/02/MV7-Optics/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/02/MV7-Optics/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</guid>
         
         <category>专业</category>
         
@@ -3867,8 +3852,8 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311111243.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 03 Feb 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/02/MV5.1color/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/02/MV5.1color/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/02/MV5.1color/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/02/MV5.1color/</guid>
         
         <category>专业</category>
         
@@ -3956,8 +3941,8 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
 \[广义特征值是标准特征值的推广，当B为单位矩阵时，广义标准问题退化为标准特征值问题\]
 </description>
         <pubDate>Sun, 30 Jan 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/01/MV5/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/01/MV5/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/01/MV5/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/MV5/</guid>
         
         <category>专业</category>
         
@@ -4323,8 +4308,8 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
 &lt;/ol&gt;
 </description>
         <pubDate>Tue, 25 Jan 2022 00:00:00 +0100</pubDate>
-        <link>http://localhost:4001/2022/01/MV4/</link>
-        <guid isPermaLink="true">http://localhost:4001/2022/01/MV4/</guid>
+        <link>https://wenboli-cn-de.github.io/2022/01/MV4/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/01/MV4/</guid>
         
         <category>专业</category>
         

@@ -1,0 +1,363 @@
+I"�.<head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+<h1 id="深度学习">深度学习</h1>
+
+<h2 id="语义分割和目标检测-semantic-segmentation-and-object-detection">语义分割和目标检测 (Semantic Segmentation and Object Detection)</h2>
+
+<h3 id="场景标注-scene-labeling">场景标注 Scene Labeling</h3>
+
+<p>分割图像</p>
+
+<ul>
+  <li>分类每个像素</li>
+  <li>自动编码器/解码器结构</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310111358.png" alt="img" style="zoom:80%;" /></p>
+
+<center>摘自：J. Long、E. Shelhamer、T. Darrell，“用于语义分割的全卷积网络”，CVPR，2015</center>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310111347.png" alt="" /></p>
+
+<center>摘自：J. Long、E. Shelhamer、T. Darrell，“用于语义分割的全卷积网络”，CVPR，2015</center>
+
+<h3 id="实例标签-instance-labeling">实例标签 Instance Labeling</h3>
+
+<p>语义标签不提供对象边界！</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310111731.png" alt="" /></p>
+
+<center>摘自: J. Uhrig, M. Cordts, U. Franke, T. Brox, Pixel-level
+encoding and depth layering for instance-level semantic
+segmentation, Germ. Conf. on Pattern Recognition, 2016/
+provided by Nick Schneider, Daimler AG</center>
+
+<p><strong>想法：将方向标记为对象中心</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112000.png" alt="" /></p>
+
+<center>摘自: J. Uhrig, M. Cordts, U. Franke, T. Brox, Pixel-level
+encoding and depth layering for instance-level semantic
+segmentation, Germ. Conf. on Pattern Recognition, 2016/
+provided by Nick Schneider, Daimler AG</center>
+
+<p><img src="C:\Users\Wenbo Li\AppData\Roaming\Typora\typora-user-images\image-20220310112145711.png" alt="image-20220310112145711" /></p>
+
+<center>video provided by Nick Schneider, Daimler AG  </center>
+
+<h3 id="区域生成网络region-proposal-networks">区域生成网络Region Proposal Networks</h3>
+
+<p>Region Proposal Network，直接翻译是“<strong>区域生成网络</strong>”，通俗讲是“筛选出可能会有目标的框”。其本质是基于滑窗的无类别object检测器，输入是任意尺度的图像，输出是一系列矩形候选区域。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112344.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112421.png" style="zoom: 68%;" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310112445.png" alt="" /></p>
+
+<p>我们在哪里可以找到哪些对象？</p>
+
+<ul>
+  <li>将图像划分为单元</li>
+  <li>在每个单元中应用区域生成网络</li>
+  <li>改变划分的单元大小以处理更大/更小的对象</li>
+</ul>
+
+<h3 id="深度学习技术">深度学习技术</h3>
+
+<p>没有比更多数据更重要的数据了！</p>
+
+<ul>
+  <li>
+    <p>训练过程的严格验证</p>
+  </li>
+  <li>
+    <p>训练过程的正则化</p>
+
+    <ul>
+      <li>
+        <p>– 提前停止</p>
+      </li>
+      <li>
+        <p>– 权重衰减/L2 正则化</p>
+      </li>
+      <li>
+        <p>– dropout</p>
+      </li>
+      <li>
+        <p>– 随机梯度下降</p>
+      </li>
+      <li>
+        <p>– 多任务学习</p>
+      </li>
+      <li>
+        <p>– 使用预训练网络</p>
+      </li>
+      <li>
+        <p>– 损失函数</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>重用 （他人的）实践知识</p>
+  </li>
+  <li>
+    <p>– 成功的网络结构</p>
+  </li>
+  <li>
+    <p>– 成功的培训过程</p>
+  </li>
+</ul>
+
+<h3 id="训练期间的典型错误进展">训练期间的典型错误进展</h3>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113429.png" alt="" /></p>
+
+<p>为什么早期停止作为正则化技术起作用？</p>
+
+<ul>
+  <li>提前停止更倾向小权重</li>
+  <li>小权重意味着几乎没有非线性</li>
+</ul>
+
+<h4 id="小权重正则化">小权重正则化</h4>
+
+<p>假设感知器的绝对权重较小</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113609.png" style="zoom: 33%;" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113743.png" style="zoom:67%;" /></p>
+
+<p>小权重促进感知器的线性行为</p>
+
+<p>假设具有线性激活的全连接网络</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310113904.png" style="zoom: 67%;" /></p>
+
+<p>→感知器的线性行为降低了非线性表达性</p>
+
+<p>→正则化</p>
+
+<h3 id="权重衰减l2-正则化-weight-decay--l2-regularisation">权重衰减/L2-正则化 Weight Decay / L2-Regularisation</h3>
+
+<p>通过正则化规则扩大训练目标</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310114446.png" alt="" /></p>
+
+<p>通过在训练期间随机关闭感知器进行正则化</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310114520.png" alt="" /></p>
+
+<p>dropout 迫使神经网络以分布式方式存储相关信息</p>
+
+<p>dropout 减少过拟合</p>
+
+<h3 id="梯度下降的修正">梯度下降的修正</h3>
+
+<h4 id="随机梯度下降"><strong>随机梯度下降</strong></h4>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310114745.png" alt="" /></p>
+
+<p>优点：</p>
+
+<ol>
+  <li>加速</li>
+  <li>减少一点过拟合</li>
+</ol>
+
+<h4 id="动量梯度下降"><strong>动量梯度下降</strong></h4>
+
+\[\begin{aligned}
+\Delta \vec{w} &amp; \leftarrow \alpha \cdot \Delta \vec{w}-\varepsilon \cdot \frac{\partial}{\partial \vec{w}} \sum_{j \in S} \operatorname{err}\left(f_{M L P}^{\vec{w}}\left(\vec{x}^{(j)}\right), \vec{t}^{(j)}\right) \\
+\vec{w} \leftarrow \vec{w}+\Delta \vec{w}
+\end{aligned}\]
+
+<p>用一个α&gt;0参数来控制后续步骤的一致性</p>
+
+<p>优点：</p>
+
+<ol>
+  <li>在平坦区域加速</li>
+  <li>减少曲折</li>
+</ol>
+
+<h3 id="多任务学习-multi-task-learning">多任务学习 Multi Task Learning</h3>
+
+<p>想法：在单个网络示例中学习多个相关任务：</p>
+
+<p>场景标记+实例标记+深度估计</p>
+
+<p>scene labeling + instance labeling + depth estimation</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115128.png" alt="" /></p>
+
+<p>优点：</p>
+
+<ol>
+  <li>强制网络在隐藏层中开发共同特征</li>
+  <li>减少对单个任务的过度拟合</li>
+</ol>
+
+<h3 id="预训练特征网络的使用"><strong>预训练特征网络的使用</strong></h3>
+
+<p>想法：重用预训练的网络</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115236.png" alt="" /></p>
+
+<ol>
+  <li>用大型训练集训练其他任务</li>
+  <li>丢弃其他任务的分类层</li>
+  <li>为新任务创建新的分类层</li>
+  <li>训练新分类层的权重，同时保留特征层</li>
+</ol>
+
+<h3 id="输出层和损失函数-output-layers-and-loss-functions">输出层和损失函数 Output Layers and Loss Functions</h3>
+
+<p>损失函数将网络输出与期望的输出进行比较</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115431.png" style="zoom:67%;" /></p>
+
+<ol>
+  <li>
+    <p>情况（回归任务）：期望的输出应该是实数</p>
+
+    <ul>
+      <li>
+        <p>在输出层使用线性激活函数</p>
+      </li>
+      <li>
+        <p>使用平方误差，即</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+\[\operatorname{err}(\vec{y}, \vec{t})=\|\vec{y}-\vec{t}\|^{2}\]
+
+<ol>
+  <li>
+    <p>情况（分类任务）：期望的输出应该是类别标签</p>
+
+    <ul>
+      <li>
+        <p>在输出层使用softmax激活函数</p>
+      </li>
+      <li>
+        <p>使用交叉熵误差 cross entropy error</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310115748.png" alt="" /></p>
+
+<h3 id="不平衡训练集的变体">不平衡训练集的变体</h3>
+
+<p>对于严重不平衡的训练集（即每个类的示例数量不相等），训练可能会失败</p>
+
+<p>引入加权因子来补偿不平衡</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120231.png" alt="" /></p>
+
+<h2 id="来自深度学习工具箱的其他技术">来自深度学习工具箱的其他技术</h2>
+
+<h3 id="生成对抗网络-gan-generative-adversarial-networks-gan">生成对抗网络 (GAN) Generative Adversarial Networks (GAN)</h3>
+
+<p>我们可以使用深度网络生成逼真的图像吗？</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120527.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120601.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p>生成网络应该学会生成逼真的图像</p>
+  </li>
+  <li>鉴别性网络应该学习如何区分图像是真实的还是生成的。</li>
+  <li>训练：两个网络都是零和游戏中的竞争对手</li>
+</ul>
+
+<p>应用领域： • 图像渲染 • 域适应 • 为分类器生成（附加）训练数据</p>
+
+<h3 id="序列处理sequence-processing">序列处理Sequence Processing</h3>
+
+<p>我们如何处理序列，例如 视频序列？</p>
+
+<p>(1) 多通道输入层</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120707.png" alt="" /></p>
+
+<p>只有在以下情况下才有可能</p>
+
+<ul>
+  <li>短序列</li>
+  <li>固定长度的序列</li>
+</ul>
+
+<p>(2)图像单独处理+拼接层</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120832.png" alt="" /></p>
+
+<p>只有当</p>
+<ul>
+  <li>短序列</li>
+  <li>固定长度的序列</li>
+</ul>
+
+<p>(3) 图像的单独处理+附加层（深度集）</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310120924.png" alt="" /></p>
+
+<p>只有当</p>
+<ul>
+  <li>图像的顺序并不重要</li>
+</ul>
+
+<p>(4)递归网络</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121006.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121023.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p>学习算法：通过时间进行反向传播</p>
+  </li>
+  <li>问题：梯度消失</li>
+  <li>解决方案：用适当的处理单元（GRU、LSTM）取代网络C中的感知器。
+适当的处理单元(GRU, LSTM)</li>
+</ul>
+
+<h3 id="循环单元-grulstm-recurrent-units-grulstm">循环单元 (GRU+LSTM) Recurrent Units (GRU+LSTM)</h3>
+
+<ul>
+  <li>
+    <p>实现简单状态机的专用单元</p>
+  </li>
+  <li>状态从不通过双曲切线的逻辑函数→来传递
+没有消失的梯度</li>
+  <li>内部结构有几个控制信息流的闸门</li>
+  <li>使用感知器机制打开/关闭闸门</li>
+  <li>LSTM：更早（1997年），更复杂（需要5个感知器）。</li>
+  <li>GRU：较新（2014年），门数较少，参数较少（需要3个感知器）。</li>
+</ul>
+
+<h3 id="门控循环单元-gru">门控循环单元 (GRU)</h3>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121136.png" alt="" /></p>
+
+<h3 id="长短期记忆单元-lstm">长短期记忆单元 (LSTM)</h3>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310121153.png" alt="" /></p>
+
+:ET
