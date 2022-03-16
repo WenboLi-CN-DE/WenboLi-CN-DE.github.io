@@ -1,0 +1,674 @@
+I"�r<head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+<h1 id="图像预处理-image-preprocessing">图像预处理 Image Preprocessing</h1>
+
+<p>图像形成与分析</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310193123.png" alt="" /></p>
+
+<h2 id="成像器">成像器</h2>
+
+<p>图像形成过程：</p>
+
+<ol>
+  <li>入射光强度</li>
+  <li>成像仪的输出</li>
+</ol>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310193451.png" alt="" /></p>
+
+<p><strong>图像形成过程：</strong></p>
+
+<p><strong>– 采样</strong>sampling</p>
+
+<p>评估规则网格上的光强度</p>
+
+<p><strong>– 量化 quantization</strong></p>
+
+<p>将连续信号映射到离散值（自然数）</p>
+
+<p><strong>– 模糊和噪声</strong>  blur and noise</p>
+
+<p>– <strong>颜色</strong>将在后面讨论。 这里：只有光强度/灰度图像</p>
+
+<h3 id="采样">采样</h3>
+
+<p>用于采样的二维网格</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310193551.png" alt="" /></p>
+
+<p><strong>电子相机</strong>：矩形等距网格</p>
+
+<p><strong>生物</strong>：具有不同分辨率的六边形网格</p>
+
+<h4 id="波纹图案-moiré-patterns">波纹图案 Moiré Patterns</h4>
+
+<p>莫列波纹（英语：Moiré pattern），又译为摩尔纹、莫尔条纹、叠纹、水状波纹，是一种在栅栏状条纹重叠下所产生的干涉影像。莫列波纹来自法语：moiré，是一种纺织品，它的纹路类似于水波。最早这种纺织品是由丝作成，后来也用棉线或人造纤维来呈现相同的效果。</p>
+
+<p>当感光元件像素的空间频率与影像中条纹的空间频率接近时，可能产生一种新的波浪形的干扰图案，即所谓的莫列波纹。</p>
+
+<p>sampling might cause artifacts  采样可能会导致伪影</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310193705.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310193959.png" alt="" /></p>
+
+<p>摩尔纹图案的一维示例：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310194028.png" alt="" /></p>
+
+<p>==莫尔条纹的出现取决于与信号最大频率相比的采样率（图像）==</p>
+
+<p><strong>The occurrence of Moiré patterns depends on the sampling rate compared to the maximal frequency of the signal (image)</strong></p>
+
+<h4 id="香农采样定理">香农采样定理</h4>
+
+<p>如果$f$是具有截止频率$k_0$的有界信号，那么它完全是通过在一系列最多$1/2k_0$间隔的点处给出其纵坐标来确定的，即 采样频率必须大于$2k_0$</p>
+
+<ul>
+  <li>什么是带界信号？</li>
+  <li>什么是截止频率？</li>
+</ul>
+
+<p><strong>傅里叶变换 Fourier Transform</strong></p>
+
+<p>假设一个周期信号</p>
+
+<p>然后，我们可以定义傅里叶变换$f$</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310195220.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310195243.png" alt="" /></p>
+
+<p>性质：</p>
+
+<ol>
+  <li><strong>线性性质：</strong></li>
+</ol>
+
+\[\mathcal{F}\{\alpha f(x)+\beta g(x)\}(k)=\alpha \widehat{f}(k)+\beta \widehat{g}(k)\]
+
+<ol>
+  <li>
+    <p>沿 x 轴移动信号只会改变频域中的复角，但不会改变幅度 shifting a signal along the x-axis only changes the complex angles in frequency domain but not the amplitudes</p>
+
+    <p><strong>位移性质：</strong></p>
+  </li>
+</ol>
+
+\[\mathcal{F}\{f(x-\xi)\}(k)=e^{-2 \pi i \xi k} \widehat{f}(k)\]
+
+<ol>
+  <li>
+    <p>在空间域中重新缩放 x 轴以倒数方式重新缩放频率轴 rescaling the x-axis in the spatial domain rescales the frequency axis in a reciprocal way</p>
+
+    <p><strong>比例变换性质</strong></p>
+  </li>
+</ol>
+
+\[\mathcal{F}\{f(\alpha x)\}(k)=\frac{1}{|\alpha|} \widehat{f}\left(\frac{k}{\alpha}\right)\]
+
+<p>在空间域中重新缩放 x 轴以倒数方式重新缩放频率轴</p>
+
+<p>– 空间域中的余弦在频域中产生两个峰值</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310195349.png" alt="" /></p>
+
+<p>峰值位于周期长度的倒数位置</p>
+
+<p>如果空间域中的信号是余弦的线性组合，则傅里叶变换将是频域中的一组峰值</p>
+
+<p>直观的解释：傅里叶变换将周期信号分解为（可能是无限的）余弦的线性组合</p>
+
+<p>观察</p>
+
+<ul>
+  <li>具有小斜率的平滑周期函数可以由具有大周期的余弦组成</li>
+  <li>具有大斜率的周期函数需要具有小周期的余弦</li>
+  <li>不连续或具有不连续导数的周期函数需要具有无限频率的余弦</li>
+</ul>
+
+<p>定义：如果对于大于截止频率的所有频率，其傅里叶变换为零，则信号$f$以截止频率$k_0$为界，即</p>
+
+\[\widehat{f}(k)=0 \text { for all } k \text { with }|k| \geq k_{0}\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310195611.png" alt="" /></p>
+
+<ul>
+  <li>信号是带界的（正弦函数）</li>
+  <li>采样频率足够高</li>
+</ul>
+
+\[f_{\text {sample }}=\frac{1}{4}&gt;2 f_{\text {signal }}=\frac{2}{10}\]
+
+<ul>
+  <li>可以重建信号</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310195935.png" alt="" /></p>
+
+<h4 id="图像缩放和插值-image-scaling-and-interpolation">图像缩放和插值 Image Scaling and Interpolation</h4>
+
+<ul>
+  <li>改变图像大小</li>
+  <li>缩放需要在非整数位置评估图像 → 插值</li>
+  <li><strong>最近邻插值：nearest neighbor interpolation:</strong>
+    <ul>
+      <li>用阶跃函数逼近灰度函数</li>
+      <li>取最近整数位置的灰度值</li>
+      <li>问题：混叠 aliasing</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316204302.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310200139.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p>ID 中的线性插值</p>
+
+    <p>在 x 附近局部拟合线性函数</p>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310200225.png" alt="" /></p>
+
+<p>将线性插值扩展到二维：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/image-20220310200250302.png" alt="" /></p>
+
+<center>从 4 个相邻像素进行插值</center>
+
+<p>三次插值；三次内插</p>
+
+<p>将三次多项式拟合到灰度等级</p>
+
+<p>三次插值扩展到二维：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310200408.png" alt="" /></p>
+
+<center>从 16 个相邻像素进行插值</center>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310200548.png" alt="" /></p>
+
+<h3 id="量化-quantization">量化 Quantization</h3>
+
+<p>—– 将连续信号映射到离散值（自然数）</p>
+
+<p>入射光： incident light:</p>
+
+\[I: \mathbb{R}^{2} \rightarrow \mathbb{R}\]
+
+<p>数码相机信号：</p>
+
+\[g: \{0, \ldots, w-1\} \times\{0, \ldots, h-1\} \rightarrow\left\{0, \ldots, g_{\max }\right\} \\ w, h : image width, height\]
+
+<p>需要从<strong>实值光强度</strong>转换为<strong>离散数字信号</strong>（模数转换器）need transformation from real valued light intensity to discrete digital signals (analog-to-digital converter)</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316204800.png" alt="" /></p>
+
+<p>具有等距步长（“线性”）大小$\Delta$的特征</p>
+
+\[\begin{aligned} &amp;g(x)=\max \left\{0, \min \left\{g_{\max },\left[\frac{I(x)}{\Delta}+\frac{1}{2}\right\rfloor\right\}\right\} \\ &amp;h(x)=\Delta g(x) \end{aligned}\]
+
+<p>非过载量化器的误差： error of non-overdriven quantiser:</p>
+
+\[I(x)-h(x) \in\left[-\frac{\Delta}{2}, \frac{\Delta}{2}\right]\]
+
+<ul>
+  <li>
+    <p>数码相机的特点： characteristic of digital cameras:  线性, 对数关系 linear ,logarithmic</p>
+
+    <p>在实际的摄像机记录拍摄数据的过程中通常会使用这两种记录方式：linear，log。简单的来说，linear会把亮度信息原原本本的记录下来，log则会对原本的亮度信息进行压缩以尽可能的节约存储空间，这个映射关系可以参考log曲线。这也是为什么大部分的linear记录方式下位深是16bit，而log的记录方式下位深只需要12bit或者10bit。log记录方式记录的拍摄素材因为对高光部分做了压缩，中间调部分提升很大，所以我们观看的时候会觉得很灰。</p>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316205201.png" style="zoom:65.7%;" /></p>
+
+<center>线性特征</center>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316205211.png" alt="" /></p>
+
+<center>log模式</center>
+
+<p>灰度截止值 grey level cutoff value</p>
+
+<ul>
+  <li>1 (binary images, “bitmaps”) → 1 bit/pixel</li>
+  <li>255 → 8 bit/pixel = 1 byte/pixel</li>
+  <li>4095 → 12 bit/pixel = 1.5 byte/pixel</li>
+  <li>65535 → 16 bit/pixel = 2 byte/pixel</li>
+</ul>
+
+<p>灰度分布校正 correction of grey level distribution</p>
+
+<ul>
+  <li>图像太暗/太亮 image too dark/too bright</li>
+  <li>低对比度 low contrast</li>
+  <li>非线性相机特性non-linear camera characteristic</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210136.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210145.png" alt="" /></p>
+
+<h4 id="灰度直方图显示灰度分布">灰度直方图显示灰度分布</h4>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210227.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210237.png" alt="" /></p>
+
+<p>曝光不足的图像： • 打开相机的光圈 • 增加相机的曝光时间 • 增加增益 • 添加额外的光源 • 将灰度值乘以一个常数 • 在许多数码相机中实现的自动曝光</p>
+
+<p>Underexposed images: • open aperture of camera • increase exposure time of camera • increase gain • add additional light sources • multiply grey values by a constant • auto-exposure implemented in many digital cameras</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210318.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210327.png" alt="" /></p>
+
+<p>过度曝光的图像： • 由于截止值导致信息丢失，无法重建 • 相机光圈关闭 • 减少相机曝光时间 • 自动曝光 Overexposed images: • information loss due to cutoff value, no reconstruction possible • close aperture of camera • reduce exposure time of camera • auto-exposure</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210355.png" alt="" /></p>
+
+\[\gamma = 1\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210453.png" alt="" /></p>
+
+\[\gamma  = 0.5\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210519.png" alt="" /></p>
+
+\[\gamma = 2\]
+
+<h5 id="伽玛校正gamma-correction">伽玛校正：Gamma correction:</h5>
+
+\[g_{o u t}=g_{\max }\left(\frac{g_{i n}}{g_{\max }}\right)^{\gamma}\]
+
+<p>伽马矫正 • 黑白度不变 • 非线性变换</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210720.png" alt="" /></p>
+
+\[\gamma = 1\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210746.png" alt="" /></p>
+
+\[\gamma = 0.5\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316210757.png" alt="" /></p>
+
+\[\gamma = 2\]
+
+<h5 id="灰度变换-grey-level-transformations">灰度变换 Grey Level Transformations</h5>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316211126.png" alt="" /></p>
+
+<h5 id="曝光序列-exposure-series">曝光序列 Exposure Series</h5>
+
+<p>包围曝光、高动态范围成像 (HDRI)：结合曝光过度和曝光不足的图像提高灰度值分辨率</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316211346.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316211525.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316211619.png" alt="" /></p>
+
+<h3 id="模糊和噪点blur-and-noise">模糊和噪点Blur and Noise</h3>
+
+<h4 id="卷积运算">卷积运算</h4>
+
+<p>卷积运算符</p>
+
+<ol>
+  <li>– 采用两个函数</li>
+  <li>– 创建一个新函数</li>
+  <li>– 由逐点定义</li>
+</ol>
+
+\[h(x)=\int_{-\infty}^{\infty} f(\tau) g(x-\tau) d \tau\]
+
+<p>我们分析：</p>
+
+<p>\(g\) is a 灰度图 gray level image</p>
+
+<p>\(f\) is a  是一个滤波函数 filter function</p>
+
+<p>\(h\)is a滤完了的图像 filtered image</p>
+
+<p>卷积实现了一个线性滤波器convolution implements a linear filter</p>
+
+<p><strong>性质：</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316212325.png" alt="" /></p>
+
+<p>扩展到二维和离散情况：
+$$</p>
+
+<p>\begin{aligned}
+&amp;f, g: \mathbb{R}^{2} \rightarrow \mathbb{R} <br />
+&amp;(g * f)(x, y)=\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(\tau, \rho) g(x-\tau, y-\rho) d \tau d \rho
+\end{aligned}</p>
+
+<p>$$
+对于我们只能在整数位评估的函数的情况</p>
+
+\[\begin{aligned} &amp;f, g: \mathbb{Z} \rightarrow \mathbb{R} \\ &amp;(g * f)(u)=\sum_{k=-\infty}^{\infty} f(k) g(u-k) \\ &amp;f, g: \mathbb{Z}^{2} \rightarrow \mathbb{R} \\ &amp;(g * f)(u, v)=\sum_{k=-\infty}^{\infty} \sum_{l=-\infty}^{\infty} f(k, l) g(u-k, v-l) \end{aligned}\]
+
+<p>对图像卷积：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316212543.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316212716.png" alt="" /></p>
+
+<h4 id="模糊和噪声的类型">模糊和噪声的类型</h4>
+
+<ol>
+  <li>运动模糊  motion blur</li>
+  <li>散焦像差 defocus aberration</li>
+  <li>传感器单元和放大器的统计噪声  statistical noise of sensor cells and amplifiers</li>
+  <li>故障传感器单元 malfunctioning sensor cells</li>
+</ol>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316212853.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316212903.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316212912.png" alt="" /></p>
+
+<h4 id="模糊模型">模糊模型</h4>
+
+<ol>
+  <li>
+    <p>运动模糊Motion blur:</p>
+
+    <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220310201055.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Gaussian blur:</p>
+
+    <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316212951.png" alt="" /></p>
+  </li>
+</ol>
+
+<p>模糊可以用卷积建模  blur can be modeled with convolution</p>
+
+\[g_{\text {blurred }}=g_{\text {sharp }} * p\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316213304.png" alt="" /></p>
+
+<p>p = “点扩散函数”模型模糊 “point-spread-function” models blur</p>
+
+<ol>
+  <li>运动模糊（沿 x 轴 n 像素）： motion blur (along x-axis by n pixels):</li>
+</ol>
+
+\[p_{\text {motion }}(x)= \begin{cases}\frac{1}{n} &amp; \text { if }-n&lt;x \leq 0 \\ 0 &amp; \text { otherwise }\end{cases}\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316213314.png" alt="" /></p>
+
+<ol>
+  <li>高斯模糊（方差 $\delta^2$）：Gaussian blur (with variance $\delta^2$):</li>
+</ol>
+
+\[p_{\text {Gauss }}(x)=\frac{1}{\sqrt{2 \pi \sigma^{2}}} e^{-\frac{1}{2} \frac{x^{2}}{\sigma^{2}}}\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/image-20220316213338576.png" alt="" /></p>
+
+<h5 id="wiener反卷积-wiener-deconvolution">Wiener反卷积 Wiener Deconvolution</h5>
+
+<p>基于维纳滤波器从模糊图像中获取清晰图像的技术 techniques to obtain sharp image from blurred image based on Wiener filter</p>
+
+<p>Wiener反卷积是一种常用的非盲线性图像恢复算法。</p>
+
+<p>非盲：盲反卷积指事先不知道模糊核或PSF，非盲指事先知道模糊核或PSF</p>
+
+<p>线性: 假设一个系统 $y=h * x+n$ ，其中 $y$ 是模糊图像， $x$ 是清晰图像， $h$ 是模糊 核， $n$ 是噪声。(PS: $n$ 与 $x$ 相互独立) 我们可以使用一个wiener卷积核 $g$ 使得</p>
+
+<p>$x = g * y$</p>
+
+\[\begin{aligned} g_{b l u r r e d}=&amp; g_{\text {sharp }} * p+v \\ &amp; p: \text { point-spread-function } \\ &amp; v: \text { pixel noise } \\ &amp; \text { assume } g_{s h a r p} \text { and } v \text { be independent } \\ g_{\text {restored }}=&amp; f * g_{b l u r r e d} \end{aligned}\]
+
+<p>找到最小化的最优 f：
+\(e(k)=\mathbb{E}\left[\left|\hat{g}_{\text {sharp }}(k)-\widehat{g}_{\text {restored }}(k)\right|^{2}\right]  ( $\hat{g}$ denotes Fourier transform of $g$ ) (E denotes expectation value期望值)\)</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316214157.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316214217.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316214347.png" alt="" /></p>
+
+<p>将 e 的导数归零以获得最小域： zeroing the derivative of e to obtain the minimum yields:</p>
+
+\[\widehat{f}(k)=\frac{\widehat{p}^{*}(k) S(k)}{\widehat{p}(k) \hat{p}^{*}(k) S(k)+N(k)}=\frac{\hat{p}^{*}(k)}{|\widehat{p}(k)|^{2}+\left(\frac{S(k)}{N(k)}\right)^{-1}}\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316214457.png" alt="" /></p>
+
+<p>它定义了最优线性滤波器（<strong>维纳滤波器</strong>）
+\(\frac{S(k)}{N(k)}\)是信噪比 is the signal-to-noise ratio</p>
+
+<p>在无噪音情况下： in the noiseless case:</p>
+
+<p>\(\widehat{f}(k)=\frac{1}{\widehat{p}(k)} \quad(\text { if } N(k)=0)\)
+<img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316214621.png" alt="" /></p>
+
+<p>但是
+\(\frac{S(k)}{N(k)}\)
+和
+\(\widehat{p}(k)\)
+必须知道</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316214753.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316214828.png" alt="" /></p>
+
+<h4 id="噪声模型-models-of-noise">噪声模型 Models of Noise</h4>
+
+<ul>
+  <li>随机干扰 杂乱噪声 statistical noise
+\(\begin{aligned} g_{\text {noisy }}(x, y) &amp;=g_{s h a r p}(x, y)+v(x, y) \\ v(x, y) &amp; \sim N\left(0, \sigma^{2}\right) i . i . d .
+\end{aligned}\)</li>
+</ul>
+
+<center>(i.i.d. = independent and identically distributed)</center>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316215020.png" alt="" /></p>
+
+<ul>
+  <li>传感器故障：malfunctioning sensors:</li>
+</ul>
+
+<p>\(g_{\text {noisy }}(x, y)= \begin{cases}g_{s h a r p}(x, y) &amp; \text { with probability } p \\ \text { arbitrary任意的 } &amp; \text { otherwise }\end{cases}\)
+<img src="C:\Users\Wenbo Li\AppData\Roaming\Typora\typora-user-images\image-20220316215033618.png" alt="image-20220316215033618" /></p>
+
+<p><strong>一、随机干扰：</strong></p>
+
+<p>基本思想：平均（平滑）</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316215239.png" alt="" /></p>
+
+<p>在同质区域效果很好，但在灰度边缘失败</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316215256.png" alt="" /></p>
+
+<h4 id="平滑滤波器">平滑滤波器</h4>
+
+<h5 id="矩形滤波器-rectangular-filter">矩形滤波器 rectangular filter</h5>
+<p>\(f(x)= \begin{cases}\frac{1}{a} &amp; \text { if }|x|&lt;\frac{a}{2} \\ 0 &amp; \text { otherwise }\end{cases}\)
+$\alpha$参数越大，平滑越强</p>
+
+<h5 id="高斯滤波gaussian-filter">高斯滤波Gaussian filter</h5>
+<p>\(f(x)=\frac{1}{\sqrt{2 \pi \sigma^{2}}} e^{-\frac{1}{2} \frac{x^{2}}{\sigma^{2}}}\)
+ $\delta$参数越大，平滑越强</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316215447.png" alt="" /></p>
+
+<p><strong>平滑滤波器的傅里叶变换</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316215844.png" alt="" /></p>
+
+<h4 id="图像平滑滤波">图像平滑滤波</h4>
+
+<p><strong>掩模</strong>mask用选定的图像、图形或物体，对处理的图像（全部或局部）进行遮挡，来控制图像处理的区域或处理过程。用于覆盖的特定图像或物体称为掩模或模板。光学图像处理中,掩模可以是胶片、滤光片等。数字图像处理中,掩模为二维矩阵数组,有时也用多值图像。</p>
+
+<h5 id="矩形滤波器掩模rectangular-filter-masks">矩形滤波器掩模：rectangular filter masks:</h5>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316215937.png" alt="" /></p>
+
+<h4 id="离散卷积-discrete-convolution">离散卷积 Discrete Convolution</h4>
+
+<h5 id="高斯滤波器掩模-gaussian-filter-masks">高斯滤波器掩模 Gaussian filter masks:</h5>
+
+<p>高斯滤波器是一类根据高斯函数的形状来选择权值的线性平滑滤波器。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316220007.png" alt="" /></p>
+
+<h5 id="二项式滤波掩模-binomial-filter-masks">二项式滤波掩模 binomial filter masks</h5>
+
+<p>Binomial Filter是由牛津大学的Matthew Aubury(马修奥伯里)和英国皇家工程院的Wayne Luk（陆永青）在1994年提出的，提出的目的是为解决高斯滤波器在一组相互冲突的约束下选择滤波器系数的问题。他们提出了一种基于二项式系数的高斯逼近算法，该算法具有简单、准确和灵活的结构。另外一个优点就是二项式滤波器不需要多次运算，因此允许大型的滤波器结构在当前变成硬件中实现，比如现场可编程门阵列（FPGA）。此外，他的规则结构便于在定制VLSI中实现，并且可以转换生成高性能的收缩版本。</p>
+
+<p>对于图像处理来说，常用二维零均值离散高斯函数作平滑滤波器。</p>
+
+<p><a href="https://zh.wikipedia.org/zh-hans/%E9%AB%98%E6%96%AF%E4%BA%8C%E9%A1%B9%E5%BC%8F%E7%B3%BB%E6%95%B0">高斯二项式系数</a></p>
+
+<p>高斯二项式系数计算一个有限维向量空间的子空间数。令q表示一个有限域里的元素数目，则在q元有限域上n维向量空间的k维子空间数等于$\left(\begin{array}{l}n \ k\end{array}\right)_q$</p>
+
+<p>例子：
+\(\begin{aligned}
+&amp;\left(\begin{array}{l}
+0 \\
+0
+\end{array}\right)_{q}=\left(\begin{array}{l}
+1 \\
+0
+\end{array}\right)_{q}=1 \\
+&amp;\left(\begin{array}{l}
+1 \\
+1
+\end{array}\right)_{q}=\frac{1-q}{1-q}=1 \\
+&amp;\left(\begin{array}{l}
+2 \\
+1
+\end{array}\right)_{q}=\frac{1-q^{2}}{1-q}=1+q \\
+&amp;\left(\begin{array}{l}
+3 \\
+1
+\end{array}\right)_{q}=\frac{1-q^{3}}{1-q}=1+q+q^{2} \\
+&amp;\left(\begin{array}{l}
+3 \\
+2
+\end{array}\right)_{q}=\frac{\left(1-q^{3}\right)\left(1-q^{2}\right)}{(1-q)\left(1-q^{2}\right)}=1+q+q^{2} \\
+&amp;\left(\begin{array}{l}
+4 \\
+2
+\end{array}\right)_{q}=\frac{\left(1-q^{4}\right)\left(1-q^{3}\right)}{(1-q)\left(1-q^{2}\right)}=\left(1+q^{2}\right)\left(1+q+q^{2}\right)=1+q+2 q^{2}+q^{3}+q^{4}
+\end{aligned}\)
+和普通二项式系数一样，高斯二项式系数是中心对称的:
+\(\left(\begin{array}{c}
+m \\
+r
+\end{array}\right)_{q}=\left(\begin{array}{c}
+m \\
+m-r
+\end{array}\right)_{q}\)
+特别地，
+\(\begin{aligned}
+&amp;\left(\begin{array}{c}
+m \\
+0
+\end{array}\right)_{q}=\left(\begin{array}{c}
+m \\
+m
+\end{array}\right)_{q}=1 \\
+&amp;\left(\begin{array}{c}
+m \\
+1
+\end{array}\right)_{q}=\left(\begin{array}{c}
+m \\
+m-1
+\end{array}\right)_{q}=\frac{1-q^{m}}{1-q}=1+q+\cdots+q^{m-1} \quad m \geq 1
+\end{aligned}\)
+当 $q=1$ 时，有
+\(\left(\begin{array}{c}
+m \\
+r
+\end{array}\right)_{1}=\left(\begin{array}{c}
+m \\
+r
+\end{array}\right)\)</p>
+<ul>
+  <li>使用二项式系数$\left(\begin{array}{l}n \ k\end{array}\right)$的二项式滤波器掩码对高斯masks的逼近</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316220007.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316220146.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316223839.png" alt="" /></p>
+
+<h4 id="双边滤波-bilateral-filter">双边滤波 Bilateral filter</h4>
+
+<p>双边滤波（Bilateral filter）是一种非线性的滤波方法，是结合图像的空间邻近度和像素值相似度的一种折衷处理，同时考虑空域信息和灰度相似性，达到保边去噪的目的。具有简单、非迭代、局部的特点。</p>
+
+<p>高斯滤波去降噪，会较明显地模糊边缘，对于高频细节的保护效果并不明显。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316224214.png" alt="" /></p>
+
+<hr />
+
+<p>我们知道，对图像进行空间域滤波的方法是使用一个结构元素（核）来对原图像进行卷积。而这个结构元素就会对原图像进行卷积操作，从而得到一个新的图像，即输出图像。我们知道，这个结构元素是不会变的。但是！但是！但是！在双边滤波算法中就不是如此了。为了使图像的边缘得到保留，就要根据当前被卷积像素的邻域进行观察，“推断”是否是边缘点和接近边缘的点。因此，结构元素就会改变，从而保留边缘点。下面的一组图中，图a是原图像，图c是输出。而中间的图像是什么呢？显然，这是原图中根据某个点的邻域生成的，专属于这个点的结构元素。</p>
+
+<p><img src="https://pic1.zhimg.com/80/v2-c1263e7f5626bb07b7d725864de911f4_1440w.jpg" alt="" /></p>
+
+<p>可以看到，原图中显然有一个灰度的突变，这就表示是边缘。灰度值高的地方不应该和灰度低的区域进行混合，所以，图像中接近边缘的一个点就会生成图b这样的结构元素。那么这个接近边缘的点在哪里呢？大概就在标出的这个区域。</p>
+
+<p><img src="https://pic4.zhimg.com/80/v2-93ab65c254ec6c12c7c565ae35ba007b_1440w.jpg" alt="" /></p>
+
+<p>而生成这样的结构元素的方法，是将我们原本的高斯核，与一个能“推断”出是否在边缘点的结构元素相乘，如下图中间的结构元素。</p>
+
+<p><img src="https://pic2.zhimg.com/80/v2-feaccefacc8c678218c03495031113b1_1440w.jpg" alt="" /></p>
+
+<p>下图是双边滤波的原理示意图：</p>
+
+<p><img src="https://pic2.zhimg.com/80/v2-56856d2c7f8f48337bb5f07f4580d55d_1440w.jpg" alt="" /></p>
+
+<p>双边滤波器的输出像素依赖于当前被卷积像素的邻域。 $i$ 和 $j$ 是当前被卷积像素的坐标点， $k$ 和 $l$ 是邻域像素的坐标点:
+\(r(i, j, k, l)=\exp \left(-\frac{\|f(i, j)-f(k, l)\|^{2}}{2 \sigma_{r}^{2}}\right)\)
+可以看到，它 取决于<strong>被卷积像素的灰度值和邻域像素的灰度值的差</strong>。我们知道，边缘会有较大的 灰度变化，而这个公式就会使边缘和边缘另一边的区域生成比较小的权值，与被卷积像素的灰度值 类似的区域会生成比较大的权值，就像之前图中的一个 “断崖”。</p>
+
+<p>相乘就得到加权系数 $w$ :
+\($ w(i, j, k, l)=\exp \left(-\frac{(i-k)^{2}+(j-l)^{2}}{2 \sigma_{d}^{2}}-\frac{\|f(i, j)-f(k, l)\|^{2}}{2 \sigma_{r}^{2}}\right)\)</p>
+
+<p>（注：分割线以内的内容来自知乎Jargon https://zhuanlan.zhihu.com/p/127023952，侵删）</p>
+
+<hr />
+
+<p>椒盐噪声 Salt-and-Pepper Noise</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316224354.png" alt="" /></p>
+
+<h5 id="中值滤波器-median-filter">中值滤波器 Median filter</h5>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316234010.png" alt="" /></p>
+
+<p>中值滤波器：</p>
+
+<ul>
+  <li>对参考像素周围环境中的灰度值进行排序</li>
+  <li>取排序列表中间的灰度值</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316234112.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316234148.png" alt="" /></p>
+:ET

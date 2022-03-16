@@ -1,0 +1,64 @@
+I"�
+<ul>
+  <li><a href="#图像预处理-image-preprocessing">图像预处理 Image Preprocessing</a>
+    <ul>
+      <li><a href="#成像器">成像器</a>
+        <ul>
+          <li><a href="#采样">采样</a>
+            <ul>
+              <li><a href="#波纹图案-moiré-patterns">波纹图案 Moiré Patterns</a></li>
+              <li><a href="#香农采样定理">香农采样定理</a></li>
+              <li><a href="#图像缩放和插值-image-scaling-and-interpolation">图像缩放和插值 Image Scaling and Interpolation</a></li>
+            </ul>
+          </li>
+          <li><a href="#量化-quantization">量化 Quantization</a>
+            <ul>
+              <li><a href="#灰度直方图显示灰度分布">灰度直方图显示灰度分布</a>
+                <ul>
+                  <li><a href="#伽玛校正gamma-correction">伽玛校正：Gamma correction:</a></li>
+                  <li><a href="#灰度变换-grey-level-transformations">灰度变换 Grey Level Transformations</a></li>
+                  <li><a href="#曝光序列-exposure-series"><strong>曝光序列 Exposure Series</strong></a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#模糊和噪点blur-and-noise">模糊和噪点Blur and Noise</a>
+            <ul>
+              <li><a href="#卷积运算">卷积运算</a></li>
+              <li><a href="#模糊和噪声的类型">模糊和噪声的类型</a></li>
+              <li><a href="#模糊模型"><strong>模糊模型</strong></a>
+                <ul>
+                  <li><a href="#wiener反卷积-wiener-deconvolution">Wiener反卷积 Wiener Deconvolution</a></li>
+                </ul>
+              </li>
+              <li><a href="#噪声模型-models-of-noise">噪声模型 Models of Noise</a></li>
+              <li><a href="#平滑滤波器"><strong>平滑滤波器</strong></a>
+                <ul>
+                  <li><a href="#矩形滤波器-rectangular-filter">矩形滤波器 rectangular filter</a></li>
+                  <li><a href="#高斯滤波gaussian-filter">高斯滤波Gaussian filter</a></li>
+                </ul>
+              </li>
+              <li><a href="#图像平滑滤波">图像平滑滤波</a>
+                <ul>
+                  <li><a href="#矩形滤波器掩模rectangular-filter-masks">矩形滤波器掩模：rectangular filter masks:</a></li>
+                </ul>
+              </li>
+              <li><a href="#离散卷积-discrete-convolution">离散卷积 Discrete Convolution</a>
+                <ul>
+                  <li><a href="#高斯滤波器掩模-gaussian-filter-masks">高斯滤波器掩模 Gaussian filter masks:</a></li>
+                  <li><a href="#二项式滤波掩模-binomial-filter-masks">二项式滤波掩模 binomial filter masks</a></li>
+                </ul>
+              </li>
+              <li><a href="#双边滤波-bilateral-filter">双边滤波 Bilateral filter</a>
+                <ul>
+                  <li><a href="#中值滤波器-median-filter"><strong>中值滤波器 Median filter</strong></a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET
