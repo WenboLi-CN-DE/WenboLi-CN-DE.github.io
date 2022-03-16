@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Mar 2022 23:20:28 +0100</pubDate>
-    <lastBuildDate>Tue, 15 Mar 2022 23:20:28 +0100</lastBuildDate>
+    <pubDate>Wed, 16 Mar 2022 16:49:08 +0100</pubDate>
+    <lastBuildDate>Wed, 16 Mar 2022 16:49:08 +0100</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -1436,10 +1436,11 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 &lt;p&gt;在知道拉格朗日乘数的情况下，解决方案完全确定：&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;– 不需要计算
+&lt;p&gt;– 不需要计算&lt;/p&gt;
 
-– 模式仅作为点积的参数成对出现$\left\langle\vec{X}^{(i)}, \vec{X}^{(j)}\right\rangle=\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;– 模式仅作为点积的参数成对出现&lt;/p&gt;
+
+\[\left\langle\vec{X}^{(i)}, \vec{X}^{(j)}\right\rangle=\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle\]
 
 &lt;p&gt;考虑到：$\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$&lt;/p&gt;
 
@@ -1469,18 +1470,19 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
   &lt;li&gt;点积：$K(\vec{x}, \vec{y})=\langle\vec{x}, \vec{y}\rangle$&lt;/li&gt;
   &lt;li&gt;多项式核函数：$K(\vec{x}, \vec{y})=(\langle\vec{x}, \vec{y}\rangle)^{q}$ or $(\langle\vec{x}, \vec{y}\rangle+1)^{q}$&lt;/li&gt;
   &lt;li&gt;径向基函数 (RBF) 内核 $K(\vec{x}, \vec{y})=e^{-\frac{|\vec{x}-\vec{y}|^{2}}{2 \sigma^{2}}}$&lt;/li&gt;
-  &lt;li&gt;直方图交叉核（仅适用于直方图特征）
-\(K(\vec{x}, \vec{y})=\sum_{i} \min \left\{x_{i}, y_{i}\right\}\)&lt;/li&gt;
+  &lt;li&gt;直方图交叉核（仅适用于直方图特征）&lt;/li&gt;
 &lt;/ul&gt;
+
+\[K(\vec{x}, \vec{y})=\sum_{i} \min \left\{x_{i}, y_{i}\right\}\]
 
 &lt;p&gt;内核参数必须手动设置&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;现在结合所有想法：&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;支持向量机&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt;最大化边距&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/u&amp;gt;&lt;/code&gt;以最小化错误分类的风险&lt;/li&gt;
-  &lt;li&gt;软边距支持向量机允许&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt;个别错误&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/u&amp;gt;&lt;/code&gt;。 由参数 C 控制边距大小和误差之间的平衡&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt;核函数允许&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/u&amp;gt;&lt;/code&gt;在不改变理论框架的情况下进行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt;非线性分类&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/u&amp;gt;&lt;/code&gt;。 内核类型和内核参数控制非线性程度&lt;/li&gt;
+  &lt;li&gt;支持向量机最大化边距以最小化错误分类的风险&lt;/li&gt;
+  &lt;li&gt;软边距支持向量机允许个别错误。 由参数 C 控制边距大小和误差之间的平衡&lt;/li&gt;
+  &lt;li&gt;核函数允许在不改变理论框架的情况下进行非线性分类。 内核类型和内核参数控制非线性程度&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;使用svms&quot;&gt;使用SVMs&lt;/h3&gt;
@@ -2550,6 +2552,8 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
 
 &lt;p&gt;区域生长（region growing）是指将成组的像素或区域发展成更大区域的过程。从种子点的集合开始，从这些点的区域增长是通过将与每个种子点有相似属性像强度、灰度级、纹理颜色等的相邻像素合并到此区域。&lt;/p&gt;
 
+&lt;p&gt;区域生长算法的基本思想是将有相似性质的像素点合并到一起。对每一个区域要先指定一个种子点作为生长的起点，然后将种子点周围领域的像素点和种子点进行对比，将具有相似性质的点合并起来继续向外生长，直到没有满足条件的像素被包括进来为止。这样一个区域的生长就完成了。这个过程中有几个关键的问题：（原文链接：https://blog.csdn.net/weixin_40647819/article/details/90215872）&lt;/p&gt;
+
 &lt;p&gt;核心思想：从一个/多个种子点开始（必须提供种子点）；增量扩展段，直到无法添加更多像素；实现连通性标准+同质性或邻域标准；产生单一的片段。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302203819.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -2560,6 +2564,8 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
   &lt;li&gt;易于实现（广度优先搜索）&lt;/li&gt;
   &lt;li&gt;需要一个或多个种子点&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316112419.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;连接组件标记算法-connected-components-labelingccl&quot;&gt;连接组件标记算法 connected components labeling（CCL）&lt;/h2&gt;
 

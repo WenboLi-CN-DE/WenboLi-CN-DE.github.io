@@ -1,4 +1,4 @@
-I"ml<head>
+I"yk<head>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -227,10 +227,11 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p>在知道拉格朗日乘数的情况下，解决方案完全确定：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>– 不需要计算
+<p>– 不需要计算</p>
 
-– 模式仅作为点积的参数成对出现$\left\langle\vec{X}^{(i)}, \vec{X}^{(j)}\right\rangle=\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$
-</code></pre></div></div>
+<p>– 模式仅作为点积的参数成对出现</p>
+
+\[\left\langle\vec{X}^{(i)}, \vec{X}^{(j)}\right\rangle=\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle\]
 
 <p>考虑到：$\left\langle\Phi\left(\vec{x}^{(i)}\right), \Phi\left(\vec{x}^{(j)}\right)\right\rangle$</p>
 
@@ -260,16 +261,17 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
   <li>点积：$K(\vec{x}, \vec{y})=\langle\vec{x}, \vec{y}\rangle$</li>
   <li>多项式核函数：$K(\vec{x}, \vec{y})=(\langle\vec{x}, \vec{y}\rangle)^{q}$ or $(\langle\vec{x}, \vec{y}\rangle+1)^{q}$</li>
   <li>径向基函数 (RBF) 内核 $K(\vec{x}, \vec{y})=e^{-\frac{|\vec{x}-\vec{y}|^{2}}{2 \sigma^{2}}}$</li>
-  <li>直方图交叉核（仅适用于直方图特征）
-\(K(\vec{x}, \vec{y})=\sum_{i} \min \left\{x_{i}, y_{i}\right\}\)</li>
+  <li>直方图交叉核（仅适用于直方图特征）</li>
 </ul>
+
+\[K(\vec{x}, \vec{y})=\sum_{i} \min \left\{x_{i}, y_{i}\right\}\]
 
 <p>内核参数必须手动设置</p>
 
 <p><strong>现在结合所有想法：</strong></p>
 
 <ul>
-  <li>支持向量机<code class="language-plaintext highlighter-rouge">&lt;u&gt;</code>最大化边距<code class="language-plaintext highlighter-rouge">&lt;/u&gt;</code>以最小化错误分类的风险</li>
+  <li>支持向量机最大化边距以最小化错误分类的风险</li>
   <li>软边距支持向量机允许<code class="language-plaintext highlighter-rouge">&lt;u&gt;</code>个别错误<code class="language-plaintext highlighter-rouge">&lt;/u&gt;</code>。 由参数 C 控制边距大小和误差之间的平衡</li>
   <li><code class="language-plaintext highlighter-rouge">&lt;u&gt;</code>核函数允许<code class="language-plaintext highlighter-rouge">&lt;/u&gt;</code>在不改变理论框架的情况下进行<code class="language-plaintext highlighter-rouge">&lt;u&gt;</code>非线性分类<code class="language-plaintext highlighter-rouge">&lt;/u&gt;</code>。 内核类型和内核参数控制非线性程度</li>
 </ul>
@@ -475,7 +477,7 @@ subject to $d^{(i)} \cdot\left(\left\langle\vec{X}^{(i)}, \vec{W}\right\rangle+b
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220309095151.png" alt="" /></p>
 
-<h4 id="第四种方法-hog-features">第四种方法 HOG-features</h4>
+<h5 id="第四种方法-hog-features">第四种方法 HOG-features</h5>
 
 <p><strong><em>HOG-features</em></strong></p>
 
