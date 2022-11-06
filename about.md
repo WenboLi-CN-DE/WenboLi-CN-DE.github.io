@@ -5,8 +5,6 @@ title: 关于我
 
 机电与信息硕士在读(Mechatronik und Informationstechnik)
 
-中共党员
-
 机械与电子爱好者
 
 科技是第一生产力
