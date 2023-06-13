@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>汽车视觉 Automotive Vision -SLAM</title>
+  <meta name="description" content="">
+  <meta name="author" content="leopardpan">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="汽车视觉 Automotive Vision -SLAM">
+  <meta name="twitter:description" content="">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="汽车视觉 Automotive Vision -SLAM">
+  <meta property="og:description" content="">
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="https://wenboli-cn-de.github.io/2023/06/SLAM/">
+  <link rel="alternate" type="application/rss+xml" title="高傲的电工李" href="https://wenboli-cn-de.github.io/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+
+<!-- 站点统计 -->
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
+
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <!-- 头像效果-start -->
+        <div class="ih-item circle effect right_to_left">            
+            <a href="/#blog" title="前往 高傲的电工李 的主页" class="blog-button">
+                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+                <div class="info">
+                    <div class="info-back">
+                        <h2> 
+                            
+                                李文博
+                            
+                        </h2>
+                        <p>
+                           
+                                机电 / 机器学习
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 头像效果-end -->
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for 高傲的电工李" class="blog-button">高傲的电工李</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">个人博客</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到我的个人博客</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        
+
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+                
+                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+                
+                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+                
+                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+                
+              </ul>
+            </nav>
+          </div>          
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-clear"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <head>
+  <link rel="stylesheet" href="/css/post.css">
+</head>
+
+<article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">汽车视觉 Automotive Vision -SLAM</h1>
+    <div class="post-meta">
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2023-06-12 00:00:00 +0200" itemprop="datePublished" class="post-meta__date date">2023-06-12</time>  
+
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+  
+    <h2 class="post-title">目录</h2>
+    <ul>
+  <li><a href="#chapter-6-self-localization-and-mapping">Chapter 6: Self-Localization and Mapping</a>
+    <ul>
+      <li><a href="#localization-with-landmarks-地标定位">Localization with landmarks 地标定位</a>
+        <ul>
+          <li><a href="#landmarks-地标">landmarks 地标：</a>
+            <ul>
+              <li><a href="#linear-landmarks-线性地标">linear landmarks 线性地标</a></li>
+              <li><a href="#what-can-we-conclude-from-我们可以从中得出什么结论-">what can we conclude from… ：我们可以从…中得出什么结论 ?</a></li>
+            </ul>
+          </li>
+          <li><a href="#one-shot-localization-一次性定位算法">One-Shot Localization 一次性定位算法</a>
+            <ul>
+              <li><a href="#icp-algorithm-三维点云配准">ICP algorithm 三维点云配准</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#incremental-localization-增量本地化">Incremental Localization 增量本地化</a></li>
+      <li><a href="#mapping-映射">Mapping 映射</a></li>
+      <li><a href="#simultaneous-localization-and-mappingslam">Simultaneous Localization and Mapping(SLAM)</a></li>
+    </ul>
+  </li>
+</ul>
+
+  
+
+  <section class="post">
+    <head>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+</head>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    packages: ['base', 'newcommand', 'configMacros']
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+
+<script> 
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    processEscapes: true
+  }
+};
+</script>
+
+<h1 id="chapter-6-self-localization-and-mapping">Chapter 6: Self-Localization and Mapping</h1>
+
+<p><strong>References</strong></p>
+<ul>
+  <li>Sebastian Thrun, Wolfram Burgard, Dieter Fox, Probabilistic Robotics. MIT Press,
+2005, Chapter 7-13 (partly)</li>
+  <li>Hugh Durrant-Whyte, Tim Bailey, Simultaneous Localization and Mapping: Part I,
+IEEE Robotics and Automation Magazine, 13(2), pg. 99-110, 2006</li>
+  <li>Tim Bailey, Hugh Durrant-Whyte, Simultaneous Localization and Mapping: Part II,
+IEEE Robotics and Automation Magazine, 13(3), pg. 108-117, 2006</li>
+  <li>Bruno Siciliano, Khatib Oussama (Hrsg.), Springer Handbook of Robotics, Springer,
+2008, Chapter 37</li>
+  <li>Joachim Hertzberg, Kai Lingemann, Andreas Nüchter, Mobile Roboter – Eine
+Einführung aus Sicht der Informatik, Springer 2012, Chapters 5+6</li>
+  <li>Ingemar J. Cox, Blanche – an Experiment in Guidance and Navigation of an
+Autonomous Robot Vehicle. IEEE Transactions on Robots and Automation, 7(2),
+pg. 193-204, 1991</li>
+</ul>
+
+<p><strong>Self Localization 自定位</strong></p>
+
+<p>self localization problem 自定位问题：</p>
+
+<ul>
+  <li>environment is known (map) 环境是已知的</li>
+  <li>vehicle position and orientation are unkonown 车辆位置和方向未知</li>
+  <li>vehicle observes the (local) environment 车辆观察（本地）环境</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612161042.png" alt="" /></p>
+
+<h2 id="localization-with-landmarks-地标定位">Localization with landmarks 地标定位</h2>
+
+<h3 id="landmarks-地标">landmarks 地标：</h3>
+
+<p>consistently identifiable points in the world. E.g. lighthouses, feature points in imaging</p>
+
+<p>一直可以被识别的点，例如灯塔、图像中的特征点</p>
+
+<p>#### what can we conclude from… 2d：我们可以从…中得出什么结论 ?</p>
+<ul>
+  <li>the distance to a given landmark?到一个给定地标的距离？
+    <ul>
+      <li>robot position on a circle</li>
+      <li>unknown orientatioin</li>
+    </ul>
+  </li>
+  <li>the distance between two landmarks?到两个给定地标的距离？
+    <ul>
+      <li>2 possible positons</li>
+      <li>unknown orientation</li>
+    </ul>
+  </li>
+  <li>the distance between three landmarks?到三个给定地标的距离？
+    <ul>
+      <li>robot position(some exceptions are possible)机器人位置（可能有一些例外）</li>
+      <li>orientationo unknown</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612162130.png" alt="" /></p>
+
+<ul>
+  <li>the angle, from which a landmark is being observed 地标的角度已经被观测到
+    <ul>
+      <li>positon unknown</li>
+      <li>relation between <em>position</em> and <em>orientation</em></li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612162831.png" alt="" /></p>
+<ul>
+  <li>the angle from which two landmarks are being observed? 两个地标之间的角度已经被观测到
+    <ul>
+      <li>robot position on an arc or line segment 圆弧或线段上的机器人位置</li>
+      <li>relation between <em>position</em> and <em>orientation</em></li>
+      <li>approch: inscribed angle theorem</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612162950.png" alt="" /></p>
+
+<h4 id="linear-landmarks-线性地标">linear landmarks 线性地标</h4>
+<ul>
+  <li>例如： roadway lines, curbs, and walls 道路线、路缘和墙壁</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612163335.png" alt="" /></p>
+
+<h4 id="what-can-we-conclude-from-我们可以从中得出什么结论-">what can we conclude from… ：我们可以从…中得出什么结论 ?</h4>
+
+<ul>
+  <li>the orthogonal distance,in which a line is being observed 观测一条线的垂直距离
+    <ul>
+      <li>position on two parallel lines 两条平行线</li>
+      <li>relation between position and orientation</li>
+    </ul>
+  </li>
+  <li>the orthogonal distance to two lines 两条线的垂直距离
+    <ul>
+      <li>4 points / 2 points</li>
+      <li>relation between position and orientation</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612164044.png" alt="" /></p>
+
+<h3 id="one-shot-localization-一次性定位算法">One-Shot Localization 一次性定位算法</h3>
+
+<blockquote>
+  <p>“One-Shot Localization” 是指在<strong>仅有一次观测</strong>或信息的情况下进行定位或位置估计的过程。它是指通过<strong>一次观测或一次输入</strong>，从未知位置或环境中准确地确定目标的位置或姿态。在传感器技术和机器人领域中，这个术语通常用于描述使用单个数据样本进行<strong>位置估计</strong>的方法或算法。这种方法可能利用传感器数据、图像处理技术或其他信息源来实现目标的定位。与传统的迭代定位算法相比，One-Shot Localization 着重于通过单次观测尽可能准确地确定目标的位置，从而减少计算和时间成本。</p>
+</blockquote>
+
+<p>给定：</p>
+<ul>
+  <li>a map with a set of landmarks</li>
+  <li>a set of boserved landmarks from seen from a vehicle</li>
+</ul>
+
+<p>任务：</p>
+<ul>
+  <li>how do I have to shift and rotate the vehicle so that the observed landmarks match best the land marks in the map?</li>
+  <li>我如何移动和旋转车辆，以便观察到的地标与地图中的地标最匹配？</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612165012.png" alt="" /></p>
+
+<p>数学方法：mathematically</p>
+
+<ul>
+  <li>which movement (translation + rotation) transforms <em>vehicle coordinates</em> into <em>world coordinates</em> such that observed <strong>landmark positions fit to map position</strong>?</li>
+  <li>哪种运动（平移+旋转）将<em>车辆坐标</em>转换为<em>世界坐标</em>，以便观察到的<strong>地标位置适配到地图位置</strong>？</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612165001.png" alt="" /></p>
+
+<ul>
+  <li>landmark positions in world coordinates (map) 世界坐标中的地标位置（地图）：</li>
+</ul>
+
+\[\vec{p_{1}},\cdots,\vec{p_{i}},...\]
+
+<ul>
+  <li>observed landmark positions in vehicle coordinates 在车辆坐标中观察到的地标位置:</li>
+</ul>
+
+\[\vec{q}_{1},\cdot\cdot\cdot,\vec{q}_{i},\cdot\cdot\cdot,\vec{q}_{N}\]
+
+<ul>
+  <li>optimization problem:</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612182552.png" alt="" /></p>
+
+<ul>
+  <li>最小化下面的式子：minimize</li>
+</ul>
+
+\[E(R,\bar{t})=\frac{1}{N}\sum_{i=1}^{N}||\vec{p_{i}}-(R\vec{q_{i}}+\vec{t})||^{2}\]
+
+<p>with：</p>
+
+\[\begin{aligned}
+&amp; E(R, \vec{t})=\frac{1}{N} \sum_{i=1}^N\left\|\vec{p}_i^{\prime}+\bar{p}-\left(R\left(\vec{q}_i^{\prime}+\bar{q}\right)+\vec{t}\right)\right\|^2 \\
+&amp; =\frac{1}{N} \sum_{i=1}^N\left\|\left(\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right)+(\bar{p}-R \bar{q}-\vec{t})\right\|^2 \\
+&amp; =\frac{1}{N} \sum_{i=1}^N\left\|\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right\|^2+\|\bar{p}-R \bar{q}-\vec{t}\|^2+\frac{2}{N} \sum_{i=1}^N(\bar{p}-R \bar{q}-\vec{t})^T\left(\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right) \\
+&amp; =\frac{1}{N} \sum_{i=1}^N\left\|\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right\|^2+\|\bar{p}-R \bar{q}-\vec{t}\|^2+2(\bar{p}-R \bar{q}-\vec{t})^T\left(\frac{1}{N} \sum_{i=1}^N \vec{p}_i^{\prime}-R \frac{1}{N} \sum_{i=1}^N \vec{q}_i^{\prime}\right) \\
+&amp; =\frac{1}{N} \sum_{i=1}^N\left\|\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right\|^2+\underbrace{\|\bar{p}-R \bar{q}-\vec{t}\|^2} \\
+&amp; =0 \quad \underbrace{N}_{=0} \\
+&amp; \Rightarrow \vec{t}=\bar{p}-R \bar{q} \\
+&amp; =\left\|\vec{p}_i^{\prime}\right\|^2+\left\|\vec{q}_i^{\prime}\right\|^2-2\left(\vec{p}_i^{\prime}\right)^T R \vec{q}_i^{\prime} \\
+&amp;
+\end{aligned}\]
+
+<p>最大化：</p>
+
+<p>$\sum_{i=1}^N\left(\vec{p}_i^{\prime}\right)^T R \vec{q}_i^{\prime}$</p>
+
+<ul>
+  <li>不同的方法，例如 SVD：</li>
+</ul>
+
+\[\sum_{i=1}^{N}\left(\vec{p}_{i}^{\prime}\right)^{T} R \vec{q}_{i}^{\prime}=\sum_{i=1}^{N} \operatorname{Tr}\left(R \vec{q}_{i}^{\prime}\left(\vec{p}_{i}^{\prime}\right)^{T}\right)=\operatorname{Tr}(R H) \quad \text { with } H=\sum_{i=1}^{N} \vec{q}_{i}^{\prime}\left(\vec{p}_{i}^{\prime}\right)^{T}\]
+
+<ul>
+  <li>
+    <p>mathematical theorem (singular value decomposition, SVD):
+for every real matrix H exist orthogonal matrices U,V, and a diagonal matrix D with nonnegative entries, such that:
+数学定理（奇异值分解，SVD）：对于每个实数矩阵 H，存在正交矩阵 U、V 和具有非负项的对角矩阵 D，使得：$H=U D V^{T}$</p>
+  </li>
+  <li>
+    <p>solution：</p>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612190302.png" alt="" /></p>
+
+\[(Derivation and proof: K.S.Arun, T.S.Hunang, S.D.Blostein, Least Squares Fitting of Two 3-D Point Sets,
+IEEE Transactions on Pattern Analysis and Machine Intelligence 9(5), 1987)\]
+
+<ul>
+  <li>what to do if landmarks are not uniquely identifiable?如果地标不是唯一可识别的怎么办？
+    <ul>
+      <li>$\vec{q_{i}}\ \mathrm{\bf~might~rester~to~any~of}\ \ \vec{p_{1}},\ …,\vec{p_{i}},…$</li>
+    </ul>
+  </li>
+  <li>brute force solution: try all possible combinations 蛮力解决方案：尝试所有可能的组合
+    <ul>
+      <li>computationally too expensive 计算成本太高</li>
+    </ul>
+  </li>
+  <li>iterative, greedy assignments: 迭代，贪婪的分配：
+    <ul>
+      <li>$\text { assign } \vec{q}_i \text { to closest landmark among } \vec{p}_1, \ldots, \vec{p}_i, \ldots$</li>
+      <li>reassign all observations incrementally 逐步重新分配所有观察结果</li>
+      <li>👉 ICP algorithm 迭代最近算法</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="icp-algorithm-三维点云配准">ICP algorithm 三维点云配准</h4>
+
+<blockquote>
+  <p>ICP（Iterative Closest Point）算法是一种迭代的点云配准算法，用于将两个或多个点云之间进行对齐和匹配。它是一种常用的三维点云配准算法，在计算机视觉、机器人和地图构建等领域得到广泛应用。</p>
+
+  <p>ICP算法的基本思想是通过迭代的方式，将待配准的目标点云与参考点云对齐，使它们在空间中尽可能重合。算法的核心是找到两个点云之间的最佳刚性变换（旋转和平移），使得它们的重叠部分最大化。</p>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612192547.png" alt="" /></p>
+
+<ul>
+  <li>Iterative Closest Point (ICP)(Besl, McKay 1992)
+    <ul>
+      <li>calculates rotation $R$ and translation $\overrightarrow{t}$ in order to transform a set of points $Q$ onto another set of points $P$ 计算旋转矩阵 $R$ 和平移向量 $\overrightarrow{t}$，以将点集 $Q$ 变换到另一个点集 $P$</li>
+      <li>ICP always terminates ICP总是终止</li>
+      <li>ICP converges to local minimum of <br /> 收敛到局部最小值</li>
+    </ul>
+  </li>
+</ul>
+
+\[E(R,\vec{t})\longrightarrow\frac{1}{N}\sum_{i=1}^{N}\,||\vec{p}_{j}(i)-\left(R\vec{q}_{i}+\vec{t}\right)||^{2}\]
+
+<ul>
+  <li>简要证明
+    <ul>
+      <li>by construction, $E(R,\overrightarrow{t})$ is minimized in step 8 assuming fixed assignments between points 根据结构，在步骤8中，$E(R,\overrightarrow{t})$是最小化的，假设点之间有固定的分配。</li>
+      <li>by construction, $E(R,\overrightarrow{t})$ is minimized in step 4 assuming fixed translation and rotation 根据结构，在步骤4中，假设固定的平移和旋转，$E(R,\overrightarrow{t})$被最小化了</li>
+      <li>hence, $E(R,\overrightarrow{t})$ never increases</li>
+      <li>since number of possible assignments is finite, we cannot generate new
+permutations in step 4 from a certain point on (pigeonhole/Dirichlet principle) 由于可能的分配数量是有限的，我们不能在第 4 步中从某个点生成新的排列（pigeonhole/Dirichlet principle）</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="incremental-localization-增量本地化">Incremental Localization 增量本地化</h2>
+
+<h2 id="mapping-映射">Mapping 映射</h2>
+
+<h2 id="simultaneous-localization-and-mappingslam">Simultaneous Localization and Mapping(SLAM)</h2>
+
+  </section>
+
+</article>
+
+<section>
+
+
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2022/03/MV12.1/" data-toggle="tooltip" data-placement="top" title="机器视觉-深度学习(第二部分) Deep Learning">上一篇：  <span>机器视觉-深度学习(第二部分) Deep Learning</span>
+            </a>
+        </li>
+        
+        
+        <li class="next">
+            <a href="/2023/06/TM4-03/" data-toggle="tooltip" data-placement="top" title="工程力学4-动力学/Technische Mechanik IV – Dynamik - Integration der Eulerschen Gleichungen 欧拉方程的积分">下一篇：  <span>工程力学4-动力学/Technische Mechanik IV – Dynamik - Integration der Eulerschen Gleichungen 欧拉方程的积分</span>
+            </a>
+        </li>
+        
+    </ul>
+</section>
+
+
+<section class="post-comments">
+
+    <script>
+
+        setInterval(function () 
+        {
+            var box = document.querySelector(".trc_rbox_container");
+            if(box) box.outerHTML = "";
+        }, 2000);
+        
+    </script>
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NTIzMy8zMTcwMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">  
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/WenboLi-CN-DE" title="@WenboLi-CN-DE 的 Github" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
+            </a>
+          </li>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:lwb_010@163.com" title="Contact me">
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
+            </a>
+          </li>
+          
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">  
+           <p class="copyright text-muted">
+            Copyright &copy; 高傲的电工李 2023 Theme by <a href="https://leopardpan.cn/">leopardpan</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+
+</html>

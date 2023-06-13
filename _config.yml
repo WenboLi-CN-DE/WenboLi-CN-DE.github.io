@@ -28,16 +28,7 @@ social:
      mail: lwb_010@163.com
 
 
-# 百度统计 
-# 使用博客模板请去掉或者更换 id 
-#baidu:
-    #id: 8ba1c6be0953b6f9c2ba38e57f615421  
 
-# Google Analytics
-# 使用博客模板请去掉或者更换 id
-#ga:
-    #id: UA-84134159-3  
-    #host: auto  
 
 
 # 《----------------- 上面的信息修改成你自己的 ---------------------------》
@@ -77,7 +68,7 @@ paginate: 20
 paginate_path: "page/:num/"
 
 # MathJax rendering for layout:page (e.g. post preview)
-page-mathjax: true
+# page-mathjax: true
 # 说明：是否对数学公式进行渲染（渲染的话显示的公式在网页加载的时候会出现变化）
 
 
