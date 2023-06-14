@@ -5,9 +5,576 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 13 Jun 2023 21:29:39 +0200</pubDate>
-    <lastBuildDate>Tue, 13 Jun 2023 21:29:39 +0200</lastBuildDate>
+    <pubDate>Wed, 14 Jun 2023 17:11:26 +0200</pubDate>
+    <lastBuildDate>Wed, 14 Jun 2023 17:11:26 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Machine Learning-Neural Networks 神经网络</title>
+        <description>&lt;head&gt;
+    &lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: [&apos;script&apos;, &apos;noscript&apos;, &apos;style&apos;, &apos;textarea&apos;, &apos;pre&apos;],
+            inlineMath: [[&apos;$&apos;,&apos;$&apos;]]
+            }
+        });
+    &lt;/script&gt;
+&lt;/head&gt;
+
+&lt;h1 id=&quot;neural-networks-神经网络&quot;&gt;Neural Networks 神经网络&lt;/h1&gt;
+
+&lt;div style=&quot;display: flex;&quot;&gt;
+    &lt;div style=&quot;width: 50%;&quot;&gt;
+
+We will learn today…
+
+- What a (deep) neural network is&lt;br /&gt;
+-  How do we train it?&lt;br /&gt;
+-  … which requires a calculus refresher ☺&lt;br /&gt;
+-  Why is everybody talking about it?&lt;br /&gt;
+-  Various ways to accelerate gradient descent&lt;br /&gt;
+-  Practical tips and tricks for training NNs
+  
+    &lt;/div&gt;
+
+    &lt;div style=&quot;width: 50%;&quot;&gt;
+
+我们今天将学习以下内容：&lt;br /&gt;
+&lt;br /&gt;
+- 什么是（深度）神经网络&lt;br /&gt;
+- 如何训练神经网络？&lt;br /&gt;
+- 这需要温习一下微积分 ☺&lt;br /&gt;
+- 为什么大家都在谈论它？&lt;br /&gt;
+- 加速梯度下降的各种方法&lt;br /&gt;
+- 训练神经网络的实际技巧和诀窍&lt;br /&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;div style=&quot;display: flex;&quot;&gt;
+    &lt;div style=&quot;width: 50%;&quot;&gt;
+
+Today‘s Agenda!&lt;br /&gt;
+&lt;br /&gt;
+-  What is a Neuron?&lt;br /&gt;
+-  Architectures and Activation Functions&lt;br /&gt;
+-  Loss-functions&lt;br /&gt;
+-  Backpropagation and the Chain Rule&lt;br /&gt;
+-  Computation graphs&lt;br /&gt;
+&lt;br /&gt;
+Advanced Topics:
+- Accelerating gradient descent
+- Regularization in Neural Networks
+- Practical considerations
+  
+    &lt;/div&gt;
+    &lt;div style=&quot;width: 50%;&quot;&gt;
+
+今天的议程如下：&lt;br /&gt;
+&lt;br /&gt;
+- 什么是神经元？&lt;br /&gt;
+- 架构和激活函数&lt;br /&gt;
+- 损失函数&lt;br /&gt;
+- 反向传播和链式法则&lt;br /&gt;
+- 计算图&lt;br /&gt;
+&lt;br /&gt;
+深入话题:&lt;br /&gt;
+- 加速梯度下降&lt;br /&gt;
+- 神经网络中的正则化&lt;br /&gt;
+- 实际考虑因素&lt;br /&gt;
+  
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;biological-inspiration-the-brain-生物学灵感大脑&quot;&gt;Biological Inspiration: The brain 生物学灵感：大脑&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;A neuron is the basic computational unit of the brain:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;神经元是大脑的基本计算单元：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144017.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Our brain has ~ 1011 neurons&lt;/li&gt;
+  &lt;li&gt;Each neuron is connected to ~ 104 other neurons (via synapses)&lt;/li&gt;
+  &lt;li&gt;Synapses have different connectivity&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Approx. model: Input impulses are weighted by synapse strength and added up&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;我们的大脑有大约10^11个神经元。&lt;/li&gt;
+  &lt;li&gt;每个神经元通过大约10^4个突触连接到其他神经元。&lt;/li&gt;
+  &lt;li&gt;突触具有不同的连接方式。&lt;/li&gt;
+  &lt;li&gt;近似模型：输入脉冲通过突触的强度加权并相加。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Neurons receive input signals and accumulate voltage. After some threshold they will fire spiking responses (highly non-linear response).&lt;/p&gt;
+
+&lt;p&gt;神经元接收输入信号并积累电压。 在达到某个阈值后，它们将激发尖峰响应（高度非线性响应）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144249.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;artificial-neurons-人工神经元&quot;&gt;Artificial Neurons 人工神经元&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;For neural nets, we use a much simpler unit (neuron, perceptron):&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;对于神经网络，我们使用更简单的单元（神经元、感知器）：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144359.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;display: flex;&quot;&gt;
+    &lt;div style=&quot;width: 50%;&quot;&gt;
+
+3 ingredients:
+- Weighting of the input
+- Summation
+- Non-linear activation function
+    &lt;/div&gt;
+    &lt;div style=&quot;width: 50%;&quot;&gt;
+    
+三个要素：
+- 输入的加权
+- 总和计算
+- 非线性激活函数
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Example we already know:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Logistic regression 逻辑回归&lt;/li&gt;
+&lt;/ul&gt;
+
+\[y=\sigma\left(\mathbf{w}^T \mathbf{x}+b\right)\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144739.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;feedforward-neural-networks-前馈神经网络&quot;&gt;Feedforward Neural Networks 前馈神经网络&lt;/h3&gt;
+
+&lt;p&gt;Building a network:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;We can connect lots of units
+together into a directed acyclic
+graph.&lt;/li&gt;
+  &lt;li&gt;This gives a feed-forward
+neural network. That’s in
+contrast to recurrent neural
+networks, which can have
+cycles.&lt;/li&gt;
+  &lt;li&gt;Typically, units are grouped
+together into layers.&lt;/li&gt;
+  &lt;li&gt;Each layer connects N input units to M output units.&lt;/li&gt;
+  &lt;li&gt;In the simplest case, all input units are connected to all output units. We call this a fully
+connected layer.&lt;/li&gt;
+  &lt;li&gt;Note: the inputs and outputs for a layer are distinct from the inputs and outputs to the network&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;构建一个网络：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;我们可以将很多单元连接在一起形成一个有向无环图。&lt;/li&gt;
+  &lt;li&gt;这就得到了一个前馈神经网络。与循环神经网络形成对比，后者可以有循环。&lt;/li&gt;
+  &lt;li&gt;通常，单元被分组成层。&lt;/li&gt;
+  &lt;li&gt;每一层将N个输入单元连接到M个输出单元。&lt;/li&gt;
+  &lt;li&gt;在最简单的情况下，所有输入单元都连接到所有输出单元。我们称之为全连接层。&lt;/li&gt;
+  &lt;li&gt;注意：层的输入和输出与网络的输入和输出是不同的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145012.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I.e., each layer has a M x N weight matrix W&lt;/li&gt;
+  &lt;li&gt;Equation in matrix form: $\mathbf{y}=\phi(\mathbf{W} \mathbf{x}+\mathbf{b})$
+    &lt;ul&gt;
+      &lt;li&gt;Output units are a function of input units&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Feedforward neural networks are also often called multi-layer perceptrons (MLPs)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;每一层具有一个大小为M x N的权重矩阵W。&lt;/li&gt;
+  &lt;li&gt;以矩阵形式的方程为：$\mathbf{y}=\phi(\mathbf{W} \mathbf{x}+\mathbf{b})$
+    &lt;ul&gt;
+      &lt;li&gt;输出单元是输入单元的函数。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;前馈神经网络通常也被称为多层感知器（MLP）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145355.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;activation-funcitons-激活函数&quot;&gt;Activation funcitons 激活函数&lt;/h3&gt;
+
+&lt;p&gt;Different activation functions for introducing non-linearities:
+引入非线性的不同激活函数：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145512.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145629.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;计算：&lt;/p&gt;
+
+\[\sigma(x)=\frac{1}{1+\exp (-x)}\]
+
+&lt;ul&gt;
+  &lt;li&gt;将数字压缩到范围[0,1]&lt;/li&gt;
+  &lt;li&gt;从历史上来看它们非常流行，因为它们可以很好地解释为神经元的饱和“发射率”
+    &lt;blockquote&gt;
+      &lt;p&gt;常用的激活函数（如Sigmoid函数）在输入值较大或较小的情况下会饱和，即输出值接近0或1，并具有类似于神经元发射的特性。因此，这些激活函数的输出值可以被解释为神经元的饱和“发射率”。&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;问题：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;饱和的神经元会使得梯度消失&lt;/li&gt;
+  &lt;li&gt;Sigmoid函数的输出不以零为中心（对于初始化很重要）&lt;/li&gt;
+  &lt;li&gt;exp()计算耗费资源&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614150009.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;将数字压缩到范围[-1,1]&lt;br /&gt;
+✓ 以零为中心（很好）&lt;br /&gt;
+× 当饱和时仍然会消失梯度&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614150446.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;修正线性单元（Rectified Linear Unit，ReLU）&lt;/p&gt;
+
+&lt;p&gt;计算： $f(x)=\max (0, x)$&lt;/p&gt;
+
+&lt;p&gt;✓ 不会饱和（在正区间内）&lt;br /&gt;
+✓ 计算效率非常高&lt;br /&gt;
+✓ 在实践中比sigmoid/tanh函数收敛速度快得多（例如，快6倍）&lt;/p&gt;
+
+&lt;p&gt;× 输出不以零为中心&lt;br /&gt;
+× 对于x &amp;lt; 0没有梯度&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614152248.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;计算： $f(x)=\max (0.1 x, x)$&lt;/p&gt;
+
+&lt;p&gt;✓ 不会饱和&lt;br /&gt;
+✓ 计算效率高&lt;br /&gt;
+✓ 在实践中收敛速度比sigmoid/tanh函数快很多！（例如，6倍）&lt;br /&gt;
+✓ 不会“消失”&lt;/p&gt;
+
+&lt;p&gt;Parametric Rectifier (PReLu):&lt;br /&gt;
+参数整流器 (PReLu)：&lt;/p&gt;
+
+&lt;p&gt;计算： $f(x)=\max (\alpha x, x)$&lt;/p&gt;
+
+&lt;p&gt;Also learn alpha&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614152454.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;指数线性单元&lt;/p&gt;
+
+&lt;p&gt;计算：&lt;/p&gt;
+
+\[f(x)= \begin{cases}x &amp;amp; \text { if } x&amp;gt;0 \\ \alpha(\exp (x)-1) &amp;amp; \text { if } x \leq 0\end{cases}\]
+
+&lt;p&gt;其中，alpha是一个预定义的常数，通常取一个较小的正数。&lt;/p&gt;
+
+&lt;p&gt;✓ 具有ReLU的所有优点&lt;br /&gt;
+✓ 输出接近零均值&lt;br /&gt;
+× 计算过程中需要使用exp()函数&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;In practice:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用ReLU。在学习率和初始化时要小心。
+    &lt;blockquote&gt;
+      &lt;p&gt;对于学习率（learning rate），选择一个合适的值非常重要。过大的学习率可能导致训练不稳定或发散，而过小的学习率可能导致收敛速度过慢。&lt;/p&gt;
+
+      &lt;p&gt;对于初始化（initialization），权重和偏置的初始值也需要谨慎选择。使用不合适的初始化方法可能导致梯度消失或梯度爆炸等问题，影响网络的训练效果。对于使用ReLU的网络，一种常见的初始化方法是使用较小的随机值，如从均匀分布或正态分布中采样得到的值。&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;尝试使用Leaky ReLU / ELU。&lt;/li&gt;
+  &lt;li&gt;尝试使用tanh函数，但不要期望太多。&lt;/li&gt;
+  &lt;li&gt;不要使用sigmoid函数。
+    &lt;ul&gt;
+      &lt;li&gt;sigmoid函数仅在分类问题的输出激活中使用。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Formalisation:&lt;/p&gt;
+
+&lt;p&gt;每层计算一个函数，因此网络计算函数的组合：&lt;/p&gt;
+
+\[\begin{aligned}
+\mathbf{h}^{(1)} &amp;amp; =f^{(1)}(\mathbf{x}) \\
+\mathbf{h}^{(2)} &amp;amp; =f^{(2)}\left(\mathbf{h}^{(1)}\right) \\
+\vdots &amp;amp;
+\end{aligned}\]
+
+&lt;p&gt;或者更简单地：&lt;/p&gt;
+
+\[\begin{aligned}
+&amp;amp; \mathbf{y}=f^{(L)}\left(\mathbf{h}^{(L-1)}\right) \\
+&amp;amp; \mathbf{y}=f^L \circ f^{L-1} \circ \ldots f^{(1)}(\mathbf{x})
+\end{aligned}\]
+
+&lt;p&gt;神经网络提供模块化：我们可以将每一层的计算实现为一个黑盒子&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614154844.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;example-xor-异或&quot;&gt;Example: XOR 异或&lt;/h4&gt;
+
+&lt;p&gt;设计一个实现 XOR 的网络：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614161253.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614161308.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;单个单元无法计算!&lt;/li&gt;
+  &lt;li&gt;经典的例子，为什么我们需要多层次&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;XOR in terms of elemental operations:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;XOR(a,b) = (a OR b) AND NOT (a AND b)&lt;/p&gt;
+
+&lt;p&gt;设计一个实现XOR的网络：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;激活函数的硬阈值，x1和x2是二进制的&lt;/li&gt;
+  &lt;li&gt;h1 计算 x1 OR x2&lt;/li&gt;
+  &lt;li&gt;h2 计算 x1 AND x2&lt;/li&gt;
+  &lt;li&gt;y 计算 h1 AND NOT h2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614161739.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;deep-architectures深层架构&quot;&gt;Deep Architectures深层架构&lt;/h3&gt;
+
+&lt;p&gt;为什么我们需要深入？&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;任何线性层序列都可以用单个线性层等效地表示&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\mathbf{y}=\underbrace{\mathbf{W}^{(3)} \mathbf{W}^{(2)} \mathbf{W}^{(1)}}_{\tilde{\mathbf{W}}} \mathbf{x}\]
+
+&lt;p&gt;即，我们需要非线性，以利用多个层次&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;具有非线性激活函数的FF-NN是通用函数近似器：
+    &lt;ul&gt;
+      &lt;li&gt;给定一个潜在的无限量的单元，它们可以任意地逼近任何函数&lt;/li&gt;
+      &lt;li&gt;通用函数逼近定理： 单层就足以实现 “普适性”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;那么，单层是否足够？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;尽管通用函数逼近定理表示单层理论上足够，但实际上我们需要指数级（与输入维度成正比）的神经元数量才能实现这一点。
+    &lt;ul&gt;
+      &lt;li&gt;如果可以学习任何函数，那么结果很可能会过拟合。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;相反，多层网络可以用更少的神经元实现类似的效果。
+    &lt;ul&gt;
+      &lt;li&gt;紧凑的表示方式比”通用表示”更有效。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;loss-functions-损失函数&quot;&gt;Loss-functions 损失函数&lt;/h2&gt;
+
+&lt;p&gt;训练神经网络的目标函数：&lt;/p&gt;
+
+&lt;p&gt;通用的机器学习方法：逐样本损失 + 正则化惩罚&lt;/p&gt;
+
+\[\boldsymbol{\theta}^*=\underset{\text { parameters } \boldsymbol{\theta}}{\arg \min } \sum_{i=1}^N l\left(\boldsymbol{x}_i, \boldsymbol{\theta}\right)+\lambda \text { penalty }(\boldsymbol{\theta})\]
+
+&lt;p&gt;对于不同的任务，损失函数和输出激活函数的选择有所不同：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;回归任务（Regression）：通常使用均方误差（Mean Squared Error）作为损失函数，输出激活函数可以是线性函数或恒等函数。&lt;/li&gt;
+  &lt;li&gt;二分类任务（Binary Classification）：常见的损失函数包括二元交叉熵（Binary Cross-Entropy）或对数损失（Log Loss），输出激活函数通常选择sigmoid函数。&lt;/li&gt;
+  &lt;li&gt;多类别分类任务（Multi-class Classification）：常用的损失函数是多类别交叉熵（Categorical Cross-Entropy），输出激活函数则通常选择softmax函数。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Regression 回归&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div style=&quot;display: flex;&quot;&gt;
+&lt;div style=&quot;flex: 50%;&quot;&gt;
+
+&lt;b&gt;Output layer: Deterministic 决定性&lt;/b&gt;
+
+linear 线性
+
+$$
+\mathbf{f}=\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+\boldsymbol{b}^{(L)}
+$$
+
+&lt;b&gt;Loss：&lt;/b&gt;
+
+squared error 方差
+
+$$
+l_i\left(\mathbf{x}_i, \boldsymbol{\theta}\right)=\frac{1}{2}\left(\mathbf{f}\left(\mathbf{x}_i\right)-\mathbf{y}_i\right)^2
+$$
+
+&lt;/div&gt;
+&lt;div style=&quot;flex: 50%;&quot;&gt;
+
+&lt;b&gt;Probabilistic 概率性&lt;/b&gt;
+
+linear Gaussian
+
+$$
+p(\mathbf{y} \mid \mathbf{x})=\mathcal{N}\left(\mathbf{y} \mid \mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+\mathbf{b}^{(L)}, \mathbf{\Sigma}\right)
+$$
+
+&lt;br /&gt;
+
+negative log-likelihood 负对数似然
+
+$$
+l_i\left(\mathbf{x}_i, \boldsymbol{\theta}\right)=-\log \mathcal{N}\left(\mathbf{y}_i \mid \boldsymbol{\mu}\left(\mathbf{x}_i\right), \boldsymbol{\Sigma}\right)
+$$
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Binary classification 二元分类&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div style=&quot;display: flex;&quot;&gt;
+&lt;div style=&quot;flex: 50%;&quot;&gt;
+
+&lt;b&gt;Output layer: Deterministic 决定性&lt;/b&gt;
+
+linear 线性
+
+$$
+f=\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+b^{(L)}
+$$
+
+&lt;b&gt;Loss function&lt;/b&gt;
+
+hinge-loss 铰链损失
+
+$$
+l\left(\mathbf{x}_i, \boldsymbol{\theta}\right)=\max \left(0,1-y_i f\left(\boldsymbol{x}_i\right)\right)
+$$
+
+&lt;/div&gt;
+&lt;div style=&quot;flex: 50%;&quot;&gt;
+
+&lt;b&gt;Probabilistic 概率性&lt;/b&gt;
+
+sigmoid 
+
+$$
+f=\sigma\left(\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+b^{(L)}\right)
+$$
+
+&lt;br /&gt;
+
+neg-loglike 负对数似然
+
+$$
+\begin{aligned}
+l_i\left(\mathbf{x}_i, \boldsymbol{\theta}\right)= &amp;amp; -c_i \log f\left(\mathbf{x}_i\right)-\left(1-c_i\right) \log \left(1-f\left(\mathbf{x}_i\right)\right)
+\end{aligned}
+$$
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;其中$y_i$是 -1/+1 labels, $c_i$ 是0/1 labels。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Multi-class classification 多类别分类&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div style=&quot;display: flex;&quot;&gt;
+&lt;div style=&quot;flex: 50%;&quot;&gt;
+
+&lt;b&gt;Output layer: Deterministic 决定性&lt;/b&gt;
+
+linear 线性
+
+$$
+\mathbf{f}=\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+\mathbf{b}^{(L)}
+$$
+
+&lt;b&gt;Loss function&lt;/b&gt;
+
+Multi-class SVM loss 多类 SVM 损失&lt;br /&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+ Not covered
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div style=&quot;flex: 50%;&quot;&gt;
+
+&lt;b&gt;Probabilistic 概率性&lt;/b&gt;
+
+sigmoid 
+
+$$
+\mathbf{f}=\operatorname{softmax}\left(\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+\mathbf{b}^{(L)}\right)
+$$
+
+&lt;br /&gt;
+
+neg-loglike 负对数似然
+
+$$
+l_i\left(\mathbf{x}_i, \boldsymbol{\theta}\right)=-\sum_{k=1}^K \boldsymbol{h}_{c_i, k} \log y_k\left(\mathbf{x}_i\right)
+$$
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;其中 $\boldsymbol{h}_{c_i, k}$ 是 one hot coding&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;One-hot encoding是一种常用的数据预处理技术，用于将离散特征表示为二进制向量的形式。它常用于机器学习和深度学习任务中，特别是当特征数据中包含分类变量时。&lt;/p&gt;
+
+  &lt;p&gt;在One-hot encoding中，如果一个特征具有n个不同的类别，那么它将被表示为一个长度为n的二进制向量，其中只有一个位置为1，其他位置都为0。被设置为1的位置对应于该特征所属的类别。&lt;/p&gt;
+
+  &lt;p&gt;这样的编码方式有助于解决以下问题：&lt;/p&gt;
+
+  &lt;p&gt;解决分类变量的数值化问题：分类变量通常无法直接用于机器学习算法，因为算法通常期望输入是数值型数据。One-hot encoding可以将分类变量转换为数值型数据，使其适用于算法的处理。&lt;/p&gt;
+
+  &lt;p&gt;避免特征之间的顺序关系：One-hot encoding将每个类别都独立地表示为一个二进制向量，不考虑类别之间的顺序关系。这在一些情况下是有益的，例如避免算法错误地学习到类别之间的顺序或大小关系。&lt;/p&gt;
+
+  &lt;p&gt;需要注意的是，当原始特征具有大量类别时，One-hot encoding会导致特征空间的维度增加，可能会导致稀疏矩阵和计算资源的浪费。在处理高维稀疏数据时，可能需要考虑其他的特征编码方法。&lt;/p&gt;
+
+  &lt;p&gt;在实践中，可以使用多种编程语言和库来执行One-hot encoding，例如Python中的scikit-learn、pandas和TensorFlow等。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Feature Learning 特征学习&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;神经网络可以被看作是一种学习特征的方式&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;最后一层是标准的线性回归/分类层&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;网络学习特征$\psi(\mathbf{x})$使得线性回归/分类可以解决它&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614165612.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614165623.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 14 Jun 2023 00:00:00 +0200</pubDate>
+        <link>https://wenboli-cn-de.github.io/2023/06/ML-04-Neural-Networks/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2023/06/ML-04-Neural-Networks/</guid>
+        
+        <category>专业</category>
+        
+        <category>机器学习</category>
+        
+        
+      </item>
     
       <item>
         <title>工程力学4-动力学/Technische Mechanik IV – Dynamik - Integration der Eulerschen Gleichungen 欧拉方程的积分</title>
@@ -4377,255 +4944,6 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
         <pubDate>Fri, 11 Feb 2022 00:00:00 +0100</pubDate>
         <link>https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</link>
         <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</guid>
-        
-        <category>专业</category>
-        
-        <category>机器视觉</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>机器视觉-颜色 Color</title>
-        <description>&lt;head&gt;
-    &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
-   &lt;/script&gt;
-&lt;/head&gt;
-&lt;h1 id=&quot;颜色&quot;&gt;颜色&lt;/h1&gt;
-
-&lt;h2 id=&quot;颜色物理学&quot;&gt;颜色物理学&lt;/h2&gt;
-
-&lt;p&gt;可见光是波长在 380nm 到 740nm 之间的电磁波&lt;/p&gt;
-
-&lt;p&gt;光的波长指定了它的颜色图像&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311101659.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;– 光可以包含许多波长’ → 光谱&lt;/p&gt;
-
-&lt;p&gt;– 光谱取决于光源和滤光片&lt;/p&gt;
-
-&lt;p&gt;– 要完整描述光源的物理特性，我们必须知道它的全光谱&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311101831.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;人类感知中的颜色&quot;&gt;人类感知中的颜色&lt;/h2&gt;
-
-&lt;p&gt;人眼有四种感光细胞：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;视杆细胞（对颜色不敏感） rods&lt;/li&gt;
-  &lt;li&gt;L-、M-、S-视锥细胞（对颜色敏感）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311101921.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Young-Helmholtz 理论：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;人类对颜色的印象可以完全通过 S、M 和 L 锥的反应来解释&lt;/li&gt;
-  &lt;li&gt;这不适用于色盲人士&lt;/li&gt;
-  &lt;li&gt;这不适用于其他物种&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;假设单色光的波长可以从视锥细胞的反应中重建&lt;/p&gt;
-
-&lt;p&gt;– 不同的光谱导致视锥细胞的相同响应&lt;/p&gt;
-
-&lt;p&gt;​	→ 彩色相机模仿视锥细胞的响应&lt;/p&gt;
-
-&lt;p&gt;​	→ 彩色监视器混合来自三个波长的颜色”&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311102345.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;色彩心理学-color-psychology&quot;&gt;色彩心理学 Color Psychology&lt;/h2&gt;
-
-&lt;p&gt;颜色的心理印象不能用视锥细胞的反应来解释&lt;/p&gt;
-
-&lt;p&gt;Hering 的拮抗色学说：&lt;/p&gt;
-
-&lt;p&gt;人类对色彩的印象可以用三个尺度来描述： • 亮与暗 • 红色与绿色 • 蓝色与黄色&lt;/p&gt;
-
-&lt;p&gt;（Hering，1834—1918)提出了色觉&lt;strong&gt;拮抗色学说&lt;/strong&gt;（&lt;strong&gt;opponent Color Theory&lt;/strong&gt;），它撇开了先入为主的成见，认为人类的色觉是由三组正反相对的基本色感——拮抗色在大脑中融合而成，它们分别是亮暗、红绿、蓝黄…&lt;/p&gt;
-
-&lt;p&gt;观察结果：存在一些“混合颜色”，其他不存在：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;存在：蓝红色（紫色）、黄红色（橙色）、蓝绿色（青色）、黄绿色（柠檬色）&lt;/p&gt;
-
-    &lt;p&gt;bluish red (violet), yellowish red (orange), bluish green
-(cyan), yellowish green (citron color)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;不存在：蓝黄色、红绿色&lt;/p&gt;
-
-    &lt;p&gt;bluish yellow, reddish green&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311102853.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;颜色名称&lt;/p&gt;
-
-&lt;p&gt;颜色的分类取决于文化背景&lt;/p&gt;
-
-&lt;p&gt;例如， 哪些颜色被命名为“绿色”、“蓝色”等。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103032.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;讲师对颜色术语的个人印象（德国文化背景，使用液晶显示器进行的分类）&lt;/p&gt;
-
-&lt;p&gt;亮度，强度luminance, intensity  ：与光谱无关的入射光总量&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103148.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;色度chrominance:  ：与亮度无关的光谱&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103545.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;色调hue  ：光谱中最主要的波长&lt;/p&gt;
-
-&lt;p&gt;饱和saturation:  主波长的能量百分比&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103348.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;颜色处理的作用&quot;&gt;颜色处理的作用&lt;/h2&gt;
-
-&lt;p&gt;视觉皮层中色度和亮度的处理遵循不同的途径&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;亮度用于识别图像中的形状和纹理&lt;/li&gt;
-  &lt;li&gt;色度是控制视觉注意力的重要线索&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311103831.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;许多不同的颜色模型，但都使用 3 个通道&lt;/p&gt;
-
-&lt;p&gt;– 模仿三个锥体的模型：RGB、CMY/CMYK&lt;/p&gt;
-
-&lt;p&gt;– 基于色彩心理学的模型：XYZ、L&lt;em&gt;a&lt;/em&gt;b&lt;em&gt;、L&lt;/em&gt;u&lt;em&gt;v&lt;/em&gt;、HSV、HSL、 …&lt;/p&gt;
-
-&lt;p&gt;– 其他模型：YUV，…&lt;/p&gt;
-
-&lt;h2 id=&quot;rgb彩色空间&quot;&gt;rgb彩色空间&lt;/h2&gt;
-
-&lt;p&gt;RGB 模仿 S 、M 和 L 视锥细胞的响应&lt;/p&gt;
-
-&lt;p&gt;– R：红色值 (0–1)&lt;/p&gt;
-
-&lt;p&gt;– G：绿色值 (0–1)&lt;/p&gt;
-
-&lt;p&gt;– B：蓝色值 (0–1)&lt;/p&gt;
-
-&lt;p&gt;显示器上显示的颜色取决于设备&lt;/p&gt;
-
-&lt;p&gt;应用领域：数码相机、显示器、图像表示&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311105844.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;hsv彩色空间&quot;&gt;HSV彩色空间&lt;/h2&gt;
-
-&lt;p&gt;颜色分解为亮度、色调和饱和度&lt;/p&gt;
-
-&lt;p&gt;– H：hue 色相 (0–360°)&lt;/p&gt;
-
-&lt;p&gt;用角度度量，取值范围为0°～360°，从红色开始按逆时针方向计算，红色为0°，绿色为120°,蓝色为240°。它们的补色是：黄色为60°，青色为180°,紫色为300°；&lt;/p&gt;
-
-&lt;p&gt;色相（英语：hue）指的是色彩的外相，是在不同波长的光照射下，人眼所感觉不同的颜色，有红色、橙色、黄色、绿色、蓝色、紫色、粉红色、黑色、褐色、灰色、白色、金色和银色。
-在HSL和HSV色彩空间中，H指的就是色相，是以红色为0度（360度）；黄色为60度；绿色为120度；青色为180度；蓝色为240度；品红色为300度。&lt;/p&gt;
-
-&lt;p&gt;– S：饱和度 (0–1)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;饱和度是指色彩的纯度&lt;/strong&gt;，一种颜色的饱和度越高，它就越鲜艳；反之，一种颜色的饱和度越低，它就越接近于灰色。&lt;/p&gt;
-
-&lt;p&gt;– V：值、亮度 (0–1)&lt;/p&gt;
-
-&lt;p&gt;明度表示颜色明亮的程度，对于光源色，明度值与发光体的光亮度有关；对于物体色，此值和物体的透射比或反射比有关。通常取值范围为0%（黑）到100%（白）。&lt;/p&gt;
-
-&lt;p&gt;– 由 RGB 立方体沿其对角线投影创建&lt;/p&gt;
-
-&lt;p&gt;– 通道具有语义&lt;/p&gt;
-
-&lt;p&gt;应用领域：绘画、机器视觉&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110016.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;luv-颜色空间和-lab-颜色空间&quot;&gt;Luv 颜色空间和 Lab 颜色空间&lt;/h2&gt;
-
-&lt;p&gt;基于人类色彩解释的色彩空间&lt;/p&gt;
-
-&lt;p&gt;– 色彩空间中的距离是指人类色彩解释的差异&lt;/p&gt;
-
-&lt;p&gt;– L* 轴：亮度&lt;/p&gt;
-
-&lt;p&gt;– u&lt;em&gt;、v&lt;/em&gt; 轴：色度&lt;/p&gt;
-
-&lt;p&gt;– a&lt;em&gt;、b&lt;/em&gt; 轴：色度&lt;/p&gt;
-
-&lt;p&gt;应用领域：机器视觉&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110159.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;色彩恒常性色感一致性&quot;&gt;色彩恒常性；色感一致性&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311181131.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;center&gt;左侧立方体顶部的蓝色瓷砖与右侧立方体顶部的黄色瓷砖颜色相同！&lt;/center&gt;
-
-&lt;p&gt;颜色感知取决于照明条件，即用于照亮物体的光谱&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110455.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;人造光导致颜色偏移&lt;/p&gt;
-
-&lt;p&gt;用于颜色校正的白平衡&lt;/p&gt;
-
-&lt;h3 id=&quot;白平衡-white-balance&quot;&gt;白平衡 white balance&lt;/h3&gt;
-
-&lt;p&gt;白平衡，字面上的理解是白色的平衡。白平衡是描述显示器中红、绿、蓝三基色混合生成后白色精确度的一项指标。&lt;/p&gt;
-
-&lt;p&gt;其基本概念是“不管在任何光源下，都能将白色物体还原为白色”，对在特定光源下拍摄时出现的偏色现象，通过加强对应的补色来进行补偿。相机的白平衡设定可以校准色温的偏差，在拍摄时我们可以大胆地调整白平衡来达到想要的画面效果&lt;/p&gt;
-
-&lt;p&gt;白平衡：&lt;/p&gt;
-
-&lt;p&gt;– 改变 RGB 的 R 和 B 通道&lt;/p&gt;
-
-&lt;p&gt;– 需要一个灰色或白色参考区域&lt;/p&gt;
-
-&lt;p&gt;– 计算参考区域的平均 RGB 值&lt;/p&gt;
-
-&lt;p&gt;– 计算 R 和 B 的校正因子&lt;/p&gt;
-
-&lt;p&gt;– 将图像像素的 R 和 B 值乘以校正因子&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110614.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;白平衡：&lt;/p&gt;
-
-&lt;p&gt;– 许多数码相机的内置功能&lt;/p&gt;
-
-&lt;p&gt;– 确定参考颜色的替代策略：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;最亮像素的颜色&lt;/li&gt;
-  &lt;li&gt;图像中的平均颜色&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;– 例如：机器人足球&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;将白纸放入相机视野&lt;/li&gt;
-  &lt;li&gt;使用该区域作为参考进行白平衡&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311110732.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311111243.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 03 Feb 2022 00:00:00 +0100</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/02/MV5.1color/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/02/MV5.1color/</guid>
         
         <category>专业</category>
         
