@@ -1,0 +1,21 @@
+I"�
+<ul>
+  <li><a href="#neural-networks-神经网络">Neural Networks 神经网络</a>
+    <ul>
+      <li><a href="#biological-inspiration-the-brain-生物学灵感大脑">Biological Inspiration: The brain 生物学灵感：大脑</a></li>
+      <li><a href="#artificial-neurons-人工神经元">Artificial Neurons 人工神经元</a>
+        <ul>
+          <li><a href="#feedforward-neural-networks-前馈神经网络">Feedforward Neural Networks 前馈神经网络</a></li>
+          <li><a href="#activation-funcitons-激活函数">Activation funcitons 激活函数</a>
+            <ul>
+              <li><a href="#example-xor-异或">Example: XOR 异或</a></li>
+            </ul>
+          </li>
+          <li><a href="#deep-architectures深层架构">Deep Architectures深层架构</a></li>
+        </ul>
+      </li>
+      <li><a href="#loss-functions-损失函数">Loss-functions 损失函数</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

@@ -1,0 +1,546 @@
+I"�F<head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
+<h1 id="neural-networks-神经网络">Neural Networks 神经网络</h1>
+
+<div style="display: flex;">
+    <div style="width: 50%;">
+We will learn today…
+
+- What a (deep) neural network is
+-  How do we train it?
+-  … which requires a calculus refresher ☺
+-  Why is everybody talking about it?
+-  Various ways to accelerate gradient descent
+-  Practical tips and tricks for training NNs
+    </div>
+
+    <div style="width: 50%;">
+我们今天将学习以下内容：
+
+- 什么是（深度）神经网络
+- 如何训练神经网络？
+- 这需要温习一下微积分 ☺
+- 为什么大家都在谈论它？
+- 加速梯度下降的各种方法
+- 训练神经网络的实际技巧和诀窍
+    </div>
+</div>
+
+<hr />
+
+<div style="display: flex;">
+    <div style="width: 50%;">
+Today‘s Agenda!
+
+-  What is a Neuron?
+-  Architectures and Activation Functions
+-  Loss-functions
+-  Backpropagation and the Chain Rule
+-  Computation graphs
+
+Advanced Topics:
+- Accelerating gradient descent
+- Regularization in Neural Networks
+- Practical considerations
+    </div>
+    <div style="width: 50%;">
+今天的议程如下：
+
+- 什么是神经元？
+- 架构和激活函数
+- 损失函数
+- 反向传播和链式法则
+- 计算图
+
+深入话题:
+- 加速梯度下降
+- 神经网络中的正则化
+- 实际考虑因素
+    </div>
+</div>
+
+<hr />
+
+<h2 id="biological-inspiration-the-brain-生物学灵感大脑">Biological Inspiration: The brain 生物学灵感：大脑</h2>
+
+<p><strong>A neuron is the basic computational unit of the brain:</strong></p>
+
+<p><strong>神经元是大脑的基本计算单元：</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144017.png" alt="" /></p>
+
+<ul>
+  <li>Our brain has ~ 1011 neurons</li>
+  <li>Each neuron is connected to ~ 104 other neurons (via synapses)</li>
+  <li>Synapses have different connectivity</li>
+  <li>
+    <p>Approx. model: Input impulses are weighted by synapse strength and added up</p>
+  </li>
+  <li>我们的大脑有大约10^11个神经元。</li>
+  <li>每个神经元通过大约10^4个突触连接到其他神经元。</li>
+  <li>突触具有不同的连接方式。</li>
+  <li>近似模型：输入脉冲通过突触的强度加权并相加。</li>
+</ul>
+
+<p>Neurons receive input signals and accumulate voltage. After some threshold they will fire spiking responses (highly non-linear response).</p>
+
+<p>神经元接收输入信号并积累电压。 在达到某个阈值后，它们将激发尖峰响应（高度非线性响应）。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144249.png" alt="" /></p>
+
+<h2 id="artificial-neurons-人工神经元">Artificial Neurons 人工神经元</h2>
+
+<p><strong>For neural nets, we use a much simpler unit (neuron, perceptron):</strong></p>
+
+<p><strong>对于神经网络，我们使用更简单的单元（神经元、感知器）：</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144359.png" alt="" /></p>
+
+<div style="display: flex;">
+    <div style="width: 50%;">
+
+3 ingredients:
+- Weighting of the input
+- Summation
+- Non-linear activation function
+    </div>
+    <div style="width: 50%;">
+    
+三个要素：
+- 输入的加权
+- 总和计算
+- 非线性激活函数
+    </div>
+</div>
+
+<p>Example we already know:</p>
+<ul>
+  <li>Logistic regression 逻辑回归</li>
+</ul>
+
+\[y=\sigma\left(\mathbf{w}^T \mathbf{x}+b\right)\]
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144739.png" alt="" /></p>
+
+<h3 id="feedforward-neural-networks-前馈神经网络">Feedforward Neural Networks 前馈神经网络</h3>
+
+<p>Building a network:</p>
+<ul>
+  <li>We can connect lots of units
+together into a directed acyclic
+graph.</li>
+  <li>This gives a feed-forward
+neural network. That’s in
+contrast to recurrent neural
+networks, which can have
+cycles.</li>
+  <li>Typically, units are grouped
+together into layers.</li>
+  <li>Each layer connects N input units to M output units.</li>
+  <li>In the simplest case, all input units are connected to all output units. We call this a fully
+connected layer.</li>
+  <li>Note: the inputs and outputs for a layer are distinct from the inputs and outputs to the network</li>
+</ul>
+
+<p>构建一个网络：</p>
+<ul>
+  <li>我们可以将很多单元连接在一起形成一个有向无环图。</li>
+  <li>这就得到了一个前馈神经网络。与循环神经网络形成对比，后者可以有循环。</li>
+  <li>通常，单元被分组成层。</li>
+  <li>每一层将N个输入单元连接到M个输出单元。</li>
+  <li>在最简单的情况下，所有输入单元都连接到所有输出单元。我们称之为全连接层。</li>
+  <li>注意：层的输入和输出与网络的输入和输出是不同的。</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145012.png" alt="" /></p>
+
+<ul>
+  <li>I.e., each layer has a M x N weight matrix W</li>
+  <li>Equation in matrix form: $\mathbf{y}=\phi(\mathbf{W} \mathbf{x}+\mathbf{b})$
+    <ul>
+      <li>Output units are a function of input units</li>
+    </ul>
+  </li>
+  <li>
+    <p>Feedforward neural networks are also often called multi-layer perceptrons (MLPs)</p>
+  </li>
+  <li>每一层具有一个大小为M x N的权重矩阵W。</li>
+  <li>以矩阵形式的方程为：$\mathbf{y}=\phi(\mathbf{W} \mathbf{x}+\mathbf{b})$
+    <ul>
+      <li>输出单元是输入单元的函数。</li>
+    </ul>
+  </li>
+  <li>前馈神经网络通常也被称为多层感知器（MLP）</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145355.png" alt="" /></p>
+
+<h3 id="activation-funcitons-激活函数">Activation funcitons 激活函数</h3>
+
+<p>Different activation functions for introducing non-linearities:
+引入非线性的不同激活函数：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145512.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145629.png" alt="" /></p>
+
+<p>计算：</p>
+
+\[\sigma(x)=\frac{1}{1+\exp (-x)}\]
+
+<ul>
+  <li>将数字压缩到范围[0,1]</li>
+  <li>从历史上来看它们非常流行，因为它们可以很好地解释为神经元的饱和“发射率”
+    <blockquote>
+      <p>常用的激活函数（如Sigmoid函数）在输入值较大或较小的情况下会饱和，即输出值接近0或1，并具有类似于神经元发射的特性。因此，这些激活函数的输出值可以被解释为神经元的饱和“发射率”。</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><strong>问题：</strong></p>
+<ul>
+  <li>饱和的神经元会使得梯度消失</li>
+  <li>Sigmoid函数的输出不以零为中心（对于初始化很重要）</li>
+  <li>exp()计算耗费资源</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614150009.png" alt="" /></p>
+
+<ul>
+  <li>将数字压缩到范围[-1,1]<br />
+✓ 以零为中心（很好）<br />
+× 当饱和时仍然会消失梯度</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614150446.png" alt="" /></p>
+
+<p>修正线性单元（Rectified Linear Unit，ReLU）</p>
+
+<p>计算： $f(x)=\max (0, x)$</p>
+
+<p>✓ 不会饱和（在正区间内）<br />
+✓ 计算效率非常高<br />
+✓ 在实践中比sigmoid/tanh函数收敛速度快得多（例如，快6倍）</p>
+
+<p>× 输出不以零为中心<br />
+× 对于x &lt; 0没有梯度</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614152248.png" alt="" /></p>
+
+<p>计算： $f(x)=\max (0.1 x, x)$</p>
+
+<p>✓ 不会饱和<br />
+✓ 计算效率高<br />
+✓ 在实践中收敛速度比sigmoid/tanh函数快很多！（例如，6倍）<br />
+✓ 不会“消失”</p>
+
+<p>Parametric Rectifier (PReLu):<br />
+参数整流器 (PReLu)：</p>
+
+<p>计算： $f(x)=\max (\alpha x, x)$</p>
+
+<p>Also learn alpha</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614152454.png" alt="" /></p>
+
+<p>指数线性单元</p>
+
+<p>计算：</p>
+
+\[f(x)= \begin{cases}x &amp; \text { if } x&gt;0 \\ \alpha(\exp (x)-1) &amp; \text { if } x \leq 0\end{cases}\]
+
+<p>其中，alpha是一个预定义的常数，通常取一个较小的正数。</p>
+
+<p>✓ 具有ReLU的所有优点<br />
+✓ 输出接近零均值<br />
+× 计算过程中需要使用exp()函数</p>
+
+<p><strong>In practice:</strong></p>
+
+<ul>
+  <li>使用ReLU。在学习率和初始化时要小心。
+    <blockquote>
+      <p>对于学习率（learning rate），选择一个合适的值非常重要。过大的学习率可能导致训练不稳定或发散，而过小的学习率可能导致收敛速度过慢。</p>
+
+      <p>对于初始化（initialization），权重和偏置的初始值也需要谨慎选择。使用不合适的初始化方法可能导致梯度消失或梯度爆炸等问题，影响网络的训练效果。对于使用ReLU的网络，一种常见的初始化方法是使用较小的随机值，如从均匀分布或正态分布中采样得到的值。</p>
+    </blockquote>
+  </li>
+  <li>尝试使用Leaky ReLU / ELU。</li>
+  <li>尝试使用tanh函数，但不要期望太多。</li>
+  <li>不要使用sigmoid函数。
+    <ul>
+      <li>sigmoid函数仅在分类问题的输出激活中使用。</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Formalisation:</p>
+
+<p>每层计算一个函数，因此网络计算函数的组合：</p>
+
+\[\begin{aligned}
+\mathbf{h}^{(1)} &amp; =f^{(1)}(\mathbf{x}) \\
+\mathbf{h}^{(2)} &amp; =f^{(2)}\left(\mathbf{h}^{(1)}\right) \\
+\vdots &amp;
+\end{aligned}\]
+
+<p>或者更简单地：</p>
+
+\[\begin{aligned}
+&amp; \mathbf{y}=f^{(L)}\left(\mathbf{h}^{(L-1)}\right) \\
+&amp; \mathbf{y}=f^L \circ f^{L-1} \circ \ldots f^{(1)}(\mathbf{x})
+\end{aligned}\]
+
+<p>神经网络提供模块化：我们可以将每一层的计算实现为一个黑盒子</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614154844.png" alt="" /></p>
+
+<h4 id="example-xor-异或">Example: XOR 异或</h4>
+
+<p>设计一个实现 XOR 的网络：</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614161253.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614161308.png" alt="" /></p>
+
+<ul>
+  <li>单个单元无法计算!</li>
+  <li>经典的例子，为什么我们需要多层次</li>
+</ul>
+
+<p><strong>XOR in terms of elemental operations:</strong></p>
+
+<p>XOR(a,b) = (a OR b) AND NOT (a AND b)</p>
+
+<p>设计一个实现XOR的网络：</p>
+<ul>
+  <li>激活函数的硬阈值，x1和x2是二进制的</li>
+  <li>h1 计算 x1 OR x2</li>
+  <li>h2 计算 x1 AND x2</li>
+  <li>y 计算 h1 AND NOT h2</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614161739.png" alt="" /></p>
+
+<h3 id="deep-architectures深层架构">Deep Architectures深层架构</h3>
+
+<p>为什么我们需要深入？</p>
+<ul>
+  <li>任何线性层序列都可以用单个线性层等效地表示</li>
+</ul>
+
+\[\mathbf{y}=\underbrace{\mathbf{W}^{(3)} \mathbf{W}^{(2)} \mathbf{W}^{(1)}}_{\tilde{\mathbf{W}}} \mathbf{x}\]
+
+<p>即，我们需要非线性，以利用多个层次</p>
+
+<ul>
+  <li>具有非线性激活函数的FF-NN是通用函数近似器：
+    <ul>
+      <li>给定一个潜在的无限量的单元，它们可以任意地逼近任何函数</li>
+      <li>通用函数逼近定理： 单层就足以实现 “普适性”</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>那么，单层是否足够？</strong></p>
+<ul>
+  <li>尽管通用函数逼近定理表示单层理论上足够，但实际上我们需要指数级（与输入维度成正比）的神经元数量才能实现这一点。
+    <ul>
+      <li>如果可以学习任何函数，那么结果很可能会过拟合。</li>
+    </ul>
+  </li>
+  <li>相反，多层网络可以用更少的神经元实现类似的效果。
+    <ul>
+      <li>紧凑的表示方式比”通用表示”更有效。</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="loss-functions-损失函数">Loss-functions 损失函数</h2>
+
+<p>训练神经网络的目标函数：</p>
+
+<p>通用的机器学习方法：逐样本损失 + 正则化惩罚</p>
+
+\[\boldsymbol{\theta}^*=\underset{\text { parameters } \boldsymbol{\theta}}{\arg \min } \sum_{i=1}^N l\left(\boldsymbol{x}_i, \boldsymbol{\theta}\right)+\lambda \text { penalty }(\boldsymbol{\theta})\]
+
+<p>对于不同的任务，损失函数和输出激活函数的选择有所不同：</p>
+<ul>
+  <li>回归任务（Regression）：通常使用均方误差（Mean Squared Error）作为损失函数，输出激活函数可以是线性函数或恒等函数。</li>
+  <li>二分类任务（Binary Classification）：常见的损失函数包括二元交叉熵（Binary Cross-Entropy）或对数损失（Log Loss），输出激活函数通常选择sigmoid函数。</li>
+  <li>多类别分类任务（Multi-class Classification）：常用的损失函数是多类别交叉熵（Categorical Cross-Entropy），输出激活函数则通常选择softmax函数。</li>
+</ul>
+
+<p><strong>Regression 回归</strong></p>
+
+<div style="display: flex;">
+<div style="flex: 50%;">
+
+<b>Output layer: Deterministic 决定性</b>
+
+linear 线性
+
+$$
+\mathbf{f}=\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+\boldsymbol{b}^{(L)}
+$$
+
+<b>Loss：</b>
+
+squared error 方差
+
+$$
+l_i\left(\mathbf{x}_i, \boldsymbol{\theta}\right)=\frac{1}{2}\left(\mathbf{f}\left(\mathbf{x}_i\right)-\mathbf{y}_i\right)^2
+$$
+
+</div>
+<div style="flex: 50%;">
+
+<b>Probabilistic 概率性</b>
+
+linear Gaussian
+
+$$
+p(\mathbf{y} \mid \mathbf{x})=\mathcal{N}\left(\mathbf{y} \mid \mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+\mathbf{b}^{(L)}, \mathbf{\Sigma}\right)
+$$
+
+<br />
+
+negative log-likelihood 负对数似然
+
+$$
+l_i\left(\mathbf{x}_i, \boldsymbol{\theta}\right)=-\log \mathcal{N}\left(\mathbf{y}_i \mid \boldsymbol{\mu}\left(\mathbf{x}_i\right), \boldsymbol{\Sigma}\right)
+$$
+
+</div>
+</div>
+
+<p><strong>Binary classification 二元分类</strong></p>
+
+<div style="display: flex;">
+<div style="flex: 50%;">
+
+<b>Output layer: Deterministic 决定性</b>
+
+linear 线性
+
+$$
+f=\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+b^{(L)}
+$$
+
+<b>Loss function</b>
+
+hinge-loss 铰链损失
+
+$$
+l\left(\mathbf{x}_i, \boldsymbol{\theta}\right)=\max \left(0,1-y_i f\left(\boldsymbol{x}_i\right)\right)
+$$
+
+</div>
+<div style="flex: 50%;">
+
+<b>Probabilistic 概率性</b>
+
+sigmoid 
+
+$$
+f=\sigma\left(\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+b^{(L)}\right)
+$$
+
+<br />
+
+neg-loglike 负对数似然
+
+$$
+\begin{aligned}
+l_i\left(\mathbf{x}_i, \boldsymbol{\theta}\right)= &amp; -c_i \log f\left(\mathbf{x}_i\right)-\left(1-c_i\right) \log \left(1-f\left(\mathbf{x}_i\right)\right)
+\end{aligned}
+$$
+
+</div>
+</div>
+
+<p>其中$y_i$是 -1/+1 labels, $c_i$ 是0/1 labels。</p>
+
+<p><strong>Multi-class classification 多类别分类</strong></p>
+
+<div style="display: flex;">
+<div style="flex: 50%;">
+
+<b>Output layer: Deterministic 决定性</b>
+
+linear 线性
+
+$$
+\mathbf{f}=\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+\mathbf{b}^{(L)}
+$$
+
+**Loss function**
+
+Multi-class SVM loss 多类 SVM 损失<br />
+
+<div style="text-align: center;">
+ Not covered
+</div>
+
+</div>
+<div style="flex: 50%;">
+
+**Probabilistic 概率性**
+
+sigmoid 
+
+$$
+\mathbf{f}=\operatorname{softmax}\left(\mathbf{W}^{(L)} \mathbf{h}^{(L-1)}+\mathbf{b}^{(L)}\right)
+$$
+
+<br />
+
+neg-loglike 负对数似然
+
+$$
+l_i\left(\mathbf{x}_i, \boldsymbol{\theta}\right)=-\sum_{k=1}^K \boldsymbol{h}_{c_i, k} \log y_k\left(\mathbf{x}_i\right)
+$$
+
+</div>
+</div>
+
+<p>其中 $\boldsymbol{h}_{c_i, k}$ 是 one hot coding</p>
+<blockquote>
+  <p>One-hot encoding是一种常用的数据预处理技术，用于将离散特征表示为二进制向量的形式。它常用于机器学习和深度学习任务中，特别是当特征数据中包含分类变量时。</p>
+
+  <p>在One-hot encoding中，如果一个特征具有n个不同的类别，那么它将被表示为一个长度为n的二进制向量，其中只有一个位置为1，其他位置都为0。被设置为1的位置对应于该特征所属的类别。</p>
+
+  <p>这样的编码方式有助于解决以下问题：</p>
+
+  <p>解决分类变量的数值化问题：分类变量通常无法直接用于机器学习算法，因为算法通常期望输入是数值型数据。One-hot encoding可以将分类变量转换为数值型数据，使其适用于算法的处理。</p>
+
+  <p>避免特征之间的顺序关系：One-hot encoding将每个类别都独立地表示为一个二进制向量，不考虑类别之间的顺序关系。这在一些情况下是有益的，例如避免算法错误地学习到类别之间的顺序或大小关系。</p>
+
+  <p>需要注意的是，当原始特征具有大量类别时，One-hot encoding会导致特征空间的维度增加，可能会导致稀疏矩阵和计算资源的浪费。在处理高维稀疏数据时，可能需要考虑其他的特征编码方法。</p>
+
+  <p>在实践中，可以使用多种编程语言和库来执行One-hot encoding，例如Python中的scikit-learn、pandas和TensorFlow等。</p>
+</blockquote>
+
+<p><strong>Feature Learning 特征学习</strong></p>
+
+<p>神经网络可以被看作是一种学习特征的方式</p>
+<ul>
+  <li>最后一层是标准的线性回归/分类层</li>
+</ul>
+
+<p>网络学习特征$\psi(\mathbf{x})$使得线性回归/分类可以解决它</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614165612.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614165623.png" alt="" /></p>
+:ET
