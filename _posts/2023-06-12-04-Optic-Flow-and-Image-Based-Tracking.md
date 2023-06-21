@@ -40,16 +40,11 @@ MathJax = {
 
 **References**
 
-• B. Jähne, Digitale Bildverarbeitung, Springer, 2005, Chapter 14
-• E.R. Davies, Machine Vision. Theory. Algorithms. Practicalities. Elsevier, 2005,
-Section 21.6 ff
-• R. Jain, R. Kasturi, B. G. Schunck, Machine Vision. McGraw Hill, 1995, Section
-14.1-14.4
-• B. K. P. Horn, B. G. Schunck, Determining Optical Flow. Artificial Intelligence 17,
-1981, pg. 185-203
-• J. F. Henriques, R. Caseiro, P. Martins, J. Batista, High-Speed Tracking with
-Kernelized Correlation Filters, IEEE Transactions on Pattern Analysis and Machine
-Intelligence, vol. 37, no. 3, pp. 583-596, 2015
+-  B. Jähne, Digitale Bildverarbeitung, Springer, 2005, Chapter 14<br>
+-  E.R. Davies, Machine Vision. Theory. Algorithms. Practicalities. Elsevier, 2005,Section 21.6 ff<br>
+-  R. Jain, R. Kasturi, B. G. Schunck, Machine Vision. McGraw Hill, 1995, Section 14.1-14.4<br>
+-  B. K. P. Horn, B. G. Schunck, Determining Optical Flow. Artificial Intelligence 17, 1981, pg. 185-203<br>
+-  J. F. Henriques, R. Caseiro, P. Martins, J. Batista, High-Speed Tracking with Kernelized Correlation Filters, IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 37, no. 3, pp. 583-596, 2015<br>
 
 ## Image Sequences 图像序列
 
@@ -232,8 +227,8 @@ $$
 ![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204416.png)
 
 编码：
-• 饱和度（saturation）= 向量长度
-• 色调（hue）= 方向
+-  饱和度（saturation）= 向量长度
+-  色调（hue）= 方向
 
 ### 线性近似的极限
 
@@ -262,8 +257,8 @@ $$
 ![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204416.png)
 
 编码：
-• 饱和度（saturation）= 向量长度
-• 色调（hue）= 方向
+-  饱和度（saturation）= 向量长度
+-  色调（hue）= 方向
 
 ### Aperture Problem 光圈问题
  
