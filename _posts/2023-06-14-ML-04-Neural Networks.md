@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Machine Learning-Neural Networks 神经网络
+title: 机器学习 Machine Learning - Neural Networks 神经网络
 tag: [专业, 机器学习]
 ---
 <head>
