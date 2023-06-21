@@ -1,189 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <title>汽车视觉 Automotive Vision - Optical Flow and Image Based Tracking</title>
-  <meta name="description" content="">
-  <meta name="author" content="leopardpan">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="汽车视觉 Automotive Vision - Optical Flow and Image Based Tracking">
-  <meta name="twitter:description" content="">
-  
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="汽车视觉 Automotive Vision - Optical Flow and Image Based Tracking">
-  <meta property="og:description" content="">
-  
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
-  
-  <link rel="stylesheet" href="/css/main.css">
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
-  <link rel="canonical" href="https://wenboli-cn-de.github.io/2023/06/04-Optic-Flow-and-Image-Based-Tracking/">
-  <link rel="alternate" type="application/rss+xml" title="高傲的电工李" href="https://wenboli-cn-de.github.io/feed.xml">
-  
-  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
-
-
-<!-- 站点统计 -->
-  <script 
-  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-  </script>  
-
-
-</head>
-
-
-  <body>
-
-    <span class="mobile btn-mobile-menu">        
-      <div class="nav_container">
-         <nav class="nav-menu-item" style = "float:right">
-            <i class="nav-menu-item">
-              <a href="/#blog" title="" class="blog-button">  博客主页
-              </a>
-            </i>
-            
-                <i class="nav-menu-item">
-
-                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
-                      所有文章
-                  </a>
-                </i>
-            
-                <i class="nav-menu-item">
-
-                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
-                      标签
-                  </a>
-                </i>
-            
-                <i class="nav-menu-item">
-
-                  <a href="/about" title="about" class="btn-mobile-menu__icon">
-                      关于我
-                  </a>
-                </i>
-            
-          </nav>
-      </div>
-    </span>
-    
-    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
-  <div class="panel-main">
-
-    <div class="panel-main__inner panel-inverted">
-    <div class="panel-main__content">
-        <!-- 头像效果-start -->
-        <div class="ih-item circle effect right_to_left">            
-            <a href="/#blog" title="前往 高傲的电工李 的主页" class="blog-button">
-                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
-                <div class="info">
-                    <div class="info-back">
-                        <h2> 
-                            
-                                李文博
-                            
-                        </h2>
-                        <p>
-                           
-                                机电 / 机器学习
-                            
-                        </p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- 头像效果-end -->
-        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for 高傲的电工李" class="blog-button">高傲的电工李</a></h1>
-        
-        <span class="panel-cover__subtitle panel-subtitle">个人博客</span>
-        
-        <hr class="panel-cover__divider" />
-        <p class="panel-cover__description">欢迎来到我的个人博客</p>
-        <hr class="panel-cover__divider panel-cover__divider--secondary" />
-        
-        
-        
-
-        <div class="navigation-wrapper">
-          <div>
-            <nav class="cover-navigation cover-navigation--primary">
-              <ul class="navigation">
-                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
-                
-                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
-                
-                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
-                
-                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
-                
-              </ul>
-            </nav>
-          </div>          
-        </div>
-
-
-        </div>
-      </div>
-    </div>
-    
-    
-    <div class="panel-cover--overlay cover-clear"></div>
-    
-  </div>
-</header>
-
-
-    <div class="content-wrapper">
-        <div class="content-wrapper__inner">
-            <head>
-  <link rel="stylesheet" href="/css/post.css">
-</head>
-
-<article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
-  <header class="post-header">
-    <h1 class="post-title">汽车视觉 Automotive Vision - Optical Flow and Image Based Tracking</h1>
-    <div class="post-meta">
-      <img src="/images/calendar.png" width="20px"/> 
-      <time datetime="2023-06-12 00:00:00 +0200" itemprop="datePublished" class="post-meta__date date">2023-06-12</time>  
-
-      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
-    </p>
-    </div>
-  </header>
-
-  
-    <h2 class="post-title">目录</h2>
-    <ul>
-  <li><a href="#chapter-4-optical-flow-and-image-based-tracking--光流和基于图像的跟踪">Chapter 4: Optical Flow and Image Based Tracking <br /> 光流和基于图像的跟踪</a>
-    <ul>
-      <li><a href="#image-sequences-图像序列">Image Sequences 图像序列</a></li>
-      <li><a href="#optical-flow-光流">Optical Flow 光流</a>
-        <ul>
-          <li><a href="#lucas-kanade-method-卢卡斯-卡纳德方法">Lucas-Kanade Method 卢卡斯-卡纳德方法</a></li>
-          <li><a href="#线性近似的极限">线性近似的极限</a></li>
-          <li><a href="#aperture-problem-光圈问题">Aperture Problem 光圈问题</a></li>
-          <li><a href="#variational-approach-变分法">Variational Approach 变分法</a></li>
-          <li><a href="#optical-flow-and-stereo-vision-光流和立体视觉">Optical Flow and Stereo Vision 光流和立体视觉</a></li>
-          <li><a href="#稀疏流">稀疏流</a></li>
-          <li><a href="#image-based-tracking-基于图像的跟踪">Image Based Tracking 基于图像的跟踪</a></li>
-          <li><a href="#example-kernelized-correlation-filter-kcf-核化相关滤波器-kcf">Example: Kernelized Correlation Filter (KCF) 核化相关滤波器 (KCF)</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-  
-
-  <section class="post">
-    <head>
+I"�y<head>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
@@ -230,8 +45,6 @@ Intelligence, vol. 37, no. 3, pp. 583-596, 2015</p>
 
 <h2 id="image-sequences-图像序列">Image Sequences 图像序列</h2>
 
-<p>到目前为止，我们<strong>已经研究了单幅灰度图像或双目摄像头设置中的成对灰度图像</strong>。现在，我们想把这种分析<em>扩展到</em><strong>随着时间推移记录的灰度图像序列</strong>。为此，我们用第三个变量T来扩展灰度函数，它代表记录的时间。在我们的案例中，我们将T解释为一个整数，用来计算到现在为止记录的图像数量。</p>
-
 <p>到目前为止我们有：</p>
 <ul>
   <li>examined single images $g(u, v)$</li>
@@ -251,32 +64,12 @@ Intelligence, vol. 37, no. 3, pp. 583-596, 2015</p>
 
 <p>光流是由相机和观察对象之间的相对运动引起的图像中任何点的明显移动</p>
 
-<p>我们感兴趣的是观察图像序列中发生的变化，这些变化可能<strong>是由相机的自我运动、图像中观察到的物体的运动或两者的组合引起</strong>的。</p>
-
-<p>这就引出了光流的第一个定义： <strong>光流是图像中任何一点的明显移动，由相机和被观察物体之间的相对运动引起</strong>。重要的是要看到，光流是图像空间中的一个属性。它是图像坐标中的一个矢量，它连接了前一幅图像中某一点的位置和后一幅图像中同一点的位置。它不是一个物体的三维运动，而是图像空间中的二维运动。</p>
-
-<p>这里我们有一个非常简单的例子，就是两幅图像一个接一个地记录下来，我们可以很容易地观察到一些光流。我们可以看到情况是如何变化的，某些点是如何在两幅图像之间移动的，这种移动就是光流。我们可以区分两种不同的光流概念。</p>
-
-<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/8f91a500-9003-4cd8-81a4-46248963f96d.gif" alt="" /></p>
-
-<p>第一个概念叫做<strong>密集流</strong>，我们的目标是为图像中的每一个点计算一个流向量，或者至少计算尽可能多的点，从而形成一个完整的流场或流向量场。</p>
-
-<p>第二个概念是<strong>稀疏流</strong>，我们只对获得特定兴趣点的光流向量感兴趣，例如图像中突出特征点的一个子集。这建议使用特征点方法，我们分析每张图像，检测特征点，然后比较第一张图像中的哪些特征点也能在随后的图像中找到。这种方法使我们能够为特征点创建稀疏的流向量。</p>
-
-<p>然而，这并不足以实现密集流，因为图像中的许多点不是特征点，我们用这种方法不会得到这些点的流向量。</p>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614203147.png" alt="" /></p>
 
 <p>– 密集流：我们确定图像中每个点的流矢量
 – 稀疏流：我们仅为（一小部分）显着点（例如特征点）确定流向量</p>
 
 <p><strong>Typical Optical Flow Fields 典型光流场</strong></p>
-
-<p>现在，让我们研究一下在某些情况下我们可以期待的典型流场。让我们假设我们有一个平面世界，在这个世界里，一辆车正笔直地向前行驶，我们观察到地面在一条水平线以下。在这些条件下得到的光流向量显示在左上方的图像中。每个流向量都用黑线标出，红色菱形表示第一幅图像中的相应点。</p>
-
-<p>我们可以观察到，流动向量正在向地平线上的一个虚拟点靠拢，流动向量的长度根据与摄像机的距离而变化。点越远，流动矢量越小。在天空中，我们无法确定任何流动矢量，因为那些点实际上位于很远的地方，导致流动等于零。</p>
-
-<p>第二张图片描述了一个类似的情况，但有一个俯仰运动。如果我们想象坐在一辆汽车里，有人把车头往下推，然后松开，造成俯仰运动，流场看起来与直行驾驶的情况类似。然而，在这种情况下，我们在地平线上仍然有不同于零的流向，而且流向的整体方向也不同。</p>
-
-<p>第三张图片显示了滚动运动，当车辆沿其纵轴倾斜时，就会出现这种情况，就像摩托车在弯道上行驶一样。流场表现为滚动运动。当然，这种滚动运动也可以与直线行驶的运动相结合，导致不同的整体流场，如第四张图片所描述的，车辆向右行驶通过一个曲线。</p>
 
 <p>道路上的预期流</p>
 
@@ -287,18 +80,6 @@ Intelligence, vol. 37, no. 3, pp. 583-596, 2015</p>
   <li>光照是恒定的。</li>
   <li>目标点没有被遮挡。</li>
 </ul>
-
-<p>这些是我们在这些情况下可能观察到的典型光流场。只是为了让您对其外观有一个概念。现在让我们讨论如何计算光流。一种方法是了解场景中所有物体的真实运动和三维场景结构，然后可以计算光流。然而，这不是我们的目的。我们的目标是直接从图像序列中提取光流。</p>
-
-<p>为了做到这一点，我们做出了一些假设。首先，我们假设图像序列是在恒定照明下记录的，这意味着每个点的亮度随时间不变。第二个假设是我们要观察的点不会在视频序列中的任何图像中被遮挡。如果被遮挡，我们就无法计算光流。这个假设是相当明显的。</p>
-
-<p>基于这些假设，我们为光流建立了一个条件。我们引入光流向量ΔUΔV，描述了某个点的光流，表示为U B。</p>
-
-<p>由于我们假设该点的照明在时间上不变，我们可以得出结论，先前图像中该点的灰度值（在时间T）必须等于稍后图像中位置为U + ΔU，V + ΔV，T + ΔT的像素的灰度值。这个必要条件要求ΔUΔV是位置U，V处点的光流。然而，这还不足够，因为可能有许多点满足这个等式。</p>
-
-<p>从这个必要条件出发，我们想推导出如何计算ΔU和ΔV。我们从等式的两边减去U，V，T处的灰度G，然后用一阶泰勒多项式替换右边的第一部分。这得到了一个名为“<strong>运动约束方程</strong>”的方程。这个方程提供了一个条件，必须满足ΔUΔV才能成为某个像素位置的光流。</p>
-
-<p>重要的是要注意，运动约束方程中需要的所有偏导数都是在用于计算光流的第一个图像对的某个位置处计算的。</p>
 
 <p>光流的必要条件：</p>
 
@@ -321,23 +102,11 @@ Intelligence, vol. 37, no. 3, pp. 583-596, 2015</p>
 
 <p>灰度值差异产生 $\frac{\partial g}{\partial t} \approx g(u, v, t+1)-g(u, v, t)$</p>
 
-<p>那么，我们如何计算这些偏导数呢？关于U和V的偏导数是我们在本课程的第一章中已经推导出来的。我们可以使用滤波器掩模，如Sobel滤波器掩模，从灰度图像中计算这些偏导数。所以这不是什么新东西，可以很容易地完成。关于时间方向的灰度值函数的偏导数也很容易计算。我们可以通过比较后续图像中的灰度值与当前图像中的灰度值（都在所关注的位置上进行评估）来近似计算它。这个近似给出了这个偏导数的近似值。因此，我们只需要灰度值信息来计算这些偏导数。从一对图像中，我们获得了一个以运动约束方程形式的约束，其中有未知的Delta U和Delta V。因此，从一对图像中，我们得到一个约束。</p>
-
-<p>让我们看一下运动约束方程的简单示例。为此，我们将分析一个一维信号，即图像的一行，其中整个光流是向左或向右移动的，由一维向量Delta U表示。假设我们有一个用青色表示的灰度值函数，对于较小的U值有较小的值，对于较大的U值有较大的灰度值。我们要分析的是位于虚线所示位置U处的光流。我们假设在后续图像中，我们有相同类型的灰度值斜坡，但向右移动了一定的距离。后续图像的新灰度值函数由蓝色曲线表示。</p>
-
 <p>一维信号的图示：</p>
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614203815.png" alt="" /></p>
 
-<p>我们正在寻找的光流代表了向右的移动，如这个水平向量所示。对于时间方向的偏导数测量了感兴趣位置U的灰度值函数的变化。在这种情况下，我们可以观察到灰度值已经减小，因此这个偏导数可以用指向下方的垂直箭头来表示，与坐标轴相反。因此，这个导数的值是负数。</p>
-
-<p>此外，我们知道，对于空间方向U，灰度级梯度可以被解释为感兴趣位置的灰度值函数的斜率。可以从灰度值函数的切线绘制的虚线红线来测量斜率，如此处所示。通过将这个虚线红线移动到垂直箭头的末端，我们可以观察到在灰度值遵循线性逼近的最佳情况下，我们得到一个三角形。这个三角形可以用来计算切线的斜率，该斜率大约等于垂直箭头长度与水平箭头长度的比值。由于垂直箭头向下指向，与坐标轴相反，我们需要添加一个负号来表示这个导数的负值。这给出了右侧所示的方程。如果我们将两边都乘以Delta U，我们就得到了一维情况下的运动约束方程。</p>
-
 <p><strong>运动约束方程：</strong></p>
-
-<p>这种方法可以直接扩展到二维情况。然而，有一个重要的区别。在一维信号的情况下，我们可以很容易地通过解方程相对于Delta U来计算Delta U，并获得Delta U的估计值。在二维情况下，这是不可能的，因为一个方程不能为两个未知变量提供解。</p>
-
-<p>那么，我们该如何解决这个问题呢？关键是添加额外的方程，以获得两个未知变量Delta U和Delta V的多个方程。为此，我们假设光流在相邻点之间没有显著变化。我们假设右侧和左侧相邻像素的光流，以及上方、下方或对角线相邻像素的光流完全相同。通过为每个相邻像素计算一个运动约束方程，我们可以创建一个具有多个方程和两个未知数的线性方程组。</p>
 
 \[-\frac{\partial g}{\partial t}=\Delta u \cdot \frac{\partial g}{\partial u}+\Delta v \cdot \frac{\partial g}{\partial v}\]
 
@@ -360,17 +129,11 @@ Intelligence, vol. 37, no. 3, pp. 583-596, 2015</p>
   <p>通过结合几个邻近像素点的信息，卢卡斯-卡纳德方法(简称为L-K方法)<strong>通常能够消除光流方程里的多义性</strong>。而且，与逐点计算的方法相比，<strong>L-K方法对图像噪声不敏感</strong>。不过，由于这是一种局部方法，所以在图像的均匀区域内部，<strong>L-K方法无法提供光流信息</strong>。</p>
 </blockquote>
 
-<p>如果我们有确切的两个方程和两个未知数，我们可以希望从这些方程中获得唯一解。如果我们有多于两个方程，由于随机性引起的方程之间的冲突，很可能我们找不到任何解。然而，我们可以通过说明我们不需要找到Delta U和Delta V以使运动约束方程完全相等来克服这个问题。相反，我们希望找到尽可能多地满足方程的Delta U和Delta V，这可以通过最小化这些方程的残差平方和来实现。残差表示运动约束方程的左右两侧之间的差异。<strong>这种方法被称为计算某一点的光流的Lucas-Kanade方法</strong>。这种方法的思想是在感兴趣点周围的某个区域内最小化残差平方和，例如最近的3x3像素的正方形区域。</p>
-
 <p>可以通过最小化二次误差来估计光流</p>
 
 \[\begin{aligned}
 \operatorname{minimize}_{\Delta u, \Delta v} \sum_{(i, j) \in\{-1,0,1\}^2}\left(\frac{\partial g(u+i, v+j, t)}{\partial t}\right. &amp; +\Delta u \cdot \frac{\partial g(u+i, v+j, t)}{\partial u} \left.+\Delta v \cdot \frac{\partial g(u+i, v+j, t)}{\partial v}\right)^2
 \end{aligned}\]
-
-<p>解决这个优化问题后，我们获得了Delta U和Delta V。解决方案涉及计算要最小化的函数相对于两个未知变量Delta U和Delta V的偏导数。然后将这些导数置零，并解出所得到的方程组，得到一个2x2矩阵</p>
-
-<p>左边乘以未知变量的向量Delta U和Delta V（表示光流向量），等于右边具有两个条目的向量。矩阵和右边的向量可以从灰度值梯度信息计算得出，因此不需要额外的信息。如果左侧的矩阵具有满秩，我们将得到该方程组的唯一解。</p>
 
 <p>在推导后并置零:</p>
 
@@ -391,10 +154,6 @@ G_{u t} &amp; =\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial u} \frac{\parti
 G_{v t} &amp; =\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial v} \frac{\partial g(u+i, v+j, t)}{\partial t}\right)
 \end{aligned}\]
 
-<p>这里提供了Lucas-Kanade方法如何计算光流向量的示例。在左侧，我们看到输入图像，它看起来非常模糊。事实上，模糊性实际上有助于Lucas-Kanade方法找到一些光流向量。在右侧，我们看到了每个像素的计算光流，根据下方提供的彩色轮进行了颜色编码。光流为0的向量将由白色像素表示。彩色轮显示了向量指向的方向，以及它的长度。高饱和度的颜色对应于较长的向量，而较低饱和度的颜色表示较短的向量。U值（红色、绿色或蓝色）确定向量指向的方向。从可视化结果中，我们可以观察到获得了一些光流向量，但并不是对所有点都获得了光流向量。此外，并非所有计算出的光流向量都是合理的，例如左下角的绿色向量。</p>
-
-<p>总的来说，Lucas-Kanade方法提供了一种通过制定和求解使用运动约束方程和最小化残差平方和的线性方程组来估计光流的方法。</p>
-
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204331.png" alt="" />
 <img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204345.png" alt="" />
 <img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204416.png" alt="" /></p>
@@ -405,23 +164,11 @@ G_{v t} &amp; =\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial v} \frac{\parti
 
 <h3 id="线性近似的极限">线性近似的极限</h3>
 
-<p>在所示的示例中，我们有一个一维灰度值图像，具有较大的移动，导致较长的光流向量。原始的灰度值函数由蓝色曲线表示，而后续图像的灰度值函数则显示为红色。</p>
-
-<p>为了使用Lucas-Kanade方法计算光流，我们首先确定虚线橙色线所示位置的灰度值函数的斜率。我们计算随时间的灰度值变化（红色垂直箭头），并将切线线移到垂直箭头的顶部，得到移动的橙色线。连接原始位置和移动的橙色线的水平向量表示由Lucas-Kanade计算得到的光流向量。</p>
-
-<p>然而，在这种情况下，光流向量显著低估了实际光流。为了解决这个问题，我们比较一下如果我们将原始灰度值函数向右移动光流量的话，灰度值函数会是什么样子。我们得到了黑色曲线，它与蓝色曲线或后续图像中的真实灰度值相差很大。</p>
-
-<p>虽然存在很大差异，我们可以继续使用Lucas-Kanade方法计算光流，但基于黑色灰度值函数而不是原始的蓝色正弦曲线。我们迭代这个过程，计算灰度值差异并移动切线，以获得额外的光流估计。这些估计与先前计算得到的光流向量连接起来。</p>
-
-<p>通过迭代执行Lucas-Kanade方法，我们可以获得比仅执行一次时更好的光流向量。这种迭代方法类似于使用牛顿法寻找函数零点。</p>
-
 <p>线性近似不足以进行较大的偏移</p>
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204456.png" alt="" /></p>
 
 <p>– 也可以使用迭代计算（牛顿法）确定光流</p>
-
-<p>图中展示了迭代的Lucas-Kanade方法的结果，其中光流向量与实际光流相比较之前的尝试更接近。</p>
 
 <p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204518.png" alt="" />
 <img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204527.png" alt="" />
@@ -652,181 +399,4 @@ G_{v t}
 <p>总结一下光流计算和基于图像的跟踪这一章节。我们开始讨论光流，介绍了光流的基本概念，推导了运动约束方程，并基于此引入了Lucas-Kanade方法。然后，我们更详细地分析了Lucas-Kanade方法，推导了光圈问题，并介绍了变分流计算方法的一些基本思想。</p>
 
 <p>对于基于图像的跟踪，我们引入了模板匹配的思想和核化相关滤波器作为一种有用且实时可行的方法来实现这种模板匹配思想，用于真实图像序列。</p>
-
-  </section>
-
-</article>
-
-<section>
-
-
-            <script type="text/javascript">
-            function dashangToggle(){
-              $(".hide_box-play").fadeToggle();
-              $(".shang_box-play").fadeToggle();
-            }
-            </script>
-
-            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
-
-            <style type="text/css">
-              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
-              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
-              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
-              .shang_box-play img{border:none;border-width:0;}
-              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
-              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
-              .shang_close-play{float:right;display:inline-block;
-                margin-right: 10px;margin-top: 20px;
-              }
-              .shang_logo{display:block;text-align:center;margin:20px auto;}
-              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
-              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
-              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
-              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
-              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
-              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
-              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
-              .shang_info-play{clear:both;}
-              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
-            </style>
-
-       <ul class="pager">
-        
-        <li class="previous">
-            <a href="/2023/06/02-BinocularVision/" data-toggle="tooltip" data-placement="top" title="汽车视觉 Automotive Vision - Binocular Vision / Stereo Vision 双目视觉/立体视觉">上一篇：  <span>汽车视觉 Automotive Vision - Binocular Vision / Stereo Vision 双目视觉/立体视觉</span>
-            </a>
-        </li>
-        
-        
-        <li class="next">
-            <a href="/2023/06/06-SLAM/" data-toggle="tooltip" data-placement="top" title="汽车视觉 Automotive Vision - SLAM">下一篇：  <span>汽车视觉 Automotive Vision - SLAM</span>
-            </a>
-        </li>
-        
-    </ul>
-</section>
-
-
-<section class="post-comments">
-
-    <script>
-
-        setInterval(function () 
-        {
-            var box = document.querySelector(".trc_rbox_container");
-            if(box) box.outerHTML = "";
-        }, 2000);
-        
-    </script>
-
-<!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC81NTIzMy8zMTcwMA==">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-
-
-</section>
-
-
-            <section class="footer">
-    <footer>
-        <div class = "footer_div">  
-        <nav class="cover-navigation navigation--social">
-          <ul class="navigation">
-
-          
-          <!-- Github -->
-          <li class="navigation__item_social">
-            <a href="https://github.com/WenboLi-CN-DE" title="@WenboLi-CN-DE 的 Github" target="_blank">
-              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
-            </a>
-          </li>
-          
-
-          
-
-          
-
-          
-
-          
-
-          
-          
-
-
-          
-          <!-- Email -->
-          <li class="navigation__item_social">
-            <a href="mailto:lwb_010@163.com" title="Contact me">
-              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
-            </a>
-          </li>
-          
-          
-          <!-- RSS -->
-          <li class="navigation__item_social">
-            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
-              <span class="label">RSS</span>
-            </a>
-          </li>
-
-          </ul>
-        </nav>
-
-        </div>
-
-        <div class = "footer_div">  
-           <p class="copyright text-muted">
-            Copyright &copy; 高傲的电工李 2023 Theme by <a href="https://leopardpan.cn/">leopardpan</a> |
-            <iframe
-                style="margin-left: 2px; margin-bottom:-5px;"
-                frameborder="0" scrolling="0" width="91px" height="20px"
-                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
-            </iframe>
-            </p>
-        	<div align="right">
-    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-          <!-- 访问统计 -->
-          <span id="busuanzi_container_site_pv">
-            本站总访问量
-            <span id="busuanzi_value_site_pv"></span>次
-          </span>
-
-        </div>
-        <div>
-    </footer>
-</section>
-
-        </div>
-    </div>
-    
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
-
-<script type="text/javascript" src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-
-    
-  </body>
-
-</html>
+:ET
