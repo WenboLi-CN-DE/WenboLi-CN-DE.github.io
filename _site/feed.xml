@@ -5,12 +5,12 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 14 Jun 2023 17:11:26 +0200</pubDate>
-    <lastBuildDate>Wed, 14 Jun 2023 17:11:26 +0200</lastBuildDate>
+    <pubDate>Wed, 21 Jun 2023 13:32:21 +0200</pubDate>
+    <lastBuildDate>Wed, 21 Jun 2023 13:32:21 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
-        <title>Machine Learning-Neural Networks 神经网络</title>
+        <title>机器学习 Machine Learning - Neural Networks 神经网络</title>
         <description>&lt;head&gt;
     &lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
     &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
@@ -577,7 +577,7 @@ $$
       </item>
     
       <item>
-        <title>工程力学4-动力学/Technische Mechanik IV – Dynamik - Integration der Eulerschen Gleichungen 欧拉方程的积分</title>
+        <title>工程力学-动力学/Technische Mechanik IV – Dynamik - Integration der Eulerschen Gleichungen 欧拉方程的积分</title>
         <description>&lt;head&gt;
     &lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
     &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
@@ -1039,7 +1039,7 @@ von Jacobi eingeführt:&lt;/p&gt;
       </item>
     
       <item>
-        <title>汽车视觉 Automotive Vision -SLAM</title>
+        <title>汽车视觉 Automotive Vision - SLAM</title>
         <description>&lt;head&gt;
 &lt;script src=&quot;https://polyfill.io/v3/polyfill.min.js?features=es6&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; id=&quot;MathJax-script&quot; async=&quot;&quot; src=&quot;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js&quot;&gt;
@@ -1332,8 +1332,835 @@ permutations in step 4 from a certain point on (pigeonhole/Dirichlet principle) 
 &lt;h2 id=&quot;simultaneous-localization-and-mappingslam&quot;&gt;Simultaneous Localization and Mapping(SLAM)&lt;/h2&gt;
 </description>
         <pubDate>Mon, 12 Jun 2023 00:00:00 +0200</pubDate>
-        <link>https://wenboli-cn-de.github.io/2023/06/SLAM/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2023/06/SLAM/</guid>
+        <link>https://wenboli-cn-de.github.io/2023/06/06-SLAM/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2023/06/06-SLAM/</guid>
+        
+        <category>专业</category>
+        
+        <category>汽车视觉</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>汽车视觉 Automotive Vision - Optical Flow and Image Based Tracking</title>
+        <description>&lt;head&gt;
+&lt;script src=&quot;https://polyfill.io/v3/polyfill.min.js?features=es6&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; id=&quot;MathJax-script&quot; async=&quot;&quot; src=&quot;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js&quot;&gt;
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;script&gt;
+MathJax = {
+  tex: {
+    inlineMath: [[&apos;$&apos;, &apos;$&apos;], [&apos;\\(&apos;, &apos;\\)&apos;]],
+    packages: [&apos;base&apos;, &apos;newcommand&apos;, &apos;configMacros&apos;]
+  },
+  svg: {
+    fontCache: &apos;global&apos;
+  }
+};
+&lt;/script&gt;
+
+&lt;script&gt; 
+MathJax = {
+  tex: {
+    inlineMath: [[&apos;$&apos;, &apos;$&apos;]],
+    processEscapes: true
+  }
+};
+&lt;/script&gt;
+
+&lt;h1 id=&quot;chapter-4-optical-flow-and-image-based-tracking--光流和基于图像的跟踪&quot;&gt;Chapter 4: Optical Flow and Image Based Tracking &lt;br /&gt; 光流和基于图像的跟踪&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;• B. Jähne, Digitale Bildverarbeitung, Springer, 2005, Chapter 14
+• E.R. Davies, Machine Vision. Theory. Algorithms. Practicalities. Elsevier, 2005,
+Section 21.6 ff
+• R. Jain, R. Kasturi, B. G. Schunck, Machine Vision. McGraw Hill, 1995, Section
+14.1-14.4
+• B. K. P. Horn, B. G. Schunck, Determining Optical Flow. Artificial Intelligence 17,
+1981, pg. 185-203
+• J. F. Henriques, R. Caseiro, P. Martins, J. Batista, High-Speed Tracking with
+Kernelized Correlation Filters, IEEE Transactions on Pattern Analysis and Machine
+Intelligence, vol. 37, no. 3, pp. 583-596, 2015&lt;/p&gt;
+
+&lt;h2 id=&quot;image-sequences-图像序列&quot;&gt;Image Sequences 图像序列&lt;/h2&gt;
+
+&lt;p&gt;到目前为止我们有：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;examined single images $g(u, v)$&lt;/li&gt;
+  &lt;li&gt;examined stereo images $\left(g_l(u, v), g_r(u, v)\right)$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;图像序列：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;examine a sequence of images $g(u, v, t)$&lt;/li&gt;
+  &lt;li&gt;观测图像随时间的变化&lt;/li&gt;
+  &lt;li&gt;自我运动(ego motion)引起的变化&lt;/li&gt;
+  &lt;li&gt;观察物体运动引起的变化&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;optical-flow-光流&quot;&gt;Optical Flow 光流&lt;/h2&gt;
+
+&lt;p&gt;光流是由相机和观察对象之间的相对运动引起的图像中任何点的明显移动&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614203147.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;– 密集流：我们确定图像中每个点的流矢量
+– 稀疏流：我们仅为（一小部分）显着点（例如特征点）确定流向量&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Typical Optical Flow Fields 典型光流场&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;道路上的预期流&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614203326.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;假设：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;光照是恒定的。&lt;/li&gt;
+  &lt;li&gt;目标点没有被遮挡。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;光流的必要条件：&lt;/p&gt;
+
+\[g(u, v, t)=g(u+\Delta u, v+\Delta v, t+\Delta t)\]
+
+&lt;ul&gt;
+  &lt;li&gt;必要但不充分。&lt;/li&gt;
+  &lt;li&gt;不够清晰&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614203515.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;运动约束方程：&lt;/strong&gt;&lt;/p&gt;
+
+\[-\frac{\partial g}{\partial t}=\Delta u \cdot \frac{\partial g}{\partial u}+\Delta v \cdot \frac{\partial g}{\partial v}\]
+
+&lt;p&gt;– 偏导数从何而来？&lt;/p&gt;
+
+&lt;p&gt;使用导数滤波器掩模（例如Sobel）进行滤波会产生$\frac{\partial g}{\partial u}, \frac{\partial g}{\partial v}$&lt;/p&gt;
+
+&lt;p&gt;灰度值差异产生 $\frac{\partial g}{\partial t} \approx g(u, v, t+1)-g(u, v, t)$&lt;/p&gt;
+
+&lt;p&gt;一维信号的图示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614203815.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;运动约束方程：&lt;/strong&gt;&lt;/p&gt;
+
+\[-\frac{\partial g}{\partial t}=\Delta u \cdot \frac{\partial g}{\partial u}+\Delta v \cdot \frac{\partial g}{\partial v}\]
+
+&lt;p&gt;– 问题：一个方程，两个未知变量
+– 附加假设：光流在局部环境中是恒定的。&lt;/p&gt;
+
+\[\begin{aligned}
+-\frac{\partial g(u, v, t)}{\partial t} &amp;amp; \approx \Delta u \cdot \frac{\partial g(u, v, t)}{\partial u}+\Delta v \cdot \frac{\partial g(u, v, t)}{\partial v} \\
+-\frac{\partial g(u-1, v, t)}{\partial t} &amp;amp; \approx \Delta u \cdot \frac{\partial g(u-1, v, t)}{\partial u}+\Delta v \cdot \frac{\partial g(u-1, v, t)}{\partial v} \\
+-\frac{\partial g(u+1, v, t)}{\partial t} &amp;amp; \approx \Delta u \cdot \frac{\partial g(u+1, v, t)}{\partial u}+\Delta v \cdot \frac{\partial g(u+1, v, t)}{\partial v} \\
+-\frac{\partial g(u, v-1, t)}{\partial t} &amp;amp; \approx \Delta u \cdot \frac{\partial g(u, v-1, t)}{\partial u}+\Delta v \cdot \frac{\partial g(u, v-1, t)}{\partial v} \\
+-\frac{\partial g(u, v+1, t)}{\partial t} &amp;amp; \approx \Delta u \cdot \frac{\partial g(u, v+1, t)}{\partial u}+\Delta v \cdot \frac{\partial g(u, v+1, t)}{\partial v}
+\end{aligned}\]
+
+&lt;h3 id=&quot;lucas-kanade-method-卢卡斯-卡纳德方法&quot;&gt;Lucas-Kanade Method 卢卡斯-卡纳德方法&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在计算机视觉中，卢卡斯-卡纳德方法是一种广泛使用的&lt;strong&gt;光流估计的差分方法&lt;/strong&gt;，这个方法是由Bruce D. Lucas和Takeo Kanade发明的。&lt;strong&gt;它假设光流在像素点的邻域是一个常数，然后使用最小平方法对邻域中的所有像素点求解基本的光流方程&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;通过结合几个邻近像素点的信息，卢卡斯-卡纳德方法(简称为L-K方法)&lt;strong&gt;通常能够消除光流方程里的多义性&lt;/strong&gt;。而且，与逐点计算的方法相比，&lt;strong&gt;L-K方法对图像噪声不敏感&lt;/strong&gt;。不过，由于这是一种局部方法，所以在图像的均匀区域内部，&lt;strong&gt;L-K方法无法提供光流信息&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;可以通过最小化二次误差来估计光流&lt;/p&gt;
+
+\[\begin{aligned}
+\operatorname{minimize}_{\Delta u, \Delta v} \sum_{(i, j) \in\{-1,0,1\}^2}\left(\frac{\partial g(u+i, v+j, t)}{\partial t}\right. &amp;amp; +\Delta u \cdot \frac{\partial g(u+i, v+j, t)}{\partial u} \left.+\Delta v \cdot \frac{\partial g(u+i, v+j, t)}{\partial v}\right)^2
+\end{aligned}\]
+
+&lt;p&gt;在推导后并置零:&lt;/p&gt;
+
+\[\begin{aligned}
+\left(\begin{array}{ll}
+G_{u u} &amp;amp; G_{u v} \\
+G_{u v} &amp;amp; G_{v v}
+\end{array}\right)\left(\begin{array}{c}
+\Delta u \\
+\Delta v
+\end{array}\right)=-\left(\begin{array}{l}
+G_{u t} \\
+G_{v t}
+\end{array}\right) \quad \text { with } G_{u u} &amp;amp; =\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial u}\right)^2 \\
+G_{u v} &amp;amp; =\sum\left(\frac{\partial g(u+i, v+j, t) \partial g(u+i, v+j, t)}{\partial v}\right) \\
+G_{v v} &amp;amp; =\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial v}\right)^2 \\
+G_{u t} &amp;amp; =\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial u} \frac{\partial g(u+i, v+j, t)}{\partial t}\right) \\
+G_{v t} &amp;amp; =\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial v} \frac{\partial g(u+i, v+j, t)}{\partial t}\right)
+\end{aligned}\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204331.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204345.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204416.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;编码：
+• 饱和度（saturation）= 向量长度
+• 色调（hue）= 方向&lt;/p&gt;
+
+&lt;h3 id=&quot;线性近似的极限&quot;&gt;线性近似的极限&lt;/h3&gt;
+
+&lt;p&gt;线性近似不足以进行较大的偏移&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204456.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;– 也可以使用迭代计算（牛顿法）确定光流&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204518.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204527.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204416.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;编码：
+• 饱和度（saturation）= 向量长度
+• 色调（hue）= 方向&lt;/p&gt;
+
+&lt;h3 id=&quot;aperture-problem-光圈问题&quot;&gt;Aperture Problem 光圈问题&lt;/h3&gt;
+
+&lt;p&gt;除了可以使用迭代的Lucas Granada方法解决的问题外，还存在另一个问题，称为光圈问题（aperture problem），它会给Lucas Granada方法带来麻烦。让我们进行一个实验，假设有一个场景，我们只能通过百叶窗中的一个小孔来看到，这意味着整个场景可以被视为相机的镜头，百叶窗则可以被视为相机内部的百叶窗。因此，我们只能看到世界的一个小区域，在我们的实验中，我们感知到的这个小区域有一些白色背景和一些黑色物体，这些物体最初只出现在孔的左边界上。现在这个物体进行了一次移动，我们来看一下。&lt;/p&gt;
+
+&lt;p&gt;最后，物体以某种方式移动了，问题是我们观察到了哪种运动？显然，物体似乎是从左向右移动的，但这是完整的事实吗？我们能够唯一确定这个运动吗？&lt;/p&gt;
+
+&lt;p&gt;为了回答这个问题，让我们看一下百叶窗的背面，看看实际发生了什么。&lt;/p&gt;
+
+&lt;p&gt;在这里，我们可以看到我们实验的初始情况。现在我们开始这个运动，我们可以看到这个运动不仅仅是从左到右，而是沿着对角线方向的运动，因此还涉及到垂直运动，这是我们在示例中无法看到的。这个例子表明，我们可以感知到运动的部分，但无法完全感知到整个运动，在某些情况下。让我们稍微改变一下我们的例子，在这个例子中，我们改变了我们看到的物体的形状，现在我们再次进行运动，我们清楚地看到这是一个沿对角线方向的运动。因此，虽然场景只稍微改变，但完整的运动变得明显起来，那么这两个例子之间的区别是什么？在第一个例子中，我们只能观察到一个灰度值的边缘，而在第二个例子中，我们可以观察到一个灰度值的角落，这就产生了重要的区别。如果我们能观察到一个角落，我们就能确定完整的运动，如果我们只能观察到一个边缘，我们只能观察到运动的部分。&lt;/p&gt;
+
+&lt;p&gt;我们看到什么样的运动？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/03832927-14d5-495f-b065-cff87f9ea7ab.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/0963d66a-dabc-413f-a168-328f524f8e54.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/8ced9aa5-60e4-415e-ae86-fe9f085c179e.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;那么什么情况下可以解决Lucas-Kanade方法呢？
+如果我们观察公式，我们可以看到涉及一个2x2矩阵，其中包含一些偏导数。当矩阵G具有满秩时，我们可以得到线性方程组的唯一解。
+如果它的秩只有1，我们可能得到一组解，也就是说我们没有唯一解；
+如果这个矩阵的秩为零，那么所有可能的向量或光流向量都满足这个矩阵，这意味着所有向量都能解决这个方程，我们就无法得到Lucas-Kanade的唯一解。
+重要的性质是矩阵G具有满秩，因此它是可逆的。
+如果满足条件，我们就能得到唯一解。这适用于当这个矩阵的两个特征值都大于零且远大于零时。&lt;/p&gt;
+
+&lt;p&gt;需要强调的是，这种矩阵始终具有两个实特征值，并且它们都是非负的，但重要的是它们不等于零，也不接近零，而是远离零。如果这两个特征值都满足条件，那么矩阵G是可逆的，并且这种反转也对相机图像中的随机影响具有稳定性。&lt;/p&gt;
+
+\[\begin{aligned}
+&amp;amp; \underbrace{\left(\begin{array}{ll}
+G_{u u} &amp;amp; G_{u v} \\
+G_{u v} &amp;amp; G_{v v}
+\end{array}\right)}_{=: G}\left(\begin{array}{c}
+\Delta u \\
+\Delta v
+\end{array}\right)=-\left(\begin{array}{l}
+G_{u t} \\
+G_{v t}
+\end{array}\right) \\
+&amp;amp; G_{u u}=\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial u}\right)^2 \\
+&amp;amp; G_{u v}=\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial u} \frac{\partial g(u+i, v+j, t)}{\partial v}\right) \\
+&amp;amp; G_{v v}=\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial v}\right)^2
+\end{aligned}\]
+
+&lt;ul&gt;
+  &lt;li&gt;矩阵 G 是可逆的&lt;/li&gt;
+  &lt;li&gt;G 的特征值都近似相等且 &amp;gt; 0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;那么什么情况下会发生这种情况呢？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果我们观察均匀区域，我们会发现矩阵G的元素几乎都等于零，如果它们都等于零，特征值将是0和0，这意味着我们无法得到唯一解，这是一个糟糕的情况。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;另一个糟糕的情况是灰度边缘，无论是水平还是垂直的边缘，在这种情况下，矩阵G有两个特征值，其中一个是零或接近零，另一个与零不同，对于所有灰度边缘（包括对角线边缘等），都是如此。
+这也是我们无法得到Lucas-Kanade方法唯一解的情况。然而，正如我们所见，该方法仍然能够揭示关于运动的一些信息，但不是全部信息。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在灰度角点的情况下，我们通常会得到两个不为零的特征值，因此这是一个好的情况。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;同样地，如果我们处理孤立点，我们会得到与零不同的特征值，所以这也是一个好的情况。这个思想类似于Stephen Harris角点检测器，并且在位移计算中也可以找到。基本思想仍然是相同的。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614211225.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;variational-approach-变分法&quot;&gt;Variational Approach 变分法&lt;/h3&gt;
+
+&lt;p&gt;由于我们面临着获取满秩矩阵G的问题，我们可能会问，我们计算矩阵G时应该考虑多大的环境范围。
+我们只应该考虑像素感兴趣的直接邻居，还是应该考虑间接邻居？
+我们应该考虑多少像素？我们可以一般性地增加环境的面积，也可以减小它。
+那么最好的做法是什么呢？如果我们选择一个非常小的环境，很明显，我们很可能遇到我们刚刚看到的问题，也就是所谓的光圈问题。在这种情况下，矩阵G的秩不满，我们无法得到唯一解，因为环境中没有足够的纹理、结构，这使我们无法观察到完整的运动。&lt;/p&gt;
+
+&lt;p&gt;因此，我们可能会提出这样的问题：为什么不使用较大的环境来计算这个大写字母G呢？
+然而，如果我们选择一个非常大的环境，我们可能会遇到其他问题。
+当然，环境越大，我们需要进行所有计算的计算时间就越长。
+更重要的是，如果我们选择了大的环境，我们可能会将不同物体的运动混淆在一起，因为在大的环境中，很可能我们不只观察到一个单独的物体，而是可能观察到几个不同的物体，它们以不同的方式运动。
+因此，我们计算出的是几个物体不同运动方式的混合。&lt;/p&gt;
+
+&lt;p&gt;因此，这两种选择都不是最佳的，我们可能需要在这两个思想之间做出一些平衡。&lt;/p&gt;
+
+&lt;p&gt;这些方法的优点是我们可以获得几乎所有图像像素的光流向量。然而，缺点是需要大量计算来解决这些大规模优化问题，因此无法实时运行，只适用于批量处理记录的图像。这些方法更适合于批量处理记录的图像。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614211701.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;霍恩和肖克最初的方法奠定了变分方法的基础。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;变分方法：假设光流在相邻像素中相似。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在变分方法中，基本思想是根据环境的特性进行自适应选择。如果处于均匀区域，可能需要选择较大的环境；如果处于纹理丰富的区域，可能更倾向于选择较小的环境。这是一种基本的思路，如何表达这个思想并使其更加普适呢？&lt;/p&gt;
+
+&lt;p&gt;早在上世纪80年代，Horn和Schunck提出了一套基于变分方法的光流计算方法，后来的一系列方法都是基于这个思路。这些方法的基本思想是，不是单独估计每个点或单个点的光流向量，而是并行估计所有像素点的光流向量，并建立一个大规模的优化问题，将相邻像素的光流向量之间建立关系。通过这种方式，避免了对环境的特定选择，使其更加灵活。&lt;/p&gt;
+
+&lt;p&gt;具体来说，假设我们有一幅灰度图像，包含一组像素点。对于每个像素点，我们可以推导出运动约束方程，该方程建立了像素点的灰度值和光流向量之间的关系。我们假设相邻像素的光流向量是相似的，它们可能是相等的，或者至少在像素之间变化不大。我们通过一个条件来表达这种相似性，即希望相邻像素的光流向量之间的差异接近于零。&lt;/p&gt;
+
+&lt;p&gt;现在，我们有了一组从运动约束方程得出的条件，以及确定相邻光流向量相似性的条件。我们可以基于这些条件建立一个大规模的优化问题，然后使用数值方法来解决这个优化问题，以并行地找到所有像素点的光流向量。这里不详细介绍具体的方法，只是介绍了这个基本思路。&lt;/p&gt;
+
+&lt;p&gt;这些方法的优点是可以为几乎所有像素点计算光流向量，缺点是需要大量计算来解决这些大规模的优化问题，因此无法实时工作，只适用于批量处理记录的图像或视频。&lt;/p&gt;
+
+&lt;p&gt;如果想了解更详细的信息，请参考提供的参考文献，其中介绍了变分方法在光流计算中的基本原理和扩展。当然，Horn和Schunck的方法已经不再是最新技术，现在有许多对这种方法进行了改进并获得更好结果的扩展方法。不过，让我们先看一下Horn和Schunck方法的结果，以了解这些变分方法的工作原理。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614212309.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然而，当今已经有很多对这种方法的扩展，比基本的霍恩和肖克方法表现更好。
+不过，让我们看一下霍恩和肖克的结果，以了解这些变分方法是如何工作的。
+我们从之前使用卢卡斯-卡纳达方法的示例开始，然后应用霍恩和肖克的方法，经过长时间的计算后，我们得到下面的结果。&lt;/p&gt;
+
+&lt;p&gt;我们可以看到，现在光流向量的估计比之前要好得多，尽管仍然存在一些估计错误和箭头状的伪影，但整体估计效果更好。我们还可以看到，平均光流向量的长度比卢卡斯-卡纳达方法更大，并且相邻像素更可能具有相似的光流向量，因为这是变分方法中引入的内容。&lt;/p&gt;
+
+&lt;p&gt;基于变分方法的解决方案：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;变分优化问题，类似于随机场&lt;/li&gt;
+  &lt;li&gt;数值迭代计算&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;无法实时运行&lt;/strong&gt;！&lt;/li&gt;
+  &lt;li&gt;有关详细信息，请参考提供的参考资料&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614212943.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;optical-flow-and-stereo-vision-光流和立体视觉&quot;&gt;Optical Flow and Stereo Vision 光流和立体视觉&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;光流计算 ≈ 立体视觉的对应问题&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;总结一下光流计算，我们已经了解了一些光流计算方法。
+在之前的章节中，我们介绍了双目视觉，在双目视觉中，我们也面临着类似的问题，即我们想计算两幅图像中某个点的像素位置之间的关系，因此我们有了对应问题。&lt;/p&gt;
+
+&lt;p&gt;虽然光流计算与双目重建不同，但我们仍然可以认为这两个问题之间存在密切的联系。
+在光流问题中，我们比较图像序列中的图像，而在双目视觉中，我们比较立体图像对。
+在光流计算中，我们希望获得两个对应点之间的矢量，而在双目视觉中，我们希望计算视差，也可以将其解释为矢量。&lt;/p&gt;
+
+&lt;p&gt;因此，我们确定了一些可能的方法。&lt;/p&gt;
+
+&lt;p&gt;例如，可以使用&lt;em&gt;运动约束方程进行光流计算，但如果需要的话，也可以用于双目重建&lt;/em&gt;。
+&lt;strong&gt;变分方法&lt;/strong&gt;主要用于光流计算，但也有非常类似的变分方法用于立体重建。
+&lt;strong&gt;极线几何&lt;/strong&gt;是在双目视觉背景下引入的概念，但也可以用于光流计算。
+&lt;strong&gt;块匹配&lt;/strong&gt;也是用于双目重建的方法，但也可以用于光流计算。
+当然，特征点方法也可用于两个问题，至少可以用于获取稀疏光流或稀疏视差。&lt;/p&gt;
+
+&lt;p&gt;可能的方法（适用于两者）包括：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;运动约束方程&lt;/li&gt;
+  &lt;li&gt;变分方法&lt;/li&gt;
+  &lt;li&gt;极线几何&lt;/li&gt;
+  &lt;li&gt;块匹配/相关过程&lt;/li&gt;
+  &lt;li&gt;特征点方法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;稀疏流&quot;&gt;稀疏流&lt;/h3&gt;
+
+&lt;p&gt;为了说明特征点方法的有用性，这里有一个标准图像序列的示例。我使用SURF特征点为两幅图像创建了特征点，并连接那些相互匹配的特征点对。结果如下图所示，每条黄线表示一个光流矢量，我们可以看到大多数光流矢量是有意义的。当然，右上角存在一些特征点连接不合理的伪影，导致了一些奇怪的光流，我们并不期望这种情况发生。当然，汽车部分也产生了一些奇怪的光流，这也是我们所预期的。然而，总体结果还是相当不错的。当然，这只是对于光流的稀疏估计，我们并没有获得每个像素的光流，但至少对于那些获得光流的像素，结果还是相当好的。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614213941.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;image-based-tracking-基于图像的跟踪&quot;&gt;Image Based Tracking 基于图像的跟踪&lt;/h3&gt;
+
+&lt;p&gt;在许多应用中，不需要计算每个像素的光流矢量，而是只对跟踪物体感兴趣，也就是确定属于某个特定物体的像素的光流。我们希望为整个物体获取一个单一的光流矢量。我们假设我们使用某种物体检测器，在第一帧中提供了一个感兴趣区域（ROI）。基于此，我们希望在整个视频序列中跟踪这个区域。我们假设我们不知道当前检测到的是什么物体，可能是汽车、人或动物等，我们只是想能够在整个视频中跟踪这个物体。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614214319.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里有一个例子，仅包含了一系列图像中的四个图像。我们可以看到几个物体。假设在第一幅图像中，物&lt;em&gt;体检测器给出了三个感兴趣区域，用红色、绿色和蓝色矩形表示&lt;/em&gt;。我们的任务是在随后的图像中再次找到这些物体，并确定相应的感兴趣区域。
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614214155.png&quot; alt=&quot;&quot; /&gt;
+&lt;strong&gt;解决这个问题的基本思路如下&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614214514.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从第一幅图像中，我们获取了对感兴趣物体的一些信息，即我们对物体的外观有一些概念。我们可以将这个外观作为该物体的模板，即我们只需将图像中的这个矩形区域作为模板。&lt;/p&gt;
+
+&lt;p&gt;然后在下一幅图像中，我们可以搜索相同的模板出现的位置。我们将该区域在整个图像上进行移动，对于每个位置，我们检查模板是否与图像中所见的内容匹配，并确定相似度的度量。在这种情况下，我们可能发现在这里显示的第一个区域的左侧区域不匹配，因此模板与该区域的内容的相似度非常低，而在右侧的另一个模板中，模板与图像内容的相似度相对较高。我们可以将其视为一种块匹配，再次比较图像的感兴趣区域的灰度值，并尝试找到最佳匹配。一旦我们找到了最佳匹配，我们就知道这个物体在第二幅图像中最有可能再次出现的位置。&lt;/p&gt;
+
+&lt;p&gt;现在，我们可以利用这第二幅图像，因为我们知道同一物体在第二幅图像中的位置，我们可以得到显示相同物体（或至少可能是相同物体）的第二个感兴趣区域。现在，我们可以使用第一幅图像和第二幅图像的两个感兴趣区域，并以最佳方式调整模板，使其适应两者。&lt;/p&gt;
+
+&lt;p&gt;这样就得到了一个适应的模板。有了这个适应的模板，我们可以进入第三幅图像，并根据最佳匹配搜索第三幅图像中最合适的区域。基于这个最佳匹配，我们可以再次调整模板以适应新找到的感兴趣区域的外观。&lt;/p&gt;
+
+&lt;p&gt;通过这样的步骤，我们可以逐步变得越来越好，以确定代表这种物体的良好模板。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;基于图像的跟踪：超越块匹配 Beyond Block Matching&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;因此，创建模板并将其与图像块进行比较的方法既可以视为一种块匹配，也可以以不同的方式处理，并将其解释为分类任务。也就是说，我们想要搜索特定类别的物体，这些分类器通常使用一些示例图像进行训练。&lt;/p&gt;
+
+&lt;p&gt;在我们的情况下，我们从一个正例图像开始，即来自图像序列中的第一幅图像的感兴趣区域，然后我们选择一些其他图像块作为负例。一旦我们在第二幅图像中找到了感兴趣区域，我们可以将第二幅图像中的感兴趣区域视为第二个训练示例，用于训练专门针对相关对象类别的分类器，通过这种方式我们可以不断进行下去。&lt;/p&gt;
+
+&lt;p&gt;因此，我们对模板匹配使用可训练的分类器。参加过机器视觉或相关模式识别讲座的人可能已经对我们可以使用哪些分类器有一些了解，例如人工神经网络、支持向量机、决策树等等。在我们这里，我们将坚持支持向量机的思想，但不使用纯粹的支持向量机，而是经过改进的某种机器。&lt;/p&gt;
+
+&lt;h3 id=&quot;example-kernelized-correlation-filter-kcf-核化相关滤波器-kcf&quot;&gt;Example: Kernelized Correlation Filter (KCF) 核化相关滤波器 (KCF)&lt;/h3&gt;
+
+&lt;p&gt;这导致了一种被称为核化相关滤波器的方法。相关滤波器让我们想起了块匹配方法，而核化则提醒我们支持向量机的思想，因为这些方法的基本思想是将一种块匹配与核化相结合。&lt;/p&gt;
+
+&lt;p&gt;在这种情况下，训练示例的创建如下所示：
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614215729.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;假设我们在最初的图像中的感兴趣区域显示了这个骑自行车的补丁，然后我们将这个补丁复制并填充整个平面。此外，我们创建了一种类似原始补丁大小的标签图像，这个标签图像的值介于0和1之间。中心点的值为1，在边界处的值为0，两者之间的值从1递减。然后我们创建一组训练示例，第一个示例是从原始图像补丁和相应的标签创建的，标签的值是标签图像中心处的值。然后，我们围绕原始图像补丁转动这个红色矩形，并以相同的方式转动用于确定相应训练示例标签的标签图像中的点。当然，标签不仅仅是0和1，这是纯粹分类任务的预期，而是介于0和1之间的实数。因此，这些标签在某种程度上告诉我们一个正确示例的级别，我们就是这样创建训练示例的。对于你所看到的红色矩形的每个位置，我们创建一个训练示例。之后，我们可能会在灰度图像或彩色图像上计算一些之前计算的特征，并将其应用于这些灰度图或者彩色图。&lt;/p&gt;
+
+&lt;p&gt;之后，我们可能会在灰度图像或彩色图像上计算一些特征，并将其应用于这些训练示例，而不是直接使用颜色或灰度值。之前参加过机器视觉讲座的人会了解到一些特征，例如HOG特征或LBP特征，这些特征也可以用来创建训练示例，而不是直接使用原始图像数据。&lt;/p&gt;
+
+&lt;p&gt;然后，我们应用一个分类器，它类似于支持向量机，但不完全是支持向量机。在我们的情况下，可以使用快速傅里叶变换以高效地进行训练，因此这种训练只需现代计算机上的10到20毫秒，可以实时进行。这样，我们就训练出了一个分类器，现在我们可以在下一幅图像中搜索适当的最佳匹配。在这种的情况下，也可以使用快速傅里叶变换来实现这一点，从而获得非常快速的响应时间。&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;Example: Tracking with Occlusions 使用遮挡进行跟踪&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;是的，我们在获取新图像时逐步更新模板。在这里，我们可以看到核化相关滤波方法的一个例子，它通过一种额外的技术扩展以处理遮挡。这是我们团队中Weitian的工作成果。让我们开始视频，我们可以看到这种方法跟踪了一个骑自行车的人，即使自行车被汽车遮挡，它仍然能够跟踪。这里的思路是分析物体的哪些部分仍然可见，然后在这个可见区域上初始化第二个核化相关滤波器，可见区域显示为绿色。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/bb28588d-b509-4bcd-bfd6-94c43a518c5d.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;Example: Tracking in Fog 雾中跟踪&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;让我们看另一个示例视频，在右下方的图像中，你可以看到初始情况，绿色矩形定义了一开始提供的感兴趣区域，很难确定我们实际上正在跟踪的是什么。如果你看左上方的图像，也显示相同的图片，我们可以看到有些东西，但很难说那是什么，即使我们放大并查看右上方的图像，我们几乎无法确定我们真正看到了什么，只有一些与周围的雾有些不同的深灰色区域。然而，让我们启动这个核化相关滤波器来跟踪物体。&lt;/p&gt;
+
+&lt;p&gt;现在我们可以看到物体的真正是什么，即一辆汽车。然而，从第一幅图像来看，几乎不可能确定这确实是一辆车，因此在第一幅图像中，车辆检测器无法确定这是一辆车，但我们仍然能够跟踪它，这真的很有趣。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/d96751c9-e29a-4f87-baf7-87295e60fa47.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;现在让我们总结一下光流计算和基于图像的跟踪这一章节。我们开始讨论光流，介绍了光流的基本概念，推导了运动约束方程，并基于此引入了Lucas-Kanade方法。然后，我们更详细地分析了Lucas-Kanade方法，推导了光圈问题，并介绍了变分流计算方法的一些基本思想。&lt;/p&gt;
+
+&lt;p&gt;对于基于图像的跟踪，我们引入了模板匹配的思想和核化相关滤波器作为一种有用且实时可行的方法来实现这种模板匹配思想，用于真实图像序列。&lt;/p&gt;
+
+&lt;p&gt;今天就到这里，谢谢大家的聆听。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 12 Jun 2023 00:00:00 +0200</pubDate>
+        <link>https://wenboli-cn-de.github.io/2023/06/04-Optic-Flow-and-Image-Based-Tracking/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2023/06/04-Optic-Flow-and-Image-Based-Tracking/</guid>
+        
+        <category>专业</category>
+        
+        <category>汽车视觉</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>汽车视觉 Automotive Vision - Binocular Vision / Stereo Vision 双目视觉/立体视觉</title>
+        <description>&lt;head&gt;
+&lt;script src=&quot;https://polyfill.io/v3/polyfill.min.js?features=es6&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; id=&quot;MathJax-script&quot; async=&quot;&quot; src=&quot;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js&quot;&gt;
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;script&gt;
+MathJax = {
+  tex: {
+    inlineMath: [[&apos;$&apos;, &apos;$&apos;], [&apos;\\(&apos;, &apos;\\)&apos;]],
+    packages: [&apos;base&apos;, &apos;newcommand&apos;, &apos;configMacros&apos;]
+  },
+  svg: {
+    fontCache: &apos;global&apos;
+  }
+};
+&lt;/script&gt;
+
+&lt;script&gt; 
+MathJax = {
+  tex: {
+    inlineMath: [[&apos;$&apos;, &apos;$&apos;]],
+    processEscapes: true
+  }
+};
+&lt;/script&gt;
+
+&lt;h1 id=&quot;chapter-2-binocular-vision--双目视觉&quot;&gt;chapter 2 Binocular Vision &lt;br /&gt; 双目视觉&lt;/h1&gt;
+
+&lt;p&gt;欢迎来到《汽车视觉》第二章，今天我们将讨论双目视觉系统，也称为立体视觉。这是一些提供有关双目视觉系统章节的教科书列表。如果你需要超出本讲座范围的背景信息，请参考这些书籍以获取更多信息。让我们通过介绍对极几何概念来开始我们对双目视觉的讨论。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;R. Hartley, A. Zisserman, Multiple View Geometry in computer vision. Cambridge
+University Press, 2006&lt;/li&gt;
+  &lt;li&gt;E. R. Davies, Machine Vision. Theory. Algorithms. Practicalities. Elsevier, 2005, ch.
+21.6 ff&lt;/li&gt;
+  &lt;li&gt;D. A. Forsyth, J. Ponce, Computer Vision. A Modern Approach. Prentice Hall, 2003,
+ch. 10&lt;/li&gt;
+  &lt;li&gt;R. Szilinsik, Computer Vision: Algorithms and Applications, 2010, ch. 10&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;epipolar-geometry-对极几何&quot;&gt;Epipolar Geometry 对极几何&lt;/h2&gt;
+
+&lt;h3 id=&quot;binocular-vision--stereo-vision-双目视觉立体视觉&quot;&gt;Binocular Vision / Stereo Vision 双目视觉/立体视觉&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615142533.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;双目视觉或立体视觉系统由两个相机组成。每个相机将三维世界映射到二维图像上。当使用两个不同的相机从两个不同的视点观察同一场景时，我们会获得两幅图像。这意味着我们有一个从三维世界到二维（两倍）世界的映射，或者换句话说，从三维到四维世界的映射。这种映射使我们能够确定一个点相对于相机的距离，这是使用单个相机无法实现的。我们将这个距离称为点的深度。此外，我们将双目相机系统中两个相机之间的距离称为立体设置或立体摄像机的基线。&lt;/p&gt;
+
+&lt;p&gt;一旦我们确定了所有点的三维位置，我们就可以创建环境的三维模型。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;场景是用两个摄像头拍摄的&lt;/li&gt;
+  &lt;li&gt;$\mathbb{R}^3 \rightarrow \mathbb{R}^2 \times \mathbb{R}^2$&lt;/li&gt;
+  &lt;li&gt;3d 重建：确定到物体的距离（深度）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/68d8081b-56f5-4e5f-b9d8-b50989567816.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;让我们从以下的图示开始分析：&lt;/p&gt;
+
+&lt;p&gt;我们有一个以焦点和图像平面为模型的相机。在现实中，相机的图像平面位于焦点后方。然而，为了简化分析，让我们引入一个位于相机前方的虚拟图像平面。由于针孔相机模型仅使用相机的焦点作为投影中心来实现透视映射，我们将在虚拟图像平面上观察到与在真实图像平面上相同的图像。然而，左右和上下是翻转的。此外，我们假设虚拟图像平面与相机之间的距离为1。&lt;/p&gt;
+
+&lt;p&gt;如果我们观察一个三维点P，我们可以通过连接这个点P与相机的焦点来构建一个视线。该视线与图像平面的交点将给出该点的图像点，我们在这个图示中将其表示为ql。&lt;/p&gt;
+
+&lt;p&gt;这里所示的点Fl和图像平面描述了左侧相机。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615143811.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;现在，让我们引入立体摄像机设置中的右侧相机，它也由其焦点和虚拟右图像平面定义。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615143923.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们添加了第三条连接两个焦点的线，实际上就是基线。我们观察到这个基线也与图像平面在两个点相交，我们将其表示为eL和eR，并将它们称为相机系统的epipolar”。请注意，图像平面本身是一个无限延伸的平面。我们在相机中感知到的图像只是该平面内的一个小区域。因此，即使epipolar”在图像之外，它仍然存在。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615144259.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;点FL、FR和P构成了一个三角形，这个三角形定义了一个平面，我们称之为极线平面（epipolar plane）。极线平面与虚拟图像平面在一条线上相交，这条线被称为相机设置的极线（epipolar line）。&lt;/p&gt;
+
+&lt;p&gt;在位于两个相机前方的极线平面上的所有点都会被映射到两个相机的图像平面上的极线上。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;现在，我们可以基于这个模型进行计算&lt;/strong&gt;，区分左侧相机和右侧相机的相关坐标系。我们引入大写索引’L’和’R’分别表示左侧和右侧相机的坐标系。在进行计算时，始终小心并检查我们当前所处的坐标系，因为混淆不同的坐标系可能会导致问题。&lt;/p&gt;
+
+&lt;p&gt;让我们首先建立起点P在左侧相机坐标系统中的三维位置描述向量PL与点P在左侧相机图像平面中的图像点位置描述向量ql之间的关系。从图示中，我们可以很容易地看出这两个向量只是彼此的缩放版本，&lt;strong&gt;缩放因子由1/zLL（1除以zLL）给出&lt;/strong&gt;。这是因为&lt;em&gt;虚拟图像平面与焦点之间的深度为1&lt;/em&gt;，而zLL是点P在左侧相机坐标系中的深度。因此，zLL只是向量PLL的第三个分量。&lt;/p&gt;
+
+&lt;p&gt;类似地，我们可以对右侧相机坐标系和向量PR应用相同的推理过程。&lt;/p&gt;
+
+&lt;p&gt;此外，我们观察到点FL、FR和P构成了极线平面，而向量PL、PR和B是极线平面的一部分。这意味着如果我们计算这些向量中任意两个的叉乘，我们将得到一个垂直于该平面的向量。此外，如果我们将这样一个垂直向量与平面上的其中一个向量进行点积运算，结果将为零。我们可以执行这个计算，例如，首先将基线向量B与向量PL进行叉乘，然后计算与向量PR的点积。当然，我们必须确保所有这些计算都在同一个坐标系中进行，特别是左侧相机的坐标系。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;左侧相机坐标系统： $\vec{q}_l^L=\frac{1}{z_l^L} \vec{p}_l^L$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;右侧相机坐标系统： $\vec{q}_r^R=\frac{1}{z_r^R} \vec{p}_r^R$&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;假设向量位于一个平面上： $\left(\vec{p}_r^L\right)^T \cdot\left(\vec{b}^L \times \vec{p}_l^L\right)=0$&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在我们之前的计算中，我们使用了向量PR，但是将其表示为左侧相机的坐标系，这有点不寻常。因此，让我们看看如何将其转换为在右侧相机坐标系中表示的向量。由于两个相机坐标系都是右手坐标系、正交坐标系，并且使用相同的长度单位，我们可以通过将这些点与幻灯片上表示的旋转矩阵（用大写字母D表示）相乘，并通过一定的偏移来将它们从一个坐标系转换到另一个坐标系。在这种情况下，偏移量是基线向量B。现在，对于在左侧相机坐标系中表示的向量PR，它实际上是连接FR和P的向量。这个向量可以被重写为从FR到FL，然后从FL到P的组合。换句话说，它是从FL到P的向量减去从FL到FR的向量。这两个向量表示了左侧相机坐标系中两个点的位置。现在，我们可以使用这个替换，应用上述的坐标变换规则，并将这些向量替换为在右侧相机坐标系中表示的相应向量。&lt;/p&gt;
+
+&lt;p&gt;在此之后，我们观察到项BL出现了两次，一次为正，一次为负，因此该项消失了。此外，我们可以将旋转矩阵D提取出来。括号中剩下的项实际上就是连接FR和P的向量，表示在右侧摄像机坐标系中。这实际上就是PRR。&lt;/p&gt;
+
+&lt;p&gt;结合我们之前的结果，我们可以得出以下结论：
+&lt;strong&gt;旋转矩阵D乘以括号中的PRR转置，再乘以BL和PLL的叉乘，必须等于零。&lt;/strong&gt; *(下面式子最后一行)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;坐标变换：$\vec{x}^L=D \vec{x}^R+\vec{b}^L$&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\begin{aligned}
+&amp;amp; \vec{p}_r^L={\overrightarrow{F_r P}}^L={\overrightarrow{F_l P}}^L-{\overrightarrow{F_l F_r}}^L \\
+&amp;amp; =D \cdot{\overrightarrow{F_l}}^R+\vec{b}^L-\left(D \cdot{\overrightarrow{F_l F_r}}^R+\vec{b}^L\right) \\
+&amp;amp; =D \cdot\left({\overrightarrow{F_l P}}^R-{\overrightarrow{F_l F_r}}^R\right) \\
+&amp;amp; =D \cdot \vec{F}_r R=D \vec{p}_r^R \\
+&amp;amp; \left(\vec{p}_r^L\right)^T \cdot\left(\vec{b}^L \times \vec{p}_l^L\right)=0 \quad \Rightarrow \quad\left(D \vec{p}_r^R\right)^T \cdot\left(\vec{b}^L \times \vec{p}_l^L\right)=0 \\
+&amp;amp;
+\end{aligned}\]
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615144259.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;现在，我们将这个结果与先前关于矢量ql和pl之间关系的结果相结合。我们已经得出这两个向量是通过一个缩放因子相关联的。现在，我们将这个关系代入以下方程中，将PRR替换为QRR，将PLL替换为QLL。
+由于zRR和zLL（点在两个坐标系中的深度）始终是正数，我们可以将整个方程除以这两个深度值。我们得到下面的等式。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;结合：&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\begin{array}{r}
+z_r^R\left(\vec{q}_r^R\right)^T D^T\left(\vec{b}^L \times z_l^L \vec{q}_l^L\right)=0 \\
+\left(\vec{q}_r^R\right)^T D^T\left(\vec{b}^L \times \vec{q}_l^L\right)=0
+\end{array}\]
+
+&lt;p&gt;最后一步是将叉乘BL叉乘QLL重新写成矩阵-向量乘法的形式。通过一些变换，我们可以将其重写为矩阵为3x3的矩阵乘以一个三维向量，如下所示。让我们将其表示为BL叉乘。你可以在纸上试一下验证这个等式。&lt;/p&gt;
+
+\[\vec{b}^L \times \vec{q}_l^L=\left(\begin{array}{ccc}
+0 &amp;amp; -b_z^L &amp;amp; b_y^L \\
+b_z^L &amp;amp; 0 &amp;amp; -b_x^L \\
+-b_y^L &amp;amp; b_x^L &amp;amp; 0
+\end{array}\right) \vec{q}_l^L=\left[\vec{b}^L\right]^L \times \cdot \vec{q}_l^L\]
+
+&lt;p&gt;现在我们可以简化我们感兴趣的方程，最终结果为：QR的转置乘以E乘以QLL等于零，其中E，也被称为本质矩阵  essential matrix，就是转置的旋转矩阵乘以矩阵BL叉乘。&lt;/p&gt;
+
+\[\begin{aligned}
+&amp;amp; \text { with: } E=D^T\left[\vec{b}^L\right] \\
+&amp;amp; \qquad\left(\vec{q}_r^R\right)^T E \vec{q}_l^L=0
+\end{aligned}\]
+
+&lt;p&gt;很容易看出，本质矩阵只包含有关相机设置的内部参数的信息，也就是关于两个相机之间的相对位置的信息。&lt;/p&gt;
+
+\[\left(\vec{q}_r^R\right)^T E \vec{q}_l^L=0\]
+
+&lt;p&gt;为什么这个结果如此重要呢？如果我们知道$\vec{q}_l^L$，也就是我们知道了&lt;strong&gt;左相机图像中的某个点&lt;/strong&gt;，那么根据这个方程，我们可以确定右图像中的对极线。
+因为右图像上的所有点都必须满足这个方程：$\left(\vec{x}^R\right)$的转置乘以E乘以$\vec{q}_l^L$必须等于零。所以这其实就是右相机图像平面上一条直线的定义。&lt;/p&gt;
+
+\[\left(\vec{x}^R\right)^T E \vec{q}_l^L=0\]
+
+&lt;p&gt;类似地，如果我们知道右相机图像中的一个点，我们可以确定左相机图像中相应的对极线。&lt;/p&gt;
+
+&lt;p&gt;我们还可以确定&lt;strong&gt;立体摄像机系统的对极点&lt;/strong&gt;，因为对极点是所有对极线共有的点。这意味着对于右相机的对极点，我们得到ERR的转置乘以本质矩阵乘以QLL必须对所有可能的QLL值都相等。类似地，我们也可以得到左相机对极点的结果。&lt;/p&gt;
+
+\[\begin{aligned}
+&amp;amp; \left(\vec{e}_r^R\right)^T E \vec{q}_l^L=0 \text { for all } \vec{q}_l^L \\
+&amp;amp; \left(\vec{q}_r^R\right)^T E \vec{e}_l^L=0 \text { for all } \vec{q}_r^R
+\end{aligned}\]
+
+&lt;p&gt;因此，如果我们想从立体摄像机系统中重建三维点，我们可以利用这一点。假设我们已经获得了立体摄像机系统的左图像和右图像，并且我们在左图像中找到了一个有趣的点QL。问题是，对应的右图像中的点在哪里？它可能在任何地方。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615152840.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然而，如果我们知道了点QL对应的对极线，我们就可以限制搜索范围，因为我们知道对应的点只能位于对极线上。这意味着知道对极线可以帮助我们将搜索空间限制在一维结构上，即一条一维线上。如果我们知道一对对极线，我们还可以确定对极平面。&lt;/p&gt;
+
+&lt;h2 id=&quot;fundamental-matrix&quot;&gt;Fundamental Matrix&lt;/h2&gt;
+
+&lt;p&gt;在许多情况下，使用本质矩阵并不方便，因为如果我们想要使用图像坐标进行操作，通常希望使用图像坐标系统中的u和v坐标，而不是相机坐标系统中的坐标。为此，我们可以引入另一个矩阵，称为基础矩阵F，它实际上与本质矩阵相同，但使用图像坐标系统中的坐标。它可以通过将本质矩阵从左侧和右侧乘以两个相机的内部参数矩阵来导出，如方程中所示。&lt;/p&gt;
+
+&lt;p&gt;现在，我们之前针对本质矩阵导出的方程同样适用于基础矩阵。对于一对对应的图像坐标UL、VL和UR、VR，我们得到UR、VR、1乘以基础矩阵乘以UL、VL、1必须等于零。&lt;/p&gt;
+
+&lt;p&gt;基础矩阵可以从已标定的相机配置中导出，因为我们&lt;em&gt;知道内部相机参数和外部参数&lt;/em&gt;，可以从中导出本质矩阵和基础矩阵。即使我们不知道这些内部和外部参数，如果我们有一定数量的左右相机图像上的对应点，仍然可以导出基础矩阵。如果我&lt;strong&gt;们至少知道八个点，我们可以使用所谓的八点算法估计基础矩阵F，但无法确定一个未知的比例因子&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在有基本矩阵 F 的情况下，首选图像坐标：
+    &lt;ul&gt;
+      &lt;li&gt;具有内在相机参数的矩阵 Al, Ar&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+\[F=A_r^{-T} E A_l^{-1}\]
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;/li&gt;
+  &lt;li&gt;在一对对应的图像坐标的情况下：&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\left(u_r, v_r, 1\right) F\left(\begin{array}{c}
+u_l \\
+v_l \\
+1
+\end{array}\right)=0\]
+
+&lt;ul&gt;
+  &lt;li&gt;基本矩阵的形状可以通过一组≥8个对应的图像点（8点算法）直到一个未知的比例因子来计算。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;例子&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;让我们来看一些例子。这里，我们看到两个图像显示的是同一个场景，但&lt;strong&gt;在左图中，视角稍微向左&lt;/strong&gt;，而&lt;strong&gt;在右图中，视角稍微向右&lt;/strong&gt;。我们看到一些蓝色的线，它们是极线，以及一些用小绿点标记的点集。在这些情况下，极线大致是水平的，并且极点远离图像之外。&lt;/p&gt;
+
+&lt;p&gt;– horizontal panning motion 水平平移运动
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615153747.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这张图片展示了类似的情况，但现在视角位置重叠。极线是垂直的。&lt;/p&gt;
+
+&lt;p&gt;– vertical panning motion 垂直平移运动
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615153935.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;– horizontal and vertical panning motion  水平和垂直平移运动
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615154100.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这是一个情况，其中两个摄像机的视角在水平和垂直方向上发生了移动，因此极线有些倾斜，至少部分倾斜。最后，让我们来看一下摄像机不是向左、向右、向上或向下移动，而是向前或向后移动，离场景越来越近或越来越远的情况。在这种设置中，四个极点都位于图像内部，正如我们在所有极线的交点处所看到的，这些交点就是立体设置的极点。
+– motion parallel to optical axis 平行于光轴的运动
+&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615154216.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;此外，还有一个非常特殊的极线几何情况，即具有相同图像平面、相同内部参数的相机，且相机完全平行且方向相同。这种情况如图所示，两个摄像机只是平行于摄像机坐标系的x轴向左或向右移动。在这种情况下，极线是平行的且完全水平的。我们需要在另一个图像的同一行上搜索对应的点。极点位于无限远处。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615155041.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在这样的设置中，我们称之为矫正相机设置，计算特定点的深度相对容易。首先，我们需要确定该点的视差，即图像坐标中对应点的 u 坐标之差。因此，视差（表示为 Ddisparity）等于 UL 减去 UR。这总是一个非负数。基于视差，我们可以轻松计算出点 P 的三维位置。它由基线（两个焦点之间的距离）乘以 alpha prime（相机设置的有效焦距）除以视差，再乘以向量 [XL, YL, 1] 给出。该向量表示左侧相机的焦点和相机坐标系中的图像点的位置。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;视差（以像素为单位）：$d=u_l-u_r$&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+\[P^L=\frac{b}{x_l^L-x_r^R}\left(\begin{array}{c}
+x_l^L \\
+y_l^L \\
+1
+\end{array}\right)=\frac{b \alpha^{\prime}}{u_l-u_r}\left(\begin{array}{c}
+x_l^L \\
+y_l^L \\
+1
+\end{array}\right)\]
+
+&lt;p&gt;&lt;strong&gt;Derivation:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230615155538.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Disparity 视差&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我们可以看到校正或矫正立体设置的视觉效果。在顶部，您可以看到立体摄像机的左图像和右图像，在底部，您可以看到两个图像一个接一个地显示。我们可以观察到，当图像发生变化时，所有的点都向左和向右移动，然而它们不上下移动。我们还可以进一步观察到，远离我们的点，例如背景中的房屋，移动得不多，即视差较小，而前景中的点，例如行人，移动得很多，这些点的视差很大。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230616150252.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Rectification 矫正&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;实际上，几乎不可能构建一个完全矫正的相机系统，因为我们在安装相机时所需的精度在机械上很难实现。那么，如果我们无法构建矫正相机，我们如何使用矫正相机呢？答案很简单，我们可以从实际的立体设置中创建虚拟矫正相机。这个原理在下面的图片中展示。我们从原始相机设置的图像开始。这个设置并不差，所以相机的对准尽可能好，但不完美。然后，我们进行一些转换，称为图像的矫正，然后稍微修改图像，使其完全矫正。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230616150522.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;它是如何实现的？起点是我们有立体设置的两个相机，具有不同的相机参数Al和AR，以及不同的坐标系。我们的目标是定义两个新的虚拟相机，一个左虚拟相机和一个右虚拟相机，两者应该具有相同的焦距，以及相同的内部参数。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230616150731.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;两个虚拟摄像机的对齐方式应该是完全一致的，这意味着它们的相机坐标系应该完全对齐。它们的相机坐标系的x轴应该与连接两个焦点的基线平行，并且焦点应该与原始摄像机的焦点相同。也就是说，左侧虚拟摄像机的焦点应与真实左侧摄像机的焦点相同，虚拟右侧摄像机的焦点应与真实右侧摄像机的焦点相同。&lt;/p&gt;
+
+&lt;p&gt;我们可以将这个过程可视化如下：我们从一个真实相机开始，你可以看到相机坐标系彼此不对齐。然后我们将它们旋转，使它们的x坐标与基线平行，而它们的y和z坐标也互相平行。然后我们忘记原始坐标系，只使用这个虚拟双目相机设置。我们如何计算这个呢？&lt;/p&gt;
+
+&lt;p&gt;首先，我们需要根据相机参数定义一个共同的内部矩阵a’，这个矩阵类似于原始内部相机矩阵Al和Ar。&lt;/p&gt;
+
+&lt;p&gt;其次，我们要找到一个共同的相机坐标系，使得x轴平行于基线。在定义这个坐标系时，我们有一定的自由度，因为我们可以始终围绕x轴旋转，并得到不同可能的矫正相机坐标系的选择。
+实际上，我们在实践中使用尽可能与原始两个相机坐标系相似的坐标系。一旦我们定义了这些新的坐标系，我们确定所需的旋转矩阵，用于将原始坐标转换为新的坐标。
+然后，我们将原始相机图像转换为虚拟相机的图像，也就是创建了新的虚拟矫正相机图像。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这可以按照以下方式完成&lt;/strong&gt;：从透视投影中，我们知道如果我们知道点p在原始相机设置和左相机的坐标系中的3D点位置，通过将Al与p相乘，我们得到图像坐标。左侧的结果是深度pz乘以该点的图像坐标。我们可以对新的虚拟左相机系统进行类似的计算。对于新的虚拟相机坐标系，我们有P’×a’ = pz’×u’×b’，其中带有撇号的变量是与新的虚拟相机坐标系相关的变量，这个新坐标系中的点的深度和坐标都可能发生变化。&lt;/p&gt;
+
+&lt;p&gt;知道两个坐标系之间有一个已知的变换，仅由一个旋转矩阵定义，我们可以将点P’转换为DL乘以p。&lt;/p&gt;
+
+&lt;p&gt;现在我们可以合并这两个方程，并通过从上面的方程推导出的相应方程替换点P，最终我们得到了你在这里看到的术语。通过将整个方程除以Pz，我们得到一个简化的项目P’ / Pz，这只是一个缩放因子，我们可以通过这个方程的第三行确定缩放因子。一旦我们知道了缩放因子，我们就可以确定U’和V’。如果我们想根据实际图像中的位置确定虚拟图像中的点的位置，这意味着我们可以创建一个描述实际图像中的点如何映射到虚拟矫正图像中的点的映射。我们可以对左右两个虚拟相机都这样做，并最终得到结果。&lt;/p&gt;
+
+\[\begin{aligned}
+&amp;amp; p_z \cdot\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right)=A_l \cdot \vec{p} \\
+&amp;amp; p_z^{\prime} \cdot\left(\begin{array}{l}
+u^{\prime} \\
+v^{\prime} \\
+1
+\end{array}\right)=A^{\prime} \cdot \vec{p}^{\prime}=A^{\prime} \cdot D_l \cdot \vec{p}=A^{\prime} \cdot D_l \cdot A_l^{-1} \cdot p_z \cdot\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right) \\
+&amp;amp; \frac{p_z^{\prime}}{p_z}\left(\begin{array}{l}
+u^{\prime} \\
+v^{\prime} \\
+1
+\end{array}\right)=A^{\prime} D_l A_l^{-1} \cdot\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right)
+\end{aligned}\]
+
+&lt;p&gt;最后，让我们分析从我们可以确定该点的视差的准确性来看，深度计算的灵敏度如何。&lt;/p&gt;
+
+&lt;p&gt;我们已经推导出深度Pz取决于视差D的公式，其中包括项基线B乘以有效焦距Alpha Prime除以视差D。如果我们假设我们只能确定视差到某个位置，那么我们假设在计算这个视差时会产生一定的误差Epsilon。让我们考虑一下这个误差和视差计算对计算深度的影响有多大。为此，我们使用泰勒展开。对于视差D + Epsilon，我们可以近似为视差D - Epsilon的点的深度，其中深度对视差的一阶导数为B乘以Alpha Prime除以D的平方。这可以表示为D-Epsilon / B乘以Alpha Prime乘以Z平方的术语，这意味着在深度估计中获得的误差与点的距离的平方成正比。也就是说，点离得越远，我们在深度估计中得到的误差就越大。&lt;/p&gt;
+
+&lt;p&gt;该图显示了这种误差增长的典型示例。现在我们清楚地看到在水平轴上是点的真实距离，而在垂直轴上是如果我们对视差进行了半个像素的小猜测或小测量所得到的误差。我们很容易看到误差的正确二次增长。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230616152729.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;correspondence-problem-对应问题&quot;&gt;Correspondence Problem 对应问题&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230616152832.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;现在让我们来讨论对应问题。到目前为止，我们假设我们知道左图像中的哪些点和右图像中的哪些点表示三维世界中的同一点，但实际上这是未知的，我们需要计算它。我们来看一对经过矫正的立体图像。&lt;/p&gt;
+
+&lt;p&gt;在左图像中，一个点用橙色圆圈标出，它是建筑物的左上角。对于这个点，找到右图像中的对应点相对容易，因为这个点非常显著，我们可以比较容易地确定它。&lt;/p&gt;
+
+&lt;p&gt;对于第二个点，它位于一个窗户的垂直边缘上，情况稍微复杂一些。在右图像中，我们可以找到同样的垂直边缘，但是如果没有任何额外的信息，我们不会确切地知道这个边缘上的哪个点是对应点。幸运的是，在这种情况下，我们知道我们正在处理的是矫正的相机图像，这意味着我们知道我们必须在同一行中搜索，因为这是对应的极线。如果我们利用这个额外的知识，我们可以轻松找到对应点。&lt;/p&gt;
+
+&lt;p&gt;在第三种情况下，我们处理的是轨道上的一个点。同样，我们可以使用相同的技巧并利用极线，但不幸的是，在这条极线上有两个非常相似的点，两个轨道上的点都有可能是对应点。如果我们分析整个图像并理解整个图像，我们将能够轻松区分左侧的轨道和右侧的轨道。但如果我们只看局部区域并比较右图像中的哪个区域与左图像中的哪个区域相似，可能会遇到问题，因为在这种情况下，错误的对应点看起来比正确的对应点更相似。&lt;/p&gt;
+
+&lt;p&gt;最后，最糟糕的情况发生在雪地中的这个点。我们知道我们必须在极线上搜索，但不幸的是，图像中没有足够的结构来确定对应点的位置，我们只能说它必定在这个区域，但无法确定确切位置。&lt;/p&gt;
+
+&lt;p&gt;为了确定对应点，我们可以利用几个特性，特别是在矫正的图像中。如果图像是由相同类型的相机拍摄，并且曝光时间选择相同，那么点的灰度值应该是相同的。它们应该具有相同的局部环境，看起来非常相似。它们必须位于同一对极线上。这些点的邻域也应该大部分时间保持不变，这意味着如果我们在左图像中有两个点，一个在另一个点的左边，那么相应的右图像中的点的顺序也应该如此。正如我所说，有一些例外情况，不满足这些条件，但这些例外情况相当罕见。最后，在左图像中，U坐标大于右图像中的U坐标，因此视差始终是非负的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;对应的点：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;具有相同的灰度值&lt;/li&gt;
+  &lt;li&gt;具有相同的局部环境&lt;/li&gt;
+  &lt;li&gt;位于同一对极线上&lt;/li&gt;
+  &lt;li&gt;邻域被保留（大部分情况下）&lt;/li&gt;
+  &lt;li&gt;在左图像中的u坐标大于在右图像中的u坐标（矫正后的图像）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;block-matching-块匹配&quot;&gt;Block Matching 块匹配&lt;/h3&gt;
+
+&lt;p&gt;我们如何确定对应点呢？方法是比较两个点的局部环境，这就得到了一种称为块匹配的方法，因为我们比较的是灰度值的块。在这种情况下，我选择了左图像中的一个图像块，如顶部所示，并提供了三个可能的右图像中的候选点，它们可能是对应点。&lt;/p&gt;
+
+&lt;p&gt;现在我们可以比较这些图像块，看灰度值结构的相似程度，例如通过一个灰度值差异度量，我们可以得到左&lt;strong&gt;边的图像块的差异为74.9，中间的图像块的差异为43.8，右边的图像块的差异为3.2&lt;/strong&gt;。在这种情况下，&lt;strong&gt;我们只是计算了逐像素的绝对灰度值差异，然后取平均值&lt;/strong&gt;。当然，我们还&lt;em&gt;可以选择其他灰度值差异度量的方法&lt;/em&gt;，例如如果我们喜欢，我们可以选择平方差异而不是计算绝对差异。在这种情况下，我们将得到这些值。最后，我们会选择最相似的图像块，也就是具有最小差异的图像块，并将其选为最有可能的对应点。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230616153711.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;数学上，我们会检查以左图像中感兴趣像素 UL、VL 为中心的一定区域，并分析通过该区域中的所有像素的灰度值结构，使用两个运行索引 i 和 j。&lt;/p&gt;
+
+&lt;p&gt;对于右图像中的潜在对应点，我们也会考虑相同区域内的所有像素，并逐像素比较灰度值，取绝对差异并对所有像素求和。如果需要，我们可以通过将结果除以该区域中的像素数量来取平均值。这将得到灰度值绝对差异的总和。对于平方差异，计算方式非常类似，只是在差异的计算中取差值的平方。另一个选项是使用相关性，如此处所示。该相关性是从统计学上确定的，具有一些不同的特性。前两种度量方式，如果图像非常相似，它们会很小；相关性在两个图像相似时很大；它们在两个图像完全相同时达到最大值 1；而当它们非常不相似时，相关性为 -1。&lt;/p&gt;
+
+&lt;p&gt;相关性具有一些优势，因为它对消除具有不变性。如果两个图像块通常稍微亮或暗一些，相关性对这些变化不敏感，例如由于相机的曝光时间不同。然而，灰度值绝对差异和平方差异是不具有这种不变性的。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;左图中像素 (ul,vl) 周围的局部环境：&lt;/li&gt;
+&lt;/ul&gt;
+
+\[g_l\left(u_l+i, v_l+j\right), \quad-n \leq i, j \leq n\]
+
+&lt;ul&gt;
+  &lt;li&gt;左右分割段的区别：
+    &lt;ul&gt;
+      &lt;li&gt;对灰度值绝对差求和：&lt;br /&gt;
+\(\sum_{i=-n}^n \sum_{j=-n}^n\left|g_l\left(u_l+i, v_l+j\right)-g_r\left(u_r+i, v_r+j\right)\right|\)&lt;br /&gt;&lt;/li&gt;
+      &lt;li&gt;对灰度值平方误差求和：&lt;br /&gt;
+\(\sum_{i=-n}^n \sum_{j=-n}^n\left(g_l\left(u_l+i, v_l+j\right)-g_r\left(u_r+i, v_r+j\right)\right)^2\)&lt;br /&gt;&lt;/li&gt;
+      &lt;li&gt;相关性:&lt;br /&gt;
+\(\frac{\frac{1}{(2 n+1)^2} \sum_{i=-n}^n \sum_{j=-n}^n\left(g_l\left(u_l+i, v_l+j\right)-\bar{g}_l\right) \cdot\left(g_r\left(u_r+i, v_r+j\right)-\bar{g}_r\right)}{\sqrt{V\left(g_l\right) V\left(g_r\right)}}\)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;让我们以一个例子来说明。
+上方是我在左图像中选择的图像块，下方是右图像。
+我们可以将此图像块与右图像中的所有可能像素进行比较，不考虑首先考虑极线几何关系。然后，对于每个像素，我们得到一个特定的误差项，如此处所示。颜色表示了右图像中相应像素周围区域的差异程度，&lt;strong&gt;蓝色表示差异小，非常相似&lt;/strong&gt;，&lt;strong&gt;红色表示差异大，非常不同&lt;/strong&gt;。&lt;em&gt;如果我们寻找最小值，我们实际上会找到一个位置，如右图像中用红色矩形标示的位置，这是实际的对应点。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230616154845.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在实际应用中，我们对图像的所有像素进行这个过程，并当然使用了极线来限制搜索范围，只搜索相应的极线，以避免过多的计算。&lt;/p&gt;
+
+&lt;p&gt;我们这样做会得到视差图像，你可以在右侧看到示例。这个视差图像显示了每个像素的视差值，视差值使用颜色编码，&lt;strong&gt;绿色表示小的视差，红色表示大的视差，对于黑色区域，我们无法确定视差&lt;/strong&gt;，因为点周围的环境结构不足，没有足够的纹理来确定对应点，正如我们在这里看到的，尤其是在非常均匀的雪地区域，无法确定对应点。但对于铁轨、架空线缆、背景建筑或铁路车辆等场景，我们可以确定对应点。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230616155152.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里是另一个例子，展示了一位前博士生安德烈亚斯·盖格（Andreas Geiger）开发的块匹配方法，他添加了一些额外的技术来得到一些密集的视差图，如你在这里所见。可能有趣的是，在第二列的视差图中有一些黑色区域，看起来像是物体的阴影。例如，对于行人的背后，我们看到一个黑色的区域，无法计算出视差。在这种情况下，该区域的结构足够丰富以计算视差，但行人本身遮挡了其后面的一些区域。这些遮挡区域在左右相机中是不同的，因此对于在一个相机中被遮挡而在另一个相机中没有遮挡的点，我们显然无法计算出视差值，因此在这些区域中，我们得到这些视差阴影。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230616155406.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;关于块匹配的一些说明&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;它是一种具有许多&lt;strong&gt;优点&lt;/strong&gt;的方法，非常通用，可以用于很多应用，双目重建是其中一个可能的应用，但不是唯一的应用。光流计算，我们在第四章中讨论过的内容，是另一个应用。我们可以利用极线几何来限制搜索范围，但如果我们无法访问极线几何，我们也可以在整个图像上执行块匹配。&lt;/p&gt;
+
+&lt;p&gt;在使用块匹配时，存在一些&lt;strong&gt;不足&lt;/strong&gt;之处。完整的搜索可能需要大量计算资源，尤其是对于大图像而言，因为它涉及对大量图像块进行比较。此外，只有当图像块中的灰度结构足够丰富时，才能明确地确定对应点。如果图像块的结构较差，存在找不到准确对应点的风险。&lt;/p&gt;
+
+&lt;p&gt;另一个考虑因素是我们在块匹配中比较的区域大小。如果区域太小，图像块中的灰度结构将较差，增加了错误匹配的风险。然而，如果区域太大，计算时间会增加，并且区域可能包含属于不同对象且具有不同深度的像素，这会增加错误结果的可能性。&lt;/p&gt;
+
+&lt;p&gt;在实践中，&lt;strong&gt;块匹配通常应用于预先校准的图像上&lt;/strong&gt;，这样它们就不会受到整体照明条件的影响。为了避免由于左右图像的亮度差异（由于曝光时间不同或其他原因）而导致块匹配失败，许多研究人员&lt;strong&gt;首先对图像进行Sobel或Laplace运算，以获得一阶或二阶滤波图像，然后在梯度图像上应用块匹配。通过使用导数计算（如梯度），消除了整体亮度水平的影响，使整个过程对消除不变。&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 12 Jun 2023 00:00:00 +0200</pubDate>
+        <link>https://wenboli-cn-de.github.io/2023/06/02-BinocularVision/</link>
+        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2023/06/02-BinocularVision/</guid>
         
         <category>专业</category>
         
@@ -3693,1257 +4520,6 @@ $\phi_{\text {prototype }}(l, f, p)=\|f-p(l)\|^{2}\)
         <pubDate>Tue, 08 Mar 2022 00:00:00 +0100</pubDate>
         <link>https://wenboli-cn-de.github.io/2022/03/MV6.1/</link>
         <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV6.1/</guid>
-        
-        <category>专业</category>
-        
-        <category>机器视觉</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>机器视觉-图像分割(第一部分) Segmentation</title>
-        <description>&lt;head&gt;
-    &lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-        MathJax.Hub.Config({
-            tex2jax: {
-            skipTags: [&apos;script&apos;, &apos;noscript&apos;, &apos;style&apos;, &apos;textarea&apos;, &apos;pre&apos;],
-            inlineMath: [[&apos;$&apos;,&apos;$&apos;]]
-            }
-        });
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;h1 id=&quot;机器视觉-图像分割第一部分&quot;&gt;机器视觉-图像分割(第一部分)&lt;/h1&gt;
-
-&lt;p&gt;在计算机视觉领域， &lt;strong&gt;图像分割&lt;/strong&gt; （segmentation）指的是将数字图像细分为多个图像子区域（像素的集合）（也被称作超像素）的过程。图像分割的目的是&lt;strong&gt;简化或改变图像的表示形式&lt;/strong&gt;，使得图像更容易理解和分析。图像分割通常用于定位图像中的物体和边界（线，曲线等）。更精确的，图像分割是对图像中的每个像素加标签的一个过程，&lt;strong&gt;这一过程使得具有相同标签的像素具有某种共同视觉特性&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;图像分割在&lt;strong&gt;实际中的应用&lt;/strong&gt;：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;在卫星图像中定位物体（道路、森林等）
-
-人脸识别
-
-指纹识别
-
-交通控制系统
-
-刹车灯检测 Brake light detection
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;分割的准则&quot;&gt;分割的准则&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;预定义的颜色标准 predefined color criterion&lt;/li&gt;
-  &lt;li&gt;邻域准则 neighborhood criterion&lt;/li&gt;
-  &lt;li&gt;均匀性准则 homogeneity criterion&lt;/li&gt;
-  &lt;li&gt;连通性准则 connectedness criterion&lt;/li&gt;
-  &lt;li&gt;空间准则 spatial criterion&lt;/li&gt;
-  &lt;li&gt;边界光滑准则 boundary smoothness criterion&lt;/li&gt;
-  &lt;li&gt;尺寸准则 size criteria&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302202410.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;预定义的颜色标准-predefined-color-criterion&quot;&gt;预定义的颜色标准 predefined color criterion&lt;/h2&gt;
-
-&lt;p&gt;像素颜色属于一组预定义的”有趣”的颜色，它指定了哪些颜色值是相关的，哪些像素是彩色的。&lt;/p&gt;
-
-&lt;p&gt;例如，我们在下面的足球机器人场地上找到橙色的球。&lt;/p&gt;
-
-&lt;p&gt;橙色的像素点是在HSV值在以下范围的：&lt;/p&gt;
-
-&lt;p&gt;$0^{\circ} \leq H \leq 24^{\circ}, 0.4 \leq S \leq 1,0.4 \leq V \leq 1$&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302193913.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302194516.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;注： HSV值(Hue, Saturation, Value)是是根据颜色的直观特性由A. R. Smith在1978年创建的一种颜色空间, 也称六角锥体模型(Hexcone Model)。这个模型中颜色的参数分别是：色调（H），饱和度（S），亮度（V）。&lt;/p&gt;
-
-&lt;p&gt;色调H：用角度度量，取值范围为0°～360°，从红色开始按逆时针方向计算，红色为0°，绿色为120°,蓝色为240°。它们的补色是：黄色为60°，青色为180°,品红为300°；&lt;/p&gt;
-
-&lt;p&gt;饱和度S：取值范围为0.0～1.0；&lt;/p&gt;
-
-&lt;p&gt;亮度V：取值范围为0.0(黑色)～1.0(白色)。&lt;/p&gt;
-
-&lt;p&gt;RGB和CMY颜色模型都是面向硬件的，而HSV（Hue Saturation Value）颜色模型是面向用户的。&lt;/p&gt;
-
-&lt;p&gt;HSV模型的三维表示从RGB立方体演化而来。设想从RGB沿立方体对角线的白色顶点向黑色顶点观察，就可以看到立方体的六边形外形。六边形边界表示色彩，水平轴表示纯度，明度沿垂直轴测量。&lt;/p&gt;
-
-&lt;p&gt;根据颜色进行分割的优缺点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;非常快速&lt;/li&gt;
-  &lt;li&gt;如果事先知道物体的颜色，并且颜色具有辨别力，则&lt;strong&gt;可以应用&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;如果不同的对象共享相同的颜色，则&lt;strong&gt;不适用&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;找到合适的颜色规格通常很麻烦&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;邻域准则-neighborhood-criterion&quot;&gt;邻域准则 neighborhood criterion&lt;/h2&gt;
-
-&lt;p&gt;像素颜色与相邻像素的颜色相似，指定哪些颜色相似，将一段中的所有像素分组，这些像素至少有一个已属于该段的相邻像素&lt;/p&gt;
-
-&lt;p&gt;例如：如果RGB三元组的欧氏距离小于7/255，则像素是相邻的&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302193913.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302195234.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;根据邻域准则进行图片细分的优缺点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;简单&lt;/li&gt;
-  &lt;li&gt;物体的颜色不需要知道&lt;/li&gt;
-  &lt;li&gt;对象边界必须是高对比度，内部必须是低对比度&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;模糊的图像可能导致分段不足，嘈杂的图像可能导致分段过度&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;均匀性准则-homogeneity-criterion&quot;&gt;均匀性准则 homogeneity criterion&lt;/h2&gt;
-
-&lt;p&gt;像素颜色与线段的分割颜色相似，指定如何计算平均的颜色并确定两种颜色是否相似。将所有像素分组到一段中，这些像素与分割的平均颜色相似&lt;/p&gt;
-
-&lt;p&gt;例如：与球的平均颜色相似的像素，都属于此分割颜色&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302193913.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302195909.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;通过均匀性准测进行图像分割的优缺点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;物体的颜色不需要知道&lt;/li&gt;
-  &lt;li&gt;对象的所有部分都必须具有相似的颜色&lt;/li&gt;
-  &lt;li&gt;不支持低频率的颜色变化&lt;/li&gt;
-  &lt;li&gt;循环定义&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;连通性准则-connectedness-criterion&quot;&gt;连通性准则 connectedness criterion&lt;/h2&gt;
-
-&lt;p&gt;同一段中的所有像素必须连接，即在该段的两个像素之间有一条不离开该段的路径&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302200517.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;优缺点：&lt;/p&gt;
-
-&lt;p&gt;此标准可以与其他标准相结合&lt;/p&gt;
-
-&lt;h2 id=&quot;空间准则-spatial-criterion&quot;&gt;空间准则 spatial criterion&lt;/h2&gt;
-
-&lt;p&gt;被另一部分的像素包围的像素应该属于该部分（另一部分）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302201711.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;优缺点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;标准与其他标准相结合&lt;/li&gt;
-  &lt;li&gt;提高了抗噪性&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;边界光滑准则-boundary-smoothness-criterion&quot;&gt;边界光滑准则 boundary smoothness criterion&lt;/h2&gt;
-
-&lt;p&gt;分割的边界应平滑，而不是参差不齐。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302201944.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302202044.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;优缺点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;标准与其他标准相结合&lt;/li&gt;
-  &lt;li&gt;提高了抗噪性&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;尺寸准则-size-criteria&quot;&gt;尺寸准则 size criteria&lt;/h2&gt;
-
-&lt;p&gt;分割的大小应在一定范围内/不太小/不太大&lt;/p&gt;
-
-&lt;h1 id=&quot;分割算法&quot;&gt;分割算法&lt;/h1&gt;
-
-&lt;p&gt;基础算法：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;区域增长 region growing&lt;/li&gt;
-  &lt;li&gt;连接组件标记 connected components labeling&lt;/li&gt;
-  &lt;li&gt;K-means和mean-shift算法&lt;/li&gt;
-  &lt;li&gt;形态学运算 morphological operations&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;更详尽的算法：&lt;/p&gt;
-
-&lt;p&gt;1.&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%B0%B4%E5%B9%B3%E9%9B%86%E6%96%B9%E6%B3%95&quot;&gt;水平集方法&lt;/a&gt;
-     level set methods&lt;/p&gt;
-
-&lt;p&gt;2.&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%9A%8F%E6%9C%BA%E5%9C%BA&quot;&gt;随机场&lt;/a&gt; 
-    random fields&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302202529.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;区域增长-region-growing&quot;&gt;区域增长 region growing&lt;/h2&gt;
-
-&lt;p&gt;区域生长（region growing）是指将成组的像素或区域发展成更大区域的过程。从种子点的集合开始，从这些点的区域增长是通过将与每个种子点有相似属性像强度、灰度级、纹理颜色等的相邻像素合并到此区域。&lt;/p&gt;
-
-&lt;p&gt;区域生长算法的基本思想是将有相似性质的像素点合并到一起。对每一个区域要先指定一个种子点作为生长的起点，然后将种子点周围领域的像素点和种子点进行对比，将具有相似性质的点合并起来继续向外生长，直到没有满足条件的像素被包括进来为止。这样一个区域的生长就完成了。这个过程中有几个关键的问题：（原文链接：https://blog.csdn.net/weixin_40647819/article/details/90215872）&lt;/p&gt;
-
-&lt;p&gt;核心思想：从一个/多个种子点开始（必须提供种子点）；增量扩展段，直到无法添加更多像素；实现连通性标准+同质性或邻域标准；产生单一的片段。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302203819.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;优缺点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;易于实现（广度优先搜索）&lt;/li&gt;
-  &lt;li&gt;需要一个或多个种子点&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220316112419.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;连接组件标记算法-connected-components-labelingccl&quot;&gt;连接组件标记算法 connected components labeling（CCL）&lt;/h2&gt;
-
-&lt;p&gt;连接组件标记算法(connected component labeling algorithm)是图像分析中最常用的算法之一，算法的实质是扫描一幅图像的每个像素，对于像素值相同的分为相同的组(group),最终得到图像中所有的像素连通组件。
-扫描的方式可以是从上到下，从左到右，对于一幅有N个像素的图像来说，最大连通组件个数为N/2。扫描是基于每个像素单位，对于二值图像而言，连通组件集合可以是V={1|白色}或者V={0|黑色}, 取决于前景色与背景色的不同。
-对于灰度图像来说，连图组件像素集合可能是一系列在0 ～ 255之间k的灰度值。&lt;/p&gt;
-
-&lt;p&gt;引用自：&lt;a href=&quot;https://zhuanlan.zhihu.com/p/81959284&quot;&gt;知乎&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;核心思想：创建图像的完整分割；实现连通性标准+邻域标准；仅通过确定与两个相邻像素的相似性，将每个像素分配给分段&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302205133.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我们从左上角到右下角逐行访问像素，并立即将它们分配给一个段。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302205336.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;当我们访问一个像素（u，v）时，我们已经访问了（u-1，v）和（u，v-1）。&lt;strong&gt;我们比较颜色（u，v）和颜色（u-1，v），颜色（u，v-1），五种情况：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;（u，v）和（u-1，v）处的像素颜色相似，（u，v）和（u，v-1）处的像素颜色不同&lt;/p&gt;
-
-    &lt;p&gt;→ 像素（u，v）和（u-1，v）属于同一段&lt;/p&gt;
-
-    &lt;p&gt;→ 我们将像素（u，v）分配给像素（u-1，v）的部分&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302205643.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;（u，v）和（u-1，v）处的像素颜色不同，（u，v）和（u，v-1）处的像素颜色相似&lt;/p&gt;
-
-    &lt;p&gt;→ 像素（u，v）和（u，v-1）属于同一段&lt;/p&gt;
-
-    &lt;p&gt;→ 我们将像素（u，v）分配给像素（u，v-1）的部分&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302205709.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;（u，v）和（u-1，v）处的像素颜色不同，（u，v）和（u，v-1）处的像素颜色不同&lt;/p&gt;
-
-    &lt;p&gt;→ 为什么像素（u，v）应该属于（u-1，v）或（u，v-1）的段？&lt;/p&gt;
-
-    &lt;p&gt;→ 我们创建一个新段，并为其指定像素（u，v）&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302210249.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;（u，v）和（u-1，v）处的像素颜色是相似的，（u，v）和（u，v-1）处的像素颜色是相似的，像素（u-1，v）和（u，v-1）属于同一段。&lt;/p&gt;
-
-    &lt;p&gt;→ 像素（u，v）也属于该部分&lt;/p&gt;
-
-    &lt;p&gt;→ 我们将像素（u，v）分配给该段&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302210306.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;（u，v）和（u-1，v）处的像素颜色相似，（u，v）和（u，v-1）处的像素颜色相似，像素（u-1，v）和（u，v-1）不属于同一段&lt;/p&gt;
-
-    &lt;p&gt;→ 像素（u，v）属于两个相邻的部分&lt;/p&gt;
-
-    &lt;p&gt;→ 我们合并两个相邻的段，并将像素（u，v）分配给合并的段&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302210325.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302210354.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;k均值聚类算法-k-means&quot;&gt;K均值聚类算法 K-means&lt;/h2&gt;
-
-&lt;p&gt;k均值聚类算法（k-means clustering algorithm）是一种迭代求解的聚类分析算法，其步骤是，预将数据分为K组，则随机选取K个对象作为初始的聚类中心，然后计算每个对象与各个种子聚类中心之间的距离，把每个对象分配给距离它最近的聚类中心。聚类中心以及分配给它们的对象就代表一个聚类。每分配一个样本，聚类的聚类中心会根据聚类中现有的对象被重新计算。这个过程将不断重复直到满足某个终止条件。终止条件可以是没有（或最小数目）对象被重新分配给不同的聚类，没有（或最小数目）聚类中心再发生变化，误差平方和局部最小。&lt;/p&gt;
-
-&lt;p&gt;核心思想：图像由相似颜色的区域组成; 寻找颜色的簇; 将每个像素指定给其颜色簇; 实现同质性标准; 创建完整的分割。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302193913.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在上面图片中的颜色簇：绿色，白色，橙色，黑色，品红，蓝，黄色，灰色&lt;/p&gt;
-
-&lt;p&gt;怎么找到颜色簇呢？ 如果我们知道簇的数量 –&amp;gt; k-means 算法&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;随机初始化k原型颜色c1、c2、…、ck（例如，从图像中随机选取像素）&lt;/li&gt;
-  &lt;li&gt;将每个像素指定给最相似的原型颜色&lt;/li&gt;
-  &lt;li&gt;通过对步骤2中指定的像素颜色进行平均，重新计算原型颜色&lt;/li&gt;
-  &lt;li&gt;重复第2步和第3步，直到收敛（即第2步中的赋值不再改变）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;例如：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302211110.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;第1步：从两个像素中随机选择颜色；&lt;/p&gt;
-
-&lt;p&gt;第2步：将像素分配给最相似的簇；&lt;/p&gt;
-
-&lt;p&gt;第3步：重新计算原型颜色；&lt;/p&gt;
-
-&lt;p&gt;第2步：重新分配像素；&lt;/p&gt;
-
-&lt;p&gt;第3步：重新计算原型颜色；&lt;/p&gt;
-
-&lt;p&gt;第2步：重新分配像素→ 汇聚&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302211413.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302211438.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302211525.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302211638.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;k-均值算法&lt;/p&gt;
-
-&lt;p&gt;优点：&lt;/p&gt;
-
-&lt;p&gt;•简单、易于实现&lt;/p&gt;
-
-&lt;p&gt;缺点：&lt;/p&gt;
-
-&lt;p&gt;•必须知道聚类数（k）&lt;/p&gt;
-
-&lt;p&gt;•通常会收敛到次优聚类（取决于初始原型颜色）&lt;/p&gt;
-
-&lt;p&gt;未知聚类数的改进： &lt;strong&gt;mean-shift&lt;/strong&gt; 均值漂移&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;需要颜色的相似性度量&lt;/li&gt;
-  &lt;li&gt;对于每个像素p，按如下步骤进行：
-1.确定p的颜色并将其分配给变量c
-    &lt;ol&gt;
-      &lt;li&gt;找到图像中与c相似的所有像素的集合S&lt;/li&gt;
-      &lt;li&gt;计算S的平均颜色并将其分配给变量c（不要改变图像中p的像素值
-不要改变图像中p的像素值！)&lt;/li&gt;
-      &lt;li&gt;重复步骤2和3，直到收敛（即直到步骤2中的S保持不变）。&lt;/li&gt;
-      &lt;li&gt;最后，c是像素p所属区段的原型颜色。&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;示例: 沿一个轴排列所有像素颜色（灰度值）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302212227.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;第1步：选择目标像素的颜色并初始化c
-第2步：找到相似像素的集合S
-第3步：计算S的平均颜色并将其分配给c
-第2步：重新计算S
-第3步：重新计算S的平均颜色并将其分配给c
-第2步：重新计算S
-第3步：重新计算S的平均颜色并将其分配给c
-第2步：重新计算S→收敛&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220302212319.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 02 Mar 2022 00:00:00 +0100</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/03/MV6/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/03/MV6/</guid>
-        
-        <category>专业</category>
-        
-        <category>机器视觉</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>机器视觉-相机光学 Ｏptics</title>
-        <description>&lt;head&gt;
-    &lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;
-   &lt;/script&gt;
-&lt;/head&gt;
-&lt;h1 id=&quot;针孔照相机&quot;&gt;针孔照相机&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311204148.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;点\((x,y,z)\)投影到\((x&apos;,y&apos;)\)截距定理：&lt;/p&gt;
-
-\[\frac{x}{z}=\frac{x^{\prime}}{f}, \quad \frac{y}{z}=\frac{y^{\prime}}{f} \quad \Rightarrow \quad z \cdot\left(\begin{array}{l}x^{\prime} \\ y^{\prime}\end{array}\right)=\left(\begin{array}{ll}f &amp;amp; 0 \\ 0 &amp;amp; f\end{array}\right) \cdot\left(\begin{array}{l}x \\ y\end{array}\right)\]
-
-&lt;h1 id=&quot;世界到图像映射&quot;&gt;世界到图像映射&lt;/h1&gt;
-
-&lt;p&gt;相机坐标系&lt;/p&gt;
-
-&lt;p&gt;图像坐标系&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;u 方向平行于 x’ 方向&lt;/li&gt;
-  &lt;li&gt;v 方向可能倾斜 θ=u 和 v 方向之间的角度&lt;/li&gt;
-  &lt;li&gt;主点 = 图像坐标中相机坐标系的原点 (u0,v0)&lt;/li&gt;
-  &lt;li&gt;单位向量 u 和 v 的长度与单位向量 x’、y’ 的长度不同 比例因子 α、β&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311204556.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;将点 Z 从相机坐标映射到图像坐标：&lt;/p&gt;
-
-&lt;p&gt;三角形 ZBC：&lt;/p&gt;
-
-\[\begin{aligned} \sin \theta &amp;amp;=\frac{\beta y^{\prime}}{v-v_{0}} \\ \Rightarrow v &amp;amp;=\frac{\beta}{\sin \theta} y^{\prime}+v_{0} \\ \cot \theta &amp;amp;=\frac{\alpha x^{\prime}+u_{0}-u}{\beta y^{\prime}} \\ \Rightarrow u &amp;amp;=\alpha x^{\prime}-(\cot \theta) \cdot \beta y^{\prime}+u_{0} \end{aligned}\]
-
-&lt;p&gt;==从相机到图像帧的映射：==&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312211920.png&quot; alt=&quot;&quot; /&gt;
-\(\left(\begin{array}{l}
-u \\
-v
-\end{array}\right)=\left(\begin{array}{cc}
-\alpha &amp;amp; -\beta \cot \theta \\
-0 &amp;amp; \frac{\beta}{\sin \theta}
-\end{array}\right) \cdot\left(\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right)+\left(\begin{array}{l}
-u_{0} \\
-v_{0}
-\end{array}\right)\)
-&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311204822.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;物体在相机坐标上的位置通常未知&lt;/p&gt;
-
-&lt;p&gt;外部坐标系（“世界框架”）（ξ，η，ζ）&lt;/p&gt;
-
-&lt;p&gt;映射：
-\(\left(\begin{array}{l}
-x \\
-y \\
-z
-\end{array}\right)=R \cdot\left(\begin{array}{l}
-\xi \\
-\eta \\
-\zeta
-\end{array}\right)+\vec{t}\)
-R是旋转矩阵，t是转移矩阵&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;坐标变换&lt;/p&gt;
-
-    &lt;p&gt;世界框架→相机框架&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-\[\left(\begin{array}{l}
-x \\
-y \\
-z
-\end{array}\right)=R \cdot\left(\begin{array}{l}
-\xi \\
-\eta \\
-\zeta
-\end{array}\right)+\vec{t}\]
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311205018.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;透视投影；中心投影法&lt;/li&gt;
-&lt;/ol&gt;
-
-\[z \cdot\left(\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right)=\left(\begin{array}{ll}
-f &amp;amp; 0 \\
-0 &amp;amp; f
-\end{array}\right) \cdot\left(\begin{array}{l}
-x \\
-y
-\end{array}\right)\]
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311205103.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;坐标变换&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;​		相机帧→图像帧
-\(\left(\begin{array}{l}
-u \\
-v
-\end{array}\right)=\left(\begin{array}{cc}
-\alpha &amp;amp; -\beta \cot \theta \\
-0 &amp;amp; \frac{\beta}{\sin \theta}
-\end{array}\right) \cdot\left(\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right)+\left(\begin{array}{l}
-u_{0} \\
-v_{0}
-\end{array}\right)\)
-\(cot\theta=cos\theta/sin\theta\)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220311205201.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;重写步骤3：
-\(\left(\begin{array}{l}
-u \\
-v \\
-1
-\end{array}\right)=\left(\begin{array}{ccc}
-\alpha &amp;amp; -\beta \cot \theta &amp;amp; u_{0} \\
-0 &amp;amp; \frac{\beta}{\sin \theta} &amp;amp; v_{0} \\
-0 &amp;amp; 0 &amp;amp; 1
-\end{array}\right) \cdot\left(\begin{array}{l}
-x^{\prime} \\
-y^{\prime} \\
-1
-\end{array}\right)\)
-重写步骤2：
-\(z \cdot\left(\begin{array}{l}
-x^{\prime} \\
-y^{\prime} \\
-1
-\end{array}\right)=\left(\begin{array}{lll}
-f &amp;amp; 0 &amp;amp; 0 \\
-0 &amp;amp; f &amp;amp; 0 \\
-0 &amp;amp; 0 &amp;amp; 1
-\end{array}\right) \cdot\left(\begin{array}{l}
-x \\
-y \\
-z
-\end{array}\right)\)
-结合第 2 步和第 3 步：
-\(\begin{aligned}
-z \cdot\left(\begin{array}{l}
-u \\
-v \\
-1
-\end{array}\right) &amp;amp;=\left(\begin{array}{ccc}
-\alpha &amp;amp; -\beta \cot \theta &amp;amp; u_{0} \\
-0 &amp;amp; \frac{\beta}{\sin \theta} &amp;amp; v_{0} \\
-0 &amp;amp; 0 &amp;amp; 1
-\end{array}\right) \cdot\left(\begin{array}{lll}
-f &amp;amp; 0 &amp;amp; 0 \\
-0 &amp;amp; f &amp;amp; 0 \\
-0 &amp;amp; 0 &amp;amp; 1
-\end{array}\right) \cdot\left(\begin{array}{l}
-x \\
-y \\
-z
-\end{array}\right) \\
-&amp;amp;=\left(\begin{array}{ccc}
-f \alpha &amp;amp; -f \beta \cot \theta &amp;amp; u_{0} \\
-0 &amp;amp; \frac{f \beta}{\sin \theta} &amp;amp; v_{0} \\
-0 &amp;amp; 0 &amp;amp; 1
-\end{array}\right) \cdot\left(\begin{array}{l}
-x \\
-y \\
-z
-\end{array}\right) \\
-&amp;amp;=\underbrace{\left(\begin{array}{ccc}
-\alpha^{\prime} &amp;amp; -\beta^{\prime} \cot \theta &amp;amp; u_{0} \\
-0 &amp;amp; \frac{\beta^{\prime}}{\sin \theta} &amp;amp; v_{0} \\
-0 &amp;amp; 0 &amp;amp; 1
-\end{array}\right)}_{=: A} \cdot\left(\begin{array}{l}
-x \\
-y \\
-z
-\end{array}\right)
-\end{aligned}\)
-with&lt;br /&gt;
-\(\alpha^{\prime}=f \alpha, \quad \beta^{\prime}=f \beta\)
-重写步骤1：
-\(\left(\begin{array}{l}
-x \\
-y \\
-z
-\end{array}\right)=(R \mid \vec{t}) \cdot\left(\begin{array}{l}
-\xi \\
-\eta \\
-\zeta \\
-1
-\end{array}\right)\)
- 将 1 与之前的结果相结合：&lt;/p&gt;
-
-\[z \cdot\left(\begin{array}{l}
-u \\
-v \\
-1
-\end{array}\right)=A \cdot(R \mid \vec{t}) \cdot\left(\begin{array}{l}
-\xi \\
-\eta \\
-\zeta \\
-1
-\end{array}\right)z \cdot\left(\begin{array}{l}
-u \\
-v \\
-1
-\end{array}\right)=A \cdot(R \mid \vec{t}) \cdot\left(\begin{array}{l}
-\xi \\
-\eta \\
-\zeta \\
-1
-\end{array}\right)\]
-
-&lt;p&gt;给定 (ξ,η,ζ)，我们如何计算 (u,v) ？&lt;/p&gt;
-
-\[\begin{array}{l}
-\left(\begin{array}{c}
-\tilde{x} \\
-\tilde{y} \\
-\tilde{z}
-\end{array}\right)=A \cdot(R \mid \vec{t}) \cdot\left(\begin{array}{l}
-\xi \\
-\eta \\
-\zeta \\
-1
-\end{array}\right) \\
-\left(\begin{array}{l}
-u \\
-v
-\end{array}\right)=\frac{1}{\widetilde{z}}\left(\begin{array}{l}
-\tilde{x} \\
-\tilde{y}
-\end{array}\right)
-\end{array}\]
-
-&lt;p&gt;给定 (u,v)，我们如何计算 (ξ,η,ζ) ？&lt;/p&gt;
-
-\[\left(\begin{array}{l}
-\xi \\
-\eta \\
-\zeta
-\end{array}\right)=z R^{T} A^{-1}\left(\begin{array}{l}
-u \\
-v \\
-1
-\end{array}\right)-R^{T} \vec{t} \quad \text { with } z \geq 0\]
-
-&lt;p&gt;(ξ,η,ζ) 不是唯一的，而是射线的元素&lt;/p&gt;
-
-&lt;p&gt;相机原点坐标：&lt;/p&gt;
-
-\[(\xi, \eta, \zeta)^{T}=-R^{T} \vec{t}\]
-
-&lt;p&gt;参数：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;内在参数：描述相机（5个参数）&lt;/p&gt;
-
-\[u_{0}, v_{0}, \alpha^{\prime}, \beta^{\prime}, \theta\]
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;外部参数：相机的位姿（6个参数）&lt;/p&gt;
-
-\[R,\vec{t}\]
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;有时，模型被简化假设&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-\[\theta=90^{\circ}, \alpha^{\prime}=\beta^{\prime}\]
-
-&lt;h1 id=&quot;体积测量&quot;&gt;体积测量&lt;/h1&gt;
-
-&lt;p&gt;测量体积：&lt;/p&gt;
-
-&lt;p&gt;– 是一个矩形金字塔&lt;/p&gt;
-
-&lt;p&gt;– 焦点是金字塔的顶点&lt;/p&gt;
-
-&lt;p&gt;– 水平孔径角（张角）&lt;/p&gt;
-
-\[\arccos \frac{\left\langle A^{-1}\left(0, v_{0}, 1\right)^{T}, A^{-1}\left(u_{\max }, v_{0}, 1\right)^{T}\right\rangle}{\left\|A^{-1}\left(0, v_{0}, 1\right)^{T}\right\| \cdot\left\|A^{-1}\left(u_{\max }, v_{0}, 1\right)^{T}\right\|}\]
-
-&lt;p&gt;– 垂直孔径角&lt;/p&gt;
-
-\[arccos \frac{\left\langle A^{-1}\left(u_{0}, 0,1\right)^{T}, A^{-1}\left(u_{0}, v_{\max }, 1\right)^{T}\right\rangle}{\left\|A^{-1}\left(u_{0}, 0,1\right)^{T}\right\| \cdot\left\|A^{-1}\left(u_{0}, v_{\max }, 1\right)^{T}\right\|}\]
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312163116.png&quot; style=&quot;zoom: 67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;透视投影中心投影法&quot;&gt;透视投影；中心投影法&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312163742.png&quot; style=&quot;zoom: 67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312163805.png&quot; style=&quot;zoom: 38.5%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312163832.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164207.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164237.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;透视投影不：&lt;/p&gt;
-
-&lt;p&gt;– 保留角度&lt;/p&gt;
-
-&lt;p&gt;– 保留长度&lt;/p&gt;
-
-&lt;p&gt;– 保留面积&lt;/p&gt;
-
-&lt;p&gt;– 保留长度比&lt;/p&gt;
-
-&lt;p&gt;– 将圆/椭圆的中心映射到所映射的椭圆的中心（除非：如果平面与光轴正交）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164333.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;镜头&quot;&gt;镜头&lt;/h1&gt;
-
-&lt;p&gt;针孔相机很难让光线通过&lt;/p&gt;
-
-&lt;p&gt;→ 镜头 • 斯涅尔折射定律&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164413.png&quot; style=&quot;zoom: 33%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;📌&lt;strong&gt;Snell’s law:&lt;/strong&gt;  📌&lt;/p&gt;
-
-\[n_{e} \sin \theta_{e}=n_{t} \sin \theta_{t}\]
-
-\[n_{\text {medium }}=\frac{v_{\text {vacuum }}}{v_{\text {medium }}}\]
-
-&lt;p&gt;镜头焦距：镜头到焦点的距离，平行于光轴的光线被折射后的交汇点&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164804.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;镜片的折射&lt;/p&gt;
-
-&lt;p&gt;– 表面空气/玻璃&lt;/p&gt;
-
-&lt;p&gt;– 表面玻璃/空气&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312164839.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;可忽略的厚度&lt;/li&gt;
-  &lt;li&gt;双折射可以通过中心线的单折射来近似&lt;/li&gt;
-  &lt;li&gt;更简单的几何建模&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;C:\Users\Wenbo Li\AppData\Roaming\Typora\typora-user-images\image-20220312164906393.png&quot; alt=&quot;image-20220312164906393&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;薄镜片&quot;&gt;薄镜片&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;清晰的图像必须满足什么条件？&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312165020.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;截距定理：&lt;/p&gt;
-
-\[\frac{x^{\prime}}{x}=\frac{f_{\text {camera }}}{z}\]
-
-\[\frac{x^{\prime}}{x}=\frac{f_{\text {camera }}-f_{\text {lens }}}{f_{\text {lens }}}\]
-
-&lt;p&gt;由上可得 👉&lt;/p&gt;
-
-\[\frac{1}{f_{\text {lens }}}=\frac{1}{f_{\text {camera }}}+\frac{1}{z}\]
-
-&lt;p&gt;（透镜方程）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;当违反透镜方程时会发生什么？&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312165242.png&quot; style=&quot;zoom: 50%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我们可以改变z多少程度才影响不大？&lt;/p&gt;
-
-&lt;h2 id=&quot;depth-of-field--景深视野深度&quot;&gt;Depth of Field  景深；视野深度&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312165422.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;截距定理：&lt;/p&gt;
-
-\[\frac{\epsilon}{D}=\frac{f_{0}-f_{f a r}}{f_{f a r}}=\cdots=\frac{f_{\text {lens }} \cdot\left(z_{\text {far }}-z_{0}\right)}{z_{\text {far }} \cdot\left(z_{0}-f_{\text {lens }}\right)}\]
-
-&lt;p&gt;截距定理：&lt;/p&gt;
-
-\[\frac{\epsilon}{D}=\frac{f_{\text {near }}-f_{0}}{f_{\text {near }}}=\cdots=\frac{f_{\text {lens }} \cdot\left(z_{0}-z_{\text {near }}\right)}{z_{\text {near }} \cdot\left(z_{0}-f_{\text {lens }}\right)}\]
-
-&lt;p&gt;由上可得：&lt;/p&gt;
-
-\[z_{f a r}=\frac{z_{0} \cdot d_{h}}{d_{h}-\left(z_{0}-f_{l e n s}\right)}\]
-
-\[z_{\text {near }}=\frac{z_{0} \cdot d_{h}}{d_{h}+\left(z_{0}-f_{\text {lens }}\right)}\]
-
-&lt;p&gt;\(d_{h}=\frac{D \cdot f_{\text {lens }}}{\epsilon}\)(hyperfocal distance)  （超焦距）&lt;/p&gt;
-
-\[\Delta z=z_{\text {far }}-z_{\text {near }}=2 \frac{z_{0} \cdot d_{h} \cdot\left(z_{0}-f_{\text {lens }}\right)}{d_{h}^{2}-\left(z_{0}-f_{\text {lens }}\right)^{2}}\]
-
-&lt;p&gt;观察:&lt;/p&gt;
-
-&lt;p&gt;对于&lt;/p&gt;
-
-\[z_{0} \rightarrow d_{h}+f_{\text {lens }}\]
-
-&lt;p&gt;holds：&lt;/p&gt;
-
-\[z_{\text {far }} \rightarrow \infty\]
-
-\[\Delta z \rightarrow \infty\]
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170009.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;对焦&quot;&gt;对焦&lt;/h2&gt;
-
-&lt;p&gt;对焦包围/对焦堆叠图像系列具有不同的镜头和图像平面之间的距离，以克服有限的景深&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170237.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;像差-lens-aberrations&quot;&gt;像差 Lens Aberrations&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;几何像差：由于镜头几何形状不完善，没有唯一焦点&lt;/p&gt;
-
-    &lt;p&gt;– 球面像差、散光、彗差&lt;/p&gt;
-
-    &lt;p&gt;geometric aberrations: no unique focal point due to imperfect lens geometry
-– spherical aberration, astigmatism, coma&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;色差：因不同波长的不同折射率引起的色散（“彩虹效应”）&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;chromatic aberrations:
-  dispersion caused by different refraction index for different wavelength (“rainbow effect”)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;渐晕：图像周边的光强度和饱和度降低&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;vignetting:
-  reduced light intensity and saturation in the image periphery&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170349.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170407.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;图象失真&quot;&gt;图象失真&lt;/h2&gt;
-
-&lt;p&gt;图像失真：透视投影应将线映射到线。&lt;/p&gt;
-
-&lt;p&gt;但大多数相机不会 → 畸变&lt;/p&gt;
-
-&lt;p&gt;– 径向畸变 镜头形状欠佳&lt;/p&gt;
-
-&lt;p&gt;– 切向畸变 镜头安装欠佳&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170604.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;径向畸变&quot;&gt;径向畸变&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;点偏离主点&lt;/li&gt;
-  &lt;li&gt;径向畸变是对称的&lt;/li&gt;
-  &lt;li&gt;偏移量与到主点的距离呈非线性关系&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170728.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;矩形对象在图像中呈桶形或枕形&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312170704.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;偶数多项式的数学建模：&lt;/p&gt;
-
-\[\left(\begin{array}{l}x^{\prime} \\ y^{\prime}\end{array}\right)=\left(1+k_{1} r^{2}+k_{2} r^{4}\right)\left(\begin{array}{l}x_{d} \\ y_{d}\end{array}\right) \quad \text{ with } r^{2}=x_{d}^{2}+y_{d}^{2}\]
-
-&lt;p&gt;或在图像坐标中：&lt;/p&gt;
-
-\[\left(\begin{array}{l}u^{\prime} \\ v^{\prime}\end{array}\right)=\left(\begin{array}{l}u_{0} \\ v_{0}\end{array}\right)+\left(1+k_{1} r^{2}+k_{2} r^{4}\right)\left(\begin{array}{l}u_{d}-u_{0} \\ v_{d}-v_{0}\end{array}\right) \text{with } r^{2}=\left(u_{d}-u_{0}\right)^{2}+\left(v_{d}-v_{0}\right)^{2}\]
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171211.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-\[k_1 = 0, k_2=0\]
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171407.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-\[k_1&amp;gt;0，k_2≥0\]
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171536.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-\[k_1&amp;lt;0，k_2≤0\]
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171627.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-\[k_1&amp;lt;0，k_2＞0\]
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171659.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-\[k_1&amp;gt;0，k_2&amp;lt;0\]
-
-&lt;h1 id=&quot;相机标定-camera-calibration&quot;&gt;相机标定 Camera Calibration&lt;/h1&gt;
-
-&lt;p&gt;常用术语
-内参矩阵: Intrinsic Matrix
-焦距: Focal Length
-主点: Principal Point
-径向畸变: Radial Distortion
-切向畸变: Tangential Distortion
-旋转矩阵: Rotation Matrices
-平移向量: Translation Vectors
-平均重投影误差: Mean Reprojection Error
-重投影误差: Reprojection Errors
-重投影点: Reprojected Points
-————————————————
-版权声明：本文为CSDN博主「AI人工智能科学」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/lql0716/article/details/71973318&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;建立相机成像几何模型并矫正透镜畸变&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;参数：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;内在参数：描述相机（5个参数）&lt;/p&gt;
-
-\[u_{0}, v_{0}, \alpha^{\prime}, \beta^{\prime}, \theta\]
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;外部参数：相机的位姿（2个参数）&lt;/p&gt;
-
-\[R,\vec{t}\]
-
-    &lt;p&gt;失真参数：&lt;/p&gt;
-
-\[k_1,k_2\]
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;校准 = 确定参数的过程&lt;/p&gt;
-
-&lt;p&gt;校准：从成对的图像点和世界点确定相机参数&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312171947.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;从一张或几张图片我们得到对应的点：&lt;/p&gt;
-
-\[\left(\xi_{i}, \eta_{i}, \zeta_{i}\right) \mapsto\left(u_{i}, v_{i}\right)\]
-
-&lt;p&gt;找到映射
-\(\left(\xi_{i}, \eta_{i}, \zeta_{i}\right)\)
-到尽可能好的相机参数
-\(A,R,\vec{t}\) 在 \(\left(u_{i}, v_{i}\right)\)&lt;/p&gt;
-
-&lt;p&gt;几种方法。 这里： 1. Tasi的方法 2. 张氏方法&lt;/p&gt;
-
-&lt;p&gt;世界到图像映射：&lt;/p&gt;
-
-\[z \cdot\left(\begin{array}{l}u \\ v \\ 1\end{array}\right)=\underbrace{A \cdot(R \mid \vec{t})}_{=: M} \cdot\left(\begin{array}{l}\xi \\ \eta \\ \zeta \\ 1\end{array}\right)\]
-
-&lt;p&gt;M 是 3x4 矩阵&lt;/p&gt;
-
-\[M=\left(\begin{array}{ccc}m_{1,1} &amp;amp; \ldots &amp;amp; m_{1,4} \\ \vdots &amp;amp; \ddots &amp;amp; \vdots \\ m_{3,1} &amp;amp; \ldots &amp;amp; m_{3,4}\end{array}\right)\]
-
-&lt;p&gt;我们得到：&lt;/p&gt;
-
-\[\vec{m}_{1,1: 3}\left(\begin{array}{l}\xi \\ \eta \\ \zeta\end{array}\right)+m_{1,4}-u\left(\vec{m}_{3,1: 3}\left(\begin{array}{l}\xi \\ \eta \\ \zeta\end{array}\right)+m_{3,4}\right)=0\]
-
-\[\vec{m}_{2,1: 3}\left(\begin{array}{l}\xi \\ \eta \\ \zeta\end{array}\right)+m_{2,4}-v\left(\vec{m}_{3,1: 3}\left(\begin{array}{l}\xi \\ \eta \\ \zeta\end{array}\right)+m_{3,4}\right)=0\]
-
-&lt;p&gt;通过最小化确定相机参数&lt;/p&gt;
-
-\[\sum_{i}\left(\left(\vec{m}_{1,1: 3}\left(\begin{array}{c}\xi_{i} \\ \eta_{i} \\ \zeta_{i}\end{array}\right)+m_{1,4}-u_{i}\left(\vec{m}_{3,1: 3}\left(\begin{array}{c}\xi_{i} \\ \eta_{i} \\ \zeta_{i}\end{array}\right)+m_{3,4}\right)\right)^{2}\right.\left.+\left(\vec{m}_{2,1: 3}\left(\begin{array}{c}\xi_{i} \\ \eta_{i} \\ \zeta_{i}\end{array}\right)+m_{2,4}-v_{i}\left(\vec{m}_{3,1: 3}\left(\begin{array}{c}\xi_{i} \\ \eta_{i} \\ \zeta_{i}\end{array}\right)+m_{3,4}\right)\right)^{2}\right)\]
-
-&lt;p&gt;归零偏导数：&lt;/p&gt;
-
-&lt;p&gt;\(\left(\begin{array}{ccc}\sum_{i} S_{i} &amp;amp; 0 &amp;amp; -\sum_{i} u_{i} S_{i} \\0 &amp;amp; \sum_{i} S_{i} &amp;amp; -\sum_{i} v_{i} S_{i} \\-\sum_{i} u_{i} S_{i} &amp;amp; -\sum_{i} v_{i} S_{i} &amp;amp; \sum_{i}\left(u_{i}^{2}+v_{i}^{2}\right) S_{i}\end{array}\right) \cdot\left(\begin{array}{l}\vec{m}_{1,1: 4}^{T} \\\vec{m}_{2,1: 4}^{T} \\\vec{m}_{3,1: 4}^{T}\end{array}\right)=\overrightarrow{0}\)  with  \(S_{i}=\left(\xi_{i}, \eta_{i}, \zeta_{i}, 1\right)^{T}\left(\xi_{i}, \eta_{i}, \zeta_{i}, 1\right)\)&lt;/p&gt;
-
-&lt;p&gt;解：关于最小特征值的特征向量&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;1 个自由度：解的长度&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;解的结构：&lt;/p&gt;
-
-&lt;p&gt;\(M=A \cdot(R \mid \vec{t})=\left(\begin{array}{ll}\vec{m}_{1,1: 3} &amp;amp; m_{1,4} \\\vec{m}_{2,1: 3} &amp;amp; m_{2,4} \\\vec{m}_{3,1: 3} &amp;amp; m_{3,4}\end{array}\right)\) with \(\vec{m}_{1,1: 3}=\alpha^{\prime} \vec{r}_{1,1: 3}-\beta^{\prime} \cot \theta \vec{r}_{2,1: 3}+u_{0} \vec{r}_{3,1: 3}\) 
-\(\begin{aligned}m_{1,4} &amp;amp;=\alpha^{\prime} t_{1}-\beta^{\prime} \cot \theta t_{2}+u_{0} t_{3} \\\vec{m}_{2,1: 3} &amp;amp;=\frac{\beta^{\prime}}{\sin \theta} \vec{r}_{2,1: 3}+v_{0} \vec{r}_{3,1: 3} \\m_{2,4} &amp;amp;=\frac{\beta^{\prime}}{\sin \theta} t_{2}+v_{0} t_{3} \\\vec{m}_{3,1: 3} &amp;amp;=\vec{r}_{3,1: 3} \\m_{3,4} &amp;amp;=t_{3}\end{aligned}\)&lt;/p&gt;
-
-&lt;p&gt;R 是一个旋转矩阵：&lt;/p&gt;
-
-\[\left\|\vec{r}_{1,1: 3}\right\|=1 \\  \| \vec{r}_{2,1: 3} \|=1 \\\| \vec{r}_{3,1: 3}\|=1\\\left\langle\vec{r}_{1,1: 3}, \vec{r}_{2,1: 3}\right\rangle=0 \left\langle\vec{r}_{2,1: 3,}, \vec{r}_{3,1: 3}\right\rangle=0 \left\langle\vec{r}_{3,1: 3,}, \vec{r}_{1,1: 3}\right\rangle=0\]
-
-&lt;p&gt;由于 
-\(\vec{m}_{3,1: 3}=\vec{r}_{3,1: 3}\)　
-选择解决方案　
-\(\left|\vec{m}_{3,1: 3}\right|^{2}=1\)
-（两种可能性，检查　
-\(\operatorname{det}(R)=+1）\)&lt;/p&gt;
-
-&lt;p&gt;给定 M，我们如何推导出相机参数 R, t, α’, β’, θ, u0, v0 ？&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312173958.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;总结：Tsai 的方法&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;用校准标记（一般位置的标记）创建一个人工场景&lt;/li&gt;
-  &lt;li&gt;测量校准标记的 3d 世界位置&lt;/li&gt;
-  &lt;li&gt;制作图片&lt;/li&gt;
-  &lt;li&gt;测量校准标记的 2d 图像位置&lt;/li&gt;
-  &lt;li&gt;解决优化问题 估计矩阵 M&lt;/li&gt;
-  &lt;li&gt;将 M 分解为 A, R, t&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;相机校准：张 Camera Calibration: Zhang&lt;/p&gt;
-
-&lt;p&gt;假设平面上的 3d-点\(\zeta=0\)&lt;/p&gt;
-
-&lt;p&gt;这些点由相机映射到
-\(\begin{aligned}
-z \cdot\left(\begin{array}{l}
-u \\
-v \\
-1
-\end{array}\right) &amp;amp;=A \cdot\left(R \cdot\left(\begin{array}{l}
-\xi \\
-\eta \\
-0
-\end{array}\right)+\vec{t}\right) \\
-&amp;amp;=\underbrace{A \cdot\left(\vec{r}_{1: 3,1}, \vec{r}_{1: 3,2}, \vec{t}\right)}_{=: H} \cdot\left(\begin{array}{l}
-\xi \\
-\eta \\
-1
-\end{array}\right)
-\end{aligned}\)
-H 称为单应性 H is called a homography&lt;br /&gt;
-\(H=A \cdot\left(\vec{r}_{1: 3,1}, \vec{r}_{1: 3,2}, \vec{t}\right)\)
-如果我们知道几个单应性$H_1,H_2…H_n$，我们能推导出来$A$吗？让我们首先考虑
-\(B=A^{-T} A^{-1}\)
-A是满秩的，上三角矩阵&lt;/p&gt;
-
-&lt;p&gt;→ \(A^{-1}\) 存在并且也是上三角矩阵&lt;/p&gt;
-
-&lt;p&gt;→ B是对称的，有 6 个不同的条目&lt;/p&gt;
-
-&lt;p&gt;→ \(A^{-1}\) 可以通过 Cholesky 分解计算&lt;/p&gt;
-
-&lt;p&gt;→ 如果我们知道B，我们可以很容易地推导出
-\(B=\left(\begin{array}{lll}
-b_{1,1} &amp;amp; b_{1,2} &amp;amp; b_{1,3} \\
-b_{1,2} &amp;amp; b_{2,2} &amp;amp; b_{2,3} \\
-b_{1,3} &amp;amp; b_{2,3} &amp;amp; b_{3,3}
-\end{array}\right)\)&lt;/p&gt;
-
-\[H=A \cdot\left(\vec{r}_{1: 3,1}, \vec{r}_{1: 3,2}, \vec{t}\right)\]
-
-&lt;p&gt;R是一个旋转矩阵，因此&lt;/p&gt;
-
-&lt;p&gt;(1)
-\(\begin{aligned}
-0=\left\langle\vec{r}_{1: 3,1}, \vec{r}_{1: 3,2}\right\rangle &amp;amp;=\left\langle A^{-1} \vec{h}_{1: 3,1}, A^{-1} \vec{h}_{1: 3,2}\right\rangle \\
-&amp;amp;=\vec{h}_{1: 3,1}^{T} \cdot\left(A^{-T} A^{-1}\right) \cdot \vec{h}_{1: 3,2} \\
-&amp;amp;=\vec{h}_{1: 3,1}^{T} \cdot B \cdot \vec{h}_{1: 3,2}
-\end{aligned}\)&lt;/p&gt;
-
-&lt;p&gt;(2)
-\(\begin{aligned}
-\left\langle\vec{r}_{1: 3,1}, \vec{r}_{1: 3,1}\right\rangle=1=&amp;amp;\left\langle\vec{r}_{1: 3,2}, \vec{r}_{1: 3,2}\right\rangle \\
-\left\langle A^{-1} \vec{h}_{1: 3,1}, A^{-1} \vec{h}_{1: 3,1}\right\rangle &amp;amp;\left\langle A^{-1} \vec{h}_{1: 3,2}, A^{-1} \vec{h}_{1: 3,2}\right\rangle \\
-\vec{h}_{1: 3,1}^{T} \cdot B \cdot \vec{h}_{1: 3,1} &amp;amp; \vec{h}_{1: 3,2}^{T} \cdot B \cdot \vec{h}_{1: 3,2} \\
-\Rightarrow 0=\vec{h}_{1: 3,1}^{T} \cdot B \cdot \vec{h}_{1: 3,1}-\vec{h}_{1: 3,2}^{T} \cdot B \cdot \vec{h}_{1: 3,2}
-\end{aligned}\)
-因此，从一个单应性我们得到两个约束（1）,（2）&lt;/p&gt;
-
-&lt;p&gt;如果我们知道几个单应性，我们能推导出来A吗？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;从每个单应性我们得到两个约束&lt;/li&gt;
-  &lt;li&gt;3 个单应性产生总共 6 个约束以估计 6 个参数&lt;/li&gt;
-  &lt;li&gt;3 个单应性产生一个超定的约束系统&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;​	→ 最小二乘法找到一个使残差最小化的矩阵&lt;/p&gt;
-
-&lt;p&gt;概述：张的方法&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;…&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;…&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;…&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;估计单应性 H&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;求解优化问题以估计矩阵 B&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;将 B 分解为 A, R, t&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;…&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;我们如何得到单应性？&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312192013.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;假设平面上点的一组点对应关系&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;找到单应性使得&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-\[z \cdot\left(u_{i}, v_{i}, 1\right)^{T} \approx H \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T}\]
-
-&lt;ol&gt;
-  &lt;li&gt;一个对应产生两个约束&lt;/li&gt;
-&lt;/ol&gt;
-
-\[\begin{aligned}
-&amp;amp;\vec{h}_{1,1: 3} \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T}-u_{i} \cdot \vec{h}_{3,1: 3} \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T} \approx 0 \\
-&amp;amp;\vec{h}_{2,1: 3} \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T}-v_{i} \cdot \vec{h}_{3,1: 3} \cdot\left(\xi_{i}, \eta_{i}, 1\right)^{T} \approx 0
-\end{aligned}\]
-
-&lt;ol&gt;
-  &lt;li&gt;最小二乘以最小化残差并找到最佳单应性H&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;概述：张的方法&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;在已知位置创建一个带有校准标记的平面&lt;/li&gt;
-  &lt;li&gt;制作几张平面不同位置和方向的图片&lt;/li&gt;
-  &lt;li&gt;测量标记的二维图像位置&lt;/li&gt;
-  &lt;li&gt;估计每张图片的单应性 H&lt;/li&gt;
-  &lt;li&gt;求解 估计矩阵 B 的优化问题&lt;/li&gt;
-  &lt;li&gt;将 B 分解为 A, R, t&lt;/li&gt;
-  &lt;li&gt;使用非线性最小二乘法优化所有参数&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;最后，我们得到&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;内在参数 A&lt;/li&gt;
-  &lt;li&gt;每个平面的旋转 R 和平移 t&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;center&gt;Z. Zhang,
-A flexible new technique for camera calibration.
-IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 22, no. 11,
-    pp. 1330-1334, 2000  &lt;/center&gt;
-
-&lt;p&gt;校准失真参数 k1、k2：&lt;/p&gt;
-
-&lt;p&gt;– 非线性优化过程&lt;/p&gt;
-
-&lt;p&gt;– 内在、外在参数和失真参数的迭代估计&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312192616.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;无畸变的效果图&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312192705.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;不失真（需要更复杂的失真模型）：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312192752.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;校准指示器：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;性能特点&lt;/li&gt;
-  &lt;li&gt;清晰可识别&lt;/li&gt;
-  &lt;li&gt;易于确定世界位置&lt;/li&gt;
-  &lt;li&gt;易于在图像中高精度定位&lt;/li&gt;
-  &lt;li&gt;世界上不共面的特征（对于 Tsai 的方法）&lt;/li&gt;
-  &lt;li&gt;避免遮挡&lt;/li&gt;
-  &lt;li&gt;避免阴影&lt;/li&gt;
-  &lt;li&gt;尽可能多&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;棋盘标记&lt;/p&gt;
-
-&lt;p&gt;​	确定图像位置，计算水平和垂直边缘的交点&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193003.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193016.png&quot; style=&quot;zoom: 50%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;正方形和矩形&lt;/strong&gt; - 确定图像位置，计算水平和垂直边缘的交点&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193103.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193051.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;圆&lt;/strong&gt; 确定结果椭圆的中心 - 圆心映射误差的迭代校正&lt;/p&gt;
-
-&lt;h1 id=&quot;非标相机&quot;&gt;非标相机&lt;/h1&gt;
-
-&lt;p&gt;远心镜头 Telecentric Lenses&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193259.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;优点：– 放大倍率与物距无关 – 改善景深&lt;/p&gt;
-
-&lt;p&gt;缺点：– 小光圈，让光线很差 – 大、重且昂贵&lt;/p&gt;
-
-&lt;p&gt;应用领域：显微镜&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193636.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;折反射相机 = 带镜子的相机&lt;/p&gt;
-
-&lt;p&gt;平面镜&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193708.png&quot; style=&quot;zoom:67%;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;– 曲面镜&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193742.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;折反射相机&quot;&gt;折反射相机&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;单视点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;如果所有物镜光线都在一个点相交（例如，如果镜子可以用针孔相机代替），则折反射相机具有单一视点&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312193851.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;单视点相机设置：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312194016.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220312194039.png&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 11 Feb 2022 00:00:00 +0100</pubDate>
-        <link>https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</link>
-        <guid isPermaLink="true">https://wenboli-cn-de.github.io/2022/02/MV7-Optics/</guid>
         
         <category>专业</category>
         
