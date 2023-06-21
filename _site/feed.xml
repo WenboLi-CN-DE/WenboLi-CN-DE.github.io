@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 21 Jun 2023 14:34:14 +0200</pubDate>
-    <lastBuildDate>Wed, 21 Jun 2023 14:34:14 +0200</lastBuildDate>
+    <pubDate>Wed, 21 Jun 2023 14:36:57 +0200</pubDate>
+    <lastBuildDate>Wed, 21 Jun 2023 14:36:57 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -1378,16 +1378,13 @@ MathJax = {
 
 &lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;• B. Jähne, Digitale Bildverarbeitung, Springer, 2005, Chapter 14
-• E.R. Davies, Machine Vision. Theory. Algorithms. Practicalities. Elsevier, 2005,
-Section 21.6 ff
-• R. Jain, R. Kasturi, B. G. Schunck, Machine Vision. McGraw Hill, 1995, Section
-14.1-14.4
-• B. K. P. Horn, B. G. Schunck, Determining Optical Flow. Artificial Intelligence 17,
-1981, pg. 185-203
-• J. F. Henriques, R. Caseiro, P. Martins, J. Batista, High-Speed Tracking with
-Kernelized Correlation Filters, IEEE Transactions on Pattern Analysis and Machine
-Intelligence, vol. 37, no. 3, pp. 583-596, 2015&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;B. Jähne, Digitale Bildverarbeitung, Springer, 2005, Chapter 14&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;E.R. Davies, Machine Vision. Theory. Algorithms. Practicalities. Elsevier, 2005,Section 21.6 ff&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;R. Jain, R. Kasturi, B. G. Schunck, Machine Vision. McGraw Hill, 1995, Section 14.1-14.4&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;B. K. P. Horn, B. G. Schunck, Determining Optical Flow. Artificial Intelligence 17, 1981, pg. 185-203&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;J. F. Henriques, R. Caseiro, P. Martins, J. Batista, High-Speed Tracking with Kernelized Correlation Filters, IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 37, no. 3, pp. 583-596, 2015&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;image-sequences-图像序列&quot;&gt;Image Sequences 图像序列&lt;/h2&gt;
 
@@ -1560,9 +1557,11 @@ G_{v t} &amp;amp; =\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial v} \frac{\p
 &lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204345.png&quot; alt=&quot;&quot; /&gt;
 &lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204416.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;编码：
-• 饱和度（saturation）= 向量长度
-• 色调（hue）= 方向&lt;/p&gt;
+&lt;p&gt;编码：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;饱和度（saturation）= 向量长度&lt;/li&gt;
+  &lt;li&gt;色调（hue）= 方向&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;线性近似的极限&quot;&gt;线性近似的极限&lt;/h3&gt;
 
@@ -1588,9 +1587,11 @@ G_{v t} &amp;amp; =\sum\left(\frac{\partial g(u+i, v+j, t)}{\partial v} \frac{\p
 &lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204527.png&quot; alt=&quot;&quot; /&gt;
 &lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204416.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;编码：
-• 饱和度（saturation）= 向量长度
-• 色调（hue）= 方向&lt;/p&gt;
+&lt;p&gt;编码：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;饱和度（saturation）= 向量长度&lt;/li&gt;
+  &lt;li&gt;色调（hue）= 方向&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;aperture-problem-光圈问题&quot;&gt;Aperture Problem 光圈问题&lt;/h3&gt;
 
