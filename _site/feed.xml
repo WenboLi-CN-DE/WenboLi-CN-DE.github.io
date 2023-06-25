@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 25 Jun 2023 23:12:53 +0200</pubDate>
-    <lastBuildDate>Sun, 25 Jun 2023 23:12:53 +0200</lastBuildDate>
+    <pubDate>Sun, 25 Jun 2023 23:16:30 +0200</pubDate>
+    <lastBuildDate>Sun, 25 Jun 2023 23:16:30 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -1415,11 +1415,16 @@ Applications to Tracking and Navigation: Theory Algorithms and Software. Wiley,
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230621190338.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;假设：匀速行驶
-\(x(t)=x_0+v \cdot t \text { (十noise) }\)&lt;/li&gt;
-  &lt;li&gt;寻找最适合测量的$x_0$和$v$。
-\(\operatorname{minimize}_{x_o, v} \sum_{i=1}^n\left(x_0+v t_i-x_i\right)^2\)&lt;/li&gt;
+  &lt;li&gt;假设：匀速行驶&lt;/li&gt;
 &lt;/ul&gt;
+
+\[x(t)=x_0+v \cdot t \text { (十noise) }\]
+
+&lt;ul&gt;
+  &lt;li&gt;寻找最适合测量的$x_0$和$v$。&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\operatorname{minimize}_{x_o, v} \sum_{i=1}^n\left(x_0+v t_i-x_i\right)^2\]
 
 &lt;p&gt;测量结果与真实位置相似但并不完全相同。以与之前类似的方式，我们可以建立一个运动模型。如果我们假设恒定速度，我们可以将时间T的测量位置表示为初始位置x₀加上未知速度V乘以时间t的积分。然而，测量结果受到额外噪声的影响。&lt;/p&gt;
 

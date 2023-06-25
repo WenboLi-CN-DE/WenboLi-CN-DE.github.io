@@ -79,10 +79,13 @@ $$
 ![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230621190338.png)
 
 - 假设：匀速行驶
+  
 $$
 x(t)=x_0+v \cdot t \text { (十noise) }
 $$
+
 - 寻找最适合测量的$x_0$和$v$。
+  
 $$
 \operatorname{minimize}_{x_o, v} \sum_{i=1}^n\left(x_0+v t_i-x_i\right)^2
 $$
