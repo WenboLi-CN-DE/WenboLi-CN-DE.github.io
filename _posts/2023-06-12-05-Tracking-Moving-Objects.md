@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 汽车视觉 Automotive Vision - Tracking Moving Objects 追踪移动物体
-tag: [专业, 汽车视觉]
+tag: [汽车视觉]
 mathjax: true
 ---
 

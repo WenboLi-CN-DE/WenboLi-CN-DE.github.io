@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 汽车视觉 Automotive Vision - Binocular Vision / Stereo Vision 双目视觉/立体视觉
-tag: [专业, 汽车视觉]
+tag: [汽车视觉]
 mathjax: true
 ---
 

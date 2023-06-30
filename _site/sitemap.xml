@@ -65,7 +65,15 @@
 <lastmod>2023-06-12T00:00:00+02:00</lastmod>
 </url>
 <url>
-<loc>https://wenboli-cn-de.github.io/2023/06/06-SLAM/</loc>
+<loc>https://wenboli-cn-de.github.io/2023/06/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89/06-SLAM/</loc>
+<lastmod>2023-06-12T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>https://wenboli-cn-de.github.io/2023/06/07-RoadRecognition/</loc>
+<lastmod>2023-06-12T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>https://wenboli-cn-de.github.io/2023/06/08-BehaviorRecognition/</loc>
 <lastmod>2023-06-12T00:00:00+02:00</lastmod>
 </url>
 <url>
@@ -83,6 +91,9 @@
 <loc>https://wenboli-cn-de.github.io/archive/</loc>
 </url>
 <url>
+<loc>https://wenboli-cn-de.github.io/categories/</loc>
+</url>
+<url>
 <loc>https://wenboli-cn-de.github.io/</loc>
 </url>
 <url>
@@ -90,5 +101,8 @@
 </url>
 <url>
 <loc>https://wenboli-cn-de.github.io/tags/</loc>
+</url>
+<url>
+<loc>https://wenboli-cn-de.github.io/page/2/</loc>
 </url>
 </urlset>
