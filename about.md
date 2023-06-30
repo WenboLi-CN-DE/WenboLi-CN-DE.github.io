@@ -3,17 +3,16 @@ layout: page
 title: 关于我 
 ---
 
-机电与信息硕士在读(Mechatronik und Informationstechnik)
+卡尔斯鲁厄理工学院机电与信息硕士在读(KIT - Mechatronik und Informationstechnik)
 
 机械与电子爱好者
 
-科技是第一生产力
 
 <h2> 我的博客 </h2>  
 
-平时更新一些学习心得, 学习笔记, 生活趣事等等
+更新一些自己平时的知识积累
 
-博客会不定时更新，谢谢~
+如果你有任何想法，欢迎留下你的评论
 
 {% include comments.html %}
 
