@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>汽车视觉 Automotive Vision - SLAM</title>
+  <meta name="description" content="">
+  <meta name="author" content="leopardpan">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="汽车视觉 Automotive Vision - SLAM">
+  <meta name="twitter:description" content="">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="汽车视觉 Automotive Vision - SLAM">
+  <meta property="og:description" content="">
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="https://wenboli-cn-de.github.io/2023/06/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89/06-SLAM/">
+  <link rel="alternate" type="application/rss+xml" title="高傲的电工李" href="https://wenboli-cn-de.github.io/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+
+<!-- 站点统计 -->
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
+
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <!-- 头像效果-start -->
+        <div class="ih-item circle effect right_to_left">            
+            <a href="/#blog" title="前往 高傲的电工李 的主页" class="blog-button">
+                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+                <div class="info">
+                    <div class="info-back">
+                        <h2> 
+                            
+                                李文博
+                            
+                        </h2>
+                        <p>
+                           
+                                机电 / 机器学习
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 头像效果-end -->
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for 高傲的电工李" class="blog-button">高傲的电工李</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">个人博客</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到我的个人博客</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        
+
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+                
+                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+                
+                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+                
+                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+                
+              </ul>
+            </nav>
+          </div>          
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-clear"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <head>
+  <link rel="stylesheet" href="/css/post.css">
+</head>
+
+<article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">汽车视觉 Automotive Vision - SLAM</h1>
+    <div class="post-meta">
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2023-06-12 00:00:00 +0200" itemprop="datePublished" class="post-meta__date date">2023-06-12</time>  
+
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+  
+    <h2 class="post-title">目录</h2>
+    <ul>
+  <li><a href="#chapter-6-self-localization-and-mapping">Chapter 6: Self-Localization and Mapping</a>
+    <ul>
+      <li><a href="#localization-with-landmarks-地标定位">Localization with landmarks 地标定位</a>
+        <ul>
+          <li><a href="#landmarks-地标">landmarks 地标：</a>
+            <ul>
+              <li><a href="#linear-landmarks-线性地标">linear landmarks 线性地标</a></li>
+              <li><a href="#what-can-we-conclude-from-我们可以从中得出什么结论-">what can we conclude from… ：我们可以从…中得出什么结论 ?</a></li>
+            </ul>
+          </li>
+          <li><a href="#one-shot-localization-一次性定位算法">One-Shot Localization 一次性定位算法</a>
+            <ul>
+              <li><a href="#icp-algorithm-三维点云配准">ICP algorithm 三维点云配准</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#incremental-localization-增量本地化">Incremental Localization 增量本地化</a></li>
+      <li><a href="#mapping-映射">Mapping 映射</a></li>
+      <li><a href="#simultaneous-localization-and-mappingslam">Simultaneous Localization and Mapping(SLAM)</a></li>
+    </ul>
+  </li>
+</ul>
+
+  
+
+  <section class="post">
+    <head>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+</head>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    packages: ['base', 'newcommand', 'configMacros']
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+
+<script> 
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    processEscapes: true
+  }
+};
+</script>
+
+<h1 id="chapter-6-self-localization-and-mapping">Chapter 6: Self-Localization and Mapping</h1>
+
+<p>欢迎回到汽车视觉的第六章，我们将讨论以相机为基础的自我定位和映射的主题。</p>
+
+<p>自我定位和映射的主题是机器人技术和制图和地理信息学领域进行大量研究的领域。例如，在Tune Burger和Fox的《概率机器人》一书中，第七到十三章覆盖了这些主题。IEEE机器人与自动化杂志上的一篇分成几部分的同时定位和映射教程，由Duran、White和Bailey编写。你还可以在《机器人手册》中找到关于定位和映射的基础知识。</p>
+
+<p>另外，如果你对涵盖这些主题的德语机器人书籍感兴趣，你可能会考虑Hartsback、Lingaman和Nishta的《移动机器人：信息科学导论》。第五和六章中你可以找到这些主题。最后，Cox在1991年撰写的一篇原创论文，描述了一种用于多种情况的算法，即最近迭代点算法，这也可能是一篇有趣的论文，以了解整个领域在1990年代初如何启动。</p>
+
+<p><strong>References</strong></p>
+<ul>
+  <li>Sebastian Thrun, Wolfram Burgard, Dieter Fox, Probabilistic Robotics. MIT Press,
+2005, Chapter 7-13 (partly)</li>
+  <li>Hugh Durrant-Whyte, Tim Bailey, Simultaneous Localization and Mapping: Part I,
+IEEE Robotics and Automation Magazine, 13(2), pg. 99-110, 2006</li>
+  <li>Tim Bailey, Hugh Durrant-Whyte, Simultaneous Localization and Mapping: Part II,
+IEEE Robotics and Automation Magazine, 13(3), pg. 108-117, 2006</li>
+  <li>Bruno Siciliano, Khatib Oussama (Hrsg.), Springer Handbook of Robotics, Springer,
+2008, Chapter 37</li>
+  <li>Joachim Hertzberg, Kai Lingemann, Andreas Nüchter, Mobile Roboter – Eine
+Einführung aus Sicht der Informatik, Springer 2012, Chapters 5+6</li>
+  <li>Ingemar J. Cox, Blanche – an Experiment in Guidance and Navigation of an
+Autonomous Robot Vehicle. IEEE Transactions on Robots and Automation, 7(2),
+pg. 193-204, 1991</li>
+</ul>
+
+<p><strong>Self Localization 自定位</strong></p>
+
+<p>自我定位领域对许多不同的应用都很重要，其中之一就是自动驾驶，其他的还包括移动机器人或甚至制图。</p>
+
+<p>在所有这些应用中，任务都可以通过三个元素来描述。<strong>第一个元素是环境的地图</strong>，我们假设我们知道那张地图。在这种情况下，地图总是数字地图，也就是存储环境中相关对象位置和几何形状的数据库。对于自动驾驶车辆，这些地图可能包含道路几何形状，道路旁边的相关对象的位置，比如树木、交通灯、交通标志或房屋。它可能包含车道标线的几何形状等等。我们不知道的，但我们想要估计的是车辆的位置和方向。这对位置和方向的配对通常被称为<strong>车辆的姿态</strong>。此外，我们假设车辆配备了能够识别本地环境元素的传感器。例如，摄像头可能识别到车道标线，或者激光雷达传感器可能识别到交通标志的柱子或树木。因此，我们想要做的是，我们想要使用这种<strong>本地感知</strong>，并以某种方式将其与地图结合起来，以确定车辆的姿态。</p>
+
+<p>self localization problem 自定位问题：</p>
+
+<ul>
+  <li>environment is known (map) 环境是已知的</li>
+  <li>vehicle position and orientation are unkonown 车辆位置和方向未知</li>
+  <li>vehicle observes the (local) environment 车辆观察（本地）环境</li>
+</ul>
+
+<p>让我们从一个非常简单的例子开始，即足球机器人。假设你应该为一个移动机器人实现一个程序，使机器人能够踢足球。当然，对于足球机器人来说，知道它在球场上的位置，以及它在球场上的方向，是非常重要的。通常，我们知道足球场是什么样子的，我们知道球场的尺寸，我们知道球场的标线是怎么画的，所以我们可以创建一个精确描述这个场地外观的数字地图，在场地上我们找到哪些元素。假设机器人配备了一些传感器，比如一些摄像系统，感知机器人的本地环境。由这样的摄像机创建的可能的图像可以在右手边看到。所以，这展示了机器人的视角。我们可以看到足球场和场地标记，我们还可以看到其他一些对象，比如其他机器人或球之类的东西，这些对象是移动的，不是地图的一部分。</p>
+
+<p>所以，现在的问题是，当我们考虑机器人的这种视角时，我们能否推断出机器人当前的位置和方向。当然，作为人类，我们可以很容易地看到，我们以某种方式正朝着足球场的一个角落看去，所以我们可以推断出，我们必须位于某个区域，以某种方向看向角落。此外，我们看到一部分罚球区的标记，所以我们可以推断出，机器人位于现在在足球场上可见的这两个位置中的一个。箭头指示机器人当前朝向的方向。</p>
+
+<p>当然，在这种情况下，很明显有两个可能的位置，因为足球场是对称的，所以有时候我们不能确定位置，但我们仍然有几个可能的位置，机器人可能在那里，而且由于机器人的视野有限，我们不能解决这种歧义。但是，如果我们随着时间的推移跟踪自我位置，我们可能稍后能够找出我们目前位于哪个歧义的位置。所以让我们从最简单的方式开始这个自我定位的主题，即使用<strong>地标的定位</strong>。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612161042.png" alt="" /></p>
+
+<h2 id="localization-with-landmarks-地标定位">Localization with landmarks 地标定位</h2>
+
+<h3 id="landmarks-地标">landmarks 地标：</h3>
+
+<p>地标是什么呢？地标是环境中的一个物体，是静态的，不会移动，我们知道它的位置，所以它必须是地图的一部分，我们必须知道那个物体的位置。此外，地标应该在机器人或车辆使用的传感器中容易识别。当然，一个典型的地标就是早期用于船只自我定位的灯塔，它们清晰可见，易于识别，它们在世界上是静态的，可以通过船上的一些光学仪器来看到，这就是一个典型的地标示例。当然，我们并不是为船只做定位任务，而是为车辆或机器人做定位任务，但你可以为移动机器人或移动车辆的自我定位假设类似的事情。例如，在路上，你可能会找到一些物体，比如交通标志或交通灯，它们在世界上是静态的，一点也不动，很容易识别，可以用来进行自我定位。</p>
+
+<p>现在，让我们假设我们正在处理一个二维问题，或者更准确地说，是在二维平面中自我定位的问题。</p>
+
+<p>那么，当我们观察到其中一个地标时，我们能得出什么结论呢？首先，假设我们的传感器能够测量到地标的距离，当我们能够确定到地标的距离时，我们能够对机器人或车辆的位置得出什么结论呢？假设我们知道地标的位置，我们可以在地图上标记出来，这是中心的红色点。我们知道我们与地标的距离，也就是说，我们可以推断出机器人必须位于蓝色圆圈上，给定的距离为半径，所以这个圆圈描述了机器人可能的所有位置。当然，只知道距离不能确定方向。</p>
+
+<p>假设我们正在观察两个地标，比如两个灯塔。</p>
+
+<p>对于每一个灯塔或地标，我们确定距离，也就是说，我们可以创建两个蓝色的圆圈，描述了车辆的可能位置。当我们观察到两个地标时，我们就知道机器人或车辆必须位于这两个圆圈的交点，也就是说，我们得到了两个可能的位置，但仍然不能确定机器人的方向。当然，我们可以继续，如果我们可以观察到三个地标，那么我们可以画出三个圆，希望所有的圆都在一个交点相交，然后我们就可以推断出这个单一的交点就是机器人的位置。</p>
+
+<p>consistently identifiable points in the world. E.g. lighthouses, feature points in imaging</p>
+
+<p>一直可以被识别的点，例如灯塔、图像中的特征点</p>
+
+<p>#### what can we conclude from… 2d：我们可以从…中得出什么结论 ?</p>
+<ul>
+  <li>the distance to a given landmark?到一个给定地标的距离？
+    <ul>
+      <li>robot position on a circle</li>
+      <li>unknown orientatioin</li>
+    </ul>
+  </li>
+  <li>the distance between two landmarks?到两个给定地标的距离？
+    <ul>
+      <li>2 possible positons</li>
+      <li>unknown orientation</li>
+    </ul>
+  </li>
+  <li>the distance between three landmarks?到三个给定地标的距离？
+    <ul>
+      <li>robot position(some exceptions are possible)机器人位置（可能有一些例外）</li>
+      <li>orientationo unknown</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612162130.png" alt="" /></p>
+
+<p>所以，总的来说，如果我们知道距离地标的距离，我们可以确定位置，但我们不能确定方向。那么，如果我们知道我们观察的角度呢？假设我们有一个地标，我们可以确定与我们自我定位的角度，即相对于我们的机器人或车辆自我定位，我们识别到的对象的角度。</p>
+
+<p>答案是，经过一些数学或几何推理后，我们得出的结论是，使用单个地标，我们无法确定机器人的位置，机器人仍然可以位于二维平面上的任何点。但是，如果我们知道机器人的位置，并且我们有一个角度测量，我们可以确定机器人的方向。也就是说，如果机器人位于用蓝圈标出的点，我们在某个角度感知到地标，那么我们可以推断出机器人具有由箭头给出的某个方向。也就是说，知道我们感知到地标的角度允许我们确定机器人的方向，前提是我们知道它的位置。也就是说，对于每个可能的位置，我们得到一个不同的机器人方向。现在，让我们看看如果我们能感知到两个地标，能确定我们观察到这两个地标的角度，会发生什么。</p>
+
+<ul>
+  <li>the angle, from which a landmark is being observed 地标的角度已经被观测到
+    <ul>
+      <li>positon unknown</li>
+      <li>relation between <em>position</em> and <em>orientation</em></li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612162831.png" alt="" /></p>
+
+<p>通过一点点的几何知识，我们可以确定，如果我们知道这两个测量值，我们可以创建一个圆弧，我们可以推断机器人必须位于这个圆弧上。这个圆经过两个地标位置，这里用两个红点表示，我们可以推断出机器人必须位于这个圆弧的某个地方。我们还不知道具体是哪个位置，但我们已经可以将它限制在这个圆，这个圆的一部分上。当然，对于每个位置，我们又可以确定机器人的方向。这也意味着，如果我们能够观察到三个地标，并确定我们感知到地标的角度，那么我们可以创建两个或者甚至三个这样的圆弧，它们会在一个交点相交，这意味着，有了三个地标，知道对这些地标的角度，就能确定机器人的位置和机器人的方向。</p>
+
+<ul>
+  <li>the angle from which two landmarks are being observed? 两个地标之间的角度已经被观测到
+    <ul>
+      <li>robot position on an arc or line segment 圆弧或线段上的机器人位置</li>
+      <li>relation between <em>position</em> and <em>orientation</em></li>
+      <li>approch: inscribed angle theorem</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612162950.png" alt="" /></p>
+
+<h4 id="linear-landmarks-线性地标">linear landmarks 线性地标</h4>
+
+<p>我们之前讨论的是，我们可以从地图上的单点地标得出的结论，比如一个灯塔，如果我们将灯塔投影到地面上，它就是一个单点。然而，在实践中，有时候利用环境中的其他对象进行定位是有用的，这些对象并不仅仅是单点。例如，线。我们可以在足球场上找到这些线，足球场上的线，是用于自我定位非常有用的线，它们并不仅仅是单点。或者对于一个自动驾驶的车辆，我们可能想使用车道标记，或者我们可能想使用路缘石，或者某些紧挨着路边的房屋的墙壁，并使用它们作为自我定位的地标。所以问题是，如果我们可以测量到这些地标的正交距离，我们能从这些地标中得出什么结论？</p>
+
+<ul>
+  <li>例如： roadway lines, curbs, and walls 道路线、路缘和墙壁</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612163335.png" alt="" /></p>
+
+<h4 id="what-can-we-conclude-from-我们可以从中得出什么结论-">what can we conclude from… ：我们可以从…中得出什么结论 ?</h4>
+
+<ul>
+  <li>the orthogonal distance,in which a line is being observed 观测一条线的垂直距离
+    <ul>
+      <li>position on two parallel lines 两条平行线</li>
+      <li>relation between position and orientation</li>
+    </ul>
+  </li>
+  <li>the orthogonal distance to two lines 两条线的垂直距离
+    <ul>
+      <li>4 points / 2 points</li>
+      <li>relation between position and orientation</li>
+    </ul>
+  </li>
+</ul>
+
+<p>因此，我们假设我们知道某条线或线性地标，我们知道它的位置和它的确切几何形状，我们测量到这个地标的正交距离，想要推断我们在哪里。</p>
+
+<p>好吧，让我们来可视化这个。如果我们假设红线是地标，我们可以测量到一定的距离，由虚线箭头表示，那么我们可以推断出，机器人或车辆必须位于两条与红线平行的蓝线上。也就是说，我们知道，车辆或机器人位于蓝线的其中一条上，我们不知道具体是哪一条，我们也不知道它是位于上面的还是下面的，但我们仍然能够发现，它位于这些线中的一条上。当然，如果不只有一条线，而是我们可以观察到的两条线，我们可以做一些更复杂的几何推理。对于每条线，我们计算出平行线，它们与地标的距离等于我们感知到的距离，然后我们知道我们必须位于这些平行线上。如果我们考虑右手边的图，我们可以推断出，我们最终位于蓝线的四个交点之一。如果两个地标线的交角不是90度，考虑到这些我们构造的线相交的角度，我们甚至可能能够将可能的位置数量限制在两个。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612164044.png" alt="" /></p>
+
+<h3 id="one-shot-localization-一次性定位算法">One-Shot Localization 一次性定位算法</h3>
+
+<blockquote>
+  <p>“One-Shot Localization” 是指在<strong>仅有一次观测</strong>或信息的情况下进行定位或位置估计的过程。它是指通过<strong>一次观测或一次输入</strong>，从未知位置或环境中准确地确定目标的位置或姿态。在传感器技术和机器人领域中，这个术语通常用于描述使用单个数据样本进行<strong>位置估计</strong>的方法或算法。这种方法可能利用传感器数据、图像处理技术或其他信息源来实现目标的定位。与传统的迭代定位算法相比，One-Shot Localization 着重于通过单次观测尽可能准确地确定目标的位置，从而减少计算和时间成本。</p>
+</blockquote>
+
+<p>给定：</p>
+<ul>
+  <li>a map with a set of landmarks</li>
+  <li>a set of boserved landmarks from seen from a vehicle</li>
+</ul>
+
+<p>任务：</p>
+<ul>
+  <li>how do I have to shift and rotate the vehicle so that the observed landmarks match best the land marks in the map?</li>
+  <li>我如何移动和旋转车辆，以便观察到的地标与地图中的地标最匹配？</li>
+</ul>
+
+<p>现在，你应该对自我定位如何工作以及基本概念有了基本的了解，所以现在是时候使事情变得更加数学化了。在我们的语境中，地图是一组对象，对于每个对象，我们都知道它的位置。在这个时候，让我们限制到点地标，也就是说，地标可以在地图上仅仅表示为一个单点。在这个例子中，你可以在幻灯片的右侧看到，我们有八个点P1到P8，它们在二维平面上排列。这些向量Pi在固定在世界中的世界坐标系中表示，我用希腊字母I和η表示这个字母坐标系的坐标轴。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612165012.png" alt="" /></p>
+
+<p>车辆使用其车载传感器进行一些观察，它观察到其中的一些标记。在这个例子中，它可能只观察到2、3、4和5号标记的某些位置，这些位置在车辆坐标系中表示。坐标轴以X和Y表示，所以这并不一定是相机的坐标系，可能是相机的坐标系，但也可能不是。我们可能已经从相机坐标系转换到了一些车辆坐标系，但是这个坐标系本身是随车辆移动的。所以，知道坐标系的原点和坐标系的方向意味着我们也知道车辆的位置和车辆的方向。</p>
+
+<p>我们的<strong>任务是找到一个平移向量和一个旋转矩阵</strong>，使得最终我们用车载传感器感知到的位置和地图上的标记位置尽可能的一致。平移向量表示车辆的位置，旋转矩阵表示车辆的方向。所以，任务是找到这个平移向量和这个旋转矩阵。我们如何做到这一点呢?</p>
+
+<p>为此，我们需要一些数学。因为最终我们想解决一个优化问题。所以我们首先陈述优化问题，然后讨论如何解决它。</p>
+
+<p>我们再次开始从<strong>地图上的点位置</strong>，它们由<strong>向量Pi</strong>表示，所以P1指的是第一个标记，P2指的是第二个标记，以此类推。车载传感器检测到的<strong>观察标记位置</strong>在车辆坐标系中表示，并由<strong>qi</strong>表示。我们假设索引与标记的索引一致，也就是说，qi指的是位于位置pi的标记。如果不是这样，我们只需要重新编号所有的标记就可以得到这个结果，这只是一个简化表示的技巧。现在，我们想要解决以下的优化问题，以确定车辆未知的位置和方向。</p>
+
+<p>让我们看看这个术语的细节。在这个部分，我们计算r乘以qi加t，这是什么呢？Qi是从车载传感器看到的第i个标记的感知位置。如果R和T是车辆的真实方向和位置，那么R乘以qi加T就是将观察到的第i个标记投影到世界坐标系中。</p>
+
+<p>这也意味着，<strong>pi减去rqi加T是真实位置的第i个标记pi和投影位置的标记rqi加T之间的差值</strong>。当然，<strong>我们期望这两个位置非常接近，这意味着这两个向量之间的差应该是一个非常短的向量</strong>。因此，我们计算该向量的长度，即欧几里得长度，并取其平方。这个表达式应该是小的，而且它不仅应该对单个标记小，而且应该对我们观察到的所有标记都小。因此，我们将这些项加总。</p>
+
+<p>最后，我们希望找到最小化这个误差项的T和R的值，并认为这些最小化误差项的T和R的值是车辆最可能的位置和最可能的方向。</p>
+
+<p><strong>数学方法：mathematically</strong></p>
+
+<ul>
+  <li>which movement (translation + rotation) transforms <em>vehicle coordinates</em> into <em>world coordinates</em> such that observed <strong>landmark positions fit to map position</strong>?</li>
+  <li>哪种运动（平移+旋转）将<em>车辆坐标</em>转换为<em>世界坐标</em>，以便观察到的<strong>地标位置适配到地图位置</strong>？</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612165001.png" alt="" /></p>
+
+<ul>
+  <li>landmark positions in world coordinates (map) 世界坐标中的地标位置（地图）：</li>
+</ul>
+
+\[\vec{p_{1}},\cdots,\vec{p_{i}},...\]
+
+<ul>
+  <li>observed landmark positions in vehicle coordinates 在车辆坐标中观察到的地标位置:</li>
+</ul>
+
+\[\vec{q}_{1},\cdot\cdot\cdot,\vec{q}_{i},\cdot\cdot\cdot,\vec{q}_{N}\]
+
+<p>现在，我们已经看到了优化问题，但是如何解决这个优化问题还不清楚。</p>
+
+<p>我们想要最小化这个依赖于未知旋转矩阵和平移向量的误差项。为了简化接下来的步骤，我们首先做一些替换。我们引入P bar作为我们观察到的所有标记的平均位置，所以它是1除以n乘以所有标记位置的和，即所有这些标记的重心。我们引入新变量p i Prime，它等于Pi减去P bar，这意味着我们从所有的标记中减去了重心，然后对于这些p i Prime变量，我们知道它们的平均值最后是零。我们对qi变量做同样的操作，我们引入Q Bar作为qi变量的重心，并从每一个qi测量中减去这个重心，得到qi Prime值。现在，我们在误差项中将Pi替换为Pi prime加P bar，将Q I替换为q i prime加Q Bar，得到最底部的项。</p>
+
+<ul>
+  <li>optimization problem:</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612182552.png" alt="" /></p>
+
+<p>所以现在我们看到了优化问题，但是还不清楚我们如何解决这个优化问题。</p>
+
+<p>现在我们可以更详细地看看不同的部分。我们可以看到，在这一点上，我们有所有的p i Prime变量的平均值，但我们选择了这样的pi primes，使得它们的平均值等于零，所以这个项实际上等于零。同样的，对于QI Prime部分也是如此，我们选择了QI Prime变量，使得它们的平均值等于零，所以我们得到了零向量，零向量乘以旋转矩阵R也会得到零向量，所以整个和的右边的括号内的项总和等于零，这意味着我们可以忽略掉整个和的第三部分，将项简化为我们在第五行找到的那样。现在我们可以看看第二项，它是P bar减去r乘以Q Bar减去t的平方范数。你可以观察到，第一项不依赖于平移向量T，只依赖于旋转矩阵R，只有第二项依赖于平移向量。这意味着，无论我们找到的旋转矩阵是什么，我们总是可以确定一个适当的平移向量T，使得第二部分等于零，即通过选择t等于P bar减去r乘以Q Bar。对于这样的向量T的选择，第二项总是等于0，并且取得最小值。所以，我们已经知道如何根据R来选择T，剩下的就是第一项。现在的问题是，我们如何确定旋转矩阵R，使得第一项最小。这个第一项可以再次被重写。所以，再次我们看到，我们有这个欧几里得距离的平方，欧几里得距离中有两个变量的差，我们可以再次分解这个平方欧几里得距离，得到我们在这里看到的结果。所以，实际上这是两个项的和，第一项是p i Prime的长度的平方，我们将它视为常数，并将它提出来。然后我们有QI Prime，QI Prime变量在旋转矩阵R的作用下，再加上p i Prime和r乘以QI Prime的标量积的两倍。这意味着，我们可以找到一个矩阵R，使得所有的pi Prime的向量和所有的r乘以QI Prime的向量成正比，那么第一项会消失，我们得到的只是这个求和，它是关于所有的标记的，它包含了所有标记位置的平方长度的和，这是一个常数。所以我们得到的就是一个常数减去另一个项，而这个项实际上是这个对应的标量积的两倍。</p>
+
+<ul>
+  <li>最小化下面的式子：minimize</li>
+</ul>
+
+\[E(R,\bar{t})=\frac{1}{N}\sum_{i=1}^{N}||\vec{p_{i}}-(R\vec{q_{i}}+\vec{t})||^{2}\]
+
+<p>with：</p>
+
+\[\begin{aligned}
+&amp; E(R, \vec{t})=\frac{1}{N} \sum_{i=1}^N\left\|\vec{p}_i^{\prime}+\bar{p}-\left(R\left(\vec{q}_i^{\prime}+\bar{q}\right)+\vec{t}\right)\right\|^2 \\
+&amp; =\frac{1}{N} \sum_{i=1}^N\left\|\left(\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right)+(\bar{p}-R \bar{q}-\vec{t})\right\|^2 \\
+&amp; =\frac{1}{N} \sum_{i=1}^N\left\|\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right\|^2+\|\bar{p}-R \bar{q}-\vec{t}\|^2+\frac{2}{N} \sum_{i=1}^N(\bar{p}-R \bar{q}-\vec{t})^T\left(\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right) \\
+&amp; =\frac{1}{N} \sum_{i=1}^N\left\|\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right\|^2+\|\bar{p}-R \bar{q}-\vec{t}\|^2+2(\bar{p}-R \bar{q}-\vec{t})^T\left(\frac{1}{N} \sum_{i=1}^N \vec{p}_i^{\prime}-R \frac{1}{N} \sum_{i=1}^N \vec{q}_i^{\prime}\right) \\
+&amp; =\frac{1}{N} \sum_{i=1}^N\left\|\vec{p}_i^{\prime}-R \vec{q}_i^{\prime}\right\|^2+\underbrace{\|\bar{p}-R \bar{q}-\vec{t}\|^2} \\
+&amp; =0 \quad \underbrace{N}_{=0} \\
+&amp; \Rightarrow \vec{t}=\bar{p}-R \bar{q} \\
+&amp; =\left\|\vec{p}_i^{\prime}\right\|^2+\left\|\vec{q}_i^{\prime}\right\|^2-2\left(\vec{p}_i^{\prime}\right)^T R \vec{q}_i^{\prime} \\
+&amp;
+\end{aligned}\]
+
+<p>最大化：</p>
+
+<p>$\sum_{i=1}^N\left(\vec{p}_i^{\prime}\right)^T R \vec{q}_i^{\prime}$</p>
+
+<p>所以现在的问题就转化为找到一个旋转矩阵R，使得所有的PI Prime和所有的R乘以QI Prime的向量尽可能的接近。这个问题可以通过奇异值分解来解决。我们可以定义一个新的矩阵S，这个矩阵是对应于每个观察到的标记，每个观察到的标记都产生一个对应的项，这个项是qi Prime乘以pi Prime的转置，这样我们得到一个3乘3的矩阵，我们将这些矩阵加起来，就得到了我们的矩阵S。然后我们对这个矩阵进行奇异值分解，得到U，D和V，然后我们可以得到旋转矩阵R，即UV的转置。</p>
+
+<p>总结一下，我们找到了一个能够最小化我们的误差项的旋转矩阵R和一个平移向量T。对于T，我们只是选择了让我们误差项中的第二部分最小化的向量。然后，我们通过奇异值分解来寻找最优的旋转矩阵R。</p>
+
+<p>这就是我们如何进行点云配准，或者说，如何找到最适合我们观察到的标记的车辆的位置和方向。</p>
+
+<p>我们现在需要最大化这个项，包括因子R，这有点复杂，有几种方法可以做到这一点。我在这里介绍的方法基于一个叫做奇异值分解（SVD）的技术。为了应用它，我们需要以以下方式稍微变换这个项。经过一点点尝试，你会发现p<sub>i</sub>‘转置乘以R再乘以q<sub>i</sub>‘转置的和可以被重写为R矩阵的迹乘以q<sub>i</sub>‘乘以p<sub>i</sub>‘转置的和，简单来说，就是矩阵R和H的迹，其中H是对q<sub>i</sub>‘和p<sub>i</sub>‘转置向量的求和。</p>
+
+<p>因为q<sub>i</sub>‘和p<sub>i</sub>‘是列向量，所以H是一个2x2的矩阵，如果我们处理的是二维位置的p<sub>i</sub>‘和q<sub>i</sub>‘，或者它是一个3x3的矩阵，如果我们处理的是三维向量的p<sub>i</sub>‘和q<sub>i</sub>‘。这个关系可能不易看出，但你可以试试看并轻松证明出来，如果你不信任的话，就试试看。所以，矩阵的迹是什么呢？<strong>矩阵的迹就是矩阵对角线元素的和。</strong></p>
+
+<p>现在让我们看看奇异值分解。奇异值分解是线性代数中的一个定理，它声明对于任何实矩阵H都存在正交矩阵U和V以及对角线上有非负项的对角矩阵D，使得H等于UDV转置。所以我们可以把任何实值矩阵H分解为两个正交矩阵、一个对角线上有非负项的对角矩阵和另一个正交矩阵的乘积。</p>
+
+<p>注意，矩阵U和V是正方形矩阵，而矩阵D可能是一个非正方形的长方形矩阵。根据H的大小，在我们的例子中，H本身就是一个正方形矩阵，因此U、V和D都是正方形矩阵。</p>
+
+<p>我们并不想证明这个定理，你可以在所有线性代数的教科书中找到它，它对于数值计算非常重要，但在这里我们只是想使用这个结果。</p>
+
+<p>经过一些推理，我们可能会发现我们可以将我们上面显示的优化问题解决为以下解决方案：如果H分解为UDV，使用奇异值分解，那么我们期望的旋转矩阵，它最大化这个误差项，就计算为V乘以U转置，如果V乘以U转置的行列式等于1，或者它是V乘以对角线上除最后一项外其他项都是1的对角矩阵，最后一项是-1，再乘以U转置。所以如果V乘以U转置的行列式等于-1，那么这个情况就是有效的。这就是解决方案。</p>
+
+<p>所以我们基于q<sub>i</sub>‘和p<sub>i</sub>‘的值计算H，然后我们用奇异值分解计算U和V，然后我们检查V和U的行列式，并检查V和U的行列式是否等于1，然后我们返回V乘以U转置，或者V乘以对角线上的元素都是1，除了最后一个元素等于-1的对角矩阵，再乘以U转置。如果你想检查证明，你可以查看原始论文，它显示在底部的行中，这个证明不是很复杂，我认为你有机会理解它，它并不太难，但它需要一点点技术思考和一点点数学。</p>
+
+<p>所以现在我们知道我们怎么计算那些最优的旋转矩阵R和平移向量T，然而我们假设我们确切地知道我们正在观察哪些地标，也就是说，我们能够准确地识别每一个地标。这在某些情况下可能是不可能的，例如，假设我们正在处理特征点方法，并且我们使用车辆环境中的特征点作为地标。每个特征点都带有一个描述符，这些描述符或多或少都是独一无二的，所以一旦我们确定了这样一个特征点，我们就知道我们观察到了哪个特征点，不仅仅是在某个位置有一个特征点，而且我们确切地知道我们观察到了哪个特征点，所以我们知道我们要考虑哪个p<sub>i</sub>变量。这并不总是这样，例如，如果你假设我们正在处理道路上的交通标志，我们观察到了某个交通标志，我们想把它作为一个地标。当然我们可以分析这个交通标志，我们可以区分不同的交通标志，所以我们不会把停止标志和优先道路标志混淆，例如，但是还可能有几个停止标志或者几个交通标志有完全相同的外观，那么我们就不能说我们观察到了地标5号或者地标10号，但我们只能说，好吧，我们观察到了一些地标，但我们并不确切地知道我们观察到了哪些地标。这当然是更复杂的情况，其中地标并不能被唯一识别。我们如何扩展这种方法，以处理这种情况？</p>
+
+<ul>
+  <li>不同的方法，例如 SVD：</li>
+</ul>
+
+\[\sum_{i=1}^{N}\left(\vec{p}_{i}^{\prime}\right)^{T} R \vec{q}_{i}^{\prime}=\sum_{i=1}^{N} \operatorname{Tr}\left(R \vec{q}_{i}^{\prime}\left(\vec{p}_{i}^{\prime}\right)^{T}\right)=\operatorname{Tr}(R H) \quad \text { with } H=\sum_{i=1}^{N} \vec{q}_{i}^{\prime}\left(\vec{p}_{i}^{\prime}\right)^{T}\]
+
+<ul>
+  <li>
+    <p>mathematical theorem (singular value decomposition, SVD):
+for every real matrix H exist orthogonal matrices U,V, and a diagonal matrix D with nonnegative entries, such that:
+数学定理（奇异值分解，SVD）：对于每个实数矩阵 H，存在正交矩阵 U、V 和具有非负项的对角矩阵 D，使得：$H=U D V^{T}$</p>
+  </li>
+  <li>
+    <p>solution：</p>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612190302.png" alt="" /></p>
+
+\[(Derivation and proof: K.S.Arun, T.S.Hunang, S.D.Blostein, Least Squares Fitting of Two 3-D Point Sets,
+IEEE Transactions on Pattern Analysis and Machine Intelligence 9(5), 1987)\]
+
+<ul>
+  <li>what to do if landmarks are not uniquely identifiable?如果地标不是唯一可识别的怎么办？
+    <ul>
+      <li>$\vec{q_{i}}\ \mathrm{\bf~might~rester~to~any~of}\ \ \vec{p_{1}},\ …,\vec{p_{i}},…$</li>
+    </ul>
+  </li>
+  <li>brute force solution: try all possible combinations 蛮力解决方案：尝试所有可能的组合
+    <ul>
+      <li>computationally too expensive 计算成本太高</li>
+    </ul>
+  </li>
+</ul>
+
+<p>当然，总会有一个暴力解决方案，我们可以尝试所有可能的组合，这就意味着我们假设我们观察到了地标1，我们假设我们观察到了地标2，我们假设我们观察到了地标3，等等，所以我们可以枚举所有可能的组合，并对每一个都计算剩下的误差，然后在所有这些组合中搜索最小值。然而，这在计算上似乎比较昂贵，因为可能的组合的数量增长非常快，通常我们不仅仅处理5个或10个不同的地标，而是处理几百个或几千个地标，这些地标的组合数量如此之大，以至于我们在实时计算中永远无法解决这个任务，所以我们需要找到另一种解决方案。我们的想法是使用迭代的贪婪分配策略，我们假设我们知道一个整数，我们有车辆位置和车辆方向的初始猜测，基于此，我们可以将所有观察到的地标投影到地图上，然后我们可以在地图上搜索最近的地标，也就是说，对于每个q<sub>i</sub>，我们搜索地图上最近的地标，考虑到车辆位置和车辆姿态的初始猜测，然后我们使用这些地标作为分配的真地标，并应用我们刚刚介绍的算法来计算最优的旋转和平移。当然，在计算了这个旋转和平移之后，我们可能会发现，现在投影所有观察到的地标会得到另一个分配，也就是说，在计算了这个旋转和平移，得到了车辆位置更好的猜测之后，我们可能会发现，现在一个特定的观察到的地标更接近另一个地标，而不是我们在前一步中假设的那个地标。所以在这种情况下，我们需要重新分配所有的观察，然后再计算R和T的最优参数。这提供了一个更好的车辆姿态的猜测，再次，我们将所有观察到的地标投影到地图上，到世界坐标系中，并比较哪个地标在地图上是最近的。根据这个，我们分配观察到的地标和地图上的地标，我们再计算一个旋转矩阵和平移向量，这提供了一个更好的车辆姿态的猜测，等等，直到整个过程收敛。<strong>这产生了一个被称为迭代最近点的算法，或者ICP算法。</strong></p>
+
+<ul>
+  <li>iterative, greedy assignments: 迭代，贪婪的分配：
+    <ul>
+      <li>$\text { assign } \vec{q}_i \text { to closest landmark among } \vec{p}_1, \ldots, \vec{p}_i, \ldots$</li>
+      <li>reassign all observations incrementally 逐步重新分配所有观察结果</li>
+      <li>👉 ICP algorithm 迭代最近算法</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="icp-algorithm-三维点云配准">ICP algorithm 三维点云配准</h4>
+
+<blockquote>
+  <p>ICP（Iterative Closest Point）算法是一种迭代的点云配准算法，用于将两个或多个点云之间进行对齐和匹配。它是一种常用的三维点云配准算法，在计算机视觉、机器人和地图构建等领域得到广泛应用。</p>
+
+  <p>ICP算法的基本思想是通过迭代的方式，将待配准的目标点云与参考点云对齐，使它们在空间中尽可能重合。算法的核心是找到两个点云之间的最佳刚性变换（旋转和平移），使得它们的重叠部分最大化。</p>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230612192547.png" alt="" /></p>
+
+<p>如果我们在步骤四中的分配方式与上一轮循环中的不同，那么我们需要继续进行步骤八。如果相同，意味着在上一轮我们将观察值分配给了相同的地标，那么我们知道算法已经收敛，不会再有任何改变，此时我们可以退出循环，并返回计算得出的旋转矩阵和平移向量。如果不是这种情况，我们就执行步骤八。在步骤八中，我们应用幻灯片10到12中介绍的算法，计算尽可能最好地将点从Q映射到P的新变换R~和t~。</p>
+
+<p>然后，我们把到目前为止计算得出的变换进行串联。我们的前一个猜测是车辆的位置T和车辆的方向R，通过这个增量步骤，我们用矩阵R~和t~进行确定。串联这些变换后，我们得到一个新的旋转矩阵R为R~ * R，新的平移向量或车辆位置t为R~ * t + t~。这样我们就可以一直进行循环，直到我们能在步骤六中退出循环。</p>
+
+<p>如前所述，这种算法被称为迭代最近点，简称ICP算法，于1992年提出。它可以用来找到车辆的最优位置和最优方向，如果我们观察到一组点地标，并且我们不能确定我们究竟观察到了哪些地标。算法保证会在某一点终止，它会收敛到这个误差项的局部最优解，不一定会收敛到全局最小值，这非常依赖于车辆姿态的初始猜测。如果初始猜测是好的，ICP算法很可能会收敛到全局最小值。如果初始猜测是差的，它可能不会收敛到全局最小值，只会收敛到次优的局部最小值。</p>
+
+<p>如果我们遍历这个算法，我们会看到在算法的每一步中，这个误差项都在减少或保持不变。这尤其适用于我们重新计算R和T的步骤八，因为在这里我们直接解决了一个优化问题，并且我们已经看到我们找到了这个优化问题的解析解。这意味着我们可以得出结论，我们真正达到了最优解，全局最优解，假设在pi和Qi地标之间的分配是固定的。</p>
+
+<p>此外，在我们重新分配qi点到pi点中最近的点的步骤四中，我们也减少了这个误差项的值，或者我们保持它不变，但我们从不增加这个距离项e。这意味着在整个循环中，在这个循环中的所有步骤中，我们都在减少这个误差项，或者我们保持它不变，所以它永远不会增加，这是一个重要的属性。此外，我们知道，qi点和pi点之间的可能分配数量是有限的，可能很大，但仍然是有限的。如果我们有这样一个有限数量的可能性，并且我们有一个在这些可能性之间的序列，使得误差项总是变小或保持不变，那么我们可以得出结论，从某一点开始，我们总是有这样的配置，在这种配置中，误差已经达到了最小，而且不再减小。这种观察到一个单调递减序列的有限集合的可能性的原则，被称为鸽巢原理或德里克雷原理。从这个论点我们可以得出结论，从某一点开始，算法收敛，这意味着这些分配不再改变，算法终止。</p>
+
+<ul>
+  <li>Iterative Closest Point (ICP)(Besl, McKay 1992)
+    <ul>
+      <li>calculates rotation $R$ and translation $\overrightarrow{t}$ in order to transform a set of points $Q$ onto another set of points $P$ 计算旋转矩阵 $R$ 和平移向量 $\overrightarrow{t}$，以将点集 $Q$ 变换到另一个点集 $P$</li>
+      <li>ICP always terminates ICP总是终止</li>
+      <li>ICP converges to local minimum of <br /> 收敛到局部最小值</li>
+    </ul>
+  </li>
+</ul>
+
+\[E(R,\vec{t})\longrightarrow\frac{1}{N}\sum_{i=1}^{N}\,||\vec{p}_{j}(i)-\left(R\vec{q}_{i}+\vec{t}\right)||^{2}\]
+
+<ul>
+  <li>简要证明
+    <ul>
+      <li>by construction, $E(R,\overrightarrow{t})$ is minimized in step 8 assuming fixed assignments between points 根据结构，在步骤8中，$E(R,\overrightarrow{t})$是最小化的，假设点之间有固定的分配。</li>
+      <li>by construction, $E(R,\overrightarrow{t})$ is minimized in step 4 assuming fixed translation and rotation 根据结构，在步骤4中，假设固定的平移和旋转，$E(R,\overrightarrow{t})$被最小化了</li>
+      <li>hence, $E(R,\overrightarrow{t})$ never increases</li>
+      <li>since number of possible assignments is finite, we cannot generate new
+permutations in step 4 from a certain point on (pigeonhole/Dirichlet principle) 由于可能的分配数量是有限的，我们不能在第 4 步中从某个点生成新的排列（pigeonhole/Dirichlet principle）</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>ICP example 1</strong></p>
+
+<p>ICP算法的一个例子是，有一个非常小的观察集。在这里，蓝色的是集合P，也就是地标在世界坐标系统中的真实位置，红色的是观察值，它们是使用车辆位置的某个初始猜测投射到世界坐标系统中的。任务是以某种方式旋转和平移红色的交叉点，使它们与蓝色的圆圈更或少的重合。在第一步中，我们搜索最近的点，对于每个红色的交叉点，我们搜索最近的蓝色圆圈，这是由虚线表示的。如我们所见，可能会出现两个观察值，对于两个红色的交叉点，分配给同一个地图中的地标的情况，这并不是算法的问题，我们不关心这个，我们就把它当作它是的。下一步是我们计算一个旋转矩阵和一个平移向量，以某种方式推动交叉点和圆圈一起。在这之后，我们再次投射红色的交叉点，也就是观察到的测量值到世界坐标系统中，现在的情况可能看起来像这样。再次，我们检查在P中最近的点，也就是在这种情况下最近的蓝色圆圈，并将红色交叉点分配给蓝色圆圈。然后我们再次计算旋转矩阵和平移向量。应用它们会使红色交叉点完美地移动到蓝色圆圈中。现在，如果我们再次搜索每个红色交叉点的最近点，我们会发现红色交叉点和蓝色圆圈之间的分配保持不变，所以算法必须停止，我们可以返回结果旋转和平移。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230630144917.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230630144953.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230630145010.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230630145027.png" alt="" /></p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230630145117.png" alt="" /></p>
+
+<p><strong>ICP example 2</strong></p>
+
+<p>这里有另一个例子，包含一些更多的点。这个例子包含一些随机采样的蓝色点，观察值是通过将蓝色点旋转45度并添加一些小的偏移量创建的。我没有添加任何噪声，所以我们假设有一个完美的传感器，没有任何不精确。那么，如果我们应用ICP算法，算法会进行几个步骤。</p>
+
+<p>现在，它已经收敛。如我们所见，在这些条件下，算法仍然能够找到全局最优。接下来我们看一个观测测量值和真实位置之间有较大平移的例子，这里我们有一个大的偏移，没有噪声。在这里，ICP算法的第一步是将红点向蓝点推动，使得它们的重心重合，然后再次补偿45度旋转，直到算法收敛。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/5fe4d6ee-ffa2-4ac1-8b88-f9ec726d8ab6.gif" alt="" /></p>
+
+<p><strong>ICP example 3</strong></p>
+
+<p>接下来我们看一个观测测量值和真实位置之间有较大平移的例子，这里我们有一个大的偏移，没有噪声。在这里，ICP算法的第一步是将红点向蓝点推动，使得它们的重心重合，然后再次补偿45度旋转，直到算法收敛。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/jhjjjhg.gif" alt="" /></p>
+
+<p><strong>ICP example 4</strong></p>
+
+<p>再来一个例子，偏移很大，但现在旋转90度。我们开始算法的第一步，算法使得重心重合，然后稍微旋转一下红点，但只是这样。现在，算法已经收敛，我们可以看到它收敛到一个局部最小值，而不是全局最优。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/fdgzfsa.gif" alt="" /></p>
+
+<p>这个展示了一个情况，即地图中的地标数量（也就是集合P）比观测到的地标数量（也就是集合Q）要多得多。这在应用中是很典型的，因为我们假设地图包含了大面积的区域，所以它有来自这个大面积的所有部分的地标。然而，机器人或者车辆只能观测到它的局部环境中的地标，它不能观测到所有其他的地标。所以，观测到的地标只会是地图中所有地标的一个子集。当我们看到找到的位置时，我们可以看到，在左边，只要ICP开始时假设的位置和真实位置之间的偏移足够小，ICP算法仍然适用于这种场景。然而，如果这个偏移过大，我们可以在右边看到，我们虽然收敛，但我们没有收敛到全局最优或真实位置，而是收敛到一个远离全局最优的局部最优。这是ICP的典型行为，只有当我们有足够好的姿态的初始猜测时，它才会收敛。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230630152014.png" alt="" /></p>
+
+<p><strong>ICP example real</strong></p>
+
+<p>让我们看一个真实的例子，即机器人足球。正如我们在开始时介绍的，我们可以使用场地标记作为地标，并使用机器人上的摄像头来检测摄像头图像中的这些线，然后我们可以以某种方式使用ICP算法或者ICP算法的变体来计算观测线和地图中线的最佳匹配。</p>
+
+<p>在这里，我们的想法是使用这种足球机器人中使用的全向摄像头的摄像头图像，这些摄像头可以感知到机器人的整个环境，你可以在中心的摄像头图像中看到这一点。我们看到的是摄像头的镜头，它在摄像头顶部反射在一个镜子上。所以这就是所谓的中心，然后我们看到的一些部分是这个镜子在摄像头顶部的安装。这些区域当然不是我们感兴趣的，我们对那些不感兴趣的区域进行了遮罩，所以这里用灰色的像素遮住了这些区域。这些区域不是我们算法要考虑的。现在我们在图像中搜索场地标记，为了在此过程中保持高效并不浪费太多时间，我们做的是我们在一些搜索线或者搜索光线上进行搜索，这里用红线表示。我们只考虑这些线上的像素，我们遵循这些线，每当我们发现一些白色像素，它们被绿色像素跟随，我们就说这里必须有一个场地标记的元素。所以这会产生一些点，这些点可能是我们用这种摄像头能检测到的。我们可以识别到距离3.5米的场地标记。当然这项工作有点旧，这是在2003年到2008年之间完成的工作。所以现在，使用新的高分辨率摄像头和更强大的计算机，这个算法当然也适用于更远的场地标记。现在我们将所有检测到的场地标记转换到车辆坐标系中，也就是固定在机器人中心的坐标系，其x轴指向前方，y轴指向左边，或者反过来，这种情况下，x轴指向右边，y轴指向前方。这在这个图中产生了黑色的菱形。现在我们知道有一个足球场的地图，也就是我们知道场地标记在哪里，我们使用了ICP算法的一种数值变体来通过最小化观测点与真实场地标记位置之间的距离来确定机器人的位置和方向。最后，在优化后，我们可能已经确定了机器人位于它的目标前方，稍微向左旋转，就像你在图中看到的那样。这种方法对于足球角色扮演工作得非常好。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230630152132.png" alt="" /></p>
+
+<p>在这里你可以看到一个例子，右边我们再次看到了足球场，在蓝色中我们看到了观测到的场地标记，在计算出最佳匹配后。</p>
+
+<p>在这种情况下，我们得到了优化问题的唯一解，或者更准确地说，因为足球场是对称的，我们得到了两个解，一个我们可以在这里看到，另一个就在场地的对方。然而，除了这种歧义性，我们得到了一个唯一的解。在左侧，我们看到我们实际上最小化的误差项。误差项用灰度值表示，像素越深，误差越大。当然，除了场地标记像素的线外，这些线在这里仅仅是为了比较的目的。我们可以看到，最优解（蓝圈的中心）确实是误差项的全局最小值。我们也可以看到，这个误差项是高度复杂的，因此存在许多局部最小值。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230630152151.png" alt="" /></p>
+
+<p>这是另一个例子。</p>
+
+<p>再次，对于我们在误差项图中看到的每个位置，我们可以看到剩余的误差，那是对于该像素位置的最佳方向的误差。我们可以看到，在这种情况下，只找到了一条线上的元素，这导致了一个问题，因为如果你只看到一条线，我们不能确定机器人的完全位置，我们只能说机器人位于两条平行线中的一条上，但我们不知道机器人位于线的哪个地方。就像我们在误差图中看到的那样，有两个小误差项的值是平行于我们看到的线的。在这种情况下，我们可以确定关于机器人位置和机器人方向的一些信息，但不是全部信息。</p>
+
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230630152247.png" alt="" /></p>
+
+<h2 id="incremental-localization-增量本地化">Incremental Localization 增量本地化</h2>
+
+<p>我们如何克服在自我定位中找不到唯一解的情况呢？一种方法是使用增量式定位。通常，我们不是在没有任何关于我们可能在哪里的先验知识的情况下被问到”你在哪里”，而通常是你想知道车辆在哪里，并且我们已经知道机器人在一段时间前的位置。所以我们可以使用这个先验知识来确定现在的位置，这实际上就是增量定位。</p>
+
+<p>这结合了两种技术，一种是我们介绍过的一次性定位，例如使用ICP算法，它在没有任何先验知识的情况下取一些地标，并确定机器人的位置；另一种是追踪方法，如卡尔曼滤波器或回归，它假设我们已经对当前状态有了一些了解，对于这个自我组织问题来说，就是车辆当前的位置，并用我们通过车载传感器获取的当前测量来更新它。这种增量定位的优势是，它比一次性定位更稳定，比一次性定位更高效，它可能为误差项最小化创造适当的图像值，例如对于ICP算法，我们可以做一个初步的相关地标选择，所有类型的数据关联或门控技术。我们还可以容忍有少量地标的区域，所以如果我们看到的地标太少，我们仍然可以依赖我们之前的位置和我们是如何移动的来确定我们现在的位置。</p>
+
+<p>基本的思路很简单，我们假设我们使用一种状态空间模型，其中车辆的姿态（即车辆的位置和方向）产生一个状态空间。我们有一个过滤后的姿态，这是我们现在所在位置的先验知识。然后我们可以应用一个预测步骤，例如卡尔曼滤波器，以得到一个预测的姿态。然后我们使用车载传感器进行测量，并使用一些类似ICP的算法确定这些传感器的姿态。然后，我们使用这个姿态来刷新我们对车辆姿态的了解，这样我们就可以再次获得过滤后的姿态。这个步骤很简单也很容易。当然，我们需要一个初始猜测，无论是预测的姿态还是过滤后的姿态，以完成整个过程。让我们看一个机器人足球定位的例子。我们从一个过滤后的姿态开始，这反映了我们之前所在位置的先验知识，如在小型足球场地图中显示的红色十字标志。然后，我们可能使用卡尔曼滤波器来预测过滤后的姿态，并得到预测的姿态，如这里显示的蓝色十字标志。我们也可能使用机器人的里程计，也就是测量轮子转动的程度，例如轮子的旋转程度，来确定我们已经开多远了，是在转弯还是在直线行驶。现在，我们有了预测的姿态，从那里开始，我们开始最小化误差项的过程，预测的姿态作为初始猜测，所以它可以提高搜索算法的效率。搜索算法收敛到误差项的局部最小值，得到一个从摄像机图像中确定的最佳位置，然后我们使用它作为卡尔曼滤波器创新步骤的测量值。所以现在我们已经闭环了，我们可以像这样以增量的方式继续下去。这个方法工作得相当好，这里是一个例子，一个非常简短的序列，显示了在这个机器人足球环境中的工作方式。你会看到这个机器人的符号是青色的，然后有四个圈，实际上一个圈标注为old，这是以前的位置，然后有一个标为odor的圈，这是预测的位置，然后有一个标注为dis，并且有一个紫色圈包围的圈，这实际上是通过匹配观察到的场地标记和地图确定的位置，然后第四个是一个标注为filter的圈，这实际上是创新步骤完成后的位置。所以现在这个图像是循环的，我们可以看到这些位置随着时间的推移是如何演变的。过滤器在一段时间内对观察到的东西进行了一些平滑处理，所以整个位置不会像我们只是考虑通过匹配观察到的场地标记和真实场地标记确定的位置那样跳动。</p>
+
+<h2 id="mapping-映射">Mapping 映射</h2>
+
+<h2 id="simultaneous-localization-and-mappingslam">Simultaneous Localization and Mapping(SLAM)</h2>
+
+  </section>
+
+</article>
+
+<section>
+
+
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2023/06/05-Tracking-Moving-Objects/" data-toggle="tooltip" data-placement="top" title="汽车视觉 Automotive Vision - Tracking Moving Objects 追踪移动物体">上一篇：  <span>汽车视觉 Automotive Vision - Tracking Moving Objects 追踪移动物体</span>
+            </a>
+        </li>
+        
+        
+        <li class="next">
+            <a href="/2023/06/07-RoadRecognition/" data-toggle="tooltip" data-placement="top" title="汽车视觉 Automotive Vision - Road Recognition">下一篇：  <span>汽车视觉 Automotive Vision - Road Recognition</span>
+            </a>
+        </li>
+        
+    </ul>
+</section>
+
+
+<section class="post-comments">
+
+    <script>
+
+        setInterval(function () 
+        {
+            var box = document.querySelector(".trc_rbox_container");
+            if(box) box.outerHTML = "";
+        }, 2000);
+        
+    </script>
+
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NTIzMy8zMTcwMA==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">  
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/WenboLi-CN-DE" title="@WenboLi-CN-DE 的 Github" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
+            </a>
+          </li>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:lwb_010@163.com" title="Contact me">
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
+            </a>
+          </li>
+          
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">  
+           <p class="copyright text-muted">
+            Copyright &copy; 高傲的电工李 2023 Theme by <a href="https://leopardpan.cn/">leopardpan</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+
+</html>
