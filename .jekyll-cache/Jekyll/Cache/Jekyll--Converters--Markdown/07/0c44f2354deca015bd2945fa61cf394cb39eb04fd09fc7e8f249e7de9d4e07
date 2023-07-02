@@ -1,0 +1,41 @@
+I"�
+<ul>
+  <li><a href="#chapter-6-self-localization-and-mapping">Chapter 6: Self-Localization and Mapping</a>
+    <ul>
+      <li><a href="#localization-with-landmarks-地标定位">Localization with landmarks 地标定位</a>
+        <ul>
+          <li><a href="#landmarks-地标">landmarks 地标：</a>
+            <ul>
+              <li><a href="#linear-landmarks-线性地标">linear landmarks 线性地标</a></li>
+              <li><a href="#what-can-we-conclude-from-我们可以从中得出什么结论-">what can we conclude from… ：我们可以从…中得出什么结论 ?</a></li>
+            </ul>
+          </li>
+          <li><a href="#one-shot-localization-一次性定位算法">One-Shot Localization 一次性定位算法</a>
+            <ul>
+              <li><a href="#icp-algorithm-三维点云配准">ICP algorithm 三维点云配准</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#incremental-localization-增量本地化">Incremental Localization 增量本地化</a>
+        <ul>
+          <li><a href="#kidnapped-robot-problem">Kidnapped Robot Problem</a></li>
+        </ul>
+      </li>
+      <li><a href="#mapping-映射">Mapping 映射</a>
+        <ul>
+          <li><a href="#point-clouds">Point clouds</a></li>
+          <li><a href="#feature-point-maps">Feature point maps</a>
+            <ul>
+              <li><a href="#occupancy-grids">Occupancy Grids</a></li>
+            </ul>
+          </li>
+          <li><a href="#stixel-map">Stixel Map</a></li>
+          <li><a href="#geometrical-map">Geometrical Map</a></li>
+        </ul>
+      </li>
+      <li><a href="#simultaneous-localization-and-mappingslam">Simultaneous Localization and Mapping(SLAM)</a></li>
+    </ul>
+  </li>
+</ul>
+:ET
