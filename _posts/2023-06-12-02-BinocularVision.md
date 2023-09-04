@@ -387,14 +387,22 @@ $$
 
 - 左右分割段的区别：
   - 对灰度值绝对差求和：<br>
+
 $$
 \sum_{i=-n}^n \sum_{j=-n}^n\left|g_l\left(u_l+i, v_l+j\right)-g_r\left(u_r+i, v_r+j\right)\right|
-$$<br>
-  - 对灰度值平方误差求和：<br>
+$$
+
+<br>
+  - 对灰度值平方误差求和：
+<br>
+
 $$
 \sum_{i=-n}^n \sum_{j=-n}^n\left(g_l\left(u_l+i, v_l+j\right)-g_r\left(u_r+i, v_r+j\right)\right)^2
-$$<br>
+$$
+
+<br>
   - 相关性:<br>
+  
 $$
 \frac{\frac{1}{(2 n+1)^2} \sum_{i=-n}^n \sum_{j=-n}^n\left(g_l\left(u_l+i, v_l+j\right)-\bar{g}_l\right) \cdot\left(g_r\left(u_r+i, v_r+j\right)-\bar{g}_r\right)}{\sqrt{V\left(g_l\right) V\left(g_r\right)}}
 $$
