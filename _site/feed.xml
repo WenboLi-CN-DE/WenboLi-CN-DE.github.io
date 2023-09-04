@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人博客</description>
     <link>https://wenboli-cn-de.github.io/</link>
     <atom:link href="https://wenboli-cn-de.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Sep 2023 22:12:57 +0200</pubDate>
-    <lastBuildDate>Mon, 04 Sep 2023 22:12:57 +0200</lastBuildDate>
+    <pubDate>Mon, 04 Sep 2023 22:38:45 +0200</pubDate>
+    <lastBuildDate>Mon, 04 Sep 2023 22:38:45 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -3701,15 +3701,27 @@ v \\
 &lt;ul&gt;
   &lt;li&gt;左右分割段的区别：
     &lt;ul&gt;
-      &lt;li&gt;对灰度值绝对差求和：&lt;br /&gt;
-\(\sum_{i=-n}^n \sum_{j=-n}^n\left|g_l\left(u_l+i, v_l+j\right)-g_r\left(u_r+i, v_r+j\right)\right|\)&lt;br /&gt;&lt;/li&gt;
-      &lt;li&gt;对灰度值平方误差求和：&lt;br /&gt;
-\(\sum_{i=-n}^n \sum_{j=-n}^n\left(g_l\left(u_l+i, v_l+j\right)-g_r\left(u_r+i, v_r+j\right)\right)^2\)&lt;br /&gt;&lt;/li&gt;
-      &lt;li&gt;相关性:&lt;br /&gt;
-\(\frac{\frac{1}{(2 n+1)^2} \sum_{i=-n}^n \sum_{j=-n}^n\left(g_l\left(u_l+i, v_l+j\right)-\bar{g}_l\right) \cdot\left(g_r\left(u_r+i, v_r+j\right)-\bar{g}_r\right)}{\sqrt{V\left(g_l\right) V\left(g_r\right)}}\)&lt;/li&gt;
+      &lt;li&gt;对灰度值绝对差求和：&lt;br /&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+\[\sum_{i=-n}^n \sum_{j=-n}^n\left|g_l\left(u_l+i, v_l+j\right)-g_r\left(u_r+i, v_r+j\right)\right|\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;对灰度值平方误差求和：
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\sum_{i=-n}^n \sum_{j=-n}^n\left(g_l\left(u_l+i, v_l+j\right)-g_r\left(u_r+i, v_r+j\right)\right)^2\]
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;相关性:&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+\[\frac{\frac{1}{(2 n+1)^2} \sum_{i=-n}^n \sum_{j=-n}^n\left(g_l\left(u_l+i, v_l+j\right)-\bar{g}_l\right) \cdot\left(g_r\left(u_r+i, v_r+j\right)-\bar{g}_r\right)}{\sqrt{V\left(g_l\right) V\left(g_r\right)}}\]
 
 &lt;p&gt;让我们以一个例子来说明。
 上方是我在左图像中选择的图像块，下方是右图像。
