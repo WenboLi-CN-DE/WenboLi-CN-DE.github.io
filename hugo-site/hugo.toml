@@ -1,3 +1,56 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = "https://wenboli-cn-de.github.io/"
+languageCode = "zh-CN"
+title = "高傲的电工李"
+theme = "custom-theme"
+paginate = 20
+paginatePath = "page"
+
+[params]
+  subtitle = "个人博客"
+  description = "欢迎来到我的个人博客"
+  author = "李文博"
+  avatarTitle = "李文博"
+  avatarDesc = "机电 / 机器学习"
+  enableToc = true
+
+[params.social]
+  github = "WenboLi-CN-DE"
+  email = "lwb_010@163.com"
+
+[params.blog_button]
+  title = "博客主页"
+
+[menu]
+  [[menu.main]]
+    name = "所有文章"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    name = "标签"
+    url = "/tags/"
+    weight = 2
+  [[menu.main]]
+    name = "关于我"
+    url = "/about/"
+    weight = 3
+
+[permalinks]
+  posts = "/:year/:month/:title/"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[outputFormats.RSS]
+  mediatype = "application/rss"
+  baseName = "feed"
+
+[markup]
+  [markup.highlight]
+    style = "monokai"
+    lineNos = false
+    lineNumbersInTable = false
+    noClasses = true
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
