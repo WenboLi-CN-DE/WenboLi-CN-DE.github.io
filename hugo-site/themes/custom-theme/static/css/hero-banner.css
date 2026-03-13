@@ -82,6 +82,24 @@
    Responsive Design
    ============================================ */
 
+@media (max-width: 1024px) and (min-width: 769px) {
+  .hero-banner {
+    padding: 1.75rem 1.5rem;
+  }
+  
+  .hero-banner-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-banner-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .hero-banner-quote {
+    font-size: 1.05rem;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-banner {
     padding: 1.5rem 1rem;
@@ -114,15 +132,15 @@
 
 @media (max-width: 480px) {
   .hero-banner {
-    padding: 1.25rem 0.75rem;
+    padding: 1rem 0.75rem;
   }
   
   .hero-banner.scrolled {
-    padding: 0.5rem 0.75rem;
+    padding: 0.75rem;
   }
   
   .hero-banner-title {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
   }
   
   .hero-banner.scrolled .hero-banner-title {
@@ -138,6 +156,7 @@
   }
   
   .hero-banner-quote {
+    font-size: 0.9rem;
     display: none;
   }
 }
