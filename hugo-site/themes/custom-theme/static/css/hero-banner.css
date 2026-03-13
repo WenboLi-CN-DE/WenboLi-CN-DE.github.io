@@ -1,0 +1,156 @@
+/* ============================================
+   Hero Banner - Fixed Top Component
+   Design: Sticky header with scroll shrink effect
+   ============================================ */
+
+.hero-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  padding: 2rem 1.5rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-banner.scrolled {
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-banner-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-banner-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-banner.scrolled .hero-banner-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.hero-banner-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 0.75rem 0;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-banner.scrolled .hero-banner-subtitle {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.hero-banner-quote {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  margin: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.hero-banner.scrolled .hero-banner-quote {
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 1.5rem 1rem;
+  }
+  
+  .hero-banner.scrolled {
+    padding: 0.75rem 1rem;
+  }
+  
+  .hero-banner-title {
+    font-size: 2rem;
+  }
+  
+  .hero-banner.scrolled .hero-banner-title {
+    font-size: 1.5rem;
+  }
+  
+  .hero-banner-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .hero-banner.scrolled .hero-banner-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .hero-banner-quote {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-banner {
+    padding: 1.25rem 0.75rem;
+  }
+  
+  .hero-banner.scrolled {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .hero-banner-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-banner.scrolled .hero-banner-title {
+    font-size: 1.35rem;
+  }
+  
+  .hero-banner-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .hero-banner.scrolled .hero-banner-subtitle {
+    font-size: 0.75rem;
+  }
+  
+  .hero-banner-quote {
+    display: none;
+  }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-banner,
+  .hero-banner-title,
+  .hero-banner-subtitle,
+  .hero-banner-quote {
+    transition: none !important;
+  }
+}
