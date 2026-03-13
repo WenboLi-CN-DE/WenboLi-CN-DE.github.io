@@ -1,0 +1,8 @@
+name = "Custom Theme"
+license = "MIT"
+description = "Custom theme migrated from Jekyll"
+homepage = "https://wenboli-cn-de.github.io/"
+min_version = "0.80.0"
+
+[author]
+  name = "李文博"
