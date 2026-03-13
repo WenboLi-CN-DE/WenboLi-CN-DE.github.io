@@ -1,4 +1,5 @@
 ---
+date: 2023-06-14
 layout: post
 title: 机器学习 Machine Learning - Neural Networks 神经网络
 tag: [机器学习]
@@ -38,6 +39,7 @@ We will learn today…
 </div>
 
 ---
+date: 2023-06-14
 
 <div style="display: flex;">
     <div style="width: 50%;">
