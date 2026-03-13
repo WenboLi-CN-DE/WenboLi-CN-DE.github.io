@@ -1,29 +1,71 @@
 {{ define "title" }}{{ .Site.Title }} - {{ .Site.Params.subtitle }}{{ end }}
 
 {{ define "main" }}
-<div class="home-page">
-    {{ partial "sidebar.html" . }}
-    
-    <div class="post-list">
-        <h2>{{ .Site.Params.blog_button.title }}</h2>
-        
+{{ partial "sidebar.html" . }}
+
+<div class="home-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">{{ .Site.Title }}</h1>
+            <p class="hero-subtitle">{{ .Site.Params.avatarDesc }}</p>
+            <p class="hero-quote">与其感慨路难行，不如马上出发。</p>
+        </div>
+    </section>
+
+    <!-- Posts Grid -->
+    <section class="posts-section">
         {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
-        {{ range $paginator.Pages }}
-        <article class="post-preview">
-            <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-            <div class="post-meta">
-                <time datetime="{{ .Date.Format "2006-01-02" }}">
-                    {{ .Date.Format "2006年01月02日" }}
-                </time>
-            </div>
-            {{ with .Description }}
-            <p class="post-description">{{ . }}</p>
+        <div class="posts-grid">
+            {{ range $paginator.Pages }}
+            <article class="post-card" data-category="{{ with .Params.categories }}{{ index . 0 }}{{ end }}">
+                {{ if .Params.cover }}
+                <div class="post-cover">
+                    <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
+                </div>
+                {{ end }}
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="{{ .Date.Format "2006-01-02" }}">
+                            {{ .Date.Format "2006-01-02" }}
+                        </time>
+                        {{ with .Params.categories }}
+                        <span class="post-category">{{ index . 0 }}</span>
+                        {{ end }}
+                    </div>
+                    
+                    {{ with .Description }}
+                    <p class="post-excerpt">{{ . }}</p>
+                    {{ end }}
+                    
+                    <div class="post-footer">
+                        {{ if .Params.readingTime }}
+                        <span class="reading-time">{{ .Params.readingTime }}分钟阅读</span>
+                        {{ end }}
+                        {{ if .Params.author }}
+                        <span class="post-author">@ {{ .Params.author }}</span>
+                        {{ end }}
+                    </div>
+                </div>
+            </article>
             {{ end }}
-            <a href="{{ .Permalink }}" class="read-more">阅读全文 →</a>
-        </article>
-        {{ end }}
+        </div>
         
-        {{ template "_internal/pagination.html" . }}
-    </div>
+        {{ if gt $paginator.TotalPages 1 }}
+        <nav class="pagination">
+            {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="pagination-link">上一页</a>
+            {{ end }}
+            {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="pagination-link">下一页</a>
+            {{ end }}
+        </nav>
+        {{ end }}
+    </section>
 </div>
 {{ end }}
