@@ -5,6 +5,10 @@ theme = "custom-theme"
 paginate = 20
 paginatePath = "page"
 
+[author]
+  name = "李文博"
+  email = "lwb_010@163.com"
+
 [params]
   subtitle = "个人博客"
   description = "欢迎来到我的个人博客"
@@ -38,12 +42,10 @@ paginatePath = "page"
   posts = "/:year/:month/:title/"
 
 [outputs]
-  home = ["HTML", "RSS"]
-  section = ["HTML", "RSS"]
-
-[outputFormats.RSS]
-  mediatype = "application/rss"
-  baseName = "feed"
+  home = ["HTML"]
+  section = ["HTML"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
 
 [markup]
   [markup.highlight]
