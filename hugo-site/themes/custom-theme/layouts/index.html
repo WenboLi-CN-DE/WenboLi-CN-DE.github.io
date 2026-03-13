@@ -4,33 +4,31 @@
 {{ partial "sidebar.html" . }}
 
 <div class="home-container">
-    <!-- Hero Banner -->
-    <section class="hero-banner" id="heroBanner">
+    <header class="hero-banner" id="heroBanner" role="banner">
         <div class="hero-banner-content">
             <h1 class="hero-banner-title">{{ .Site.Title }}</h1>
             <p class="hero-banner-subtitle">{{ .Site.Params.avatarDesc }}</p>
             <p class="hero-banner-quote">与其感慨路难行，不如马上出发。</p>
         </div>
-    </section>
+    </header>
 
-    <!-- Posts Section -->
-    <section class="posts-section">
+    <section class="posts-section" id="main-content" role="main" aria-label="文章列表">
         {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
-        <div class="articles-grid">
+        <div class="articles-grid" role="list">
             {{ range $paginator.Pages }}
-            <article class="article-card">
-                <a href="{{ .Permalink }}" class="article-card-link">
+            <article class="article-card" role="listitem">
+                <a href="{{ .Permalink }}" class="article-card-link" aria-label="阅读文章：{{ .Title }}">
                     {{ if .Params.cover }}
                     <div class="article-card-cover">
-                        <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
+                        <img src="{{ .Params.cover }}" alt="{{ .Title }}的封面图片" loading="lazy">
                     </div>
                     {{ end }}
                     <div class="article-card-content">
                         <div class="article-card-meta">
                             {{ with .Params.categories }}
-                            <span class="article-card-category">{{ index . 0 }}</span>
+                            <span class="article-card-category" aria-label="分类">{{ index . 0 }}</span>
                             {{ end }}
-                            <span class="article-card-reading-time">{{ .ReadingTime }} 分钟</span>
+                            <span class="article-card-reading-time" aria-label="阅读时间">{{ .ReadingTime }} 分钟</span>
                         </div>
                         <h2 class="article-card-title">{{ .Title }}</h2>
                         {{ if .Description }}
@@ -39,10 +37,10 @@
                         <p class="article-card-excerpt">{{ .Summary }}</p>
                         {{ end }}
                         <div class="article-card-footer">
-                            <time class="article-card-date" datetime="{{ .Date.Format "2006-01-02" }}">
+                            <time class="article-card-date" datetime="{{ .Date.Format "2006-01-02" }}" aria-label="发布日期">
                                 {{ .Date.Format "2006年1月2日" }}
                             </time>
-                            <span class="article-card-author">{{ .Site.Params.author }}</span>
+                            <span class="article-card-author" aria-label="作者">{{ .Site.Params.author }}</span>
                         </div>
                     </div>
                 </a>
@@ -51,13 +49,13 @@
         </div>
         
         {{ if gt $paginator.TotalPages 1 }}
-        <nav class="pagination">
+        <nav class="pagination" role="navigation" aria-label="分页导航">
             {{ if $paginator.HasPrev }}
-            <a href="{{ $paginator.Prev.URL }}" class="pagination-link">← 上一页</a>
+            <a href="{{ $paginator.Prev.URL }}" class="pagination-link" aria-label="上一页">← 上一页</a>
             {{ end }}
-            <span class="pagination-info">第 {{ $paginator.PageNumber }} 页 / 共 {{ $paginator.TotalPages }} 页</span>
+            <span class="pagination-info" aria-current="page">第 {{ $paginator.PageNumber }} 页 / 共 {{ $paginator.TotalPages }} 页</span>
             {{ if $paginator.HasNext }}
-            <a href="{{ $paginator.Next.URL }}" class="pagination-link">下一页 →</a>
+            <a href="{{ $paginator.Next.URL }}" class="pagination-link" aria-label="下一页">下一页 →</a>
             {{ end }}
         </nav>
         {{ end }}
