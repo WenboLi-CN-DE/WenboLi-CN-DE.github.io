@@ -7,14 +7,21 @@
     <meta name="description" content="{{ .Site.Params.description }}">
     
     <!-- CSS -->
+    <link rel="stylesheet" href="{{ "css/variables.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/header.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/category-nav.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/animate.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/tomorrow.css" | relURL }}">
+    
+    <!-- 主题切换脚本（阻塞加载避免闪烁） -->
+    <script src="{{ "js/theme-switcher.js" | relURL }}"></script>
     
     {{ block "head" . }}{{ end }}
 </head>
 <body>
     {{ partial "header.html" . }}
+    {{ partial "category-nav.html" . }}
     
     <main>
         {{ block "main" . }}{{ end }}
