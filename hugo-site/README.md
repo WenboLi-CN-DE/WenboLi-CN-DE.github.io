@@ -112,3 +112,31 @@ MIT License
 
 - GitHub: [@WenboLi-CN-DE](https://github.com/WenboLi-CN-DE)
 - Email: lwb_010@163.com
+
+## 最新更新
+
+### 首页重新设计（2026-03-14）
+
+- ✨ 新增固定顶部 Hero Banner
+- 🎨 重新设计文章卡片布局
+- 🌓 支持亮色/暗色模式切换
+- 📱 优化移动端响应式设计
+- ♿ 改进可访问性支持
+- ⚡ 性能优化（懒加载、关键 CSS）
+
+详细信息请查看 [HOMEPAGE_REDESIGN.md](HOMEPAGE_REDESIGN.md)
+
+## 文章 Front Matter 字段
+
+```yaml
+---
+title: "文章标题"
+date: 2026-03-14
+description: "文章描述"
+categories: ["code"]
+tags: ["标签1", "标签2"]
+cover: "/images/cover.jpg"  # 可选
+readingTime: 5              # 可选
+featured: true              # 可选
+---
+```
