@@ -1,0 +1,17 @@
+<aside class="sidebar">
+    <div class="sidebar-content">
+        <div class="sidebar-section">
+            <h3>关于</h3>
+            <p>{{ .Site.Params.description }}</p>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3>最近文章</h3>
+            <ul>
+                {{ range first 5 (where .Site.RegularPages "Type" "posts") }}
+                <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+</aside>

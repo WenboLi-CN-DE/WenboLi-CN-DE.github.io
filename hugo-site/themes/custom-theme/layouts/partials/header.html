@@ -1,0 +1,23 @@
+<header class="site-header">
+    <div class="header-content">
+        <div class="avatar-section">
+            <h1 class="avatar-title">{{ .Site.Params.avatarTitle }}</h1>
+            <p class="avatar-desc">{{ .Site.Params.avatarDesc }}</p>
+        </div>
+        
+        <nav class="site-nav">
+            {{ range .Site.Menus.main }}
+            <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
+            {{ end }}
+        </nav>
+        
+        <div class="social-links">
+            {{ with .Site.Params.social.github }}
+            <a href="https://github.com/{{ . }}" target="_blank">GitHub</a>
+            {{ end }}
+            {{ with .Site.Params.social.email }}
+            <a href="mailto:{{ . }}">Email</a>
+            {{ end }}
+        </div>
+    </div>
+</header>
