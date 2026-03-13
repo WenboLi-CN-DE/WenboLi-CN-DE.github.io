@@ -49,6 +49,7 @@
   box-shadow: var(--shadow-md);
   border-color: var(--category-color, var(--color-accent));
   background: var(--color-surface);
+  font-weight: 600;
 }
 
 /* .category-icon {
@@ -77,11 +78,14 @@
   background: var(--color-accent);
   color: white;
   border-color: var(--color-accent);
+  font-weight: 700;
+  box-shadow: var(--shadow-md);
 }
 
 .category-link.active .category-count {
   background: rgba(255, 255, 255, 0.2);
   color: white;
+  font-weight: 600;
 }
 
 /* 响应式 */
