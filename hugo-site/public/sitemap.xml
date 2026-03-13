@@ -2,66 +2,64 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://wenboli-cn-de.github.io/about/</loc>
     <lastmod>2026-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://wenboli-cn-de.github.io/</loc>
     <lastmod>2026-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/1/01/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://wenboli-cn-de.github.io/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://wenboli-cn-de.github.io/posts/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://wenboli-cn-de.github.io/tags/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/test-math-shortcode/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/win%E7%B3%BB%E7%BB%9F%E4%B8%8Elinux%E8%BF%9B%E8%A1%8C%E6%96%87%E4%BB%B6%E4%BA%92%E4%BC%A0/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/test-passthrough/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E5%B7%A5%E7%A8%8B%E5%8A%9B%E5%AD%A6-%E5%8A%A8%E5%8A%9B%E5%AD%A6/technische-mechanik-iv-dynamik-integration-der-eulerschen-gleichungen-%E6%AC%A7%E6%8B%89%E6%96%B9%E7%A8%8B%E7%9A%84%E7%A7%AF%E5%88%86/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/win%E7%B3%BB%E7%BB%9F%E4%B8%8Elinux%E8%BF%9B%E8%A1%8C%E6%96%87%E4%BB%B6%E4%BA%92%E4%BC%A0/</loc>
+    <loc>https://wenboli-cn-de.github.io/archive/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E5%B7%A5%E7%A8%8B%E5%8A%9B%E5%AD%A6-%E5%8A%A8%E5%8A%9B%E5%AD%A6/technische-mechanik-iv-dynamik-integration-der-eulerschen-gleichungen-%E6%AC%A7%E6%8B%89%E6%96%B9%E7%A8%8B%E7%9A%84%E7%A7%AF%E5%88%86/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-machine-learning-neural-networks-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-machine-learning-neural-networks-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-segmentation/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-segmentation/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-segmentation/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-segmentation/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86-image-preprocessing/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86-image-preprocessing/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88%E5%9C%86%E5%92%8C%E6%A4%AD%E5%9C%86-curve-fitting/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88%E5%9C%86%E5%92%8C%E6%A4%AD%E5%9C%86-curve-fitting/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88%E7%9B%B4%E7%BA%BF%E9%83%A8%E5%88%86-curve-fitting/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88%E7%9B%B4%E7%BA%BF%E9%83%A8%E5%88%86-curve-fitting/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-pattern-recognition/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-pattern-recognition/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-pattern-recognition/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-pattern-recognition/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-deep-learning/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-deep-learning/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-deep-learning/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-deep-learning/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E7%9B%B8%E6%9C%BA%E5%85%89%E5%AD%A6-%EF%BD%8Fptics/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E7%9B%B8%E6%9C%BA%E5%85%89%E5%AD%A6-%EF%BD%8Fptics/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B-edge-detection/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B-edge-detection/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E9%A2%9C%E8%89%B2-color/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E9%A2%9C%E8%89%B2-color/</loc>
+    <loc>https://wenboli-cn-de.github.io/categories/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-behavior-recognition-%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-behavior-recognition-%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-binocular-vision-/-stereo-vision-%E5%8F%8C%E7%9B%AE%E8%A7%86%E8%A7%89/%E7%AB%8B%E4%BD%93%E8%A7%86%E8%A7%89/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-binocular-vision-/-stereo-vision-%E5%8F%8C%E7%9B%AE%E8%A7%86%E8%A7%89/%E7%AB%8B%E4%BD%93%E8%A7%86%E8%A7%89/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-optical-flow-and-image-based-tracking/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-optical-flow-and-image-based-tracking/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-road-recognition-%E9%81%93%E8%B7%AF%E8%AF%86%E5%88%AB/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-road-recognition-%E9%81%93%E8%B7%AF%E8%AF%86%E5%88%AB/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-slam-%E5%90%8C%E6%97%B6%E5%AE%9A%E4%BD%8D%E4%B8%8E%E5%9C%B0%E5%9B%BE%E6%9E%84%E5%BB%BA/</loc>
   </url><url>
-    <loc>http://localhost:1313/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-slam-%E5%90%8C%E6%97%B6%E5%AE%9A%E4%BD%8D%E4%B8%8E%E5%9C%B0%E5%9B%BE%E6%9E%84%E5%BB%BA/</loc>
-  </url><url>
-    <loc>http://localhost:1313/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-tracking-moving-objects-%E8%BF%BD%E8%B8%AA%E7%A7%BB%E5%8A%A8%E7%89%A9%E4%BD%93/</loc>
+    <loc>https://wenboli-cn-de.github.io/1/01/%E6%B1%BD%E8%BD%A6%E8%A7%86%E8%A7%89-automotive-vision-tracking-moving-objects-%E8%BF%BD%E8%B8%AA%E7%A7%BB%E5%8A%A8%E7%89%A9%E4%BD%93/</loc>
   </url>
 </urlset>

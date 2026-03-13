@@ -1,4 +1,4 @@
-{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+{{ define "title" }}文章归档 - {{ .Site.Title }}{{ end }}
 
 {{ define "head" }}
 <link rel="stylesheet" href="{{ "css/archive.css" | relURL }}">
@@ -7,14 +7,14 @@
 {{ define "main" }}
 <div class="archive-container">
     <header class="archive-header">
-        <h1>{{ .Title }}</h1>
-        <p>{{ len .Pages }} 篇文章</p>
+        <h1>文章归档</h1>
+        <p>{{ len (where .Site.RegularPages "Type" "posts") }} 篇文章的时光印记</p>
     </header>
 
-    {{ $pages := .Pages }}
-    {{ $pagesByYear := dict }}
+    {{ $posts := where .Site.RegularPages "Type" "posts" }}
+    {{ $postsByYear := dict }}
     
-    {{ range $pages }}
+    {{ range $posts }}
         {{ $fileName := .File.BaseFileName }}
         {{ $year := "2023" }}
         {{ $month := "01" }}
@@ -26,23 +26,23 @@
             {{ $day = substr $fileName 8 2 }}
         {{ end }}
         
-        {{ $yearPages := index $pagesByYear $year }}
-        {{ if not $yearPages }}
-            {{ $yearPages = slice }}
+        {{ $yearPosts := index $postsByYear $year }}
+        {{ if not $yearPosts }}
+            {{ $yearPosts = slice }}
         {{ end }}
-        {{ $pageData := dict "page" . "year" $year "month" $month "day" $day }}
-        {{ $yearPages = $yearPages | append $pageData }}
-        {{ $pagesByYear = merge $pagesByYear (dict $year $yearPages) }}
+        {{ $postData := dict "page" . "year" $year "month" $month "day" $day }}
+        {{ $yearPosts = $yearPosts | append $postData }}
+        {{ $postsByYear = merge $postsByYear (dict $year $yearPosts) }}
     {{ end }}
     
-    {{ range $year, $yearPages := $pagesByYear }}
+    {{ range $year, $yearPosts := $postsByYear }}
     <div class="year-group">
         <div class="year-header">
             <h2>{{ $year }}</h2>
         </div>
         
         <div class="posts-timeline">
-            {{ range $yearPages }}
+            {{ range $yearPosts }}
             {{ $page := .page }}
             <article class="post-item">
                 <time class="post-date" datetime="{{ .year }}-{{ .month }}-{{ .day }}">
@@ -58,7 +58,7 @@
     </div>
     {{ end }}
 
-    {{ if eq (len $pages) 0 }}
+    {{ if eq (len $posts) 0 }}
     <div class="empty-state">
         <p>暂无文章</p>
     </div>
