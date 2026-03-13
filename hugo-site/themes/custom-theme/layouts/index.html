@@ -13,45 +13,25 @@
         </div>
     </section>
 
-    <!-- Posts Grid -->
+    <!-- Posts Section -->
     <section class="posts-section">
         {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
-        <div class="posts-grid">
+        <div class="posts-list">
             {{ range $paginator.Pages }}
-            <article class="post-card" data-category="{{ with .Params.categories }}{{ index . 0 }}{{ end }}">
-                {{ if .Params.cover }}
-                <div class="post-cover">
-                    <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
-                </div>
-                {{ end }}
-                
-                <div class="post-content">
-                    <h2 class="post-title">
-                        <a href="{{ .Permalink }}">{{ .Title }}</a>
-                    </h2>
-                    
-                    <div class="post-meta">
-                        <time datetime="{{ .Date.Format "2006-01-02" }}">
-                            {{ .Date.Format "2006-01-02" }}
+            <article class="post-item">
+                <a href="{{ .Permalink }}" class="post-link">
+                    <div class="post-main">
+                        <h2 class="post-title">{{ .Title }}</h2>
+                        <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">
+                            {{ .Date.Format "2006年1月2日" }}
                         </time>
-                        {{ with .Params.categories }}
-                        <span class="post-category">{{ index . 0 }}</span>
-                        {{ end }}
                     </div>
-                    
-                    {{ with .Description }}
-                    <p class="post-excerpt">{{ . }}</p>
+                    {{ if .Params.cover }}
+                    <div class="post-thumbnail">
+                        <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
+                    </div>
                     {{ end }}
-                    
-                    <div class="post-footer">
-                        {{ if .Params.readingTime }}
-                        <span class="reading-time">{{ .Params.readingTime }}分钟阅读</span>
-                        {{ end }}
-                        {{ if .Params.author }}
-                        <span class="post-author">@ {{ .Params.author }}</span>
-                        {{ end }}
-                    </div>
-                </div>
+                </a>
             </article>
             {{ end }}
         </div>
@@ -59,10 +39,11 @@
         {{ if gt $paginator.TotalPages 1 }}
         <nav class="pagination">
             {{ if $paginator.HasPrev }}
-            <a href="{{ $paginator.Prev.URL }}" class="pagination-link">上一页</a>
+            <a href="{{ $paginator.Prev.URL }}" class="pagination-link">← 上一页</a>
             {{ end }}
+            <span class="pagination-info">第 {{ $paginator.PageNumber }} 页 / 共 {{ $paginator.TotalPages }} 页</span>
             {{ if $paginator.HasNext }}
-            <a href="{{ $paginator.Next.URL }}" class="pagination-link">下一页</a>
+            <a href="{{ $paginator.Next.URL }}" class="pagination-link">下一页 →</a>
             {{ end }}
         </nav>
         {{ end }}
