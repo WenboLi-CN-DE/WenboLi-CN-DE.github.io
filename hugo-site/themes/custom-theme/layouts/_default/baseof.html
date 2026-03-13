@@ -9,6 +9,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ "css/variables.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/header.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/category-nav.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/animate.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/tomorrow.css" | relURL }}">
@@ -20,6 +21,7 @@
 </head>
 <body>
     {{ partial "header.html" . }}
+    {{ partial "category-nav.html" . }}
     
     <main>
         {{ block "main" . }}{{ end }}
