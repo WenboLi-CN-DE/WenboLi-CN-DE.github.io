@@ -1,0 +1,15 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<div class="taxonomy-list">
+    <h1>{{ .Title }}</h1>
+    
+    <div class="tag-cloud">
+        {{ range .Data.Terms.ByCount }}
+        <a href="{{ .Page.Permalink }}" class="tag-item">
+            {{ .Page.Title }} <span class="tag-count">({{ .Count }})</span>
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
