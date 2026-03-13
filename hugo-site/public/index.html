@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta name="generator" content="Hugo 0.157.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高傲的电工李 - 个人博客</title>
+    <meta name="description" content="欢迎来到我的个人博客">
+    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    
+    
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/category-nav.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/tomorrow.css">
+    
+    
+    <script src="/js/theme-switcher.js"></script>
+    
+    
+</head>
+<body>
+    
+<header class="site-header">
+  <div class="header-container">
+    <a href="http://localhost:1313/" class="site-logo">
+      高傲的电工李
+    </a>
+    
+    <nav class="header-nav">
+      <ul class="nav-links">
+        
+        <li>
+          <a href="/posts/">所有文章</a>
+        </li>
+        
+        <li>
+          <a href="/tags/">标签</a>
+        </li>
+        
+        <li>
+          <a href="/about/">关于我</a>
+        </li>
+        
+      </ul>
+      
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+        <span class="theme-icon">🌓</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+    
+<nav class="category-nav">
+  <div class="category-nav-container">
+    <ul class="category-list">
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/posts/" class="category-link ">
+          <span class="category-icon">📚</span>
+          <span class="category-name">全部文章</span>
+          <span class="category-count">22</span>
+        </a>
+      </li>
+      
+      
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/ai/" 
+           class="category-link "
+           style="--category-color: #f39c12">
+          <span class="category-icon">🤖</span>
+          <span class="category-name">智识前沿</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/code/" 
+           class="category-link "
+           style="--category-color: #2ecc71">
+          <span class="category-icon">💻</span>
+          <span class="category-name">代码诗篇</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/engineering/" 
+           class="category-link "
+           style="--category-color: #3498db">
+          <span class="category-icon">⚙️</span>
+          <span class="category-name">工程随笔</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/life/" 
+           class="category-link "
+           style="--category-color: #e74c3c">
+          <span class="category-icon">📝</span>
+          <span class="category-name">人间便签</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/thought/" 
+           class="category-link "
+           style="--category-color: #9b59b6">
+          <span class="category-icon">💭</span>
+          <span class="category-name">思维漫游</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+    
+    <main>
+        
+<aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        <div class="sidebar-avatar">
+            <div class="avatar-wrapper">
+                <img src="/images/avatar.jpg" alt="李文博" class="avatar-img">
+            </div>
+            <h3 class="sidebar-name">李文博</h3>
+            <p class="sidebar-bio">机电 / 机器学习</p>
+        </div>
+        
+        
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">关于我</h4>
+            <p class="sidebar-text">欢迎来到我的个人博客</p>
+        </div>
+        
+        
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">分类</h4>
+            <div class="category-list">
+                
+                <a href="/categories/ai" class="category-item" style="--category-color: #f39c12">
+                    <span class="category-icon">🤖</span>
+                    <span class="category-name">智识前沿</span>
+                </a>
+                
+                <a href="/categories/code" class="category-item" style="--category-color: #2ecc71">
+                    <span class="category-icon">💻</span>
+                    <span class="category-name">代码诗篇</span>
+                </a>
+                
+                <a href="/categories/engineering" class="category-item" style="--category-color: #3498db">
+                    <span class="category-icon">⚙️</span>
+                    <span class="category-name">工程随笔</span>
+                </a>
+                
+                <a href="/categories/life" class="category-item" style="--category-color: #e74c3c">
+                    <span class="category-icon">📝</span>
+                    <span class="category-name">人间便签</span>
+                </a>
+                
+                <a href="/categories/thought" class="category-item" style="--category-color: #9b59b6">
+                    <span class="category-icon">💭</span>
+                    <span class="category-name">思维漫游</span>
+                </a>
+                
+            </div>
+        </div>
+        
+        
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">社交链接</h4>
+            <div class="social-links">
+                
+                <a href="https://github.com/WenboLi-CN-DE" target="_blank" rel="noopener" class="social-link" title="GitHub">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                
+                
+                <a href="mailto:lwb_010@163.com" class="social-link" title="Email">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</aside>
+
+
+<div class="home-container">
+    
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">高傲的电工李</h1>
+            <p class="hero-subtitle">机电 / 机器学习</p>
+            <p class="hero-quote">与其感慨路难行，不如马上出发。</p>
+        </div>
+    </section>
+
+    
+    <section class="posts-section">
+        
+        <div class="posts-grid">
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/"></a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/win%E7%B3%BB%E7%BB%9F%E4%B8%8Elinux%E8%BF%9B%E8%A1%8C%E6%96%87%E4%BB%B6%E4%BA%92%E4%BC%A0/">Win系统与Linux进行文件互传</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    <p class="post-excerpt">通过Winscp作为载体进行操作</p>
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/%E5%B7%A5%E7%A8%8B%E5%8A%9B%E5%AD%A6-%E5%8A%A8%E5%8A%9B%E5%AD%A6/technische-mechanik-iv-dynamik-integration-der-eulerschen-gleichungen-%E6%AC%A7%E6%8B%89%E6%96%B9%E7%A8%8B%E7%9A%84%E7%A7%AF%E5%88%86/">工程力学-动力学/Technische Mechanik IV – Dynamik - Integration der Eulerschen Gleichungen 欧拉方程的积分</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-machine-learning-neural-networks-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">机器学习 Machine Learning - Neural Networks 神经网络</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-segmentation/">机器视觉-图像分割(第一部分) Segmentation</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-segmentation/">机器视觉-图像分割(第二部分) Segmentation</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86-image-preprocessing/">机器视觉-图像预处理 Image Preprocessing</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88%E5%9C%86%E5%92%8C%E6%A4%AD%E5%9C%86-curve-fitting/">机器视觉-曲线拟合(圆和椭圆) Curve Fitting</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88%E7%9B%B4%E7%BA%BF%E9%83%A8%E5%88%86-curve-fitting/">机器视觉-曲线拟合（直线部分） Curve Fitting</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    <p class="post-excerpt">曲线拟合（直线部分） Curve Fitting</p>
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+            <article class="post-card" data-category="">
+                
+                
+                <div class="post-content">
+                    <h2 class="post-title">
+                        <a href="http://localhost:1313/1/01/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89-%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86-pattern-recognition/">机器视觉-模式识别(第一部分) Pattern Recognition</a>
+                    </h2>
+                    
+                    <div class="post-meta">
+                        <time datetime="0001-01-01">
+                            0001-01-01
+                        </time>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="post-footer">
+                        
+                        
+                    </div>
+                </div>
+            </article>
+            
+        </div>
+        
+        
+        <nav class="pagination">
+            
+            
+            <a href="/page/2/" class="pagination-link">下一页</a>
+            
+        </nav>
+        
+    </section>
+</div>
+
+    </main>
+    
+    <footer class="site-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 李文博. All rights reserved.</p>
+        <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a></p>
+    </div>
+</footer>
+
+    
+    
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    <script src="/js/main.js"></script>
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机器视觉-曲线拟合(圆和椭圆) Curve Fitting - 高傲的电工李</title>
+    <meta name="description" content="欢迎来到我的个人博客">
+    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    
+    
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/category-nav.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/tomorrow.css">
+    
+    
+    <script src="/js/theme-switcher.js"></script>
+    
+    
+</head>
+<body>
+    
+<header class="site-header">
+  <div class="header-container">
+    <a href="http://localhost:1313/" class="site-logo">
+      高傲的电工李
+    </a>
+    
+    <nav class="header-nav">
+      <ul class="nav-links">
+        
+        <li>
+          <a href="/posts/">所有文章</a>
+        </li>
+        
+        <li>
+          <a href="/tags/">标签</a>
+        </li>
+        
+        <li>
+          <a href="/about/">关于我</a>
+        </li>
+        
+      </ul>
+      
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+        <span class="theme-icon">🌓</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+    
+<nav class="category-nav">
+  <div class="category-nav-container">
+    <ul class="category-list">
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/posts/" class="category-link active">
+          <span class="category-icon">📚</span>
+          <span class="category-name">全部文章</span>
+          <span class="category-count">22</span>
+        </a>
+      </li>
+      
+      
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/ai/" 
+           class="category-link "
+           style="--category-color: #f39c12">
+          <span class="category-icon">🤖</span>
+          <span class="category-name">智识前沿</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/code/" 
+           class="category-link "
+           style="--category-color: #2ecc71">
+          <span class="category-icon">💻</span>
+          <span class="category-name">代码诗篇</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/engineering/" 
+           class="category-link "
+           style="--category-color: #3498db">
+          <span class="category-icon">⚙️</span>
+          <span class="category-name">工程随笔</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/life/" 
+           class="category-link "
+           style="--category-color: #e74c3c">
+          <span class="category-icon">📝</span>
+          <span class="category-name">人间便签</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+      
+      <li class="category-item">
+        <a href="http://localhost:1313/categories/thought/" 
+           class="category-link "
+           style="--category-color: #9b59b6">
+          <span class="category-icon">💭</span>
+          <span class="category-name">思维漫游</span>
+          <span class="category-count">0</span>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+    
+    <main>
+        
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">机器视觉-曲线拟合(圆和椭圆) Curve Fitting</h1>
+        <div class="post-meta">
+            <time datetime="0001-01-01">
+                0001年01月01日
+            </time>
+            
+        </div>
+    </header>
+    
+    <div class="post-content">
+        <h1 id="曲线拟合圆和椭圆">曲线拟合——圆和椭圆</h1>
+<p>在上一篇文章中，我们总结了视觉识别中对于直线型边缘的拟合。但是如果有的图形边缘是曲线的话应该怎么拟合？ 这一篇博文，我们就对其进行讨论。</p>
+<h2 id="标准圆">标准圆</h2>
+<p>首先圆的方程为：</p>
+$$\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} = 0$$<p>因为d很小，用趋近的想法来考虑</p>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130112538.png" alt=""></p>
+<p>那么点(x,y)到圆的欧几里得距离大小为：</p>
+$$d_{E}=\left|\sqrt{\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}}-r\right|$$<p>代数距离为</p>
+$$d_{A}=\left|\left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2}\right|$$<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130113813.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130113853.png" alt=""></p>
+<p>根据图知道，欧几里得距离和代数距离是不对称的，靠近圆的点都是相似的。</p>
+<p>两种思路：最小化欧几里得距离和最小化代数距离。解析法</p>
+<ol>
+<li>
+<p>最小化欧几里得距离
+不能用解析法求解，必须数值优化</p>
+<p>解析法又称为分析法，它是应用解析式去求解数学模型的方法。 数学中用解析式表示函数或任意数学对象的方法叫解析法。</p>
+</li>
+<li>
+<p>最小化代数距离</p>
+<ol>
+<li>重写代数距离：
+$$\begin{aligned} \left(x-m_{1}\right)^{2}+\left(y-m_{2}\right)^{2}-r^{2} &=\left(x^{2}+y^{2}\right)+\left(m_{1}^{2}+m_{2}^{2}-r^{2}\right)+\left(-2 m_{1}\right) x+\left(-2 m_{2}\right) y \\ &=A x+B y+C+\left(x^{2}+y^{2}\right) \\ \text { with } & A=-2 m_{1}, B=-2 m_{2}, C=m_{1}^{2}+m_{2}^{2}-r^{2} \end{aligned}$$</li>
+<li>最小化：
+$$\sum_{i=1}^{N}\left(A x_{i}+B y_{i}+C+\left(x_{i}^{2}+y_{i}^{2}\right)\right)^{2}$$</li>
+<li>偏导数归零:
+$$\left(\begin{array}{ccc} \sum_{i} x_{i}^{2} & \sum_{i} x_{i} y_{i} & \sum_{i} x_{i} \\ \sum_{i} x_{i} y_{i} & \sum_{i} y_{i}^{2} & \sum_{i} y_{i} \\ \sum_{i} x_{i} & \sum_{i} y_{i} & N \end{array}\right)\left(\begin{array}{l} A \\ B \\ C \end{array}\right)=\left(\begin{array}{c} -\sum_{i} x_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \\ -\sum_{i} y_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \\ -\sum_{i}\left(x_{i}^{2}+y_{i}^{2}\right) \end{array}\right)$$</li>
+<li>最后得到：
+$$\begin{aligned} m_{1} &=-\frac{A}{2} \\ m_{2} &=-\frac{B}{2} \\ r^{2} &=m_{1}^{2}+m_{2}^{2}-C \end{aligned}$$</li>
+</ol>
+</li>
+</ol>
+<h2 id="椭圆">椭圆</h2>
+<p><img src="https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20220130115302.png" alt=""></p>
+<p>椭圆特性：</p>
+<p>长短轴：半长轴r1，半短轴r2；</p>
+<p>中心点：m</p>
+<p>旋转角：θ</p>
+<p>代数表达式：</p>
+$$\begin{array}{l} A x^{2}+H x y+B y^{2}+G x+F y+C=0 \\ \text { with } 4 A B-H^{2}>0 \end{array}$$<p>当消除一个自由度时：</p>
+$$\begin{array}{l} A=1 \\ \text { or } A+B=1 \\ \text { or } A^{2}+B^{2}+C^{2}+F^{2}+G^{2}+H^{2}=1 \\ \text { or } C=1 \text { (not invariant to translation) } \end{array}$$<p>根据椭圆的特性，Fitzgibbon, Pilu, 和 Fisher在1999年提出了基于直接最小二乘的椭圆拟合算法，</p>
+<p>最小化了代数距离(通过最小化的约束条件: </p>
+$$4 A B-H^{2}=1$$<p>)</p>
+$$定义：设 A、B 为 n 阶方阵，若存在数λ ，使得方程Ax = λBx 存在 非零解，则称λ 为 A 相对于 B 的广义特征值，x 为 A 相对于 B 的属于 广义特征值λ 的特征向量。$$$$
+广义特征值是标准特征值的推广，当B为单位矩阵时，广义标准问题退化为标准特征值问题
+$$
+    </div>
+    
+    
+    <aside class="post-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#标准圆">标准圆</a></li>
+    <li><a href="#椭圆">椭圆</a></li>
+  </ul>
+</nav>
+    </aside>
+    
+</article>
+
+    </main>
+    
+    <footer class="site-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 李文博. All rights reserved.</p>
+        <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a></p>
+    </div>
+</footer>
+
+    
+    
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/highlight.pack.js"></script>
+    <script src="/js/main.js"></script>
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>
