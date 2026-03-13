@@ -5,7 +5,6 @@
       <!-- 全部文章 -->
       <li class="category-item">
         <a href="{{ .Site.BaseURL }}posts/" class="category-link {{ if eq .Type "posts" }}active{{ end }}">
-          <span class="category-icon">📚</span>
           <span class="category-name">全部文章</span>
           <span class="category-count">{{ len (where .Site.RegularPages "Type" "posts") }}</span>
         </a>
@@ -18,7 +17,6 @@
         <a href="{{ $.Site.BaseURL }}categories/{{ $key }}/" 
            class="category-link {{ if eq $.Title $value.name }}active{{ end }}"
            style="--category-color: {{ $value.color }}">
-          <span class="category-icon">{{ $value.icon }}</span>
           <span class="category-name">{{ $value.name }}</span>
           <span class="category-count">{{ len $categoryPages }}</span>
         </a>
