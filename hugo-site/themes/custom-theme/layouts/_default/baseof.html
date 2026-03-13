@@ -36,6 +36,8 @@
     {{ block "head" . }}{{ end }}
 </head>
 <body>
+    <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">🌙</button>
+    
     {{ partial "header.html" . }}
     {{ partial "category-nav.html" . }}
     
@@ -45,14 +47,13 @@
     
     {{ partial "footer.html" . }}
     
-    <!-- JavaScript -->
     <script src="{{ "js/sidebar.js" | relURL }}"></script>
     <script src="{{ "js/hero-banner.js" | relURL }}"></script>
     <script src="{{ "js/lazy-load.js" | relURL }}"></script>
     <script src="{{ "js/highlight.pack.js" | relURL }}"></script>
     <script src="{{ "js/main.js" | relURL }}"></script>
+    <script src="{{ "js/theme-toggle.js" | relURL }}"></script>
     
-    <!-- KaTeX Auto-render -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             renderMathInElement(document.body, {

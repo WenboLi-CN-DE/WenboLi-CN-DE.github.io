@@ -162,6 +162,31 @@
 }
 
 /* ============================================
+   Dark Mode
+   ============================================ */
+
+[data-theme="dark"] .hero-banner {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .hero-banner.scrolled {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .hero-banner-title {
+  color: #f0f0f0;
+}
+
+[data-theme="dark"] .hero-banner-subtitle {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+[data-theme="dark"] .hero-banner-quote {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================
    Accessibility
    ============================================ */
 

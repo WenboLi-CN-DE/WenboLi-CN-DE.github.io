@@ -168,11 +168,40 @@
   gap: 4px;
 }
 
-.article-card-author::before {
+  .article-card-author::before {
   content: "✍️";
 }
 
-/* Responsive Design */
+[data-theme="dark"] .article-card {
+  background: #1e1e1e;
+  border-color: #333;
+}
+
+[data-theme="dark"] .article-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .article-card-cover {
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+}
+
+[data-theme="dark"] .article-card-title {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .article-card:hover .article-card-title {
+  color: var(--accent-color);
+}
+
+[data-theme="dark"] .article-card-excerpt {
+  color: #b0b0b0;
+}
+
+[data-theme="dark"] .article-card-footer {
+  border-top-color: #333;
+  color: #888;
+}
+
 @media (max-width: 768px) {
   .articles-grid {
     grid-template-columns: 1fr;
