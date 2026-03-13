@@ -1,115 +1,104 @@
+# 高傲的电工李 - 个人博客
 
-[leopard](https://leopardpan.cn) 是一个简洁的博客模板，响应式主题， 适配了电脑、手机各种屏幕，看效果直接点击下面链接
- 
- * [博客链接](https://leopardpan.cn) （部署在国内，访问更快）         
- * [Demo链接](https://leopardpan.github.io/) （部署在github page）         
+这是李文博的个人博客，使用 Hugo 静态站点生成器构建。
 
-如果你喜欢请 Star ，你的 Star 是我持续更新的动力, 谢谢 😄.
- 
-### 你在搭建个人博客遇到任何问题都可以找我
+## 博客链接
 
-遇到解决不了的问题 [需要技术支持联系我](https://leopardpan.cn/support/)
+- [博客主页](https://wenboli-cn-de.github.io)
 
+## 技术栈
+
+- **静态站点生成器**: Hugo v0.120.0+
+- **主题**: 自定义主题 (custom-theme)
+- **部署**: GitHub Pages
+- **语言**: 中文 (zh-CN)
+
+## 最近更新
+
+### 前端页面优化 (2026-03-13)
+
+完成了博客前端的现代化改造：
+
+- ✅ CSS Variables 系统与主题切换
+- ✅ 响应式 Header 组件
+- ✅ 分类系统（人间便签、思维漫游、工程随笔、代码诗篇、智识前沿）
+- ✅ 分类导航栏组件
+- ✅ 亮色/暗色主题切换
+
+## 项目结构
+
+```
+.
+├── hugo-site/              # Hugo 站点目录
+│   ├── content/           # 文章内容
+│   ├── themes/            # 主题文件
+│   │   └── custom-theme/  # 自定义主题
+│   ├── static/            # 静态资源
+│   ├── layouts/           # 布局模板
+│   └── hugo.toml          # Hugo 配置文件
+├── docs/                  # 文档目录
+└── README.md              # 本文件
+```
+
+## 本地开发
 
 ### 环境要求
 
-* Jekyll 支持: Mac 、Windows、ubuntu 、Linux 操作系统                     
-* Jekyll 需要依赖: Ruby、bundler
+- Hugo v0.120.0 或更高版本（需要 extended 版本）
+- Git
 
-### 使用手册
+### 运行本地服务器
 
-[Jekyll搭建个人博客](https://leopardpan.cn/2016/10/jekyll_tutorials1/)  :  使用Jekyll搭建个人博客的教程，及如何把这个博客模板修改成你自己的博客，里面也有大量的评论、Jekyll 搭建博客各种环境出现过的问题。
+```bash
+cd hugo-site
+hugo server -D
+```
 
-[HEXO搭建个人博客](https://leopardpan.cn/2015/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/) : 使用 HEXO 基于 Github Page 搭建个人博客， 教程里面累计了大量提问和评论，如果你在搭建博客时遇到问题，可以看看这个教程。 
+访问 http://localhost:1313 查看效果。
 
+### 构建生产版本
 
-#### 安装Jekyll
+```bash
+cd hugo-site
+hugo --minify
+```
 
-[Jekyll中文官方文档](http://jekyll.bootcss.com/) ， 如果你已经安装过了 Jekyll，可以忽略此处。
+构建结果将输出到 `hugo-site/public/` 目录。
 
-> $ gem install jekyll
+## 文章分类
 
-#### 获取博客模板
+博客文章按以下分类组织：
 
-> $ git clone https://github.com/leopardpan/leopardpan.github.io.git
+- 📝 **人间便签** - 生活的点滴记录
+- 💭 **思维漫游** - 思想的自由探索
+- ⚙️ **工程随笔** - 工程实践与思考
+- 💻 **代码诗篇** - 代码的艺术与技巧
+- 🤖 **智识前沿** - 人工智能的探索
 
-或者直接[下载博客](https://github.com/leopardpan/leopardpan.github.io/archive/master.zip)   
+## 功能特性
 
-进leopardpan.github.io/ 目录下， 开启本地服务 
+- 🎨 现代化 UI 设计
+- 🌓 亮色/暗色主题切换
+- 📱 响应式设计，完美适配移动端
+- 🏷️ 分类和标签系统
+- 🔍 文章搜索（规划中）
+- 💬 评论系统（规划中）
 
-> $ jekyll server
+## 迁移历史
 
-在浏览器输入 [127.0.0.1:4000](127.0.0.1:4000) ， 就可以看到博客效果了。
+本博客原使用 Jekyll 构建，已于 2026-03 完成向 Hugo 的迁移。详见 [迁移文档](hugo-site/MIGRATION.md)。
 
+## 作者
 
-### 提示
+**李文博**
+- GitHub: [@WenboLi-CN-DE](https://github.com/WenboLi-CN-DE)
+- Email: lwb_010@163.com
+- 领域: 机电 / 机器学习
 
->* 如果你想使用我的模板，请把 _posts/ 目录下的文章都去掉。
->* 修改 _config.yml 文件里面的内容为你自己的个人信息。
+## 许可证
 
-如果在部署博客的时候发现问题，可以直接在[Issues](https://github.com/leopardpan/leopardpan.github.io/issues)里面提问。        
+本项目内容采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议。
 
+---
 
-### 把这个博客变成你自己的博客
-
-根据上面【提示】修改过后，在你的github里创建一个username.github.io的仓库，username指的值你的github的用户名。      
-创建完成后，把我的这个模板使用git push到你的username.github.io仓库下就行了。
-搭建博客如果遇到问题可以看看我教程[Jekyll搭建个人博客](https://leopardpan.cn/2016/10/jekyll_tutorials1/)。
-
-
-### 赞助
-
-你可以通过下方二维码赞助本项目，资金将用于服务器开销以及今后的公共服务
-
-感谢所有赞助过本项目的朋友，你们都为本项目贡献了自己的一份力量
-
-<details>
-
-<summary>微信二维码</summary>
-<img width="300" src="https://leopardpan.github.io/images/payimg/weipayimg.jpg" alt="wechat">
-</details>
-
-<details>
-
-<summary>支付宝二维码</summary>
-<img width="300" src="https://leopardpan.github.io/images/payimg/alipayim.jpg" alt="alipay">
-</details>
-
-
-### 效果预览
-
-#### 头像效果
-
-![](https://leopardpan.github.io/images/readme/icon.gif)
-
-如果你只想要我博客里的头像效果，你只需要拿 leopardpan.github.io/_includes/side-panel.html 文件里面 `头像效果` 和 leopardpan.github.io/css/main.css 里面最后面 `头像效果` 部分就行了。
-
-
-***
-
-#### 博客首页   
-
-![](https://leopardpan.github.io//images/readme/img4.png)   
-
-***  
-
-#### 每篇文章下面都支持打赏   
-
-![](https://leopardpan.github.io/images/readme/img3.png)
-
-#### 文章详情   
-
-![](https://leopardpan.github.io/images/readme/img1.png)
-
-
-#### 文章支持标签分类 
-
-![](https://leopardpan.github.io/images/readme/img2.png)
-
-#### 手机端效果
-
-<img width="300" src="https://leopardpan.github.io/images/readme/img5.png" alt="wechat">
-
-#### 感谢   
-
-本博客在[Vno Jekyll](https://github.com/onevcat/vno-jekyll)基础上修改的。  
+最后更新: 2026-03-13
