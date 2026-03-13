@@ -16,21 +16,35 @@
     <!-- Posts Section -->
     <section class="posts-section">
         {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
-        <div class="posts-list">
+        <div class="articles-grid">
             {{ range $paginator.Pages }}
-            <article class="post-item">
-                <a href="{{ .Permalink }}" class="post-link">
-                    <div class="post-main">
-                        <h2 class="post-title">{{ .Title }}</h2>
-                        <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">
-                            {{ .Date.Format "2006年1月2日" }}
-                        </time>
-                    </div>
+            <article class="article-card">
+                <a href="{{ .Permalink }}" class="article-card-link">
                     {{ if .Params.cover }}
-                    <div class="post-thumbnail">
+                    <div class="article-card-cover">
                         <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
                     </div>
                     {{ end }}
+                    <div class="article-card-content">
+                        <div class="article-card-meta">
+                            {{ with .Params.categories }}
+                            <span class="article-card-category">{{ index . 0 }}</span>
+                            {{ end }}
+                            <span class="article-card-reading-time">{{ .ReadingTime }} 分钟</span>
+                        </div>
+                        <h2 class="article-card-title">{{ .Title }}</h2>
+                        {{ if .Description }}
+                        <p class="article-card-excerpt">{{ .Description }}</p>
+                        {{ else }}
+                        <p class="article-card-excerpt">{{ .Summary }}</p>
+                        {{ end }}
+                        <div class="article-card-footer">
+                            <time class="article-card-date" datetime="{{ .Date.Format "2006-01-02" }}">
+                                {{ .Date.Format "2006年1月2日" }}
+                            </time>
+                            <span class="article-card-author">{{ .Site.Params.author }}</span>
+                        </div>
+                    </div>
                 </a>
             </article>
             {{ end }}
