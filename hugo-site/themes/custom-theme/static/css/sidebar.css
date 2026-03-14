@@ -208,6 +208,12 @@
     }
 }
 
+.home-container {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 120px;
+}
+
 @media (min-width: 1200px) {
     .sidebar {
         transform: translateX(0);
@@ -219,6 +225,8 @@
     
     .home-container {
         margin-left: 300px;
+        width: calc(100% - 300px);
+        padding-top: 120px;
     }
     
     .site-header {
