@@ -1,0 +1,36 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Agent skills
+.agents/
+
+# Documentation
+docs/
+
+# Node modules
+node_modules/
+package-lock.json
+
+# Hugo build output (generated)
+hugo-site/public/
+
+# Backup files
+*.backup
+*.bak
+
+# Old Jekyll site cache
+old-jekyll-site/.jekyll-cache/
+old-jekyll-site/_site/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test files
+screenshot.js
+screenshot.png
