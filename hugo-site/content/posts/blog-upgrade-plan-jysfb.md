@@ -3,7 +3,10 @@ title: 博客升级计划
 slug: blog-upgrade-plan-jysfb
 url: /post/blog-upgrade-plan-jysfb.html
 date: '2026-03-13 21:23:29+08:00'
-lastmod: '2026-03-14 21:23:22+08:00'
+lastmod: '2026-03-14 21:25:43+08:00'
+tags:
+  - code
+keywords: code
 toc: true
 isCJKLanguage: true
 ---
@@ -11,10 +14,6 @@ isCJKLanguage: true
 
 
 # 博客升级计划
-
-# 博客升级计划
-
----
 
 ## 一、前端页面优化
 
