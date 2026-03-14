@@ -1,0 +1,36 @@
+{{- $index := slice -}}
+{{- range .Site.RegularPages -}}
+    {{- /* 内容清理：移除 HTML 标签，保留纯文本 */ -}}
+    {{- $content := .Content | htmlUnescape | plainify -}}
+    {{- /* 清理多余空白 */ -}}
+    {{- $content = replaceRE `\s+` ` ` $content -}}
+    {{- /* 限制内容长度，优化索引大小（nodejieba 会处理分词） */ -}}
+    {{- $content = substr $content 0 2000 -}}
+    
+    {{- /* 处理 tags 和 categories 转为字符串 */ -}}
+    {{- $tagsStr := "" -}}
+    {{- range .Params.tags -}}
+        {{- if $tagsStr -}}{{- $tagsStr = printf "%s %s" $tagsStr . -}}{{- else -}}{{- $tagsStr = . -}}{{- end -}}
+    {{- end -}}
+    
+    {{- $categoriesStr := "" -}}
+    {{- range .Params.categories -}}
+        {{- if $categoriesStr -}}{{- $categoriesStr = printf "%s %s" $categoriesStr . -}}{{- else -}}{{- $categoriesStr = . -}}{{- end -}}
+    {{- end -}}
+    
+    {{- /* 构建索引条目（nodejieba 将对标题、内容、描述进行分词） */ -}}
+    {{- $indexItem := dict 
+        "id" .RelPermalink
+        "title" .Title 
+        "content" $content
+        "description" .Description
+        "permalink" .Permalink
+        "relpermalink" .RelPermalink
+        "date" (.Date.Format "2006-01-02")
+        "section" .Section
+        "tags" $tagsStr
+        "categories" $categoriesStr
+    -}}
+    {{- $index = $index | append $indexItem }}
+{{- end -}}
+{{- $index | jsonify (dict "indent" " ") }}

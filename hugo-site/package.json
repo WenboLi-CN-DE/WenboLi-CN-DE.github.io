@@ -1,0 +1,12 @@
+{
+  "name": "hugo-site-search",
+  "version": "1.0.0",
+  "description": "Chinese search with nodejieba for Hugo site",
+  "private": true,
+  "scripts": {
+    "build-search": "node build-search.js"
+  },
+  "dependencies": {
+    "@node-rs/jieba": "^2.0.0"
+  }
+}

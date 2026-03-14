@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/animate.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/tomorrow.css" | relURL }}">
+    {{ if eq .Layout "search" }}
+    <link rel="stylesheet" href="{{ "css/search.css" | relURL }}">
+    {{ end }}
     
     <script src="{{ "js/theme-switcher.js" | relURL }}"></script>
     

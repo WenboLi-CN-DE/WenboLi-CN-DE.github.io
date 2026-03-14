@@ -42,10 +42,15 @@ paginatePath = "page"
   posts = "/:year/:month/:title/"
 
 [outputs]
-  home = ["HTML"]
+  home = ["HTML", "JSON"]
   section = ["HTML"]
   taxonomy = ["HTML"]
   term = ["HTML"]
+
+[outputFormats.JSON]
+  mediaType = "application/json"
+  baseName = "search-index"
+  isPlainText = true
 
 [markup]
   [markup.highlight]

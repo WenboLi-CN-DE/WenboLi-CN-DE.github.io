@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="search-page">
+  <h1 class="search-page-title">{{ .Title }}</h1>
+  <p class="search-page-description">搜索本站的所有文章</p>
+  
+  <div class="search-box">
+    <input 
+      type="text" 
+      id="search-input" 
+      class="search-input" 
+      placeholder="输入关键词搜索..."
+      autocomplete="off"
+      aria-label="搜索关键词"
+    >
+  </div>
+  
+  <div id="search-results" class="search-results">
+    <p class="search-hint">输入关键词开始搜索</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.43/dist/flexsearch.bundle.min.js"></script>
+<script src="{{ "js/search.js" | relURL }}"></script>
+{{ end }}
