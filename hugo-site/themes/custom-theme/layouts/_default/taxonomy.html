@@ -4,21 +4,41 @@
 {{ partial "sidebar.html" . }}
 
 <div class="home-container">
-    <div class="taxonomy-page">
-        <h1>标签: {{ .Title }}</h1>
-        
-        <div class="post-list">
+    <section class="posts-section" id="main-content" role="main" aria-label="文章列表">
+        <h1>{{ .Title }}</h1>
+        <div class="articles-grid" role="list">
             {{ range .Pages }}
-            <article class="post-preview">
-                <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-                <div class="post-meta">
-                    <time datetime="{{ .Date.Format "2006-01-02" }}">
-                        {{ .Date.Format "2006年01月02日" }}
-                    </time>
-                </div>
+            <article class="article-card" role="listitem">
+                <a href="{{ .Permalink }}" class="article-card-link" aria-label="阅读文章：{{ .Title }}">
+                    <div class="article-card-cover">
+                        {{ if .Params.cover }}
+                        <img src="{{ .Params.cover }}" alt="{{ .Title }}的封面图片" loading="lazy">
+                        {{ end }}
+                    </div>
+                    <div class="article-card-content">
+                        <div class="article-card-meta">
+                            {{ with .Params.categories }}
+                            <span class="article-card-category" aria-label="分类">{{ index . 0 }}</span>
+                            {{ end }}
+                            <span class="article-card-reading-time" aria-label="阅读时间">{{ .ReadingTime }} 分钟</span>
+                        </div>
+                        <h2 class="article-card-title">{{ .Title }}</h2>
+                        {{ if .Description }}
+                        <p class="article-card-excerpt">{{ .Description }}</p>
+                        {{ else }}
+                        <p class="article-card-excerpt">{{ .Summary | plainify | truncate 150 }}</p>
+                        {{ end }}
+                        <div class="article-card-footer">
+                            <time class="article-card-date" datetime="{{ .Date.Format "2006-01-02" }}" aria-label="发布日期">
+                                {{ .Date.Format "2006年1月2日" }}
+                            </time>
+                            <span class="article-card-author" aria-label="作者">{{ .Site.Params.author }}</span>
+                        </div>
+                    </div>
+                </a>
             </article>
             {{ end }}
         </div>
-    </div>
+    </section>
 </div>
 {{ end }}
