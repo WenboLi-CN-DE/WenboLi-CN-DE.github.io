@@ -4,14 +4,6 @@
 {{ partial "sidebar.html" . }}
 
 <div class="home-container">
-    <header class="hero-banner" id="heroBanner" role="banner">
-        <div class="hero-banner-content">
-            <h1 class="hero-banner-title">{{ .Site.Title }}</h1>
-            <p class="hero-banner-subtitle">{{ .Site.Params.avatarDesc }}</p>
-            <p class="hero-banner-quote">与其感慨路难行，不如马上出发。</p>
-        </div>
-    </header>
-
     <section class="posts-section" id="main-content" role="main" aria-label="文章列表">
         {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
         <div class="articles-grid" role="list">

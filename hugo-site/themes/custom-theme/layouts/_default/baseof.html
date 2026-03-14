@@ -21,8 +21,6 @@
     
     <link rel="stylesheet" href="{{ "css/variables.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/header.css" | relURL }}">
-    <link rel="stylesheet" href="{{ "css/category-nav.css" | relURL }}">
-    <link rel="stylesheet" href="{{ "css/hero-banner.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/home.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/sidebar.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/post.css" | relURL }}">
@@ -40,7 +38,6 @@
     <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">🌙</button>
     
     {{ partial "header.html" . }}
-    {{ partial "category-nav.html" . }}
     
     <main>
         {{ block "main" . }}{{ end }}
@@ -49,7 +46,6 @@
     {{ partial "footer.html" . }}
     
     <script src="{{ "js/sidebar.js" | relURL }}"></script>
-    <script src="{{ "js/hero-banner.js" | relURL }}"></script>
     <script src="{{ "js/lazy-load.js" | relURL }}"></script>
     <script src="{{ "js/highlight.pack.js" | relURL }}"></script>
     <script src="{{ "js/main.js" | relURL }}"></script>
