@@ -18,11 +18,11 @@
             {{ range $paginator.Pages }}
             <article class="article-card" role="listitem">
                 <a href="{{ .Permalink }}" class="article-card-link" aria-label="阅读文章：{{ .Title }}">
-                    {{ if .Params.cover }}
                     <div class="article-card-cover">
+                        {{ if .Params.cover }}
                         <img src="{{ .Params.cover }}" alt="{{ .Title }}的封面图片" loading="lazy">
+                        {{ end }}
                     </div>
-                    {{ end }}
                     <div class="article-card-content">
                         <div class="article-card-meta">
                             {{ with .Params.categories }}
@@ -34,7 +34,7 @@
                         {{ if .Description }}
                         <p class="article-card-excerpt">{{ .Description }}</p>
                         {{ else }}
-                        <p class="article-card-excerpt">{{ .Summary }}</p>
+                        <p class="article-card-excerpt">{{ .Summary | plainify | truncate 150 }}</p>
                         {{ end }}
                         <div class="article-card-footer">
                             <time class="article-card-date" datetime="{{ .Date.Format "2006-01-02" }}" aria-label="发布日期">

@@ -46,6 +46,11 @@
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
   
+  /* 布局高度 */
+  --header-height: 60px;
+  --category-nav-height: 60px;
+  --sticky-offset: 120px;
+  
   /* 分类颜色 */
   --category-life: #e74c3c;
   --category-thought: #9b59b6;
