@@ -74,30 +74,25 @@ paginatePath = "page"
 [params.categories]
   [params.categories.life]
     name = "人间便签"
-    icon = "📝"
-    color = "#e74c3c"
+    color = "#e07a5f"
     description = "生活的点滴记录"
   
   [params.categories.thought]
     name = "思维漫游"
-    icon = "💭"
-    color = "#9b59b6"
+    color = "#81b29a"
     description = "思想的自由探索"
   
   [params.categories.engineering]
     name = "工程随笔"
-    icon = "⚙️"
-    color = "#3498db"
+    color = "#3d405b"
     description = "工程实践与思考"
   
   [params.categories.code]
     name = "代码诗篇"
-    icon = "💻"
-    color = "#2ecc71"
+    color = "#f2cc8f"
     description = "代码的艺术与技巧"
   
   [params.categories.ai]
     name = "智识前沿"
-    icon = "🤖"
-    color = "#f39c12"
+    color = "#8338ec"
     description = "人工智能的探索"

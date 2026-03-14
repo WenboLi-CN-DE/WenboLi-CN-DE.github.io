@@ -161,7 +161,7 @@
 }
 
 .article-card-date::before {
-  content: "📅";
+  content: none;
 }
 
 .article-card-author {
@@ -171,7 +171,7 @@
 }
 
   .article-card-author::before {
-  content: "✍️";
+  content: none;
 }
 
 [data-theme="dark"] .article-card {
