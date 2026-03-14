@@ -19,6 +19,6 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.43/dist/flexsearch.bundle.min.js"></script>
-<script src="{{ "js/search.js" | relURL }}"></script>
+<script src="{{ "js/flexsearch.bundle.min.js" | relURL }}"></script>
+<script src="{{ "js/search.js" | relURL }}?v={{ now.Unix }}"></script>
 {{ end }}

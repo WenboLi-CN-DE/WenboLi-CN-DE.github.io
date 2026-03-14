@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     if (!searchInput || !searchResults) return;
     
-    // 创建 FlexSearch 文档索引
+    // 创建 FlexSearch 文档索引（使用 unicode 字符集支持中文）
     const index = new FlexSearch.Document({
-        tokenize: 'forward',
-        charset: 'latin:extra',
+        tokenize: 'full',
+        charset: 'unicode:default',
         optimize: true,
         cache: true,
         document: {
@@ -23,16 +23,23 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     // 加载搜索索引
     let indexLoaded = false;
+    let data = []; // 在外层定义，供 renderResults 使用
     try {
         const response = await fetch('/search-index.json');
         if (!response.ok) {
             throw new Error('索引文件不存在');
         }
-        const data = await response.json();
+        data = await response.json();
         
-        // 批量添加到索引（tags 和 categories 已在 Hugo 模板中转为字符串）
+        // 批量添加到索引（处理空字符串，避免 FlexSearch tokenize 错误）
         data.forEach(item => {
-            index.add(item);
+            // 确保 tags 和 categories 是有效的字符串（空字符串会导致 FlexSearch 内部错误）
+            const normalizedItem = {
+                ...item,
+                tags: item.tags || 'untagged',
+                categories: item.categories || 'uncategorized'
+            };
+            index.add(normalizedItem);
         });
         
         indexLoaded = true;
@@ -106,8 +113,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         const resultsHTML = results.map(item => {
             const snippet = generateSnippet(item.content || '', query);
-            const tags = (item.tags || '').split(' ').filter(Boolean);
-            const categories = (item.categories || '').split(' ').filter(Boolean);
+            // 处理 tags 和 categories（可能是空字符串或已分词的字符串）
+            const tags = typeof item.tags === 'string' ? item.tags.split(' ').filter(Boolean) : [];
+            const categories = typeof item.categories === 'string' ? item.categories.split(' ').filter(Boolean) : [];
             
             return `
                 <a href="${item.permalink}" class="result-item">

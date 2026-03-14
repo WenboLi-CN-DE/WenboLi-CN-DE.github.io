@@ -7,6 +7,10 @@
     "build-search": "node build-search.js"
   },
   "dependencies": {
-    "@node-rs/jieba": "^2.0.0"
+    "@node-rs/jieba": "^2.0.0",
+    "flexsearch": "^0.8.212"
+  },
+  "devDependencies": {
+    "playwright": "^1.58.2"
   }
 }
