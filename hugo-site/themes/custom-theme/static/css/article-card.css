@@ -11,7 +11,7 @@
 }
 
 .article-card {
-  background: var(--bg-secondary);
+  background: #ffffff;
   border-radius: var(--radius-lg);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -19,11 +19,12 @@
   flex-direction: column;
   height: 100%;
   border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(26, 22, 20, 0.04);
 }
 
 .article-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(26, 22, 20, 0.08);
 }
 
 [data-theme="dark"] .article-card:hover {
@@ -174,8 +175,9 @@
 }
 
 [data-theme="dark"] .article-card {
-  background: #1e1e1e;
-  border-color: #333;
+  background: #252220;
+  border-color: #3d3935;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .article-card:hover {
@@ -187,7 +189,7 @@
 }
 
 [data-theme="dark"] .article-card-title {
-  color: #e0e0e0;
+  color: #f5f3f0;
 }
 
 [data-theme="dark"] .article-card:hover .article-card-title {
@@ -195,12 +197,12 @@
 }
 
 [data-theme="dark"] .article-card-excerpt {
-  color: #b0b0b0;
+  color: #a8a29e;
 }
 
 [data-theme="dark"] .article-card-footer {
-  border-top-color: #333;
-  color: #888;
+  border-top-color: #3d3935;
+  color: #6b6560;
 }
 
 @media (max-width: 768px) {
