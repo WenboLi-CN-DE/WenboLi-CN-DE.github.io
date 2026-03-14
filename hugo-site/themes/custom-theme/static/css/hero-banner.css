@@ -6,7 +6,7 @@
 .hero-banner {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1050;
   background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
   padding: 2rem 1.5rem;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -158,6 +158,18 @@
   .hero-banner-quote {
     font-size: 0.9rem;
     display: none;
+  }
+}
+
+/* ============================================
+   Desktop Layout - Respects Sidebar Space
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .hero-banner,
+  .hero-banner.scrolled {
+    /* Hero banner stays within home-container bounds */
+    /* home-container already has margin-left: 300px from sidebar.css */
   }
 }
 
