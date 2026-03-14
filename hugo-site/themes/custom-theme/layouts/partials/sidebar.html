@@ -25,7 +25,6 @@
             <div class="category-list">
                 {{ range $key, $value := .Site.Params.categories }}
                 <a href="/categories/{{ $key }}" class="category-item" style="--category-color: {{ $value.color }}">
-                    <span class="category-icon">{{ $value.icon }}</span>
                     <span class="category-name">{{ $value.name }}</span>
                 </a>
                 {{ end }}
