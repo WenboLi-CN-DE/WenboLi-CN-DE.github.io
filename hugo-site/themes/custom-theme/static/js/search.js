@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     if (!searchInput || !searchResults) return;
     
-    // 创建 FlexSearch 文档索引（使用 unicode 字符集支持中文）
+    // 创建 FlexSearch 文档索引（使用 forward 分词模式支持中文搜索）
     const index = new FlexSearch.Document({
-        tokenize: 'full',
+        tokenize: 'forward',
         charset: 'unicode:default',
         optimize: true,
         cache: true,
