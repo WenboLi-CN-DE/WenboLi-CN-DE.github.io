@@ -18,16 +18,9 @@
         {{ $pagesByYear := dict }}
         
         {{ range $pages }}
-            {{ $fileName := .File.BaseFileName }}
-            {{ $year := "2023" }}
-            {{ $month := "01" }}
-            {{ $day := "01" }}
-            
-            {{ if findRE "^\\d{4}-\\d{2}-\\d{2}" $fileName }}
-                {{ $year = substr $fileName 0 4 }}
-                {{ $month = substr $fileName 5 2 }}
-                {{ $day = substr $fileName 8 2 }}
-            {{ end }}
+            {{ $year := .Date.Format "2006" }}
+            {{ $month := .Date.Format "01" }}
+            {{ $day := .Date.Format "02" }}
             
             {{ $yearPages := index $pagesByYear $year }}
             {{ if not $yearPages }}
