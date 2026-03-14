@@ -8,12 +8,31 @@
         {{ $paginator := .Paginate (where .Site.RegularPages "Type" "posts") }}
         <div class="articles-grid" role="list">
             {{ range $paginator.Pages }}
+            {{/* 封面图兜底逻辑：cover 字段 > 文中第一张图 > 默认图 */}}
+            {{ $cover := "" }}
+            {{ if .Params.cover }}
+                {{ $cover = .Params.cover }}
+            {{ else }}
+                {{/* 提取文中第一张图片的 URL */}}
+                {{ $content := .RawContent }}
+                {{ $imagePattern := `!\[.*?\]\(([^)]+)\)` }}
+                {{ $matches := findRE $imagePattern $content }}
+                {{ if $matches }}
+                    {{ $firstMatch := index $matches 0 }}
+                    {{ $urlMatches := findRE `https?://[^)]+` $firstMatch }}
+                    {{ if $urlMatches }}
+                        {{ $cover = index $urlMatches 0 }}
+                    {{ end }}
+                {{ end }}
+                {{/* 如果没有找到图片，使用默认图 */}}
+                {{ if eq $cover "" }}
+                    {{ $cover = "https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20260315010320216.png" }}
+                {{ end }}
+            {{ end }}
             <article class="article-card" role="listitem">
                 <a href="{{ .Permalink }}" class="article-card-link" aria-label="阅读文章：{{ .Title }}">
                     <div class="article-card-cover">
-                        {{ if .Params.cover }}
-                        <img src="{{ .Params.cover }}" alt="{{ .Title }}的封面图片" loading="lazy">
-                        {{ end }}
+                        <img src="{{ $cover }}" alt="{{ .Title }}的封面图片" loading="lazy">
                     </div>
                     <div class="article-card-content">
                         <div class="article-card-meta">
