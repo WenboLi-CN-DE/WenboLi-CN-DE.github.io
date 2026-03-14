@@ -38,18 +38,38 @@
             {{ $postsByYear = merge $postsByYear (dict $year $yearPosts) }}
         {{ end }}
         
-        {{ range $year, $yearPosts := $postsByYear }}
+        {{ $years := slice }}
+        {{ range $year, $_ := $postsByYear }}
+            {{ $years = $years | append $year }}
+        {{ end }}
+        {{ $sortedYears := $years | sort }}
+        
+        {{ $len := len $sortedYears }}
+        {{ range seq $len }}
+        {{ $i := sub $len . }}
+        {{ $year := index $sortedYears $i }}
+        {{ $yearPosts := index $postsByYear $year }}
+        {{ $withMonth := slice }}
+        {{ range $yearPosts }}
+            {{ $m := int (strings.TrimLeft "0" .month) }}
+            {{ $d := int (strings.TrimLeft "0" .day) }}
+            {{ $withMonth = $withMonth | append (dict "page" .page "year" .year "month" .month "day" .day "monthInt" $m "dayInt" $d) }}
+        {{ end }}
+        {{ $sortedPosts := sort $withMonth "monthInt" }}
+        {{ $postLen := len $sortedPosts }}
         <div class="year-group">
             <div class="year-header">
                 <h2>{{ $year }}</h2>
             </div>
             
             <div class="posts-timeline">
-                {{ range $yearPosts }}
-                {{ $page := .page }}
+                {{ range seq $postLen }}
+                {{ $j := sub $postLen . }}
+                {{ $post := index $sortedPosts $j }}
+                {{ $page := $post.page }}
                 <article class="post-item">
-                    <time class="post-date" datetime="{{ .year }}-{{ .month }}-{{ .day }}">
-                        {{ .month }}月{{ .day }}日
+                    <time class="post-date" datetime="{{ $post.year }}-{{ $post.month }}-{{ $post.day }}">
+                        {{ $post.month }}月{{ $post.day }}日
                     </time>
                     <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
                     {{ with $page.Params.categories }}

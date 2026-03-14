@@ -10,7 +10,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 60px 40px;
-  background: linear-gradient(135deg, #1a1d29 0%, #2d3142 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
   min-height: 100vh;
   position: relative;
 }
@@ -55,7 +55,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: linear-gradient(135deg, #2d4263 0%, #1f2937 100%);
+  background: linear-gradient(135deg, #e4e9f2 0%, #f5f5f5 100%);
   margin: 0 -40px 40px -40px;
   padding: 20px 40px;
   border-left: 6px solid #f59e0b;
@@ -117,7 +117,7 @@
   position: relative;
   margin-bottom: 24px;
   padding: 24px 28px;
-  background: rgba(255, 255, 255, 0.03);
+  background: #fcfcfc;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   backdrop-filter: blur(10px);
@@ -169,14 +169,14 @@
   font-family: 'Inter', sans-serif;
   font-size: 0.9em;
   font-weight: 500;
-  color: #94a3b8;
-  background: rgba(148, 163, 184, 0.1);
+  color: #64748b;
+  background: rgba(100, 116, 139, 0.1);
   padding: 6px 14px;
   border-radius: 6px;
   margin-right: 16px;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid rgba(100, 116, 139, 0.2);
 }
 
 .post-item:hover .post-date {
@@ -208,7 +208,7 @@
   font-family: 'Noto Serif SC', 'Crimson Pro', serif;
   font-size: 1.15em;
   font-weight: 600;
-  color: #e2e8f0;
+  color: #1a1a2e;
   text-decoration: none;
   transition: all 0.3s ease;
   display: inline-block;
