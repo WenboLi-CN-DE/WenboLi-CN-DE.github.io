@@ -20,6 +20,12 @@ body {
   line-height: 1; 
 }
 
+main {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
 ol, ul {
   list-style: none; }
 

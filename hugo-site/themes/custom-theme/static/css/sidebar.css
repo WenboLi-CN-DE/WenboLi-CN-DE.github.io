@@ -211,7 +211,7 @@
 .home-container {
     width: 100%;
     min-height: 100vh;
-    padding-top: 120px;
+    padding-top: 2.5rem;
 }
 
 @media (min-width: 1200px) {
@@ -226,7 +226,7 @@
     .home-container {
         margin-left: 300px;
         width: calc(100% - 300px);
-        padding-top: 120px;
+        padding-top: 2.5rem;
     }
     
     .site-header {
