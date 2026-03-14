@@ -5,63 +5,67 @@
 {{ end }}
 
 {{ define "main" }}
-<div class="archive-container">
-    <header class="archive-header">
-        <h1>{{ .Title }}</h1>
-        <p>{{ len .Pages }} 篇文章</p>
-    </header>
+{{ partial "sidebar.html" . }}
 
-    {{ $pages := .Pages }}
-    {{ $pagesByYear := dict }}
-    
-    {{ range $pages }}
-        {{ $fileName := .File.BaseFileName }}
-        {{ $year := "2023" }}
-        {{ $month := "01" }}
-        {{ $day := "01" }}
+<div class="home-container">
+    <div class="archive-container">
+        <header class="archive-header">
+            <h1>{{ .Title }}</h1>
+            <p>{{ len .Pages }} 篇文章</p>
+        </header>
+
+        {{ $pages := .Pages }}
+        {{ $pagesByYear := dict }}
         
-        {{ if findRE "^\\d{4}-\\d{2}-\\d{2}" $fileName }}
-            {{ $year = substr $fileName 0 4 }}
-            {{ $month = substr $fileName 5 2 }}
-            {{ $day = substr $fileName 8 2 }}
-        {{ end }}
-        
-        {{ $yearPages := index $pagesByYear $year }}
-        {{ if not $yearPages }}
-            {{ $yearPages = slice }}
-        {{ end }}
-        {{ $pageData := dict "page" . "year" $year "month" $month "day" $day }}
-        {{ $yearPages = $yearPages | append $pageData }}
-        {{ $pagesByYear = merge $pagesByYear (dict $year $yearPages) }}
-    {{ end }}
-    
-    {{ range $year, $yearPages := $pagesByYear }}
-    <div class="year-group">
-        <div class="year-header">
-            <h2>{{ $year }}</h2>
-        </div>
-        
-        <div class="posts-timeline">
-            {{ range $yearPages }}
-            {{ $page := .page }}
-            <article class="post-item">
-                <time class="post-date" datetime="{{ .year }}-{{ .month }}-{{ .day }}">
-                    {{ .month }}月{{ .day }}日
-                </time>
-                <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
-                {{ with $page.Params.categories }}
-                <span class="post-category">{{ index . 0 }}</span>
-                {{ end }}
-            </article>
+        {{ range $pages }}
+            {{ $fileName := .File.BaseFileName }}
+            {{ $year := "2023" }}
+            {{ $month := "01" }}
+            {{ $day := "01" }}
+            
+            {{ if findRE "^\\d{4}-\\d{2}-\\d{2}" $fileName }}
+                {{ $year = substr $fileName 0 4 }}
+                {{ $month = substr $fileName 5 2 }}
+                {{ $day = substr $fileName 8 2 }}
             {{ end }}
+            
+            {{ $yearPages := index $pagesByYear $year }}
+            {{ if not $yearPages }}
+                {{ $yearPages = slice }}
+            {{ end }}
+            {{ $pageData := dict "page" . "year" $year "month" $month "day" $day }}
+            {{ $yearPages = $yearPages | append $pageData }}
+            {{ $pagesByYear = merge $pagesByYear (dict $year $yearPages) }}
+        {{ end }}
+        
+        {{ range $year, $yearPages := $pagesByYear }}
+        <div class="year-group">
+            <div class="year-header">
+                <h2>{{ $year }}</h2>
+            </div>
+            
+            <div class="posts-timeline">
+                {{ range $yearPages }}
+                {{ $page := .page }}
+                <article class="post-item">
+                    <time class="post-date" datetime="{{ .year }}-{{ .month }}-{{ .day }}">
+                        {{ .month }}月{{ .day }}日
+                    </time>
+                    <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
+                    {{ with $page.Params.categories }}
+                    <span class="post-category">{{ index . 0 }}</span>
+                    {{ end }}
+                </article>
+                {{ end }}
+            </div>
         </div>
-    </div>
-    {{ end }}
+        {{ end }}
 
-    {{ if eq (len $pages) 0 }}
-    <div class="empty-state">
-        <p>暂无文章</p>
+        {{ if eq (len $pages) 0 }}
+        <div class="empty-state">
+            <p>暂无文章</p>
+        </div>
+        {{ end }}
     </div>
-    {{ end }}
 </div>
 {{ end }}
