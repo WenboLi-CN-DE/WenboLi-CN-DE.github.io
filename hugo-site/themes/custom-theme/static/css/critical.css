@@ -1,5 +1,4 @@
 /* Critical CSS - 首屏关键样式 */
-/* 此文件包含首屏渲染所需的最小 CSS，内联到 <head> 中以加速首屏渲染 */
 
 /* 基础样式 */
 body {
@@ -12,16 +11,9 @@ body {
   background-color: #ffffff;
 }
 
-/* Hero Banner 关键样式 */
+/* Hero Banner 首屏样式 - 只定义背景和颜色 */
 .hero-banner {
-  width: 100%;
-  height: 400px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
 }
 
 .hero-banner-content {
@@ -32,31 +24,26 @@ body {
 
 .hero-banner-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: #ffffff;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0 0 0.5rem 0;
 }
 
 .hero-banner-subtitle {
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.95);
-  margin: 0;
-  font-weight: 400;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 0.75rem 0;
+  font-weight: 500;
 }
 
 /* 响应式 - 移动端 */
 @media (max-width: 768px) {
-  .hero-banner {
-    height: 250px;
-  }
-  
   .hero-banner-title {
     font-size: 2rem;
   }
   
   .hero-banner-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 }
