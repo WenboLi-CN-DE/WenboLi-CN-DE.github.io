@@ -3,7 +3,7 @@
  * 生成优化后的搜索索引文件
  */
 
-const { Jieba } = require('@node-rs/jieba');
+const nodejieba = require('nodejieba');
 const fs = require('fs');
 const path = require('path');
 
@@ -11,8 +11,9 @@ const path = require('path');
 const INPUT_FILE = path.join(__dirname, 'public', 'search-index.json');
 const OUTPUT_FILE = path.join(__dirname, 'public', 'search-index.json');
 
-// 创建结巴分词实例
-const jieba = new Jieba();
+console.log('🔪 开始中文分词处理...');
+console.log(`📄 输入文件：${INPUT_FILE}`);
+console.log(`📝 输出文件：${OUTPUT_FILE}`);
 
 console.log('🔪 开始中文分词处理...');
 console.log(`📄 输入文件：${INPUT_FILE}`);
@@ -42,11 +43,11 @@ const segmentedData = data.map((item, index) => {
   return {
     ...item,
     // 对标题进行分词
-    title: jieba.cut(item.title || '').join(' '),
+    title: nodejieba.cut(item.title || '').join(' '),
     // 对内容进行分词
-    content: jieba.cut(item.content || '').join(' '),
+    content: nodejieba.cut(item.content || '').join(' '),
     // 对描述进行分词
-    description: jieba.cut(item.description || '').join(' '),
+    description: nodejieba.cut(item.description || '').join(' '),
     // tags 和 categories 保持原样
     tags: item.tags,
     categories: item.categories
