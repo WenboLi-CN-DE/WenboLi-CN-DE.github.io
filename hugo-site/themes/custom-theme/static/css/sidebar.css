@@ -121,23 +121,17 @@
 .category-item {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-sm);
     text-decoration: none;
     color: var(--color-text);
     transition: all 0.2s ease;
-    border: 1px solid transparent;
+    border-left: 3px solid var(--category-color);
 }
 
 .category-item:hover {
-    background: var(--color-bg);
-    border-color: var(--category-color);
-    transform: translateX(4px);
-}
-
-.category-icon {
-    font-size: 1.2rem;
+    background: var(--color-accent-soft);
+    border-left-color: var(--category-color);
 }
 
 .category-name {
