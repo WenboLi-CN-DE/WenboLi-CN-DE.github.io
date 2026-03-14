@@ -13,6 +13,12 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Site header scroll-out animation (when year-header scrolls up to it) */
+.site-header.scroll-out {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
 [data-theme="dark"] .site-header {
   background: rgba(10, 10, 10, 0.8);
 }
