@@ -1,20 +1,24 @@
 {{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
 
 {{ define "main" }}
-<div class="taxonomy-page">
-    <h1>标签: {{ .Title }}</h1>
-    
-    <div class="post-list">
-        {{ range .Pages }}
-        <article class="post-preview">
-            <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-            <div class="post-meta">
-                <time datetime="{{ .Date.Format "2006-01-02" }}">
-                    {{ .Date.Format "2006年01月02日" }}
-                </time>
-            </div>
-        </article>
-        {{ end }}
+{{ partial "sidebar.html" . }}
+
+<div class="home-container">
+    <div class="taxonomy-page">
+        <h1>标签: {{ .Title }}</h1>
+        
+        <div class="post-list">
+            {{ range .Pages }}
+            <article class="post-preview">
+                <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+                <div class="post-meta">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">
+                        {{ .Date.Format "2006年01月02日" }}
+                    </time>
+                </div>
+            </article>
+            {{ end }}
+        </div>
     </div>
 </div>
 {{ end }}
