@@ -1,11 +1,9 @@
 ---
-date: 2023-06-14
-layout: post
-title: 机器学习 Machine Learning - Neural Networks 神经网络
-tag: [机器学习]
+title: "机器学习 Machine Learning - Neural Networks 神经网络"
+date: "2023-06-14"
+categories: ["ai"]
+tags: ["机器学习"]
 ---
-
-
 
 # Neural Networks 神经网络
 
