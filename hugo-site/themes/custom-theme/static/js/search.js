@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (!searchInput || !searchResults) return;
     
     // 创建 FlexSearch 文档索引
-    // tokenize: 'forward' - 前向分词，适合中文
-    // charset: 'latin:extra' - 支持中文等多字节字符
     const index = new FlexSearch.Document({
         tokenize: 'forward',
         charset: 'latin:extra',
@@ -19,31 +17,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         cache: true,
         document: {
             id: 'id',
-            index: ['title', 'content', 'tags', 'categories', 'description'],
-            store: ['title', 'permalink', 'date', 'description', 'tags', 'categories']
-        },
-        // 字段权重配置
-        fields: {
-            title: {
-                tokenize: 'forward',
-                resolution: 9
-            },
-            content: {
-                tokenize: 'forward',
-                resolution: 2
-            },
-            tags: {
-                tokenize: 'forward',
-                resolution: 8
-            },
-            categories: {
-                tokenize: 'forward',
-                resolution: 7
-            },
-            description: {
-                tokenize: 'forward',
-                resolution: 5
-            }
+            index: ['title', 'content', 'tags', 'categories', 'description']
         }
     });
     
@@ -108,7 +82,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 result.result.forEach(id => {
                     if (!seen.has(id)) {
                         seen.add(id);
-                        const doc = index.get(id);
+                        // 从原始数据中查找
+                        const doc = data.find(d => d.id === id);
                         if (doc) allResults.push(doc);
                     }
                 });
