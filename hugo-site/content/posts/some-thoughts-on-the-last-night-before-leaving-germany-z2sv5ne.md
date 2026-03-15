@@ -2,8 +2,17 @@
 title: 离开德国前最后一晚的一些絮叨
 slug: some-thoughts-on-the-last-night-before-leaving-germany-z2sv5ne
 url: /post/some-thoughts-on-the-last-night-before-leaving-germany-z2sv5ne.html
-date: '2026-03-15 14:26:27+08:00'
-lastmod: '2026-03-15 14:58:05+08:00'
+date: '2024-07-19 14:26:27+08:00'
+lastmod: '2024-07-19 14:58:05+08:00'
+tags:
+  - 随笔
+  - 感悟
+categories:
+  - life
+keywords: 随笔,感悟
+description: >-
+  这几年在德国经历的起伏、成长以及离别前的复杂心境。从初到多特蒙德的“社牛”，到 KIT 的学业压力，再到实习的职场洗礼，最后到如今的从容告别。
+  留学就是一场修行，从“看山不是山”到慢慢清晰自己的路线。虽然挂科、疫情、歧视、被坑，但更多的是你在这个过程中构建起的“内核”。
 toc: true
 isCJKLanguage: true
 ---
