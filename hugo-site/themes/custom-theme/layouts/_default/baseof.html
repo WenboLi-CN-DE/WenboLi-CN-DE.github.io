@@ -39,7 +39,7 @@
 </head>
 <body>
     <a href="#main-content" class="skip-to-content">跳转到主内容</a>
-    <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">🌙</button>
+    <button id="theme-toggle" class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">🌙</button>
     
     {{ partial "header.html" . }}
     
@@ -53,8 +53,11 @@
     <script src="{{ "js/lazy-load.js" | relURL }}"></script>
     <script src="{{ "js/highlight.pack.js" | relURL }}"></script>
     <script src="{{ "js/main.js" | relURL }}"></script>
-    <script src="{{ "js/theme-toggle.js" | relURL }}"></script>
+    <script src="{{ "js/theme-switcher.js" | relURL }}"></script>
     <script src="{{ "js/header-scroll.js" | relURL }}"></script>
+    {{ if hugo.IsServer }}
+    <script src="{{ "js/layout-debug.js" | relURL }}"></script>
+    {{ end }}
     
     <script>
         document.addEventListener("DOMContentLoaded", function() {

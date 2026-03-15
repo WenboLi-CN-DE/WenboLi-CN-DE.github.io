@@ -12,6 +12,7 @@
   function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem(THEME_KEY, theme);
+    updateToggleButton(theme);
   }
   
   function toggleTheme() {
@@ -20,8 +21,17 @@
     setTheme(next);
   }
   
+  function updateToggleButton(theme) {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+      themeToggle.setAttribute('aria-label', theme === 'light' ? '切换到暗色模式' : '切换到亮色模式');
+    }
+  }
+  
   // 初始化主题
-  setTheme(getPreferredTheme());
+  const initialTheme = getPreferredTheme();
+  setTheme(initialTheme);
   
   // 导出全局函数
   window.toggleTheme = toggleTheme;
