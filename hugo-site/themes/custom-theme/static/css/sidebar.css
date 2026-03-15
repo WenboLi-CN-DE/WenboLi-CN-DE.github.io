@@ -8,13 +8,35 @@
     left: 0;
     width: 280px;
     height: 100vh;
+    box-sizing: border-box;
     background: var(--color-surface);
     border-right: 1px solid var(--color-border);
     overflow-y: auto;
+    overflow-x: hidden;
     padding: var(--spacing-lg) var(--spacing-md);
     z-index: 1100;
     transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-secondary);
 }
 
 .sidebar.active {
@@ -56,21 +78,21 @@
 }
 
 .sidebar-name {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 0;
-    line-height: 1.5;
-    letter-spacing: -0.02em;
-    position: relative;
-    padding: 0.25rem 1rem;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, #6b7d9a 0%, #5a6d80 100%);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--sidebar-name-color);
+  margin-bottom: 0;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  position: relative;
+  padding: 0.25rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--sidebar-name-bg);
+  box-shadow: var(--sidebar-name-shadow);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sidebar-name::after {
@@ -87,10 +109,6 @@
         var(--color-accent) 80%,
         transparent
     );
-}
-
-[data-theme="dark"] .sidebar-name {
-    color: var(--color-text);
 }
 
 .sidebar-title {
@@ -265,6 +283,7 @@
 .sidebar-toggle svg {
     width: 24px;
     height: 24px;
+    pointer-events: none;
 }
 
 /* Responsive */
@@ -282,6 +301,21 @@
     
     .sidebar-toggle {
         display: none;
+    }
+}
+
+/* 平板端 sidebar 激活时，主内容区向右偏移 */
+@media (min-width: 769px) and (max-width: 1199px) {
+    body.sidebar-active .home-container {
+        margin-left: 280px;
+        width: calc(100% - 280px);
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    body.sidebar-active .site-header {
+        margin-left: 280px;
+        width: calc(100% - 280px);
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 }
 

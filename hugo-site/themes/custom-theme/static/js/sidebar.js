@@ -1,73 +1,85 @@
 // Sidebar Toggle Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Create sidebar toggle button
-    const toggleButton = document.createElement('button');
-    toggleButton.className = 'sidebar-toggle';
-    toggleButton.setAttribute('aria-label', 'Toggle Sidebar');
-    toggleButton.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-    `;
+    const sidebar = document.querySelector('.sidebar');
     
-    // Only add toggle button on smaller screens
+    if (!sidebar) return;
+    
+    let toggleButton = null;
+    
+    function createToggleButton() {
+        const button = document.createElement('button');
+        button.className = 'sidebar-toggle';
+        button.setAttribute('aria-label', 'Toggle Sidebar');
+        button.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        `;
+        return button;
+    }
+    
+    function updateButtonIcon(button, isActive) {
+        if (isActive) {
+            button.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            `;
+        } else {
+            button.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            `;
+        }
+    }
+    
     if (window.innerWidth < 1400) {
+        toggleButton = createToggleButton();
         document.body.appendChild(toggleButton);
     }
     
-    const sidebar = document.querySelector('.sidebar');
-    
-    if (toggleButton && sidebar) {
-        toggleButton.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
-            
-            // Update icon
-            if (sidebar.classList.contains('active')) {
-                toggleButton.innerHTML = `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                `;
-            } else {
-                toggleButton.innerHTML = `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                `;
-            }
-        });
-        
-        // Close sidebar when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
-                sidebar.classList.remove('active');
-                toggleButton.innerHTML = `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                `;
-            }
-        });
+    function handleToggleClick(event) {
+        event.stopPropagation();
+        sidebar.classList.toggle('active');
+        document.body.classList.toggle('sidebar-active', sidebar.classList.contains('active'));
+        updateButtonIcon(toggleButton, sidebar.classList.contains('active'));
     }
     
-    // Handle window resize
+    function handleOutsideClick(event) {
+        if (toggleButton && !sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
+            sidebar.classList.remove('active');
+            document.body.classList.remove('sidebar-active');
+            if (toggleButton) {
+                updateButtonIcon(toggleButton, false);
+            }
+        }
+    }
+    
+    if (toggleButton) {
+        toggleButton.addEventListener('click', handleToggleClick);
+        document.addEventListener('click', handleOutsideClick);
+    }
+    
     window.addEventListener('resize', function() {
         if (window.innerWidth >= 1400) {
             if (toggleButton && toggleButton.parentNode) {
                 toggleButton.remove();
+                toggleButton = null;
             }
-            if (sidebar) {
-                sidebar.classList.remove('active');
+            sidebar.classList.remove('active');
+            document.body.classList.remove('sidebar-active');
+        } else {
+            if (!toggleButton || !document.querySelector('.sidebar-toggle')) {
+                toggleButton = createToggleButton();
+                document.body.appendChild(toggleButton);
+                toggleButton.addEventListener('click', handleToggleClick);
             }
-        } else if (!document.querySelector('.sidebar-toggle')) {
-            document.body.appendChild(toggleButton);
         }
     });
 });

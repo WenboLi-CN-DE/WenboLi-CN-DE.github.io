@@ -87,8 +87,9 @@
 }
 
 .category-link.active .category-count {
+  /* 半透明白色背景：在 accent 色上的覆盖层设计，亮/暗色模式均适用 */
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: var(--color-on-accent);
   font-weight: 600;
 }
 

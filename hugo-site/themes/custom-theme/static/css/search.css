@@ -23,12 +23,14 @@
 
 /* Search Box */
 .search-box {
-    margin-bottom: var(--spacing-xl);
+    max-width: 600px;
+    margin: 0 auto var(--spacing-xl) auto;
     position: relative;
 }
 
 .search-input {
-    width: 100%;
+    width: 100% !important;
+    max-width: 100%;
     padding: 14px 20px;
     font-size: 1.05rem;
     border: 2px solid var(--color-border);
@@ -171,8 +173,8 @@
 
 .result-category {
     font-size: 0.8rem;
-    color: white;
-    background: linear-gradient(135deg, #6b7d9a 0%, #5a6d80 100%);
+    color: var(--bg-primary);
+    background: var(--text-muted);
     padding: 2px 10px;
     border-radius: var(--radius-sm);
     font-weight: 500;
@@ -195,6 +197,30 @@ mark {
     font-weight: 500;
 }
 
+/* Search Page Footer - Bottom Right */
+.search-page ~ .site-footer,
+body:has(.search-page) .site-footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 8px 16px;
+    background: transparent;
+    border-top: none;
+}
+
+.search-page ~ .site-footer .footer-content,
+body:has(.search-page) .site-footer .footer-content {
+    padding: 0;
+}
+
+.search-page ~ .site-footer p,
+body:has(.search-page) .site-footer p {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    opacity: 0.6;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .search-page-title {
@@ -207,5 +233,16 @@ mark {
     
     .result-date {
         white-space: normal;
+    }
+    
+    /* 移动端改为底部居中 */
+    .search-page ~ .site-footer,
+    body:has(.search-page) .site-footer {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        padding: 8px 16px;
     }
 }

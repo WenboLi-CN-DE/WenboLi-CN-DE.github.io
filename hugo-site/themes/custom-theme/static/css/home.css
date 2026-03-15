@@ -179,6 +179,8 @@
     padding: 0 var(--spacing-md);
 }
 
+/* 注意：桌面端（≥1200px）的 .home-container margin-left 在 variables.css 中定义 */
+
 .posts-list {
     display: flex;
     flex-direction: column;
