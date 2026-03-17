@@ -72,7 +72,7 @@ MathJax = {
 
 这里我们有一个非常简单的例子，就是两幅图像一个接一个地记录下来，我们可以很容易地观察到一些光流。我们可以看到情况是如何变化的，某些点是如何在两幅图像之间移动的，这种移动就是光流。我们可以区分两种不同的光流概念。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/8f91a500-9003-4cd8-81a4-46248963f96d.gif)
+![](https://img.wenbo.space/8f91a500-9003-4cd8-81a4-46248963f96d.gif)
 
 第一个概念叫做**密集流**，我们的目标是为图像中的每一个点计算一个流向量，或者至少计算尽可能多的点，从而形成一个完整的流场或流向量场。
 
@@ -98,7 +98,7 @@ MathJax = {
 道路上的预期流
 
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614203326.png)
+![](https://img.wenbo.space/20230614203326.png)
 
 假设：
 - 光照是恒定的。
@@ -127,7 +127,7 @@ $$
 - 不够清晰
 
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614203515.png)
+![](https://img.wenbo.space/20230614203515.png)
 
 **运动约束方程：**
 
@@ -147,7 +147,7 @@ $$
 
 一维信号的图示：
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614203815.png)
+![](https://img.wenbo.space/20230614203815.png)
 
 我们正在寻找的光流代表了向右的移动，如这个水平向量所示。对于时间方向的偏导数测量了感兴趣位置U的灰度值函数的变化。在这种情况下，我们可以观察到灰度值已经减小，因此这个偏导数可以用指向下方的垂直箭头来表示，与坐标轴相反。因此，这个导数的值是负数。
 
@@ -223,9 +223,9 @@ $$
 
 总的来说，Lucas-Kanade方法提供了一种通过制定和求解使用运动约束方程和最小化残差平方和的线性方程组来估计光流的方法。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204331.png)
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204345.png)
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204416.png)
+![](https://img.wenbo.space/20230614204331.png)
+![](https://img.wenbo.space/20230614204345.png)
+![](https://img.wenbo.space/20230614204416.png)
 
 编码：
 -  饱和度（saturation）= 向量长度
@@ -247,15 +247,15 @@ $$
 
 线性近似不足以进行较大的偏移
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204456.png)
+![](https://img.wenbo.space/20230614204456.png)
 
 – 也可以使用迭代计算（牛顿法）确定光流
 
 图中展示了迭代的Lucas-Kanade方法的结果，其中光流向量与实际光流相比较之前的尝试更接近。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204518.png)
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204527.png)
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614204416.png)
+![](https://img.wenbo.space/20230614204518.png)
+![](https://img.wenbo.space/20230614204527.png)
+![](https://img.wenbo.space/20230614204416.png)
 
 编码：
 -  饱和度（saturation）= 向量长度
@@ -273,11 +273,11 @@ $$
 
 我们看到什么样的运动？
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/03832927-14d5-495f-b065-cff87f9ea7ab.gif)
+![](https://img.wenbo.space/03832927-14d5-495f-b065-cff87f9ea7ab.gif)
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/0963d66a-dabc-413f-a168-328f524f8e54.gif)
+![](https://img.wenbo.space/0963d66a-dabc-413f-a168-328f524f8e54.gif)
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/8ced9aa5-60e4-415e-ae86-fe9f085c179e.gif)
+![](https://img.wenbo.space/8ced9aa5-60e4-415e-ae86-fe9f085c179e.gif)
 
 那么什么情况下可以解决Lucas-Kanade方法呢？
 如果我们观察公式，我们可以看到涉及一个2x2矩阵，其中包含一些偏导数。当矩阵G具有满秩时，我们可以得到线性方程组的唯一解。
@@ -321,7 +321,7 @@ $$
   
 - 同样地，如果我们处理孤立点，我们会得到与零不同的特征值，所以这也是一个好的情况。这个思想类似于Stephen Harris角点检测器，并且在位移计算中也可以找到。基本思想仍然是相同的。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614211225.png)
+![](https://img.wenbo.space/20230614211225.png)
 
 ### Variational Approach 变分法
 
@@ -340,7 +340,7 @@ $$
 
 这些方法的优点是我们可以获得几乎所有图像像素的光流向量。然而，缺点是需要大量计算来解决这些大规模优化问题，因此无法实时运行，只适用于批量处理记录的图像。这些方法更适合于批量处理记录的图像。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614211701.png)
+![](https://img.wenbo.space/20230614211701.png)
 
 霍恩和肖克最初的方法奠定了变分方法的基础。
 
@@ -358,7 +358,7 @@ $$
 
 如果想了解更详细的信息，请参考提供的参考文献，其中介绍了变分方法在光流计算中的基本原理和扩展。当然，Horn和Schunck的方法已经不再是最新技术，现在有许多对这种方法进行了改进并获得更好结果的扩展方法。不过，让我们先看一下Horn和Schunck方法的结果，以了解这些变分方法的工作原理。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614212309.png)
+![](https://img.wenbo.space/20230614212309.png)
 
 然而，当今已经有很多对这种方法的扩展，比基本的霍恩和肖克方法表现更好。
 不过，让我们看一下霍恩和肖克的结果，以了解这些变分方法是如何工作的。
@@ -374,7 +374,7 @@ $$
 - **无法实时运行**！
 - 有关详细信息，请参考提供的参考资料
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614212943.png)
+![](https://img.wenbo.space/20230614212943.png)
 
 ### Optical Flow and Stereo Vision 光流和立体视觉
 
@@ -408,20 +408,20 @@ $$
 
 为了说明特征点方法的有用性，这里有一个标准图像序列的示例。我使用SURF特征点为两幅图像创建了特征点，并连接那些相互匹配的特征点对。结果如下图所示，每条黄线表示一个光流矢量，我们可以看到大多数光流矢量是有意义的。当然，右上角存在一些特征点连接不合理的伪影，导致了一些奇怪的光流，我们并不期望这种情况发生。当然，汽车部分也产生了一些奇怪的光流，这也是我们所预期的。然而，总体结果还是相当不错的。当然，这只是对于光流的稀疏估计，我们并没有获得每个像素的光流，但至少对于那些获得光流的像素，结果还是相当好的。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614213941.png)
+![](https://img.wenbo.space/20230614213941.png)
 
 
 ### Image Based Tracking 基于图像的跟踪
 
 在许多应用中，不需要计算每个像素的光流矢量，而是只对跟踪物体感兴趣，也就是确定属于某个特定物体的像素的光流。我们希望为整个物体获取一个单一的光流矢量。我们假设我们使用某种物体检测器，在第一帧中提供了一个感兴趣区域（ROI）。基于此，我们希望在整个视频序列中跟踪这个区域。我们假设我们不知道当前检测到的是什么物体，可能是汽车、人或动物等，我们只是想能够在整个视频中跟踪这个物体。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614214319.png)
+![](https://img.wenbo.space/20230614214319.png)
 
 这里有一个例子，仅包含了一系列图像中的四个图像。我们可以看到几个物体。假设在第一幅图像中，物*体检测器给出了三个感兴趣区域，用红色、绿色和蓝色矩形表示*。我们的任务是在随后的图像中再次找到这些物体，并确定相应的感兴趣区域。
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614214155.png)
+![](https://img.wenbo.space/20230614214155.png)
 **解决这个问题的基本思路如下**：
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614214514.png)
+![](https://img.wenbo.space/20230614214514.png)
 
 从第一幅图像中，我们获取了对感兴趣物体的一些信息，即我们对物体的外观有一些概念。我们可以将这个外观作为该物体的模板，即我们只需将图像中的这个矩形区域作为模板。
 
@@ -446,7 +446,7 @@ $$
 这导致了一种被称为核化相关滤波器的方法。相关滤波器让我们想起了块匹配方法，而核化则提醒我们支持向量机的思想，因为这些方法的基本思想是将一种块匹配与核化相结合。
 
 在这种情况下，训练示例的创建如下所示：
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614215729.png)
+![](https://img.wenbo.space/20230614215729.png)
 
 假设我们在最初的图像中的感兴趣区域显示了这个骑自行车的补丁，然后我们将这个补丁复制并填充整个平面。此外，我们创建了一种类似原始补丁大小的标签图像，这个标签图像的值介于0和1之间。中心点的值为1，在边界处的值为0，两者之间的值从1递减。然后我们创建一组训练示例，第一个示例是从原始图像补丁和相应的标签创建的，标签的值是标签图像中心处的值。然后，我们围绕原始图像补丁转动这个红色矩形，并以相同的方式转动用于确定相应训练示例标签的标签图像中的点。当然，标签不仅仅是0和1，这是纯粹分类任务的预期，而是介于0和1之间的实数。因此，这些标签在某种程度上告诉我们一个正确示例的级别，我们就是这样创建训练示例的。对于你所看到的红色矩形的每个位置，我们创建一个训练示例。之后，我们可能会在灰度图像或彩色图像上计算一些之前计算的特征，并将其应用于这些灰度图或者彩色图。
 
@@ -459,7 +459,7 @@ $$
 
 是的，我们在获取新图像时逐步更新模板。在这里，我们可以看到核化相关滤波方法的一个例子，它通过一种额外的技术扩展以处理遮挡。这是我们团队中Weitian的工作成果。让我们开始视频，我们可以看到这种方法跟踪了一个骑自行车的人，即使自行车被汽车遮挡，它仍然能够跟踪。这里的思路是分析物体的哪些部分仍然可见，然后在这个可见区域上初始化第二个核化相关滤波器，可见区域显示为绿色。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/bb28588d-b509-4bcd-bfd6-94c43a518c5d.gif)
+![](https://img.wenbo.space/bb28588d-b509-4bcd-bfd6-94c43a518c5d.gif)
 
 ---
 **Example: Tracking in Fog 雾中跟踪**
@@ -468,7 +468,7 @@ $$
 
 现在我们可以看到物体的真正是什么，即一辆汽车。然而，从第一幅图像来看，几乎不可能确定这确实是一辆车，因此在第一幅图像中，车辆检测器无法确定这是一辆车，但我们仍然能够跟踪它，这真的很有趣。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/d96751c9-e29a-4f87-baf7-87295e60fa47.gif)
+![](https://img.wenbo.space/d96751c9-e29a-4f87-baf7-87295e60fa47.gif)
 
 ---
 

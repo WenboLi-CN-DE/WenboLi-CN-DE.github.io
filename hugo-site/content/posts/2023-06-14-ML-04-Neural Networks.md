@@ -84,7 +84,7 @@ Advanced Topics:
 
 **神经元是大脑的基本计算单元：**
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144017.png)
+![](https://img.wenbo.space/20230614144017.png)
 
 - Our brain has ~ 1011 neurons
 - Each neuron is connected to ~ 104 other neurons (via synapses)
@@ -100,7 +100,7 @@ Neurons receive input signals and accumulate voltage. After some threshold they 
 
 神经元接收输入信号并积累电压。 在达到某个阈值后，它们将激发尖峰响应（高度非线性响应）。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144249.png)
+![](https://img.wenbo.space/20230614144249.png)
 
 ## Artificial Neurons 人工神经元
 
@@ -108,7 +108,7 @@ Neurons receive input signals and accumulate voltage. After some threshold they 
 
 **对于神经网络，我们使用更简单的单元（神经元、感知器）：**
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144359.png)
+![](https://img.wenbo.space/20230614144359.png)
 
 <div style="display: flex;">
     <div style="width: 50%;">
@@ -134,7 +134,7 @@ $$
 y=\sigma\left(\mathbf{w}^T \mathbf{x}+b\right)
 $$
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614144739.png)
+![](https://img.wenbo.space/20230614144739.png)
 
 ### Feedforward Neural Networks 前馈神经网络
 
@@ -162,7 +162,7 @@ connected layer.
 - 在最简单的情况下，所有输入单元都连接到所有输出单元。我们称之为全连接层。
 - 注意：层的输入和输出与网络的输入和输出是不同的。
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145012.png)
+![](https://img.wenbo.space/20230614145012.png)
 
 
 
@@ -176,16 +176,16 @@ connected layer.
   - 输出单元是输入单元的函数。
 - 前馈神经网络通常也被称为多层感知器（MLP）
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145355.png)
+![](https://img.wenbo.space/20230614145355.png)
 
 ### Activation funcitons 激活函数
 
 Different activation functions for introducing non-linearities:
 引入非线性的不同激活函数：
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145512.png)
+![](https://img.wenbo.space/20230614145512.png)
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614145629.png)
+![](https://img.wenbo.space/20230614145629.png)
 
 计算： 
 
@@ -201,13 +201,13 @@ $$\sigma(x)=\frac{1}{1+\exp (-x)}$$
 -  exp()计算耗费资源
 
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614150009.png)
+![](https://img.wenbo.space/20230614150009.png)
 
 - 将数字压缩到范围[-1,1]<br>
 ✓ 以零为中心（很好）<br>
 × 当饱和时仍然会消失梯度
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614150446.png)
+![](https://img.wenbo.space/20230614150446.png)
 
 修正线性单元（Rectified Linear Unit，ReLU）
 
@@ -221,7 +221,7 @@ $$\sigma(x)=\frac{1}{1+\exp (-x)}$$
 × 输出不以零为中心<br>
 × 对于x < 0没有梯度
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614152248.png)
+![](https://img.wenbo.space/20230614152248.png)
 
 计算： $f(x)=\max (0.1 x, x)$
 
@@ -239,7 +239,7 @@ Also learn alpha
 
 
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614152454.png)
+![](https://img.wenbo.space/20230614152454.png)
 
 指数线性单元
 
@@ -290,15 +290,15 @@ $$
 
 神经网络提供模块化：我们可以将每一层的计算实现为一个黑盒子
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614154844.png)
+![](https://img.wenbo.space/20230614154844.png)
 
 #### Example: XOR 异或
 
 设计一个实现 XOR 的网络：
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614161253.png)
+![](https://img.wenbo.space/20230614161253.png)
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614161308.png)
+![](https://img.wenbo.space/20230614161308.png)
 
 - 单个单元无法计算!
 - 经典的例子，为什么我们需要多层次
@@ -313,7 +313,7 @@ XOR(a,b) = (a OR b) AND NOT (a AND b)
 - h2 计算 x1 AND x2
 - y 计算 h1 AND NOT h2
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614161739.png)
+![](https://img.wenbo.space/20230614161739.png)
 
 ### Deep Architectures深层架构
 
@@ -510,6 +510,6 @@ $$
 
 网络学习特征$\psi(\mathbf{x})$使得线性回归/分类可以解决它
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614165612.png)
+![](https://img.wenbo.space/20230614165612.png)
 
-![](https://raw.githubusercontent.com/WenboLi-CN-DE/Picture/main/20230614165623.png)
+![](https://img.wenbo.space/20230614165623.png)
